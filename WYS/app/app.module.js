@@ -13,14 +13,8 @@ var platform_browser_1 = require('@angular/platform-browser');
 var forms_1 = require('@angular/forms');
 var app_routing_1 = require('./app.routing');
 var app_component_1 = require('./app.component');
-var stafflist_component_1 = require('./component/personnel/stafflist/stafflist.component');
-var staff_component_1 = require('./component/personnel/staff.component');
-var departmenttitle_component_1 = require('./component/personnel/departmenttitle/departmenttitle.component');
-var stafftitle_component_1 = require('./component/personnel/stafftitle/stafftitle.component');
-var departmentcontent_component_1 = require('./component/personnel/departmentcontent/departmentcontent.component');
-var department_component_1 = require('./component/personnel/department.component');
-var staffcontent_component_1 = require('./component/personnel/staffcontent/staffcontent.component');
 var app_nav_component_1 = require('./app.nav.component');
+var personnel_module_1 = require('./modules/personnel/personnel.module');
 var AppModule = (function () {
     function AppModule() {
     }
@@ -29,18 +23,12 @@ var AppModule = (function () {
             imports: [
                 platform_browser_1.BrowserModule,
                 forms_1.FormsModule,
+                personnel_module_1.PersonnelModule,
                 app_routing_1.routing
             ],
             declarations: [
                 app_component_1.AppComponent,
                 app_nav_component_1.NavComponent,
-                stafflist_component_1.StafflistComponent,
-                departmenttitle_component_1.DepartmenttitleComponent,
-                departmentcontent_component_1.DepartmentcontentComponent,
-                stafftitle_component_1.StafftitleComponent,
-                staffcontent_component_1.StaffcontentComponent,
-                department_component_1.DepartmentComponent,
-                staff_component_1.StaffComponent,
             ],
             providers: [],
             bootstrap: [

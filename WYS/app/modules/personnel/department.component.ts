@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 @Component({
     moduleId:module.id,
-    selector:'staff',
+    selector:'department',
     template:`
     <div class="main">
 		<div class="main-left">
@@ -17,17 +17,16 @@ import { Component } from '@angular/core';
 
 		<div class="main-right" >
 			<div class="title">
-				<staff-title></staff-title>
+				<department-title></department-title>
 			</div>
 			<div class="content">
-				<staff-content></staff-content>
+				<department-content></department-content>
 			</div>
 		</div>
     </div>
     `
-
 })
 
-export class StaffComponent {
+export class DepartmentComponent {
 
 }
