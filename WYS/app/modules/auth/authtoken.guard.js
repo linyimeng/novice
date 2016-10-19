@@ -9,18 +9,29 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var StaffComponent = (function () {
-    function StaffComponent() {
+var router_1 = require('@angular/router');
+/**
+ * 验证token是否存在
+ */
+var AuthTokenGuard = (function () {
+    function AuthTokenGuard(router) {
+        this.router = router;
     }
-    StaffComponent = __decorate([
-        core_1.Component({
-            moduleId: module.id,
-            selector: 'staff',
-            template: "\n    <div class=\"main\">\n\t\t<div class=\"main-left\">\n\t\t\t<h1>\n\t\t\t\t<span style=\"color:rgb(164,74,140)\">s</span>c\n\t\t\t</h1>\n\t\t\t<div class=\"list\">\n\t\t\t\t<staff-list></staff-list>\n\t\t\t</div>\n\t\t\t<div class=\"footer\">\u6B22\u8FCE\u4F7F\u7528</div>\n\t\t</div>\n\t\t<div class=\"main-right\" >\n\t\t\t<staff-right></staff-right>\n\t\t</div>\n    </div>\n    "
-        }), 
-        __metadata('design:paramtypes', [])
-    ], StaffComponent);
-    return StaffComponent;
+    AuthTokenGuard.prototype.canActivate = function () {
+        var token = localStorage.getItem('wystoken');
+        if (token) {
+            return true;
+        }
+        else {
+            //this.router.navigate([LoginComponent]);
+            return true;
+        }
+    };
+    AuthTokenGuard = __decorate([
+        core_1.Injectable(), 
+        __metadata('design:paramtypes', [router_1.Router])
+    ], AuthTokenGuard);
+    return AuthTokenGuard;
 }());
-exports.StaffComponent = StaffComponent;
-//# sourceMappingURL=staff.component.js.map
+exports.AuthTokenGuard = AuthTokenGuard;
+//# sourceMappingURL=authtoken.guard.js.map

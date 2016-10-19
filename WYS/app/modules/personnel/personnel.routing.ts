@@ -3,22 +3,36 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { DepartmentComponent } from './department.component';
 import { StaffComponent } from './staff.component';
+import { StaffcreatComponent } from './staffcreat/staffcreat.component';
+import { StaffcontentComponent } from './staffcontent/staffcontent.component';
 
-const appRoutes: Routes = [
-    {
-        path:'department',
-        component:DepartmentComponent
-    },
+export const PersonnelRouting:ModuleWithProviders = RouterModule.forRoot([
     {
         path:'',
         redirectTo:'department',
         pathMatch:'full'
     },
     {
-        path:'staff',
-        component:StaffComponent
+        path:'department',
+        component:DepartmentComponent
     },
-];
-
-export const PersonnelRouting:ModuleWithProviders = RouterModule.forRoot(appRoutes);
+    {
+        path:'staff',
+        component:StaffComponent,
+        children:[
+            {
+                path:'',
+                component:StaffcontentComponent
+            },
+            {
+                path:"create",
+                component:StaffcreatComponent
+            },
+            {
+                path:'list',
+                component:StaffcontentComponent
+            },
+        ]
+    },
+]);
 

@@ -9,18 +9,23 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var StafftitleComponent = (function () {
-    function StafftitleComponent() {
+var router_1 = require('@angular/router');
+var StaffrightComponent = (function () {
+    function StaffrightComponent(router) {
+        this.router = router;
     }
-    StafftitleComponent = __decorate([
+    StaffrightComponent.prototype.showstaffcreate = function () {
+        this.router.navigate(['/staff/create']);
+    };
+    StaffrightComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
-            selector: 'staff-title',
-            templateUrl: 'stafftitle.component.html'
+            selector: 'staff-right',
+            templateUrl: 'staff-right.html'
         }), 
-        __metadata('design:paramtypes', [])
-    ], StafftitleComponent);
-    return StafftitleComponent;
+        __metadata('design:paramtypes', [router_1.Router])
+    ], StaffrightComponent);
+    return StaffrightComponent;
 }());
-exports.StafftitleComponent = StafftitleComponent;
-//# sourceMappingURL=stafftitle.component.js.map
+exports.StaffrightComponent = StaffrightComponent;
+//# sourceMappingURL=staff-right.component.js.map

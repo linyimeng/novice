@@ -1,4 +1,4 @@
-import { Component} from '@angular/core';
+import { Component,Input } from '@angular/core';
 
 @Component({
    moduleId: module.id,
@@ -6,5 +6,5 @@ import { Component} from '@angular/core';
    templateUrl: 'staffcreat.component.html'
 })
 export class StaffcreatComponent{
+    
 }
-

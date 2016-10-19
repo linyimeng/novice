@@ -14,6 +14,7 @@ var forms_1 = require('@angular/forms');
 var app_routing_1 = require('./app.routing');
 var app_component_1 = require('./app.component');
 var app_nav_component_1 = require('./app.nav.component');
+var login_component_1 = require('./modules/auth/login.component');
 var personnel_module_1 = require('./modules/personnel/personnel.module');
 var AppModule = (function () {
     function AppModule() {
@@ -28,6 +29,7 @@ var AppModule = (function () {
             ],
             declarations: [
                 app_component_1.AppComponent,
+                login_component_1.LoginComponent,
                 app_nav_component_1.NavComponent,
             ],
             providers: [],

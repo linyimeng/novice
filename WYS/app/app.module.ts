@@ -6,6 +6,7 @@ import { routing } from './app.routing';
 import { AppComponent }        from './app.component';
 import { NavComponent } from './app.nav.component';
 
+import { LoginComponent } from './modules/auth/login.component';
 import { PersonnelModule } from './modules/personnel/personnel.module';
 
 @NgModule({
@@ -18,6 +19,7 @@ import { PersonnelModule } from './modules/personnel/personnel.module';
 
   declarations: [
     AppComponent,
+    LoginComponent,
     NavComponent,
   ],
 

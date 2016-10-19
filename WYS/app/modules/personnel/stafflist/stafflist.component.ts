@@ -7,5 +7,6 @@ import { Router } from '@angular/router';
    templateUrl: 'stafflist.component.html'
 })
 export class StafflistComponent{
+    
 }
 

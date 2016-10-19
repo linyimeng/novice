@@ -4,7 +4,6 @@ import { Component } from '@angular/core';
 	moduleId: module.id,
 	selector: 'department-content',
 	templateUrl: 'departmentcontent.component.html'
-  
 })
 export class  DepartmentcontentComponent{
 
