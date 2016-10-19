@@ -9,18 +9,27 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var StafflistComponent = (function () {
-    function StafflistComponent() {
+var DepartmentrightComponent = (function () {
+    function DepartmentrightComponent() {
+        this.is_show_create = false;
     }
-    StafflistComponent = __decorate([
+    DepartmentrightComponent.prototype.show_or_hidden_create = function () {
+        if (this.is_show_create) {
+            this.is_show_create = false;
+        }
+        else {
+            this.is_show_create = true;
+        }
+    };
+    DepartmentrightComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
-            selector: 'staff-list',
-            templateUrl: 'stafflist.component.html'
+            selector: 'department-right',
+            templateUrl: 'department-right.html'
         }), 
         __metadata('design:paramtypes', [])
-    ], StafflistComponent);
-    return StafflistComponent;
+    ], DepartmentrightComponent);
+    return DepartmentrightComponent;
 }());
-exports.StafflistComponent = StafflistComponent;
-//# sourceMappingURL=stafflist.component.js.map
+exports.DepartmentrightComponent = DepartmentrightComponent;
+//# sourceMappingURL=department-right.component.js.map

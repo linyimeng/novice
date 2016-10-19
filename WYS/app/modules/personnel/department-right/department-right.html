@@ -1,0 +1,38 @@
+<div class="title">
+    <div class="left">部门</div>
+    <div class="right">
+        <span class="iconfont">&#xe638;</span>
+        <input type="text">
+    </div>
+    <span class="new" (click)="show_or_hidden_create()">新建</span>
+</div>
+
+<div class="content">
+    <department-content></department-content>
+</div>
+
+<div class="model" [style.display]="is_show_create ? 'block' : 'none'">
+		<div class="mask" (click)="show_or_hidden_create()"></div>
+		<ul>
+			<span class="iconfont" (click)="show_or_hidden_create()">&#xe625;</span>
+			<li>
+				<span>部门名称</span>
+				<input type="text">
+			</li>
+			<li>
+				<span>部门经理</span>
+				<input type="text">
+				<i class="iconfont bmjl">&#xe696;</i>
+			</li>
+			<li>
+				<span>上级部门</span>
+				<input type="text">
+				<i class="iconfont sjbm">&#xe696;</i>
+			</li>
+			<li class="btn">
+				<button class="close" (click)="show_or_hidden_create()">取消</button>
+				<button class="ok">确定</button>
+			</li>
+		</ul>
+</div>
+

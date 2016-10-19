@@ -9,18 +9,18 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var AppComponent = (function () {
-    function AppComponent() {
+var PersonnelComponent = (function () {
+    function PersonnelComponent() {
     }
-    AppComponent = __decorate([
+    PersonnelComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
-            selector: 'wys-app',
-            template: "\n\t<wys-nav></wys-nav>\n\t<router-outlet></router-outlet>\n\t"
+            selector: 'staff',
+            template: "\n    <div class=\"main\">\n\t\t<div class=\"main-left\">\n\t\t\t<h1>\n\t\t\t\t<span style=\"color:rgb(164,74,140)\">s</span>c\n\t\t\t</h1>\n\t\t\t<div class=\"list\">\n\t\t\t\t<div class=\"ultitle\" style=\"cursor: pointer;\" routerLink='/personnel/department'>\u90E8\u95E8</div>\n\t\t\t\t<div class=\"ultitle\" style=\"cursor: pointer;\" routerLink='/personnel/staff'>\u5458\u5DE5</div>\n\t\t\t</div>\n\t\t\t<div class=\"footer\">\u6B22\u8FCE\u4F7F\u7528</div>\n\t\t</div>\n\t\t<div class=\"main-right\" >\n\t\t\t<router-outlet></router-outlet>\n\t\t</div>\n    </div>\n    "
         }), 
         __metadata('design:paramtypes', [])
-    ], AppComponent);
-    return AppComponent;
+    ], PersonnelComponent);
+    return PersonnelComponent;
 }());
-exports.AppComponent = AppComponent;
-//# sourceMappingURL=app.component.js.map
+exports.PersonnelComponent = PersonnelComponent;
+//# sourceMappingURL=personnel.component.js.map

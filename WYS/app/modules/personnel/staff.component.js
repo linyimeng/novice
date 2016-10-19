@@ -16,7 +16,7 @@ var StaffComponent = (function () {
         core_1.Component({
             moduleId: module.id,
             selector: 'staff',
-            template: "\n    <div class=\"main\">\n\t\t<div class=\"main-left\">\n\t\t\t<h1>\n\t\t\t\t<span style=\"color:rgb(164,74,140)\">s</span>c\n\t\t\t</h1>\n\t\t\t<div class=\"list\">\n\t\t\t\t<staff-list></staff-list>\n\t\t\t</div>\n\t\t\t<div class=\"footer\">\u6B22\u8FCE\u4F7F\u7528</div>\n\t\t</div>\n\t\t<div class=\"main-right\" >\n\t\t\t<staff-right></staff-right>\n\t\t</div>\n    </div>\n    "
+            template: "\n    <div class=\"main\">\n\t\t<div class=\"main-left\">\n\t\t\t<h1>\n\t\t\t\t<span style=\"color:rgb(164,74,140)\">s</span>c\n\t\t\t</h1>\n\t\t\t<div class=\"list\">\n\t\t\t\t<div class=\"ultitle\" style=\"cursor: pointer;\" routerLink='/department'>\u90E8\u95E8</div>\n\t\t\t\t<div class=\"ultitle\" style=\"cursor: pointer;\" routerLink='/staff'>\u5458\u5DE5</div>\n\t\t\t</div>\n\t\t\t<div class=\"footer\">\u6B22\u8FCE\u4F7F\u7528</div>\n\t\t</div>\n\t\t<div class=\"main-right\" >\n\t\t\t<router-outlet></router-outlet>\n\t\t</div>\n    </div>\n    "
         }), 
         __metadata('design:paramtypes', [])
     ], StaffComponent);

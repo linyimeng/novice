@@ -1,10 +1,9 @@
 "use strict";
-var router_1 = require('@angular/router');
-var department_component_1 = require('./department.component');
-var staff_component_1 = require('./staff.component');
+var department_right_component_1 = require('./department-right/department-right.component');
+var staff_right_component_1 = require('./staff-right/staff-right.component');
 var staffcreat_component_1 = require('./staffcreat/staffcreat.component');
 var staffcontent_component_1 = require('./staffcontent/staffcontent.component');
-exports.PersonnelRouting = router_1.RouterModule.forRoot([
+exports.personnelRouting = [
     {
         path: '',
         redirectTo: 'department',
@@ -12,11 +11,11 @@ exports.PersonnelRouting = router_1.RouterModule.forRoot([
     },
     {
         path: 'department',
-        component: department_component_1.DepartmentComponent
+        component: department_right_component_1.DepartmentrightComponent
     },
     {
         path: 'staff',
-        component: staff_component_1.StaffComponent,
+        component: staff_right_component_1.StaffrightComponent,
         children: [
             {
                 path: '',
@@ -32,5 +31,5 @@ exports.PersonnelRouting = router_1.RouterModule.forRoot([
             },
         ]
     },
-]);
+];
 //# sourceMappingURL=personnel.routing.js.map

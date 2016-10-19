@@ -12,7 +12,7 @@ export class StaffrightComponent {
     ) {}
 
     showstaffcreate() {
-        this.router.navigate(['/staff/create']);
+        this.router.navigate(['/personnel/staff/create']);
     }
 }
 

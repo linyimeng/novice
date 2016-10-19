@@ -10,17 +10,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var common_1 = require('@angular/common');
-var departmenttitle_component_1 = require('./departmenttitle/departmenttitle.component');
+var router_1 = require('@angular/router');
+var personnel_component_1 = require('./personnel.component');
+var department_right_component_1 = require('./department-right/department-right.component');
 var departmentcontent_component_1 = require('./departmentcontent/departmentcontent.component');
-var department_component_1 = require('./department.component');
-var staff_component_1 = require('./staff.component');
-var stafflist_component_1 = require('./stafflist/stafflist.component');
 var staffcreat_component_1 = require('./staffcreat/staffcreat.component');
 var staffdetail_component_1 = require('./staffdetail/staffdetail.component');
 var staff_right_component_1 = require('./staff-right/staff-right.component');
 var staffcontent_component_1 = require('./staffcontent/staffcontent.component');
 var authtoken_guard_1 = require('../auth/authtoken.guard');
-var personnel_routing_1 = require('./personnel.routing');
 var PersonnelModule = (function () {
     function PersonnelModule() {
     }
@@ -28,24 +26,19 @@ var PersonnelModule = (function () {
         core_1.NgModule({
             imports: [
                 common_1.CommonModule,
-                personnel_routing_1.PersonnelRouting,
+                router_1.RouterModule,
             ],
             declarations: [
-                stafflist_component_1.StafflistComponent,
-                departmenttitle_component_1.DepartmenttitleComponent,
+                personnel_component_1.PersonnelComponent,
+                department_right_component_1.DepartmentrightComponent,
                 departmentcontent_component_1.DepartmentcontentComponent,
-                department_component_1.DepartmentComponent,
-                staff_component_1.StaffComponent,
                 staffcontent_component_1.StaffcontentComponent,
                 staffcreat_component_1.StaffcreatComponent,
                 staffdetail_component_1.StaffdetailComponent,
                 staffcreat_component_1.StaffcreatComponent,
                 staff_right_component_1.StaffrightComponent,
             ],
-            exports: [
-                staff_component_1.StaffComponent,
-                department_component_1.DepartmentComponent
-            ],
+            exports: [],
             providers: [
                 authtoken_guard_1.AuthTokenGuard,
             ]

@@ -10,17 +10,18 @@ import { Component } from '@angular/core';
 				<span style="color:rgb(164,74,140)">s</span>c
 			</h1>
 			<div class="list">
-				<staff-list></staff-list>
+				<div class="ultitle" style="cursor: pointer;" routerLink='/personnel/department'>部门</div>
+				<div class="ultitle" style="cursor: pointer;" routerLink='/personnel/staff'>员工</div>
 			</div>
 			<div class="footer">欢迎使用</div>
 		</div>
 		<div class="main-right" >
-			<staff-right></staff-right>
+			<router-outlet></router-outlet>
 		</div>
     </div>
     `
 })
 
-export class StaffComponent {
+export class PersonnelComponent {
 
 }

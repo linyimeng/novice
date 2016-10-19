@@ -15,7 +15,7 @@ var StaffrightComponent = (function () {
         this.router = router;
     }
     StaffrightComponent.prototype.showstaffcreate = function () {
-        this.router.navigate(['/staff/create']);
+        this.router.navigate(['/personnel/staff/create']);
     };
     StaffrightComponent = __decorate([
         core_1.Component({

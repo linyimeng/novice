@@ -1,12 +1,13 @@
 import { ModuleWithProviders }  from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { DepartmentComponent } from './department.component';
-import { StaffComponent } from './staff.component';
+import { DepartmentrightComponent } from './department-right/department-right.component';
+
+import { StaffrightComponent } from './staff-right/staff-right.component';
 import { StaffcreatComponent } from './staffcreat/staffcreat.component';
 import { StaffcontentComponent } from './staffcontent/staffcontent.component';
 
-export const PersonnelRouting:ModuleWithProviders = RouterModule.forRoot([
+export const personnelRouting = [
     {
         path:'',
         redirectTo:'department',
@@ -14,11 +15,11 @@ export const PersonnelRouting:ModuleWithProviders = RouterModule.forRoot([
     },
     {
         path:'department',
-        component:DepartmentComponent
+        component:DepartmentrightComponent
     },
     {
         path:'staff',
-        component:StaffComponent,
+        component:StaffrightComponent,
         children:[
             {
                 path:'',
@@ -34,5 +35,5 @@ export const PersonnelRouting:ModuleWithProviders = RouterModule.forRoot([
             },
         ]
     },
-]);
+];
 
