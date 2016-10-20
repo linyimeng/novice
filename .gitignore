@@ -1,0 +1,7 @@
+*.component.js
+*.service.js
+*guard.js
+*.map
+
+node_modules/
+typings/
