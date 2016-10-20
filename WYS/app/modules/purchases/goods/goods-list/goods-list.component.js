@@ -9,18 +9,18 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var DepartmentComponent = (function () {
-    function DepartmentComponent() {
+var GoodslistComponent = (function () {
+    function GoodslistComponent() {
     }
-    DepartmentComponent = __decorate([
+    GoodslistComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
-            selector: 'department',
-            template: "\n    <div class=\"main\">\n\t\t<!-- \u516C\u5171\u90E8\u5206\u9700\u6A21\u5757\u5316\uFF0C\u5F85\u6A21\u5757\u591A\u540E\u7EDF\u4E00\u91CD\u65B0\u8BBE\u8BA1\u4FEE\u6539 -->\n\t\t<div class=\"main-left\">\n\t\t\t<h1>\n\t\t\t\t<span style=\"color:rgb(164,74,140)\">s</span>c\n\t\t\t</h1>\n\t\t\t<div class=\"list\">\n\t\t\t\t<staff-list></staff-list>\n\t\t\t</div>\n\t\t\t<div class=\"footer\">\u6B22\u8FCE\u4F7F\u7528</div>\n\t\t</div>\n\n\t\t<div class=\"main-right\" >\n\t\t\t\n\t\t</div>\n    </div>\n    "
+            selector: 'goods-list',
+            templateUrl: 'goods-list.component.html'
         }), 
         __metadata('design:paramtypes', [])
-    ], DepartmentComponent);
-    return DepartmentComponent;
+    ], GoodslistComponent);
+    return GoodslistComponent;
 }());
-exports.DepartmentComponent = DepartmentComponent;
-//# sourceMappingURL=department.component.js.map
+exports.GoodslistComponent = GoodslistComponent;
+//# sourceMappingURL=goods-list.component.js.map

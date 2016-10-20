@@ -228,6 +228,22 @@ nav .nav-left .user-div .triangle {
 	cursor:pointer;
 }
 
+.main .main-right .title .action {
+	display: inline-block;
+	padding: 5px 12px;
+	margin-left:10px;
+	border:1px solid #ccc;
+	background-color:#fff;
+	border-radius: 4px;
+	cursor: pointer;
+}
+
+.main .main-right .title .action i {
+	font-size: 12px;
+	margin-left: 5px;
+	color: #666;
+}
+
 .main .main-right .title .left {
 	width: 49%;
 	display: inline-block;
@@ -360,20 +376,62 @@ nav .nav-left .user-div .triangle {
 
 
 
-/* 人员表格 */
+/* 人员列表 */
 .main .main-right .content table {
 	
 	background-color: #fff;
-	border-radius: 4px;
-	width: 90%;
-	border:1px solid #c8c8d3;
-	margin:20px auto;
-	*border-collapse: collapse; /* IE7 and lower */
+	width: 100%;
     border-spacing: 0;
     box-shadow: 0 1px 1px #ccc;   
+    border-bottom: 1px solid #ccc;
+    color: #4c4c4c;
+    font-size: 13px;
+}
+
+.main .main-right .content table  tr {
+	cursor: pointer;
+}
+
+  
+
+.main .main-right .content table  tr:nth-child(odd) {
+	background-color: #efeff8;
+}
+.main .main-right .content table  td{
+    padding: 10px;
+    text-align: left;    
+}
+
+.main .main-right .content table  th {
+	padding: 10px;
+	text-align: left;
+	border-right: 1px solid #ccc;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+}
+
+.main .main-right .content table  th {
+    background-color: #f0eeee;
+    border-top: none;
+    text-shadow: 0 1px 0 rgba(255,255,255,0.5); 
 }
 
 
+.main .main-right .content table  td:first-child, .main .main-right .content table  th:first-child {
+    border-right: none;
+    background-color: transparent;
+    width: 1px;
+    
+}
+
+.main .main-right .content table thead th:first-child{
+	background-color: #f0eeee;;
+
+}
+
+.main .main-right .content table tbody th:first-child {
+	border-bottom: none;
+}
 .main .main-right .content table  tr:hover {
     background: #fbf8e9;
     -o-transition: all 0.1s ease-in-out;
@@ -381,63 +439,8 @@ nav .nav-left .user-div .triangle {
     -moz-transition: all 0.1s ease-in-out;
     -ms-transition: all 0.1s ease-in-out;
     transition: all 0.1s ease-in-out;     
-}    
-    
-.main .main-right .content table  td, .main .main-right .content table  th {
-    border-left: 1px solid #ccc;
-    border-top: 1px solid #ccc;
-    padding: 10px;
-    text-align: left;    
-}
+}  
 
-.main .main-right .content table  th {
-    background-color: #dce9f9;
-    background-image: -webkit-gradient(linear, left top, left bottom, from(#ebf3fc), to(#dce9f9));
-    background-image: -webkit-linear-gradient(top, #ebf3fc, #dce9f9);
-    background-image:    -moz-linear-gradient(top, #ebf3fc, #dce9f9);
-    background-image:     -ms-linear-gradient(top, #ebf3fc, #dce9f9);
-    background-image:      -o-linear-gradient(top, #ebf3fc, #dce9f9);
-    background-image:         linear-gradient(top, #ebf3fc, #dce9f9);
-    -webkit-box-shadow: 0 1px 0 rgba(255,255,255,.8) inset; 
-    -moz-box-shadow:0 1px 0 rgba(255,255,255,.8) inset;  
-    box-shadow: 0 1px 0 rgba(255,255,255,.8) inset;        
-    border-top: none;
-    text-shadow: 0 1px 0 rgba(255,255,255,.5); 
-}
-
-.main .main-right .content table  td:first-child, .main .main-right .content table  th:first-child {
-    border-left: none;
-}
-
-.main .main-right .content table  th:first-child {
-    -moz-border-radius: 6px 0 0 0;
-    -webkit-border-radius: 6px 0 0 0;
-    border-radius: 6px 0 0 0;
-}
-
-.main .main-right .content table  th:last-child {
-    -moz-border-radius: 0 6px 0 0;
-    -webkit-border-radius: 0 6px 0 0;
-    border-radius: 0 6px 0 0;
-}
-
-.main .main-right .content table  th:only-child{
-    -moz-border-radius: 6px 6px 0 0;
-    -webkit-border-radius: 6px 6px 0 0;
-    border-radius: 6px 6px 0 0;
-}
-
-.main .main-right .content table  tr:last-child td:first-child {
-    -moz-border-radius: 0 0 0 6px;
-    -webkit-border-radius: 0 0 0 6px;
-    border-radius: 0 0 0 6px;
-}
-
-.main .main-right .content table  tr:last-child td:last-child {
-    -moz-border-radius: 0 0 6px 0;
-    -webkit-border-radius: 0 0 6px 0;
-    border-radius: 0 0 6px 0;
-}
 
 /* 创建人员 */
 .main .main-right .content .newperson {
