@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 export class StaffrightComponent {
     constructor(
         private router:Router
-    ) {}
+    ) { }
 
     showstaffcreate() {
         this.router.navigate(['/personnel/staff/create']);

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 @Component({
     moduleId:module.id,
-    selector:'staff',
+    selector:'purchases',
     template:`
     <div class="main">
 		<div class="main-left">

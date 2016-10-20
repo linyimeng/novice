@@ -1,6 +1,10 @@
 *.component.js
 *.service.js
 *guard.js
+*.module.js
+*.routing.js
+main.js
+
 *.map
 
 node_modules/

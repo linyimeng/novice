@@ -5,7 +5,7 @@ import { Component} from '@angular/core';
    selector: 'goods-detail',
    templateUrl: 'goods-detail.component.html'
 })
-export class GoodsdetailComponent{
+export class GoodsDetailComponent{
     
 }
 

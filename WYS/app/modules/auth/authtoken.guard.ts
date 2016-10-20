@@ -9,12 +9,13 @@ import { LoginComponent } from './login.component';
 export class AuthTokenGuard implements CanActivate {
     constructor(private router:Router) { }
     canActivate() {
+        console.log('守卫');
         let token=localStorage.getItem('wystoken');
         if(token) {
             return true;
         } else {
             //this.router.navigate([LoginComponent]);
-            return true;
+            return false;
         }
     }
 }

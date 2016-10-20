@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
 
 import { PersonnelComponent } from './personnel.component';
 
@@ -13,12 +12,13 @@ import { StaffdetailComponent } from './staffdetail/staffdetail.component';
 import { StaffrightComponent } from './staff-right/staff-right.component';
 import { StaffcontentComponent } from './staffcontent/staffcontent.component';
 
-import { AuthTokenGuard } from '../auth/authtoken.guard';
+//模块路由
+import { personnelRouting } from './personnel.routing';
 
 @NgModule({
     imports:[
         CommonModule,
-        RouterModule,
+        personnelRouting,
     ],
     declarations:[
         PersonnelComponent,
@@ -35,7 +35,7 @@ import { AuthTokenGuard } from '../auth/authtoken.guard';
     exports:[
     ],
     providers:[
-        AuthTokenGuard,
+        
     ]
 })
 
