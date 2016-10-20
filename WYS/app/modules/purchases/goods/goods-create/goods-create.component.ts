@@ -2,9 +2,9 @@ import { Component,Input } from '@angular/core';
 
 @Component({
    moduleId: module.id,
-   selector: 'goods-creat',
-   templateUrl: 'goods-creat.component.html'
+   selector: 'goods-create',
+   templateUrl: 'goods-create.component.html'
 })
-export class GoodscreatComponent{
+export class GoodsCreateComponent{
     
 }

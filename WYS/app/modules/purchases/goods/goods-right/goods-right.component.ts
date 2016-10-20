@@ -6,12 +6,12 @@ import { Router } from '@angular/router';
    selector: 'goods-right',
    templateUrl: 'goods-right.component.html'
 })
-export class GoodsrightComponent {
+export class GoodsRightComponent {
     constructor(
         private router:Router
     ) {}
 
-    showgoodscreate() {
+    show_goods_create() {
         this.router.navigate(['/purchases/goods/create']);
     }
 }

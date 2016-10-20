@@ -2,9 +2,9 @@ import { Component,Input } from '@angular/core';
 
 @Component({
    moduleId: module.id,
-   selector: 'supplier-creat',
-   templateUrl: 'supplier-creat.component.html'
+   selector: 'supplier-create',
+   templateUrl: 'supplier-create.component.html'
 })
-export class SuppliercreateComponent{
+export class SupplierCreateComponent{
     
 }

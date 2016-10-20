@@ -6,22 +6,22 @@ import { Component } from '@angular/core';
     template:`
         <nav>
             <ul>
-                <li routerLink="/yg" routerLinkActive="activity" class="activity">
-                    <a routerLink='/department'>员工</a>
+                <li routerLink="/personnel" routerLinkActive="active">
+                    <a>员工</a>
                 </li>
-                <li routerLink="/jh">
-                    <a href="#">进货</a>
+                <li routerLink='/purchases' routerLinkActive="active">
+                    <a >进货</a>
                 </li>
-                <li routerLink="/xs">
+                <li>
                     <a href="#">销售</a>
                 </li>
-                <li routerLink="/ck">
+                <li>
                     <a href="#">仓库</a>
                 </li>
-                <li routerLink="/cw">
+                <li>
                     <a href="#">财务</a>
                 </li>
-                <li routerLink="/sz">
+                <li>
                     <a href="#">设置</a>
                 </li>
             </ul>
