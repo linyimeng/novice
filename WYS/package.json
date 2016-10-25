@@ -1,6 +1,6 @@
 {
-  "name": "angular-quickstart",
-  "version": "1.0.0",
+  "name": "wys",
+  "version": "0.0.1",
   "scripts": {
     "start": "tsc && concurrently \"tsc -w\" \"lite-server\" ",
     "lite": "lite-server",
