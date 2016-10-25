@@ -7,5 +7,5 @@ main.js
 
 *.map
 
-node_modules/
-typings/
+/WYS/node_modules/
+/WYS/typings/
