@@ -20,7 +20,6 @@ urlpatterns = [
     url(r'user/(?P<pk>[0-9]+)/$',views.BlogUserDetailAPIView.as_view()),
     url(r'comments/(?P<apk>[0-9]+)/$',views.CommentList.as_view(),name='comment-list'),
     url(r'comment/(?P<pk>[0-9]+)/$',views.CommentDetail.as_view(),name='comment-detail'),
-    url(r'atest/$',views.atest),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

@@ -101,9 +101,4 @@ class CommentDetail(APIView):
         comment.save()
         return Response(status=status.HTTP_204_NO_CONTENT)
     
-@api_view(['GET'])
-def atest(request,format=None):
-    if request.method == 'GET':
-        return Response(({'id':'1','name':'Mr.Li'},{'id':'2','name':'Miss.Wang'},{'id':'3','name':'Mr.Ok'}),status=status.HTTP_200_OK)
-    
     
