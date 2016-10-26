@@ -37,13 +37,13 @@ class EmpInfo(models.Model):
     '''
     user = models.OneToOneField(User)
     name = models.CharField(_('full name'),max_length=60)
-    customid = models.CharField(max_length=30,unique=True,blank=True,null=True)
+    customid = models.CharField(max_length=30,blank=True,null=True,unique=True)
     department = models.ForeignKey(Department)
     job = models.ForeignKey(Jobs)
     work_address = models.CharField(_('work address'),max_length=255,blank=True,null=True)
     office_phone = models.CharField(_('office phone'),max_length=12,unique=True,blank=True,null=True)
     office_address = models.CharField(_('office address'),max_length=255,blank=True,null=True)
-    office_email = models.EmailField(blank=True,null=True,unique=True)
+    email = models.EmailField(unique=True)
     office_landline = models.CharField(_('landline'),max_length=20,blank=True,null=True)
     
     cardid = models.CharField(_('cardid'),max_length=20,blank=20,null=True)
@@ -54,7 +54,7 @@ class EmpInfo(models.Model):
     birthday = models.DateField(blank=True,null=True)
     
     isarchive = models.BooleanField(_('is archive'),default=False)
-    entry_time = models.DateTimeField()
+    entry_time = models.DateTimeField(blank=True,null=True)
     joined = models.DateTimeField(_('joined'),auto_now_add=True)
     updated = models.DateTimeField(_('updated'),auto_now=True)
     deleted = models.DateTimeField(_('deleted'),blank=True,null=True)
