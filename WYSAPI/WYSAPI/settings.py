@@ -27,10 +27,12 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'plugin.editors.DjangoUeditor',
     'rest_framework',
-    'rest_framework.authtoken',
+    #'rest_framework.authtoken',
     'corsheaders',
     'user',
-    'blog'
+    'blog',
+    'staff',
+    'goods',
 )
 
 MIDDLEWARE_CLASSES = (

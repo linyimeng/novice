@@ -6,7 +6,9 @@ from plugin.editors.DjangoUeditor import urls as ueditorurl
 api_urls = [
     url(r'^user/',include('user.urls')),
     url(r'^blog/',include('blog.urls')),
-    #url(r'^staff/',include('staff.urls')),
+    url(r'^staff/',include('staff.urls')),
+    url(r'^goods/',include('goods.urls')),
+    #url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]
 
 urlpatterns = [
