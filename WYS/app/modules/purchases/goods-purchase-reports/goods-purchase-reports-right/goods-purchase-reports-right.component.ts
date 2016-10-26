@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 @Component({
    moduleId: module.id,
    selector: 'goods-purchase-reports-right',
-   templateUrl: 'goods-purchase-reports.component.html'
+   templateUrl: 'goods-purchase-reports-right.component.html'
 })
 export class GoodsPurchaseReportsRightComponent {
     constructor(

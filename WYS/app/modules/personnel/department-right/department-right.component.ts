@@ -5,8 +5,8 @@ import { Router } from '@angular/router';
    moduleId: module.id,
    selector: 'department-right',
    templateUrl: 'department-right.html'
-})
 
+})
 export class DepartmentrightComponent {
     is_show_create = false;
     show_or_hidden_create() {

@@ -7,14 +7,14 @@ import { Router } from '@angular/router';
 	template: `
     <nav>
         <ul>
-            <li routerLink="/personnel" routerLinkActive="active">
+            <li routerLink="/personnel" routerLinkActive="activity">
                 <a>员工</a>
             </li>
-            <li routerLink='/purchases' routerLinkActive="active">
+            <li routerLink='/purchases' routerLinkActive="activity">
                 <a >进货</a>
             </li>
-            <li>
-                <a href="#">销售</a>
+            <li routerLink='/sales' routerLinkActive="activity">
+                <a>销售</a>
             </li>
             <li>
                 <a href="#">仓库</a>

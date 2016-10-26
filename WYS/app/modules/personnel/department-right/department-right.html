@@ -7,9 +7,7 @@
     <span class="new" (click)="show_or_hidden_create()">新建</span>
 </div>
 
-<div class="content">
-    <department-content></department-content>
-</div>
+<department-content class="content"></department-content>
 
 <div class="model" [style.display]="is_show_create ? 'block' : 'none'">
 		<div class="mask" (click)="show_or_hidden_create()"></div>

@@ -7,7 +7,7 @@ import { AppComponent }        from './app.component';
 
 import { PersonnelModule } from './modules/personnel/personnel.module';
 import { PurchasesModule } from './modules/purchases/purchases.module';
-
+import { SalesModule } from './modules/Sales/sales.module';
 
 @NgModule({
   imports: [
@@ -15,6 +15,7 @@ import { PurchasesModule } from './modules/purchases/purchases.module';
     FormsModule,
     PersonnelModule,
     PurchasesModule,
+    SalesModule,
     routing
   ],
 

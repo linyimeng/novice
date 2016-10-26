@@ -5,6 +5,6 @@ import { Component,Input } from '@angular/core';
    selector: 'supplier-purchase-reports',
    templateUrl: 'supplier-purchase-reports.component.html'
 })
-export class SupplierPurchaseReportsComponent{
+export class SupplierPurchaseReportsContentComponent{
     
 }

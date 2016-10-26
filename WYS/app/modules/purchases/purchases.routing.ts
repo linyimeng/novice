@@ -12,6 +12,15 @@ import { SupplierRightComponent } from './supplier/supplier-right/supplier-right
 import { SupplierCreateComponent } from './supplier/supplier-create/supplier-create.component';
 import { SupplierListComponent } from './supplier/supplier-list/supplier-list.component';
 
+import { PurchaseOrdersRightComponent } from './purchase-orders/purchase-orders-right/purchase-orders-right.component';
+import { PurchaseOrdersListComponent } from './purchase-orders/purchase-orders-list/purchase-orders-list.component';
+import { PurchaseOrdersCreateComponent } from './purchase-orders/purchase-orders-create/purchase-orders-create.component';
+
+import { GoodsPurchaseReportsRightComponent } from './goods-purchase-reports/goods-purchase-reports-right/goods-purchase-reports-right.component';
+import { GoodsPurchaseReportsContentComponent } from './goods-purchase-reports/goods-purchase-reports-content/goods-purchase-reports-content.component';
+
+import { SupplierPurchaseReportsRightComponent } from './supplier-purchase-reports/supplier-purchase-reports-right/supplier-purchase-reports-right.component';
+import { SupplierPurchaseReportsContentComponent } from './supplier-purchase-reports/supplier-purchase-reports-content/supplier-purchase-reports.component';
 const purchasesRoutes:Routes = [
     // 当URL为 example.com/purchases 时导航到商品 goods
     {
@@ -41,6 +50,34 @@ const purchasesRoutes:Routes = [
                     { path:'', component:SupplierListComponent },
                     { path:"create", component:SupplierCreateComponent },
                     { path:'list', component:SupplierListComponent },
+                ]
+            },
+            {
+                path:'purchaseorder',
+                component:PurchaseOrdersRightComponent,
+                children:[
+                    { path:'',component:PurchaseOrdersListComponent},
+                    { path:'list',component:PurchaseOrdersListComponent},
+                    { path:'create',component: PurchaseOrdersCreateComponent}
+                ]
+            },
+            {
+                path:'reports',
+                children:[
+                    { 
+                        path:'purchaseorders',
+                        component:GoodsPurchaseReportsRightComponent,
+                        children:[
+                            {path:'',component:GoodsPurchaseReportsContentComponent}
+                        ]
+                    },
+                    {
+                        path:'supplier',
+                        component:SupplierPurchaseReportsRightComponent,
+                        children:[
+                            { path:'',component:SupplierPurchaseReportsContentComponent}
+                        ]
+                    },
                 ]
             },
         ]

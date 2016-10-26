@@ -15,9 +15,9 @@ import { Component } from '@angular/core';
 				<ul>
 					<li routerLink='/purchases/goods' routerLinkActive="active"><a>商品</a></li>
 					<li routerLink='/purchases/supplier' routerLinkActive="active"><a>供应商</a></li>
-					<li><a href="">进货单</a></li>
-					<li><a href="">商品进货报表</a></li>
-					<li><a href="">供应商进货报表</a></li>
+					<li routerLink='/purchases/purchaseorder' routerLinkActive="active"><a>进货单</a></li>
+					<li routerLink='/purchases/reports/purchaseorders' routerLinkActive="active"><a>商品进货报表</a></li>
+					<li routerLink='/purchases/reports/supplier' routerLinkActive="active"><a>供应商进货报表</a></li>
 				</ul>
 			</div>
 			<div class="footer">欢迎使用</div>

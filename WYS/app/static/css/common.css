@@ -344,7 +344,6 @@ nav .nav-left .user-div .triangle {
 
 }
 
-
 .main .main-right .content > ul .look {
 	width: 0;
 	height: 0;
@@ -392,7 +391,6 @@ nav .nav-left .user-div .triangle {
 	position: absolute;
 	right: 10px;
 	bottom: 5px;
-
 }
 
 .main .main-right .content > ul li .bottom a {
@@ -407,7 +405,7 @@ nav .nav-left .user-div .triangle {
 /*--------------------------------------------------------------------------------------------------------------*/
 
 /* 右边列表 */
-.main .main-right .content  table {
+.main .main-right .content table {
 	background-color: #fff;
 	width: 100%;
     border-spacing: 0;
@@ -417,7 +415,7 @@ nav .nav-left .user-div .triangle {
     font-size: 13px;
 }
 
-.main .main-right .content  table  tr {
+.main .main-right .content table tr {
 	cursor: pointer;
 }
 
