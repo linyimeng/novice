@@ -1,10 +1,10 @@
 <!-- 创建商品 -->
-<form action="#" class="newperson" style="display:block;">
-    <div class="up">
+<form action="#" class="purchase-order">
+    <div class="order-title">
         <img src="/app/static/img/mr.png" alt="">
         <a href="">上传图像</a>
     </div>
-    <div class="down">
+    <div class="order-form">
         <div class="left">
             <div>	
                 <label for="name">名称：</label>
@@ -54,17 +54,19 @@
             </div>
         </div>
         <div class="right">
-            <span>产地：</span>
-            <input type="text" placeholder="城市">
-            <div class="group">
+            <div class="group address">
+                <label>产地：</label>
+                <input type="text" placeholder="城市">
                 <input type="text" placeholder="省份">
-                <i class="iconfont">&#xe696;</i>
+                
             </div>
             <span class="detail">详细地址：</span>
             <textarea name="" id="" cols="30" rows="10"></textarea>
         </div>
     </div>
-    <div class="bottom">
+    
+    <div class="order-bottom">
+        <div></div>
         <input type="submit" value="提交">
     </div>
 </form>

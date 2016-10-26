@@ -9,6 +9,8 @@
     box-sizing: border-box;
 }
 
+
+
 p {
 	margin: 0;
 }
@@ -146,7 +148,9 @@ nav .nav-left .user-div .triangle {
 	height: calc(100% - 34px);
 }
 
-/* 左边 */
+
+/*--------------------------------------------------------------------------------------------------------*/
+/* 左边 布局*/
 .main .main-left {
     background: #f0eeee none repeat scroll 0 0;
     border-right: 1px solid #afafb6;
@@ -192,7 +196,8 @@ nav .nav-left .user-div .triangle {
 .main .main-left .list ul li a {
 	display: block;
 	color: #4c4c4c;
-    padding: 8px 4px 4px 18px;
+    padding: 8px 4px 5px 18px;
+    margin-bottom: 2px;
 }
 .main .main-left .list ul .active a{
 	background-color: #7c7bad;
@@ -200,7 +205,20 @@ nav .nav-left .user-div .triangle {
 
 }
 
-/* 右边 */
+.main .main-left .footer {
+	display: block;
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	line-height: 19px;
+	text-align: center;
+	height: 19px;
+	width: 219px;
+}
+
+/*-----------------------------------------------------------------------------------------------------------------*/
+
+/* 右边 布局*/
 .main .main-right {
 	display: flex;
     flex-direction: column;
@@ -227,7 +245,6 @@ nav .nav-left .user-div .triangle {
 	margin-top:1px;
 	cursor:pointer;
 }
-
 .main .main-right .title .action {
 	display: inline-block;
 	padding: 5px 12px;
@@ -275,15 +292,6 @@ nav .nav-left .user-div .triangle {
 	top: 4px;
 	cursor:pointer;
 }
-
-
-
-
-
-/* 人员模块*/
-.main .main-right .bg {
-	background: url('../img/bg.png');
-}
 .main .main-right .content {
 	-moz-box-flex: 1;
     flex: 1 1 auto;
@@ -292,8 +300,14 @@ nav .nav-left .user-div .triangle {
     display: block;
 	
 }
+.main .main-right .bg {
+	background: url('../img/bg.png');
+}
 
-.main .main-right .content ul {
+
+/*-------------------------------------------------------------------------------------------------------------------*/
+/*部门+块状布局 */
+.main .main-right .content > ul {
 	flex-flow: row wrap;
 	display:flex;
 	justify-content:flex-start;
@@ -301,14 +315,14 @@ nav .nav-left .user-div .triangle {
 	
 }
 
-.main .main-right .content ul li {
+.main .main-right .content > ul li {
 	flex: 1 1 300px;
  	position: relative;
  	margin:4px;
  	
 }
 
-.main .main-right .content ul .typeli {
+.main .main-right .content > ul .typeli {
 	background-color: #fff;
     box-shadow: 0 0 1px 1px #6f6f6f;
     min-width:150px;
@@ -316,30 +330,46 @@ nav .nav-left .user-div .triangle {
  	
 }
 
-.main .main-right .content ul .look {
+
+.main .main-right .content > ul .typeli i{
+	cursor: pointer;
+	font-size: 10px;
+	position: absolute;
+	right: 5px;
+	top:5px;
+	
+	padding: 2px 5px;
+	border-radius: 5px;
+	color: #666;
+
+}
+
+
+.main .main-right .content > ul .look {
 	width: 0;
 	height: 0;
 }
 
 
-.main .main-right .content ul li img{
+.main .main-right .content > ul li img{
    height: 80%;
    display: inline-block;
    margin: 8px;
 } 
 
-.main .main-right .content ul li h3 {
+.main .main-right .content > ul li h3 {
 	display: inline-block;
 	vertical-align: top;
 	margin-top: 8px;
 	font-weight: bold;
 }
-.main .main-right .content ul li h3 span {
+.main .main-right .content > ul li h3 span {
 	font-size: 12px;
 	color: #666;
+	
 }
 
-.main .main-right .content ul li p{
+.main .main-right .content > ul li p{
 	display: inline-block;
 	position: absolute;
 	left: 90px;
@@ -348,7 +378,7 @@ nav .nav-left .user-div .triangle {
 
 }
 
-.main .main-right .content ul li .Dmanager{
+.main .main-right .content > ul li .Dmanager{
 	display: inline-block;
 	position: absolute;
 	left: 90px;
@@ -358,14 +388,14 @@ nav .nav-left .user-div .triangle {
 
 
 
-.main .main-right .content ul li .bottom {
+.main .main-right .content > ul li .bottom {
 	position: absolute;
 	right: 10px;
 	bottom: 5px;
 
 }
 
-.main .main-right .content ul li .bottom a {
+.main .main-right .content > ul li .bottom a {
 	display: inline-block;
 	padding:5px 10px;
 	color: #fff;
@@ -374,11 +404,10 @@ nav .nav-left .user-div .triangle {
 	border-radius: 3px;
 }
 
+/*--------------------------------------------------------------------------------------------------------------*/
 
-
-/* 人员列表 */
-.main .main-right .content table {
-	
+/* 右边列表 */
+.main .main-right .content  table {
 	background-color: #fff;
 	width: 100%;
     border-spacing: 0;
@@ -388,21 +417,21 @@ nav .nav-left .user-div .triangle {
     font-size: 13px;
 }
 
-.main .main-right .content table  tr {
+.main .main-right .content  table  tr {
 	cursor: pointer;
 }
 
   
 
-.main .main-right .content table  tr:nth-child(odd) {
+.main .main-right .content > table  tr:nth-child(odd) {
 	background-color: #efeff8;
 }
-.main .main-right .content table  td{
+.main .main-right .content  table  td{
     padding: 10px;
     text-align: left;    
 }
 
-.main .main-right .content table  th {
+.main .main-right .content  table  th {
 	padding: 10px;
 	text-align: left;
 	border-right: 1px solid #ccc;
@@ -410,29 +439,29 @@ nav .nav-left .user-div .triangle {
     border-bottom: 1px solid #ccc;
 }
 
-.main .main-right .content table  th {
+.main .main-right .content  table  th {
     background-color: #f0eeee;
     border-top: none;
     text-shadow: 0 1px 0 rgba(255,255,255,0.5); 
 }
 
 
-.main .main-right .content table  td:first-child, .main .main-right .content table  th:first-child {
+.main .main-right .content > table  td:first-child, .main .main-right .content > table  th:first-child {
     border-right: none;
     background-color: transparent;
     width: 1px;
     
 }
 
-.main .main-right .content table thead th:first-child{
+.main .main-right .content > table thead th:first-child{
 	background-color: #f0eeee;;
 
 }
 
-.main .main-right .content table tbody th:first-child {
+.main .main-right .content > table tbody th:first-child {
 	border-bottom: none;
 }
-.main .main-right .content table  tr:hover {
+.main .main-right .content > table  tr:hover {
     background: #fbf8e9;
     -o-transition: all 0.1s ease-in-out;
     -webkit-transition: all 0.1s ease-in-out;
@@ -442,10 +471,11 @@ nav .nav-left .user-div .triangle {
 }  
 
 
-/* 创建人员 */
-.main .main-right .content .newperson {
-	display: none;
-	width: 80%;
+/*---------------------------------------------------------------------------------------------------------------*/
+
+/*表单布局*/
+.main .main-right .content .purchase-order {
+	max-width: 888px;
 	margin:20px auto;
 	border:1px solid #ccc;
 	background-color:#fff;
@@ -453,15 +483,129 @@ nav .nav-left .user-div .triangle {
 	padding: 20px;
 	position: relative;
 	font-size: 14px;
-	box-shadow: 1px 1px 4px #ccc;
+	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
 }
 
-.main .main-right .content .newperson .up {
-	height: 115px;
+.main .main-right .content .purchase-order textarea {
+	display: block;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	padding-left:5px;
+	
+}
+
+.main .main-right .content .purchase-order .order-title {
+	padding-bottom: 10px;
 	border-bottom: 1px solid #ccc;
 }
 
-.main .main-right .content .newperson .up img {
+
+.main .main-right .content .purchase-order .order-title{
+	
+	border-bottom: 1px solid #ccc;
+}
+
+.main .main-right .content .purchase-order .order-form {
+	display: flex;
+	flex-direction:row;
+	padding:20px 0;
+	font-weight: bold;
+	border-bottom:1px solid #ccc;
+
+}
+
+.main .main-right .content .purchase-order .order-form .group {
+	position: relative;
+}
+
+.main .main-right .content .purchase-order .order-form .group i {
+	position: absolute;
+	right:6px;
+	top:2px;
+	font-size: 10px;
+}
+
+.main .main-right .content .purchase-order .order-form input {
+	
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	height: 25px;
+	padding-left:5px;
+	width: 100%;
+
+}
+
+.main .main-right .content .purchase-order .order-form .left {
+	width: 50%;
+	border-right: 1px solid #ccc;
+	padding-right: 20px;
+}
+
+.main .main-right .content .purchase-order .order-form .right{
+	padding-left: 20px;
+	width: 50%;
+
+}
+.main .main-right .content .purchase-order .order-form .left > div,.main .main-right .content .purchase-order .order-form .right > div{
+	line-height: 40px;
+	width: 100%;
+	display: flex;
+	flex-direction:row;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.main .main-right .content .purchase-order .order-bottom {
+
+	display: flex;
+	flex-direction:row;
+	flex-wrap: nowrap;
+	margin-top: 20px;
+	align-items:flex-end;
+	justify-content:space-between;
+}
+
+
+.main .main-right .content .purchase-order .order-bottom input {
+	display: block;
+	height: 30px;
+	width: 50px;
+	background-color: #337ab7;
+	border:1px solid #2d6da3;
+	border-radius: 3px;
+	color: #fff;
+}
+
+/*地址*/
+.main .main-right .content .purchase-order .order-form .right .address {
+	display: flex;
+	flex-direction: row;
+	justify-content:flex-start;
+	align-items:center;
+	
+}
+
+.main .main-right .content .purchase-order .order-form .address input {
+	width: 20%;
+	margin-left:10px;
+}
+
+
+
+.main .main-right .content .purchase-order .order-form .right .textarea{
+	align-items: flex-start;
+}
+
+
+
+/*------------------------------------------------------------------------------------------------------------------------*/
+
+/*员工*/
+.main .main-right .content .purchase-order .order-form .right .detail {
+	display: block;
+	line-height: 40px;
+}
+.main .main-right .content .purchase-order .order-title img {
 	max-width: 90px;
 	max-height: 90px;
 	border-radius: 3px;
@@ -469,7 +613,7 @@ nav .nav-left .user-div .triangle {
 	border:none;
 }
 
-.main .main-right .content .newperson .up a {
+.main .main-right .content .purchase-order .order-title a {
 	border:1px solid #204d73;
 	padding: 5px 10px;
 	border-radius: 3px;
@@ -482,170 +626,185 @@ nav .nav-left .user-div .triangle {
 	
 }
 
-.main .main-right .content .newperson .down {
-	display: flex;
-	flex-direction:row;
-	border-bottom: 1px solid #ccc;
-	padding-bottom: 20px;
-	
-}
-
-.main .main-right .content .newperson .down .left {
-	margin-top: 20px;
-	border-right:1px solid #ccc;
+.main .main-right .content .purchase-order .left > div p{
 	width: 50%;
+	text-align: left;
+	font-weight: 400;
+}
+.main .main-right .content .purchase-order .right > p{
+
+	font-weight: 400;
 }
 
-.main .main-right .content .newperson .down .left > div {
-	line-height: 40px;
-	width: 100%;
-	display: flex;
-	flex-direction:row;
-	justify-content: space-between;
-	align-items: center;
-	
+.main .main-right .content .purchase-order .order-bottom > a{
+    padding:5px 10px;
+    background-color: #337ab7;
+    border: 1px solid #2d6da3;
+    border-radius: 3px;
+    color: #fff;
 }
 
-.main .main-right .content .newperson .down .left label{
+
+
+
+/*------------------------------------------------------------------------------------------------------------------------*/
+
+/*财务：经营报表的列表*/
+.main .main-right .content .purchase-order .goods-list table tbody tr td{
+	border-bottom: 1px solid #ccc
+}
+
+
+.main .main-right .content table thead th:last-child{
+	border-right:none;
+
+}
+
+/*财务：经营报表右侧底部统计*/
+.main .main-right .content .purchase-order .order-bottom table {
+	width: 258px;
+	border: none;
+	box-shadow: none;
 	
+}
+.main .main-right .content .purchase-order .order-bottom table td {
+	height: 22px;
+	padding:0;
+	text-align: right;
+	padding-bottom: 5px;
+}
+
+.main .main-right .content .purchase-order .order-bottom table td span {
 	font-weight: bold;
+	font-size: 16px;
+}
+.main .main-right .content .purchase-order .order-bottom table .last td {
+	border-top: 1px solid #ccc;
+	padding:10px 0;
 }
 
-.main .main-right .content .newperson .down .left input {
+/*---------------------------------------------------------------------------------------------------------------------*/
+
+
+/*销售模块*/
+.main .main-right .content .purchase-order .order-form textarea {
 	border: 1px solid #ccc;
-	border-radius: 3px;
-	height: 25px;
-	padding-left:5px;
-	width:100%;	
-}
-
-.main .main-right .content .newperson .down .left .group {
-	position: relative;
-	width:60%;
-	padding-right: 40px;
-
-}
-
-.main .main-right .content .newperson .down .left .group i{
-	position: absolute;
-	right: 44px;
-	top:2px;
-	font-size: 12px;
-	color: #666;
-	cursor:pointer;
-}
-
-.main .main-right .content .newperson .down .right {
-	margin-top: 20px;
-	margin-left: 40px;
-
-}
-
-.main .main-right .content .newperson .down .right .group {
-	display: inline-block;
-	position: relative;
-	width:45%;
-}
-
-.main .main-right .content .newperson .down .right .group input {
-	border: 1px solid #ccc;
-	border-radius: 3px;
-	height: 25px;
-	padding-left:5px;
+	margin-top:10px;
 	width: 100%;
-}
-
-.main .main-right .content .newperson .down .right .group i {
-	font-size: 12px;
-	color: #666;
-	position: absolute;
-	right: 5px;
-	top:5px;
-	cursor:pointer;
-
-}
-
-.main .main-right .content .newperson .down .right span {
-	display: inline-block;
-	line-height: 40px;
-	font-weight: bold;
-}
-
-.main .main-right .content .newperson .down .right .detail {
-	display:block;
-}
-
-.main .main-right .content .newperson .down .right > input {
-	border: 1px solid #ccc;
-	border-radius: 3px;
-	height: 25px;
-	padding-left:5px;
-	width: 20%;
-}
-
-.main .main-right .content .newperson .down .right textarea {
-	display: block;
-	border: 1px solid #ccc;
-	border-radius: 3px;
-	padding-left:5px;
-	width: 80%;
-}
-
-.main .main-right .content .newperson .bottom {
-	display: flex;
-	justify-content: flex-end;
-	padding-top: 10px;
-}
-
-.main .main-right .content .newperson .bottom input,.main .main-right .content .newperson .bottom  a{
-	border:1px solid #204d73;
-	padding: 5px 20px;
-	border-radius: 3px;
-	background-color: #337ab7;
-	color: #fff;
-	line-height: 1.5;
-	cursor: pointer;
-}
-
-
-
-
-
 	
+}
 
 
 
 
+.main .main-right .content .purchase-order .order-form textarea {
+	border: 1px solid #ccc;
+	margin-top:10px;
+	width: 100%;
+	
+}
 
+/*----------------------------------------------------------------------------------------------------------------------*/
+/*经营模块*/
+/*business为经营模块的首页*/
+.main .main-right .content .business {
+	max-width: 500px;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-.main .main-left .footer {
-	display: block;
-	position: fixed;
-	bottom: 0;
-	left: 0;
-	line-height: 19px;
+.main .main-right .content .business ul li{
+	
 	text-align: center;
-	height: 19px;
-	width: 219px;
+	line-height: 40px;
+	margin-bottom: 20px;
 }
+
+.main .main-right .content .business ul li .btitle {
+	font-weight: bold;
+}
+
+.main .main-right .content .business  ul li .bcontent label{
+	font-weight: bold;
+
+}
+.main .main-right .content .business  ul li .bcontent .btn {
+	border:1px solid #2d6da3;
+	border-radius: 3px;
+	padding: 4px 8px;
+	color: #fff;
+    background-color: #337ab7;
+   	cursor: pointer;
+
+}
+.main .main-right .content .business  ul li .bcontent .center{
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	height: 25px;
+	padding-left:5px;
+	margin:0 30px;
+}
+
+.main .main-right .content .purchase-order .order-form .left > p {
+	margin-top:10px;
+}
+
+/*a为年月经营报表链接到详情页*/
+.main .main-right .content .purchase-order > a {
+	display: block;
+	width: 200px;
+	border:1px solid #ccc;
+	line-height: 35px;
+	margin:0 auto;
+	text-align:center;
+	margin-top:20px;
+	border-radius: 4px;
+	border:1px solid #2d6da3;
+	color: #fff;
+    background-color: #337ab7;
+}
+
+/*ul为月经营报表最底部的统计*/
+.main .main-right .content .purchase-order .order-bottom > ul {
+	width: 50%;
+	
+}
+
+.main .main-right .content .purchase-order .order-bottom > ul li{
+	line-height: 25px;
+	font-weight: bold;
+	
+}
+.main .main-right .content .purchase-order .order-bottom > ul li span {
+	display: inline-block;
+	width:117px;
+	margin-right: 10px;
+}
+
+/*年经营详细报表*/
+.main .main-right .content .purchase-order > ul li p{
+	font-weight: bold;
+	line-height: 35px;
+}
+
+.main .main-right .content .purchase-order > ul li .m-profit {
+	text-align: right;
+	margin-top: 10px;
+	font-size: 18px;
+}
+
+.main .main-right .content .purchase-order > ul .y-profit {
+	font-weight: bold;
+	line-height: 35px;
+	font-size: 18px;
+}
+
+
+
+
+
+
+/*-------------------------------------------------------------------------------------------------------------------------*/
 
 /* 模态框 */
-
-/* 部门 */
 .model {
 	display: none;
 }
@@ -746,3 +905,59 @@ nav .nav-left .user-div .triangle {
 .model ul li .close {
 	margin-right:120px;
 }
+
+/* 登录 */
+.logo {
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+	width: 40%;
+	margin:0 auto;
+	background-color: #fff;
+}
+
+.logo h1 {
+	text-align: center;
+	font-size: 60px;
+	line-height: 50px;
+	color: #888;
+	font-weight: bold;
+	text-shadow: 2px 2px 4px #ccc;
+
+}
+.logo form label {
+	font-size: 14px;
+	font-weight: bold;
+	display: block;
+	line-height: 30px;
+	margin-top: 15px;
+}
+
+.logo form input {
+	border:1px solid #ccc;
+	padding:0 12px;
+	display: block;
+	width: 100%;
+	height: 34px;
+	border-radius: 4px;
+	box-shadow:	rgba(0,​ 0,​ 0,​ 0.075) 0px 1px 1px 0px inset;
+	font-size: 14px;
+
+}
+.logo form input:focus {
+	border-color: #66afe9;
+	box-shadow: 0 1px 1px rgba(0,0,0,0.075),0 0 8px rgba(102,175,233,0.6);
+	outline: 0 none;
+}
+
+.logo form .submit {
+	margin-top: 15px;
+	background-color: #337ab7;
+    border-color: #2e6da4;
+    color: #fff;
+    width: 54px;
+    cursor:pointer;
+}
+
+
+
+
+
