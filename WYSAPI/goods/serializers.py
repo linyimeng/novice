@@ -18,10 +18,10 @@ class TypeSerializer(serializers.ModelSerializer):
         return None
     
 class TypeAttrSerializer(serializers.ModelSerializer):
-    attr_type_name = serializers.SerializerMethodField()
     class Meta:
         model = TypeAttr
         fields= ('pk','goodstype','name','attr_type')
+        
         
 class GoodsSerializer(serializers.ModelSerializer):
     class Meta:
