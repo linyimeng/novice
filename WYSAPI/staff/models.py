@@ -8,7 +8,7 @@ class Department(models.Model):
     '''
     name = models.CharField(_('department name'),max_length=60)
     superiors = models.ForeignKey('self',default=None,blank=True,null=True)
-    customid = models.CharField(max_length=30,unique=True,blank=True,null=True)
+    customid = models.CharField(max_length=30,unique=True,null=True,default=None,blank=True)
     manager = models.ForeignKey('EmpInfo',related_name='empinfo',blank=True,null=True)
     joined = models.DateTimeField(_('joined'),auto_now_add=True)
     updated = models.DateTimeField(_('updated'),auto_now=True)
@@ -28,7 +28,7 @@ class Jobs(models.Model):
     updated = models.DateTimeField(_('updated'),auto_now=True)
     deleted = models.DateTimeField(_('deleted'),blank=True,null=True)
     class Meta:
-        verbose_name = _('position')
+        verbose_name = _('jobs')
     def __str__(self):
         return self.name
 class EmpInfo(models.Model):
@@ -54,7 +54,7 @@ class EmpInfo(models.Model):
     birthday = models.DateField(blank=True,null=True)
     
     isarchive = models.BooleanField(_('is archive'),default=False)
-    entry_time = models.DateTimeField(blank=True)
+    entry_time = models.DateTimeField()
     joined = models.DateTimeField(_('joined'),auto_now_add=True)
     updated = models.DateTimeField(_('updated'),auto_now=True)
     deleted = models.DateTimeField(_('deleted'),blank=True,null=True)
