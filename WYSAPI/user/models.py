@@ -13,7 +13,6 @@ class UserInfo(models.Model):
     joined = models.DateTimeField(_('joined'),auto_now_add=True)
     updated = models.DateTimeField(_('updated'),auto_now=True)
     deleted = models.DateTimeField(_('deleted'),blank=True,null=True)
-    
     def __str__(self):
         return self.name
     class Meta:
