@@ -1,21 +1,21 @@
-from rest_framework import viewsets
+from rest_framework.viewsets import ModelViewSet
 from goods.models import Type,TypeAttr,Goods
 from goods.serializers import TypeSerializer,TypeAttrSerializer,GoodsSerializer
 # Create your views here.
 
-class TypeViewSet(viewsets):
-    queryset = Type.objects.filter(deleted=None)
+class TypeViewSet(ModelViewSet):
+    queryset = Type.objects.filter()
     serializer_class = TypeSerializer
     
-class TypeAttrViewSet(viewsets):
-    queryset = TypeAttr.objects.filter(deleted=None)
+class TypeAttrViewSet(ModelViewSet):
+    queryset = TypeAttr.objects.filter()
     serializer_class = TypeAttrSerializer
 
-class GoodsViewSet(viewsets):
+class GoodsViewSet(ModelViewSet):
     '''
     main_attr: json string {"attrname":"attrvalue"}
     custom_attr: json string {"attrname":"attrvalue"}
     other_attr: json string {"attrname":"attrvalue"}
     '''
-    queryset = Goods.objects.filter(deleted=None,is_active=True)
+    queryset = Goods.objects.filter(is_active=True)
     serializer_class = GoodsSerializer

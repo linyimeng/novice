@@ -4,9 +4,13 @@ from django.utils.translation import ugettext_lazy as _
 
 class Type(models.Model):
     name = models.CharField(max_length=30)
+    superiors = models.ForeignKey("self",blank=True,null=True,default=None)
     joined = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     deleted = models.DateTimeField(_('deleted'),blank=True,null=True)
+    
+    def __str__(self):
+        return self.name
 
 class Goods(models.Model):
     customid = models.CharField(max_length=30,unique=True,blank=True,null=True)
@@ -17,9 +21,9 @@ class Goods(models.Model):
     costprice = models.DecimalField(max_digits=12,decimal_places=4)
     type = models.ForeignKey(Type)
     is_active = models.BooleanField(default=True)
-    main_attr = models.TextField()
-    custom_attr = models.TextField()
-    other_attr = models.TextField()
+    main_attr = models.TextField(blank=True,null=True)
+    custom_attr = models.TextField(blank=True,null=True)
+    other_attr = models.TextField(blank=True,null=True)
     user = models.ForeignKey(User)
     lastmodifyer = models.ForeignKey(User,blank=True,null=True,related_name='lastmodifyer')
     joined = models.DateTimeField(auto_now_add=True)
