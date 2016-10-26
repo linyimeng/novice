@@ -9,3 +9,5 @@ main.js
 
 /WYS/node_modules/
 /WYS/typings/
+__pycache__/
+migrations/
