@@ -13,14 +13,14 @@ import { Component } from '@angular/core';
 			<div class="list">
 				<div class="ultitle">销售</div>
 				<ul>
-					<li class="active"><a>客户</a></li>
-					<li><a href="">销售单</a></li>
+					<li routerLink="/sales/client" routerLinkActive="active"><a>客户</a></li>
+					<li routerLink="/sales/salesorder" routerLinkActive="active"><a>销售单</a></li>
 				</ul>
 				<div class="ultitle">报表</div>
 				<ul>
-					<li><a href="">日期销售报表</a></li>
-					<li><a href="">商品销售报表</a></li>
-					<li><a href="">客户销售报表</a></li>
+					<li routerLink="/sales/reports/datesales" routerLinkActive="active"><a>日期销售报表</a></li>
+					<li routerLink="/sales/reports/goodssales" routerLinkActive="active"><a>商品销售报表</a></li>
+					<li routerLink="/sales/reports/clientsales" routerLinkActive="active"><a>客户销售报表</a></li>
 				</ul>
 			</div>
 			<div class="footer">欢迎使用</div>

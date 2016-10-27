@@ -5,6 +5,6 @@ import { Component,Input } from '@angular/core';
    selector: 'setting-users-create',
    templateUrl: 'setting-users-create.component.html'
 })
-export class SettingUsersCreateComponent{
+export class UsersCreateComponent{
     
 }

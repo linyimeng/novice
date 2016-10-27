@@ -3,16 +3,10 @@ import { Router } from '@angular/router';
 
 @Component({
    moduleId: module.id,
-   selector: 'goods-right',
-   templateUrl: 'goods-right.component.html'
+   selector: 'goods-list-reports',
+   templateUrl: 'warehouse-loss-right-title.component.html'
 })
-export class GoodsRightComponent {
-    constructor(
-        private router:Router
-    ) {}
+export class WarehouseGoodsReportsRightComponent {
 
-    show_goods_create() {
-        this.router.navigate(['/purchases/goods/create']);
-    }
 }
 

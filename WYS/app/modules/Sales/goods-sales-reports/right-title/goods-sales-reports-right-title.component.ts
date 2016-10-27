@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
    selector: 'goods-sales-reports-right-title',
    templateUrl: 'goods-sales-reports-right-title.component.html'
 })
-export class GoodsSalesReportsRightTitleComponent {
+export class GoodsSalesReportsRightComponent {
     constructor(
         private router:Router
     ) {}

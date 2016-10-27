@@ -25,10 +25,6 @@ const personnelRoutes:Routes = [
     },
     {
         path:'personnel',
-        component:PersonnelComponent
-    },
-    {
-        path:'personnel',
         component:PersonnelComponent,
         children:[
             { path:'department', component:DepartmentrightComponent },

@@ -5,6 +5,6 @@ import { Component,Input } from '@angular/core';
    selector: 'goods-last-reports',
    templateUrl: 'goods-last-reports-content.component.html'
 })
-export class GoodsLastReportsComponent{
+export class GoodsLastReportsContentComponent{
     
 }

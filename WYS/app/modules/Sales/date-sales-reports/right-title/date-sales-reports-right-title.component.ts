@@ -4,13 +4,11 @@ import { Router } from '@angular/router';
 @Component({
    moduleId: module.id,
    selector: 'date-sales-reports-right-title',
-   templateUrl: 'date-sales-reports-right-title.component'
+   templateUrl: 'date-sales-reports-right-title.component.html'
 })
-export class GoodsRightComponent {
+export class DateSalesReportsRightComponent {
     constructor(
         private router:Router
-    ) {}
-
-  
+    ) {}  
 }
 

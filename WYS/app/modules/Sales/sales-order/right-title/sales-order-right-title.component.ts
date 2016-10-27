@@ -3,16 +3,9 @@ import { Router } from '@angular/router';
 
 @Component({
    moduleId: module.id,
-   selector: 'purchase-orders-right',
-   templateUrl: 'purchase-orders-right.component.html'
+   selector: 'sales-orders-right',
+   templateUrl: 'sales-order-right-title.component.html'
 })
-export class PurchaseOrdersRightComponent {
-    constructor(
-        private router:Router
-    ) {}
+export class SalesOrdersRightComponent {
 
-    show_sales_order_create() {
-        this.router.navigate(['/purchases/sales-orders/create']);
-    }
 }
-

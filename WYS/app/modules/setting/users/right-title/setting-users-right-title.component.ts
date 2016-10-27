@@ -6,13 +6,7 @@ import { Router } from '@angular/router';
    selector: 'setting-users-right-title',
    templateUrl: 'setting-users-right-title.component.html'
 })
-export class GoodsRightComponent {
-    constructor(
-        private router:Router
-    ) {}
+export class UsersRightComponent {
 
-    show_users_create() {
-        this.router.navigate(['/setting/users/create']);
-    }
 }
 

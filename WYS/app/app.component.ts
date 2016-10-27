@@ -16,15 +16,16 @@ import { Router } from '@angular/router';
             <li routerLink='/sales' routerLinkActive="activity">
                 <a>销售</a>
             </li>
-            <li>
-                <a href="#">仓库</a>
+            <li routerLink='/warehouse' routerLinkActive="activity">
+                <a>仓库</a>
             </li>
-            <li>
-                <a href="#">财务</a>
+            <!-- 财务模块暂不启用
+            <li><a>财务</a></li>
+            -->
+            <li routerLink='/setting' routerLinkActive="activity">
+                <a>设置</a>
             </li>
-            <li>
-                <a href="#">设置</a>
-            </li>
+            
         </ul>
         <div class="nav-left">
             <span class="iconfont">&#xe647;</span>

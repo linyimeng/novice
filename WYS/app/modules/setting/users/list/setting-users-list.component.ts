@@ -5,7 +5,7 @@ import { Component} from '@angular/core';
    selector: 'setting-users-list',
    templateUrl: 'setting-users-list.component.html'
 })
-export class SettingUsersListComponent{
+export class UsersListComponent{
 
 }
 

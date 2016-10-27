@@ -8,6 +8,8 @@ import { AppComponent }        from './app.component';
 import { PersonnelModule } from './modules/personnel/personnel.module';
 import { PurchasesModule } from './modules/purchases/purchases.module';
 import { SalesModule } from './modules/Sales/sales.module';
+import { WarehouseModule } from './modules/warehouse/warehouse.module';
+import { SettingModule } from './modules/setting/setting.module';
 
 @NgModule({
   imports: [
@@ -16,6 +18,8 @@ import { SalesModule } from './modules/Sales/sales.module';
     PersonnelModule,
     PurchasesModule,
     SalesModule,
+    WarehouseModule,
+    SettingModule,
     routing
   ],
 
