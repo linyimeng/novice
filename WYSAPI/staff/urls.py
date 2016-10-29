@@ -2,16 +2,21 @@
 Created on 2016-9-20
 @author: yimeng
 '''
-
 from django.conf.urls import url,include
 from staff import views
 from rest_framework.routers import DefaultRouter
+from rest_framework.urlpatterns import format_suffix_patterns
 
 router = DefaultRouter()
 router.register(r'departments', views.DepartmentViewSet)
 router.register(r'jobs',views.JobsViewSet)
-router.register(r'emp',views.EmpInfoViewSet)
-
-urlpatterns = [
+router_urls = [
     url(r'^',include(router.urls)),
 ]
+
+emp_urls = format_suffix_patterns([
+    url(r'^emp/$',views.EmpInfoListAPIView.as_view(),name='emps-list'),
+    url(r'^emp/(?P<pk>[^/.]+)/$',views.EmpInfoRetrieveUpdateAPIView.as_view(),name='emps-detail'),
+])
+
+urlpatterns = emp_urls + router_urls

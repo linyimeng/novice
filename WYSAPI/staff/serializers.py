@@ -5,7 +5,7 @@ Created on 2016-9-20
 from rest_framework import serializers
 from staff.models import Department,Jobs,EmpInfo
 from django.contrib.auth.models import User
-
+from django.core.exceptions import ObjectDoesNotExist
 class DepartmentSerializer(serializers.ModelSerializer):
     staff_number = serializers.SerializerMethodField()
     superiors_name = serializers.SerializerMethodField()
@@ -18,6 +18,7 @@ class DepartmentSerializer(serializers.ModelSerializer):
                     'superiors',
                     'manager',
                     'customid',
+                    'remark',
                     
                     'staff_number',
                     'superiors_name',
@@ -59,11 +60,57 @@ class JobsSerializer(serializers.ModelSerializer):
         return None
     
     
-class EmpInfoSerializer(serializers.ModelSerializer):
+class EmpInfoCreateSerializer(serializers.ModelSerializer):
     department_name = serializers.SerializerMethodField()
     job_name = serializers.SerializerMethodField()
     loginname = serializers.CharField(write_only=True)
     password = serializers.CharField(max_length=30,write_only=True)
+    class Meta:
+        model = EmpInfo
+        fields= (
+                 'name',
+                 'customid',
+                 'department',
+                 'job',
+                 'work_address',
+                 'office_phone',
+                 'office_address',
+                 'email',
+                 'office_landline',
+                 'cardid',
+                 'bank_account',
+                 'sex',
+                 'marital_status',
+                 'birthday',
+                 'entry_time',
+                 'isarchive',
+                 'remark',
+                 
+                 'loginname',
+                 'password',
+                 )
+    def validate_loginname(self, value):
+        try:
+            User.objects.get(username=value)
+            raise serializers.ValidationError("loginname already exists")
+        except ObjectDoesNotExist:
+            return value
+    def create(self,validated_data):
+        new_user = User(
+                    email=validated_data['email'],
+                    username=validated_data['loginname']
+                )
+        new_user.set_password(validated_data['password'])
+        new_user.save()
+        del validated_data['loginname']
+        del validated_data['password']
+        validated_data['user_id'] = new_user.pk
+        empinfo = EmpInfo.objects.create(**validated_data)
+        return empinfo
+    
+class EmpInfoListDetailSerializer(serializers.ModelSerializer):
+    department_name = serializers.SerializerMethodField()
+    job_name = serializers.SerializerMethodField()
     class Meta:
         model = EmpInfo
         fields= (
@@ -84,12 +131,10 @@ class EmpInfoSerializer(serializers.ModelSerializer):
                  'birthday',
                  'entry_time',
                  'isarchive',
+                 'remark',
                  
                  'department_name',
                  'job_name',
-                 
-                 'loginname',
-                 'password',
                  )
     
     def get_department_name(self,obj):
@@ -100,22 +145,6 @@ class EmpInfoSerializer(serializers.ModelSerializer):
         if obj.job:
             return obj.job.name
         return None
-    def validate_loginname(self, value):
-        user = User(username=value)
-        if(user.is_authenticated()):
-            raise serializers.ValidationError("loginname already exists")
-        return value
-    def create(self,validated_data):
-        new_user = User(
-                    email=validated_data['email'],
-                    username=validated_data['loginname']
-                )
-        new_user.set_password(validated_data['password'])
-        new_user.save()
-        del validated_data['loginname']
-        del validated_data['password']
-        validated_data['user_id'] = new_user.pk
-        empinfo = EmpInfo.objects.create(**validated_data)
-        return empinfo
+
         
         

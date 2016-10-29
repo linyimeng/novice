@@ -1,6 +1,7 @@
 from rest_framework import viewsets
+from rest_framework.generics import CreateAPIView,RetrieveUpdateAPIView,ListAPIView
 from staff.models import Department,Jobs,EmpInfo
-from staff.serializers import DepartmentSerializer,JobsSerializer,EmpInfoSerializer
+from staff.serializers import DepartmentSerializer,JobsSerializer,EmpInfoCreateSerializer,EmpInfoListDetailSerializer
 from staff.pagination import StaffLimitOffsetPagination
 # Create your views here.
 
@@ -14,7 +15,13 @@ class JobsViewSet(viewsets.ModelViewSet):
     queryset = Jobs.objects.filter()
     serializer_class = JobsSerializer
     
-class EmpInfoViewSet(viewsets.ModelViewSet):
-    queryset = EmpInfo.objects.filter(user__is_active=True)
-    serializer_class = EmpInfoSerializer
+class EmpInfoCreateAPIView(CreateAPIView):
+    serializer_class = EmpInfoCreateSerializer
+
+class EmpInfoListAPIView(ListAPIView):
     pagination_class = StaffLimitOffsetPagination
+    queryset = EmpInfo.objects.filter(user__is_active=True)
+    serializer_class = EmpInfoListDetailSerializer
+class EmpInfoRetrieveUpdateAPIView(RetrieveUpdateAPIView):
+    queryset = EmpInfo.objects.filter(user__is_active=True)
+    serializer_class = EmpInfoListDetailSerializer

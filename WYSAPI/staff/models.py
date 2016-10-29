@@ -10,6 +10,7 @@ class Department(models.Model):
     superiors = models.ForeignKey('self',default=None,blank=True,null=True)
     customid = models.CharField(max_length=30,unique=True,null=True,default=None,blank=True)
     manager = models.ForeignKey('EmpInfo',related_name='empinfo',blank=True,null=True)
+    remark = models.TextField(blank=True,null=True)
     joined = models.DateTimeField(_('joined'),auto_now_add=True)
     updated = models.DateTimeField(_('updated'),auto_now=True)
     deleted = models.DateTimeField(_('deleted'),blank=True,null=True)
@@ -45,7 +46,7 @@ class EmpInfo(models.Model):
     office_address = models.CharField(_('office address'),max_length=255,blank=True,null=True)
     email = models.EmailField(unique=True)
     office_landline = models.CharField(_('landline'),max_length=20,blank=True,null=True)
-    
+    remark = models.TextField(blank=True,null=True)
     cardid = models.CharField(_('cardid'),max_length=20,blank=20,null=True)
     bank_account = models.CharField(_('bank Account'),max_length=36,blank=True,null=True)
     
