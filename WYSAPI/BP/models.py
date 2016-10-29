@@ -13,6 +13,8 @@ class Company(models.Model):
     phone = models.CharField(_('phone'),max_length=12,unique=True,blank=True,null=True)
     email = models.EmailField(blank=True,null=True,unique=True)
     fax = models.CharField(_('fax'),max_length=30,blank=True,null=True)
+    address = models.CharField(max_length=225,blank=True,null=True)
+    remark = models.TextField(blank=True,null=True)
     
     joined = models.DateTimeField(_('joined'),auto_now_add=True)
     updated = models.DateTimeField(_('updated'),auto_now=True)
@@ -31,6 +33,7 @@ class Personal(models.Model):
     phone = models.CharField(_('phone'),max_length=12,unique=True,blank=True,null=True)
     email = models.EmailField(blank=True,null=True,unique=True)
     fax = models.CharField(_('fax'),max_length=30,blank=True,null=True)
+    remark = models.TextField(blank=True,null=True)
     
     joined = models.DateTimeField(_('joined'),auto_now_add=True)
     updated = models.DateTimeField(_('updated'),auto_now=True)

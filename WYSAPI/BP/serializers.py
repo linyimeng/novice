@@ -9,7 +9,18 @@ from BP.models import Company,Personal
 class CompanySerializer(serializers.ModelSerializer):
     class Meta:
         model = Company
-        fields = ('pk','name','is_vendor','is_client','landline','phone','email','fax')
+        fields = (
+                  'pk',
+                  'name',
+                  'is_vendor',
+                  'is_client',
+                  'landline',
+                  'phone',
+                  'email',
+                  'fax',
+                  'address',
+                  'remark',
+                 )
         
 class PersonalSerializer(serializers.ModelSerializer):
     class Meta:
