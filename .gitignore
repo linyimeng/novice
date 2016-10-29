@@ -4,6 +4,7 @@
 *.module.js
 *.routing.js
 main.js
+.metadata/
 
 *.map
 /WYS/app/modules/*.js
