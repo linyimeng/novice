@@ -1,14 +1,6 @@
-*.component.js
-*.service.js
-*guard.js
-*.module.js
-*.routing.js
-main.js
 .metadata/
-
-*.map
-/WYS/app/modules/*.js
 /WYS/node_modules/
-/WYS/typings/
+/WYS/dist
+
 __pycache__/
 migrations/
