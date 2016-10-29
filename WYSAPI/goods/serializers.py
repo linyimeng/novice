@@ -18,13 +18,28 @@ class TypeSerializer(serializers.ModelSerializer):
         return None
     
 class TypeAttrSerializer(serializers.ModelSerializer):
+    goodstype = serializers.IntegerField(write_only=True)
     class Meta:
         model = TypeAttr
-        fields= ('pk','goodstype','name','attr_type')
+        fields= ('goodstype','logicname','name','attr_type')
         
         
 class GoodsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Goods
-        fields=('pk','name','customid','manufacturer','barcode','type','salesprice','costprice','is_active','main_attr',
-                'custom_attr','other_attr','user','lastmodifyer')
+        fields=(
+                'pk',
+                'name',
+                'customid',
+                'manufacturer',
+                'specification',
+                'unit',
+                'barcode',
+                'type',
+                'salesprice',
+                'costprice',
+                'is_active',
+                'static_attr',
+                'user',
+                'lastmodifyer'
+                )
