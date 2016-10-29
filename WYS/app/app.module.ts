@@ -1,6 +1,6 @@
 import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule }   from '@angular/forms';
+import { HttpModule } from '@angular/http';
 import { routing } from './app.routing';
 
 import { AppComponent }        from './app.component';
@@ -11,10 +11,11 @@ import { SalesModule } from './modules/Sales/sales.module';
 import { WarehouseModule } from './modules/warehouse/warehouse.module';
 import { SettingModule } from './modules/setting/setting.module';
 
+import { LoginComponent } from './modules/auth/login.component';
 @NgModule({
   imports: [
     BrowserModule,
-    FormsModule,
+    HttpModule,
     PersonnelModule,
     PurchasesModule,
     SalesModule,
@@ -25,6 +26,7 @@ import { SettingModule } from './modules/setting/setting.module';
 
   declarations: [
     AppComponent,
+    LoginComponent
   ],
 
   providers: [

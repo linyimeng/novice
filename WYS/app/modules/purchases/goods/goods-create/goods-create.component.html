@@ -1,6 +1,6 @@
 <!-- 创建商品 -->
 <div class="content"> 
-    <form action="#" class="purchase-order" >
+    <form class="purchase-order"  #goodsForm="ngForm" (ngSubmit)="save_goods(goodsForm)">
         <div class="order-title">
             <img src="/app/static/img/mr.png" alt="">
             <a href="">上传图像</a>
@@ -8,61 +8,64 @@
         <div class="order-form">
             <div class="left">
                 <div>	
+                    <label for="name">商品类别：</label>
+                    <div class="group">
+                    <input type="text" ngModel name="type" required>
+                    </div>
+                </div>
+                <div>	
                     <label for="name">名称：</label>
                     <div class="group">
-                    <input type="text" id="name">
+                    <input type="text" ngModel name="name" required>
                     </div>
                 </div>
-
-                <div>
-                    <label for="unit">单位：</label>
-                    <div class="group">
-                    <input type="text" id="name">
-                    </div>
-                </div>
-
                 <div>
                     <label for="specification">规格：</label>
                     <div class="group">
-                    <input type="text" id="specification">
+                    <input type="text" ngModel name="specification">
                     </div>
-
                 </div>
-
                 <div>
-                    <label for="number">编号：</label>
+                    <label for="unit">单位：</label>
                     <div class="group">
-                        <input type="text" id="number">
-                        <i class="iconfont">&#xe696;</i>
+                    <input type="text" ngModel name="unit">
                     </div>
-                    
                 </div>
-
                 <div>
-                    <label for="cost">成本：</label>
+                    <label for="barcode">条形码：</label>
                     <div class="group">
-                        <input type="text" id="cost">
-                        <i class="iconfont">&#xe696;</i>
+                    <input type="text" ngModel name="barcode">
                     </div>
                 </div>
-
+                
                 <div>
-                    <label for="price">售价：</label>	
+                    <label for="manufacturer">生产厂家：</label>
                     <div class="group">
-                        <input type="text" id="price">
-                        <i class="iconfont">&#xe696;</i>
+                    <input type="text" ngModel name="manufacturer">
                     </div>
                 </div>
+                <div>
+                    <label for="costprice">预成本价：</label>
+                    <div class="group">
+                        <input type="text" ngModel name="costprice">
+                    </div>
+                </div>
+                <div>
+                    <label for="salesprice">零售价：</label>	
+                    <div class="group">
+                        <input type="text" ngModel name="salesprice">
+                    </div>
+                </div>
+                <span class="detail">备注：</span>
+                <textarea ngModel name="remark" id="" cols="30" rows="3"></textarea>
             </div>
-            <div class="right">
-                <div class="group address">
-                    <label>产地：</label>
-                    <input type="text" placeholder="城市">
-                    <input type="text" placeholder="省份">
-                    
+            <div class="right" ngModelGroup="static_attr">
+                <div *ngFor="let attr of static_attrs">
+                    <label for="price">{{attr.name}}：</label>	
+                    <div class="group">
+                        <input type="text" ngModel name="{{attr.logicname}}">
+                    </div>
                 </div>
-                <span class="detail">详细地址：</span>
-                <textarea name="" id="" cols="30" rows="10"></textarea>
             </div>
         </div>
         <div class="order-bottom">

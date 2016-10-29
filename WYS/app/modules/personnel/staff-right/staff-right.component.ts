@@ -7,12 +7,6 @@ import { Router } from '@angular/router';
    templateUrl: 'staff-right.html'
 })
 export class StaffrightComponent {
-    constructor(
-        private router:Router
-    ) { }
 
-    showstaffcreate() {
-        this.router.navigate(['/personnel/staff/create']);
-    }
 }
 

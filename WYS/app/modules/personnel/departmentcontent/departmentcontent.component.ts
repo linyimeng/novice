@@ -1,12 +1,34 @@
-import { Component } from '@angular/core';
+import { Component,OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { DepartmentService } from '../../wysservices/department.service';
 
 @Component({
 	moduleId: module.id,
 	selector: 'department-content',
-	templateUrl: 'departmentcontent.component.html'
+	templateUrl: 'departmentcontent.component.html',
+	providers:[DepartmentService]
 })
-export class  DepartmentcontentComponent{
+export class  DepartmentcontentComponent implements OnInit{
+	departments:any;
+	constructor(
+		private _departmentService:DepartmentService,
+		private router:Router
+	) {}
 
+	ngOnInit() {
+		this.get_list();
+	}
+
+	get_list() {
+		this._departmentService.get_department_list().subscribe(
+			departments=>this.departments=departments,
+			err=>alert('获取数据失败')
+		)
+	}
+
+	gotodetail(pk){
+		this.router.navigate(['/personnel/department',pk]);
+	}
 }
 
 

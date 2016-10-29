@@ -6,10 +6,11 @@
     </div>
     <div class="order-form">
         <div class="left">
-            <div>	
+            <div>
                 <label for="name">供应商名称：</label>
                 <div class="group">
                 <input type="text" [(ngModel)]="supplier.name" name="name">
+                <input type="hidden" [(ngModel)]="supplier.is_vendor" name="is_vendor">
                 </div>
             </div>
             <div>

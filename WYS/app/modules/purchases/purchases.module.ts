@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { FormsModule }   from '@angular/forms';
 import { PurchasesComponent } from './purchases.component';
 
 import { GoodsRightComponent } from './goods/goods-right/goods-right.component';
@@ -11,6 +11,7 @@ import { GoodsDetailComponent } from './goods/goods-detail/goods-detail.componen
 import { SupplierRightComponent } from './supplier/supplier-right/supplier-right.component';
 import { SupplierCreateComponent } from './supplier/supplier-create/supplier-create.component';
 import { SupplierListComponent } from './supplier/supplier-list/supplier-list.component';
+import { SupplierDetailComponent } from './supplier/supplier-detail/supplier-detail.component';
 
 import { PurchaseOrdersRightComponent } from './purchase-orders/purchase-orders-right/purchase-orders-right.component';
 import { PurchaseOrdersListComponent } from './purchase-orders/purchase-orders-list/purchase-orders-list.component';
@@ -24,9 +25,13 @@ import { SupplierPurchaseReportsContentComponent } from './supplier-purchase-rep
 
 import { purchasesRouting } from './purchases.routing';
 
+import { GoodsService } from '../wysservices/goods.service';
+import { TypeattrService } from '../wysservices/typeattr.service';
+import { CompanyService } from '../wysservices/company.service';
 @NgModule({
     imports:[
         CommonModule,
+        FormsModule,
         purchasesRouting,
     ],
     declarations:[
@@ -39,6 +44,7 @@ import { purchasesRouting } from './purchases.routing';
         SupplierRightComponent,
         SupplierCreateComponent,
         SupplierListComponent,
+        SupplierDetailComponent,
 
         PurchaseOrdersRightComponent,
         PurchaseOrdersListComponent,
@@ -51,10 +57,10 @@ import { purchasesRouting } from './purchases.routing';
         SupplierPurchaseReportsContentComponent
 
     ],
-    exports:[
-    ],
     providers:[
-
+        GoodsService,
+        TypeattrService,
+        CompanyService,
     ]
 })
 

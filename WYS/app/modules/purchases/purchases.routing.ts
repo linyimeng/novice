@@ -11,6 +11,7 @@ import { GoodsDetailComponent } from './goods/goods-detail/goods-detail.componen
 import { SupplierRightComponent } from './supplier/supplier-right/supplier-right.component';
 import { SupplierCreateComponent } from './supplier/supplier-create/supplier-create.component';
 import { SupplierListComponent } from './supplier/supplier-list/supplier-list.component';
+import { SupplierDetailComponent } from './supplier/supplier-detail/supplier-detail.component';
 
 import { PurchaseOrdersRightComponent } from './purchase-orders/purchase-orders-right/purchase-orders-right.component';
 import { PurchaseOrdersListComponent } from './purchase-orders/purchase-orders-list/purchase-orders-list.component';
@@ -40,7 +41,7 @@ const purchasesRoutes:Routes = [
                     { path:'', component:GoodsListComponent,},
                     { path:'create', component:GoodsCreateComponent,},
                     { path:'list', component:GoodsListComponent, },
-                    { path:'detail',component:GoodsDetailComponent },
+                    { path:':pk',component:GoodsDetailComponent },
                 ]
             },
             {
@@ -50,6 +51,7 @@ const purchasesRoutes:Routes = [
                     { path:'', component:SupplierListComponent },
                     { path:"create", component:SupplierCreateComponent },
                     { path:'list', component:SupplierListComponent },
+                    { path:':pk',component:SupplierDetailComponent }
                 ]
             },
             {

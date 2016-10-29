@@ -1,11 +1,11 @@
-import { Component } from '@angular/core';
+import { Component,OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
 	moduleId: module.id, 
 	selector: 'wys-app',
 	template: `
-    <nav>
+    <nav *ngIf="wyslogin">
         <ul>
             <li routerLink="/personnel" routerLinkActive="activity">
                 <a>员工</a>
@@ -39,4 +39,21 @@ import { Router } from '@angular/router';
     <router-outlet></router-outlet>
 	`
 })
-export class AppComponent { }
+export class AppComponent implements OnInit {
+    wyslogin:boolean;
+    constructor(
+        private router:Router
+    ){}
+    ngOnInit() {
+        this.wyslogin=true;
+    }
+
+    checklogin() {
+        setInterval(()=>{
+            console.log('检测中');
+            let wystoken = localStorage.getItem('token');
+            if(!wystoken) this.router.navigate(['/login']); 
+        },300000);
+    }
+
+ }

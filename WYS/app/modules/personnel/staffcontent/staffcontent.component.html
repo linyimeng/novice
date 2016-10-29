@@ -11,69 +11,17 @@
                 <th>邮箱</th>
                 <th>部门</th>
                 <th>职位</th>
-                <th>部门经理</th>
             </tr>
         </thead>
         <tbody>
-            <tr routerLink='/personnel/staff/detail'>
+            <tr *ngFor="let staff of staffs">
                 <th><input name="radiogroup" type="checkbox"></th>
-                <td>201424</td>
-                <td>邓超</td>
-                <td>13526598451</td>
-                <td>dengchao@126.com</td>
-                <td>销售部</td>
-                <td>跑腿</td>
-                <td>杨洋</td>
-            </tr>
-            <tr>
-                <th><input name="radiogroup" type="checkbox"></th>
-                <td>201424</td>
-                <td>邓超</td>
-                <td>13526598451</td>
-                <td>dengchao@126.com</td>
-                <td>销售部</td>
-                <td>跑腿</td>
-                <td>杨洋</td>
-            </tr>
-            <tr>
-                <th><input name="radiogroup" type="checkbox"></th>
-                <td>201424</td>
-                <td>邓超</td>
-                <td>13526598451</td>
-                <td>dengchao@126.com</td>
-                <td>销售部</td>
-                <td>跑腿</td>
-                <td>杨洋</td>
-            </tr>
-            <tr>
-                <th><input name="radiogroup" type="checkbox"></th>
-                <td>201424</td>
-                <td>邓超</td>
-                <td>13526598451</td>
-                <td>dengchao@126.com</td>
-                <td>销售部</td>
-                <td>跑腿</td>
-                <td>杨洋</td>
-            </tr>
-            <tr>
-                <th><input name="radiogroup" type="checkbox"></th>
-                <td>201424</td>
-                <td>邓超</td>
-                <td>13526598451</td>
-                <td>dengchao@126.com</td>
-                <td>销售部</td>
-                <td>跑腿</td>
-                <td>杨洋</td>
-            </tr>
-            <tr>
-                <th><input name="radiogroup" type="checkbox"></th>
-                <td>201424</td>
-                <td>邓超</td>
-                <td>13526598451</td>
-                <td>dengchao@126.com</td>
-                <td>销售部</td>
-                <td>跑腿</td>
-                <td>杨洋</td>
+                <td>{{staff.pk}}</td>
+                <td routerLink="/personnel/staff/{{staff.pk}}">{{staff.name}}</td>
+                <td>{{staff.office_phone}}</td>
+                <td>{{staff.email}}</td>
+                <td>{{staff.department_name}}</td>
+                <td>{{staff.job_name}}</td>
             </tr>
         </tbody>
         
