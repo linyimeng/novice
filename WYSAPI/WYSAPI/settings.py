@@ -33,6 +33,7 @@ INSTALLED_APPS = (
     'blog',
     'staff',
     'goods',
+    'BP',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -54,9 +55,10 @@ ROOT_URLCONF = 'WYSAPI.urls'
 
 
 REST_FRAMEWORK = {
+    '''
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.TokenAuthentication',
-    ),
+    ),'''
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticated',
     ),
