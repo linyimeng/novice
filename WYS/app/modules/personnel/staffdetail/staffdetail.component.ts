@@ -5,7 +5,7 @@ import { StaffService } from '../../wysservices/staff.service';
 
 export class Staff{
     constructor(
-        pk:string,
+        pk:number,
         email:string,
 
         name:string,
