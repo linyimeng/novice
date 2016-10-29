@@ -1,7 +1,7 @@
 <div class="content">
 <ul>
     <li class="typeli" *ngFor="let department of departments">
-        <img src="/app/assets/img/xsb.png" alt="">
+        <img src="/assets/img/xsb.png" alt="">
         <h3>{{department.name}}
             <span [ngSwitch]="department.superiors">
                 <span *ngSwitchCase="null">(无上级部门)</span>
