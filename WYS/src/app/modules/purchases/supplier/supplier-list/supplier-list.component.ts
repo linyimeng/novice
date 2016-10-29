@@ -3,7 +3,7 @@ import { Component,OnInit} from '@angular/core';
 import { CompanyService } from '../../../wysservices/company.service';
 
 @Component({
-   moduleId: module.id,
+   
    selector: 'supplier-list',
    templateUrl: 'supplier-list.component.html'
 })

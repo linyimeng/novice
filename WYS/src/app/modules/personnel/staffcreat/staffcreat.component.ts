@@ -29,7 +29,6 @@ export class Staff{
 }
 
 @Component({
-   moduleId: module.id,
    selector: 'staff-creat',
    templateUrl: 'staffcreat.component.html',
    providers:[StaffService]

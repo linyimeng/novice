@@ -6,7 +6,6 @@ import { GoodsService } from '../../../wysservices/goods.service';
 import { Goods } from '../goods';
 import { StaticAttr } from '../goods';
 @Component({
-   moduleId: module.id,
    selector: 'goods-detail',
    templateUrl: 'goods-detail.component.html'
 })

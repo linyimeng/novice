@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
-   moduleId: module.id,
+   
    selector: 'goods-purchase-reports-right',
    templateUrl: 'goods-purchase-reports-right.component.html'
 })

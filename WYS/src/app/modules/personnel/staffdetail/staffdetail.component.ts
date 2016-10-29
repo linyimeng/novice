@@ -5,7 +5,7 @@ import { StaffService } from '../../wysservices/staff.service';
 
 export class Staff{
     constructor(
-        pk:number,
+        public pk:number,
         email:string,
 
         name:string,
@@ -28,14 +28,13 @@ export class Staff{
 }
 
 @Component({
-   moduleId: module.id,
    selector: 'staff-detail',
    templateUrl: 'staffdetail.component.html',
    providers:[StaffService]
 })
 export class StaffdetailComponent implements OnInit{
     staff:Staff = new Staff(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
-    
+    staff_pk:any;
     constructor(
         private _staffservice:StaffService,
 		private router:Router,
@@ -46,6 +45,7 @@ export class StaffdetailComponent implements OnInit{
         this.activatedroute.params.forEach(
             params=>{
                 let pk= +params['pk'];
+                this.staff_pk = pk;
                 this._staffservice.get_emp_detail(pk).subscribe(
                     staff=>this.staff=staff,
                     error=>alert(error)
@@ -57,7 +57,6 @@ export class StaffdetailComponent implements OnInit{
     save_staff() {
         let json = JSON.stringify(this.staff);
         let pk = this.staff.pk;
-        console.log(pk);
         this._staffservice.put_update_emp(pk,json).subscribe(
             staff=> {
                     console.log(JSON.stringify(staff));

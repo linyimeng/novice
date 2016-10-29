@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-    moduleId:module.id,
+    
     selector:'setting',
     template:`
     <div class="main">

@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { DepartmentService } from '../../wysservices/department.service';
 
 @Component({
-	moduleId: module.id,
+	
 	selector: 'department-content',
 	templateUrl: 'departmentcontent.component.html',
 	providers:[DepartmentService]

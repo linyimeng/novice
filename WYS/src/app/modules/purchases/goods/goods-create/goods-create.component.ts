@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { GoodsService } from '../../../wysservices/goods.service';
 import { TypeattrService } from '../../../wysservices/typeattr.service';
 @Component({
-   moduleId: module.id,
+   
    selector: 'goods-create',
    templateUrl: 'goods-create.component.html'
 })

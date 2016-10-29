@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { GoodsService } from '../../../wysservices/goods.service';
 
 @Component({
-   moduleId: module.id,
+   
    selector: 'goods-list',
    templateUrl: 'goods-list.component.html'
 })

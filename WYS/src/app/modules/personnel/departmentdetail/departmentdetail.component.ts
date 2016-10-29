@@ -13,7 +13,7 @@ export class Department {
 }
 
 @Component({
-	moduleId: module.id,
+	
 	selector: 'department-detail',
 	templateUrl: 'detail.html',
 	providers:[DepartmentService]

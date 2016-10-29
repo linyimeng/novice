@@ -1,8 +1,8 @@
 export class Supplier {
     constructor(
-        pk:number,
+        public pk:number,
         name:string,
-        is_vendor:boolean,
+        public is_vendor:boolean,
         landline:string,
         phone:string,
         email:string,

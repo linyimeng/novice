@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { StaffService } from '../../wysservices/staff.service';
 
 @Component({
-   moduleId: module.id,
+   
    selector: 'staff-content',
    templateUrl: 'staffcontent.component.html',
    providers:[StaffService]

@@ -6,7 +6,7 @@ export class StaticAttr{
 }
 export class Goods{
     constructor(
-        pk:number,
+        public pk:number,
         type:number,
         name:string,
         specification:string,
@@ -16,6 +16,6 @@ export class Goods{
         costprice:number,
         salesprice:number,
         remark:string,
-        static_attr:string,
+        public static_attr:string,
     ){}
 }
