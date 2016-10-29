@@ -1,8 +1,12 @@
-from rest_framework import viewsets
-from BP.models import Company
-from BP.serializers import CompanySerializer
-# Create your views here.
+'''
+Created on 2016-10-29
 
-class VendorsViewSet(viewsets):
-    queryset = Company.objects.filter(deleted=None,is_vendor=True)
-    serializer_class = CompanySerializer
+@author: yimeng
+'''
+from rest_framework.generics import ListCreateAPIView,RetrieveUpdateDestroyAPIView
+from purchases.serializers import PurchaseSerializer
+from purchases.models import Purchase
+
+class PurchaseListCreateAPIView(ListCreateAPIView):
+    queryset = Purchase.objects.all()
+    serializer_class = PurchaseSerializer
