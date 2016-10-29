@@ -6,7 +6,7 @@
 main.js
 
 *.map
-
+/WYS/app/modules/*.js
 /WYS/node_modules/
 /WYS/typings/
 __pycache__/
