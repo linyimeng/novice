@@ -105,7 +105,7 @@ nav ul li a {
 	color:rgb(157,157,157);
 	width: 42px;
 	text-align: center;
-
+	cursor: pointer;
 }
 
 nav ul li a:hover {
@@ -198,6 +198,7 @@ nav .nav-left .user-div .triangle {
 	color: #4c4c4c;
     padding: 8px 4px 5px 18px;
     margin-bottom: 2px;
+	cursor: pointer;
 }
 .main .main-left .list ul .active a{
 	background-color: #7c7bad;
@@ -426,6 +427,10 @@ nav .nav-left .user-div .triangle {
 	border-radius: 3px;
 }
 
+.main .main-right .content > ul li .bottom .edit {
+	cursor: pointer;
+}
+
 /*--------------------------------------------------------------------------------------------------------------*/
 
 /* 右边列表 */
@@ -608,6 +613,7 @@ nav .nav-left .user-div .triangle {
 	border:1px solid #2d6da3;
 	border-radius: 3px;
 	color: #fff;
+	cursor: pointer;
 }
 
 /*地址*/
