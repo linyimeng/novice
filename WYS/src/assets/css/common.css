@@ -226,6 +226,28 @@ nav .nav-left .user-div .triangle {
     width: 100%;
 }
 
+
+.main .main-right > * {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	width: 100%;
+}
+
+.main .main-right > * > * {
+	-moz-box-flex: 1;
+	flex: 1 1 auto;
+	overflow: auto;
+	position: relative;
+	display: block;
+
+}
+.main .main-right router-outlet{
+	display:none;
+}
+
+
+
 .main .main-right .title {
 	-moz-box-flex: 0;
     background-color: #f0eeee;
