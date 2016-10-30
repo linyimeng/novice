@@ -1,0 +1,12 @@
+<div>
+    <label for="price">批准文号：</label>
+    <div class="group">
+        <input type="text" [(ngModel)]="static_attr.approvalnumber" name="approvalnumber">
+    </div>
+</div>
+<div>
+    <label for="price">产地：</label>
+    <div class="group">
+        <input type="text" [(ngModel)]="static_attr.origin" name="origin">
+    </div>
+</div>

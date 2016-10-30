@@ -7,7 +7,7 @@ export class StaticAttr{
 export class Goods{
     constructor(
         public pk:number,
-        type:number,
+        public type:number,
         name:string,
         specification:string,
         unit:string,

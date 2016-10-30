@@ -10,7 +10,8 @@
                 <div>	
                     <label for="name">商品类别：</label>
                     <div class="group">
-                    <input type="text" ngModel name="type" required>
+                        <goodstypeSelect [inputpk]='1' (outputpk)="setgoodstype($event)"></goodstypeSelect>
+                        <input type="hidden" ngModel name="type">
                     </div>
                 </div>
                 <div>	

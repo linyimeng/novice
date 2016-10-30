@@ -2,9 +2,10 @@ import { Component,OnInit } from '@angular/core';
 import { Router,ActivatedRoute } from '@angular/router';
 import { FormArray }   from '@angular/forms';
 import { GoodsService } from '../../../wysservices/goods.service';
+import { TypeattrService } from '../../../wysservices/typeattr.service';
 
 import { Goods } from '../goods';
-import { StaticAttr } from '../goods';
+//import { StaticAttr } from '../goods';
 @Component({
    selector: 'goods-detail',
    templateUrl: 'goods-detail.component.html'
@@ -12,9 +13,13 @@ import { StaticAttr } from '../goods';
 
 export class GoodsDetailComponent implements OnInit {
     goods:Goods = new Goods(null,null,null,null,null,null,null,null,null,null,null);
-    static_attr:StaticAttr = new StaticAttr(null,null);
+    //static_attr:StaticAttr = new StaticAttr(null,null);
+    static_attr:any;
+    static_attrs:any;
+    attravlues:any;
     constructor(
         private _goodsService:GoodsService,
+        private _typeattrService:TypeattrService,
         private router:Router,
         private activatedRoute:ActivatedRoute
     ){}
@@ -26,7 +31,10 @@ export class GoodsDetailComponent implements OnInit {
                 this._goodsService.get_goods_detail(pk).subscribe(
                     goods=>{
                         this.static_attr = JSON.parse(goods.static_attr);
-                        this.goods = goods;    
+                        console.log('static_attr');
+                        console.log(this.static_attr);
+                        this.goods = goods;
+                        this.get_static_attr_list();
                     },
                     error=>alert(error)
                 );
@@ -34,8 +42,37 @@ export class GoodsDetailComponent implements OnInit {
         )
     }
 
-    save_goods() {
-        this.goods.static_attr = JSON.stringify(this.static_attr);
+    get_static_attr_list(){
+        this._typeattrService.get_attr_list('static',this.goods.type).subscribe(
+            attr_list=>{
+                this.static_attrs = attr_list;
+                console.log('static_attrs');
+                console.log(attr_list);
+                this.get_attr_and_value();
+            },
+            error=>alert('获取属性列表失败\n'+error)
+        );
+    }
+
+    /** 整理json数据至attrs[0].value格式 */
+    get_attr_and_value() {
+        let attrs = new Array();
+        for(let a in this.static_attrs){
+            let key = this.static_attrs[a].logicname;
+            let attr = new Array();
+            attr['value'] = this.static_attr[key];
+            attr['name'] = this.static_attrs[a].name;
+            attr['logicname'] = this.static_attrs[a].logicname;
+            attrs[a] = attr;
+        }
+        this.attravlues = attrs;
+        console.log('attrvalue');
+        console.log(this.attravlues);
+    }
+    
+    save_goods(goodsForm) {
+        let a = JSON.stringify(goodsForm.value.static_attr);
+        this.goods.static_attr = a;
         let pk = this.goods.pk;
         let json = JSON.stringify(this.goods);
         this._goodsService.put_update_goods(pk,json).subscribe(
@@ -44,6 +81,11 @@ export class GoodsDetailComponent implements OnInit {
             },
             error=>alert(error)
         );
+    }
+
+    /** 设置商品分类选项 */
+    setgoodstype(pk) {
+        this.goods.type = pk;
     }
 }
 

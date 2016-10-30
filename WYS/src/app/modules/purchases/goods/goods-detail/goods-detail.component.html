@@ -1,6 +1,6 @@
 <!-- 商品详情 -->
 <div class="content"> 
-    <form class="purchase-order"  goodsForm="ngForm" (ngSubmit)="save_goods()">
+    <form class="purchase-order"  #goodsForm="ngForm" (ngSubmit)="save_goods(goodsForm)">
         <div class="order-title">
             <img src="/assets/img/mr.png" alt="">
             <a href="">上传图像</a>
@@ -10,7 +10,7 @@
                 <div>	
                     <label for="name">商品类别：</label>
                     <div class="group">
-                    <input type="text" [(ngModel)]="goods.type" name="type" required>
+                        <goodstypeSelect [inputpk]="goods.type" (outputpk)="setgoodstype($event)"></goodstypeSelect>
                     </div>
                 </div>
                 <div>	
@@ -57,19 +57,13 @@
                     </div>
                 </div>
                 <span class="detail">备注：</span>
-                <textarea ngModel name="remark" id="" cols="30" rows="3"></textarea>
+                <textarea [(ngModel)]="goods.remark" name="remark" cols="30" rows="3"></textarea>
             </div>
             <div class="right" ngModelGroup="static_attr">
-                <div>
-                    <label for="price">批准文号：</label>
+                <div *ngFor="let attr of attravlues">
+                    <label>{{attr.name}}：</label>
                     <div class="group">
-                        <input type="text" [(ngModel)]="static_attr.approvalnumber" name="approvalnumber">
-                    </div>
-                </div>
-                <div>
-                    <label for="price">产地：</label>
-                    <div class="group">
-                        <input type="text" [(ngModel)]="static_attr.origin" name="origin">
+                        <input type="text" [ngModel]="attr.value" name="{{attr.logicname}}">
                     </div>
                 </div>
             </div>
