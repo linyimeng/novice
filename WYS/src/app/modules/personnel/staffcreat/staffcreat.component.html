@@ -79,7 +79,7 @@
                 <div>
                     <label for="department">部门：</label>
                     <div class="group">
-                        <input type="text" [(ngModel)]="staff.department" name="department">
+                        <departmentSelect (departpk)="setdepartmentPk($event)"></departmentSelect>
                     </div>
                 </div>
 

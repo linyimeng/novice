@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule }   from '@angular/forms';
+
 import { PurchasesComponent } from './purchases.component';
 
 import { GoodsRightComponent } from './goods/goods-right/goods-right.component';
@@ -28,6 +29,8 @@ import { purchasesRouting } from './purchases.routing';
 import { GoodsService } from '../wysservices/goods.service';
 import { TypeattrService } from '../wysservices/typeattr.service';
 import { CompanyService } from '../wysservices/company.service';
+
+import { GoodstypeSelectComponent } from '../formcomponents/goodstype-select.component'
 @NgModule({
     imports:[
         CommonModule,
@@ -54,7 +57,9 @@ import { CompanyService } from '../wysservices/company.service';
         GoodsPurchaseReportsContentComponent,
 
         SupplierPurchaseReportsRightComponent,
-        SupplierPurchaseReportsContentComponent
+        SupplierPurchaseReportsContentComponent,
+        
+        GoodstypeSelectComponent,
 
     ],
     providers:[

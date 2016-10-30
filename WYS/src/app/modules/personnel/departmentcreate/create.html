@@ -10,13 +10,19 @@
                 <div>
                     <label for="name">部门名称：</label>
                     <div class="group">
-                    <input type="text" [(ngModel)]="staff.name" name="name" required>
+                    <input type="text" id="name" autofocus="autofocus" [(ngModel)]="department.name" name="name" required>
                     </div>
                 </div>
                 <div>
-                    <label for="manager">上级部门：</label>
+                    <label for="manager" >上级部门：{{pk}}</label>
                     <div class="group">
-                        <input type="text" [(ngModel)]="department.superiors" name="superiors">
+                        <departmentSelect (departpk)="setdepartmentPk($event)"></departmentSelect>
+                        <!--
+                        <select [(ngModel)]="department.superiors" name="superiors">
+                            <option value="null">无上级部门</option>
+                            <option [value]="depart.pk" *ngFor="let depart of departments">{{depart.name}}</option>
+                        </select>
+                        -->
                     </div>
                 </div>
                 <div>

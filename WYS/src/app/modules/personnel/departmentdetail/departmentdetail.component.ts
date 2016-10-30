@@ -51,4 +51,9 @@ export class  DepartmentDetailComponent implements OnInit{
             error=>{alert(error)},
         )
     }
+
+    setdepartpk(pk) {
+        this.department.superiors = pk;
+        console.log(pk);
+    }
 }

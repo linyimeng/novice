@@ -7,6 +7,7 @@ export class GoodsService extends BaseService {
     private GET_Goods_LIST_URL = '/api/goods/goods.json';
     private GET_Goods_DETAIL_URL = '/api/goods/goods/';
     private POST_Goods_CREATE_URL = '/api/goods/goods.json';
+    private GET_Goods_TYPE_URL = '/api/goods/type.json';
 
     constructor(
         http:Http
@@ -18,7 +19,6 @@ export class GoodsService extends BaseService {
                  .map(this.extractData)
                  .catch(this.httpError);
     }
-
     /** 获取单个商品 */
     get_goods_detail(pk:number) {
         let detailUrl = this.get_requesr_url(this.GET_Goods_DETAIL_URL) + String(pk) + '.json';
@@ -27,18 +27,24 @@ export class GoodsService extends BaseService {
                         .map(this.extractData)
                         .catch(this.httpError);
     }
-
     /** 创建商品 */
     post_create_goods(json:string) {
         return this.http.post(this.get_requesr_url(this.POST_Goods_CREATE_URL),json,this.get_auth_header())
                         .map(this.extractData)
                         .catch(this.httpError);
     }
-
     /** 更新一整个商品put */
     put_update_goods(pk,json:string) {
         let updateUrl = this.get_requesr_url(this.GET_Goods_DETAIL_URL) + String(pk) + '.json';
         return this.http.put(updateUrl,json,this.get_auth_header())
+                        .map(this.extractData)
+                        .catch(this.httpError);
+    }
+
+
+    /** 商品类型 */
+    get_goods_type() {
+        return this.http.get(this.get_requesr_url(this.GET_Goods_TYPE_URL),this.get_auth_header())
                         .map(this.extractData)
                         .catch(this.httpError);
     }

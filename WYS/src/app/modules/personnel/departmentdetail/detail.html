@@ -16,7 +16,7 @@
                 <div>
                     <label for="manager">上级部门：</label>
                     <div class="group">
-                        <input type="text" [(ngModel)]="department.superiors" name="superiors">
+                        <departmentSelect [dpk]="department.superiors" (departpk)="setdepartpk($event)"></departmentSelect>
                     </div>
                 </div>
                 <div>

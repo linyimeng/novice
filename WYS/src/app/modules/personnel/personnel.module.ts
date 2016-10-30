@@ -13,6 +13,7 @@ import { StaffdetailComponent } from './staffdetail/staffdetail.component';
 import { StaffrightComponent } from './staff-right/staff-right.component';
 import { StaffcontentComponent } from './staffcontent/staffcontent.component';
 
+import { DepartmentSelectComponent } from '../formcomponents/department-select.component';
 //模块路由
 import { personnelRouting } from './personnel.routing';
 
@@ -35,6 +36,8 @@ import { personnelRouting } from './personnel.routing';
         StaffdetailComponent,
         StaffcreatComponent,
         StaffrightComponent,
+
+        DepartmentSelectComponent,
     ],
     exports:[
     ],

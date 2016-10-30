@@ -12,33 +12,42 @@ export class Department {
 }
 
 @Component({
-	
 	selector: 'department-create',
 	templateUrl: 'create.html',
 	providers:[DepartmentService]
 })
 
 export class  DepartmentCreateComponent implements OnInit{
-	department:Department;
+	department:Department = new Department('','','','');
+	departments:any;
 	constructor(
 		private _departmentService:DepartmentService,
 		private router:Router
 	) {}
 
 	ngOnInit() {
-		this.department = new Department('','','','');
+		this._departmentService.get_department_list().subscribe(
+			departments=>this.departments = departments,
+			error=>alert(error)
+		)
 	}
 
 	save_department() {
         let json = JSON.stringify(this.department);
+		console.log(json);
+		
         this._departmentService.post_create_department(json).subscribe(
             department=> {
                     console.log(JSON.stringify(department));
 					this.router.navigate(['/personnel/department/list']);
                  },
             error=>{alert(error)},
-        )
+        );
     }
+
+	setdepartmentPk(pk:string){
+		this.department.superiors = pk;
+	}
 }
 
 

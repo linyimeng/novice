@@ -24,7 +24,7 @@ export class Staff{
         remark:string,
 
         job:number,
-        department:number,
+        public department:number,
     ){}
 }
 
@@ -51,5 +51,9 @@ export class StaffcreatComponent{
             },
             error=>alert(error)
         )
+    }
+    setdepartmentPk(pk) {
+        this.staff.department = pk;
+        console.log(pk);
     }
 }

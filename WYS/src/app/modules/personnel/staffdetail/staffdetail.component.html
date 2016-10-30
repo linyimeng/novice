@@ -2,12 +2,11 @@
 <div class="content">
     <form class="purchase-order" (ngSubmit)="save_staff()" #staffForm="ngForm">
         <div class="order-title">
-            <img src="/app/static/img/mr.png" alt="">
+            <img src="/assets/img/mr.png" alt="">
             <a href="">上传头像</a>
         </div>
         <div class="order-form">
             <div class="left">
-
                 <div>	
                     <label for="name">姓名：</label>
                     <div class="group">
@@ -64,7 +63,7 @@
                 <div>
                     <label for="department">部门：</label>
                     <div class="group">
-                        <input type="text" [(ngModel)]="staff.department" name="department">
+                        <departmentSelect [dpk]="staff.department" (departpk)="setdepartmentPk($event)"></departmentSelect>
                     </div>
                 </div>
 
