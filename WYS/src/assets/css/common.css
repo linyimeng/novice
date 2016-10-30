@@ -29,7 +29,7 @@ body {
 	min-width: 500px;
 	height: 100%;
 	margin:0 auto;
-	overflow: height;
+	overflow: hidden;
 
 }
 
@@ -276,7 +276,7 @@ nav .nav-left .user-div .triangle {
 	display: inline-block;
 }
 
-.main .main-right .title .right input {
+.main .main-right .title .right input{
 	width: 100%;
 	border:1px solid #ccc;
 	border-radius: 3px;
@@ -344,6 +344,7 @@ nav .nav-left .user-div .triangle {
 
 }
 
+
 .main .main-right .content > ul .look {
 	width: 0;
 	height: 0;
@@ -391,6 +392,7 @@ nav .nav-left .user-div .triangle {
 	position: absolute;
 	right: 10px;
 	bottom: 5px;
+
 }
 
 .main .main-right .content > ul li .bottom a {
@@ -405,7 +407,7 @@ nav .nav-left .user-div .triangle {
 /*--------------------------------------------------------------------------------------------------------------*/
 
 /* 右边列表 */
-.main .main-right .content table {
+.main .main-right .content  table {
 	background-color: #fff;
 	width: 100%;
     border-spacing: 0;
@@ -415,7 +417,7 @@ nav .nav-left .user-div .triangle {
     font-size: 13px;
 }
 
-.main .main-right .content table tr {
+.main .main-right .content  table  tr {
 	cursor: pointer;
 }
 
@@ -492,6 +494,8 @@ nav .nav-left .user-div .triangle {
 	
 }
 
+
+
 .main .main-right .content .purchase-order .order-title {
 	padding-bottom: 10px;
 	border-bottom: 1px solid #ccc;
@@ -514,6 +518,7 @@ nav .nav-left .user-div .triangle {
 
 .main .main-right .content .purchase-order .order-form .group {
 	position: relative;
+	width: 55%;
 }
 
 .main .main-right .content .purchase-order .order-form .group i {
@@ -521,15 +526,22 @@ nav .nav-left .user-div .triangle {
 	right:6px;
 	top:2px;
 	font-size: 10px;
+
 }
 
-.main .main-right .content .purchase-order .order-form input {
+
+
+.main .main-right .content .purchase-order .order-form input,.main .main-right .content .purchase-order .order-form select {
 	
 	border: 1px solid #ccc;
 	border-radius: 3px;
 	height: 25px;
 	padding-left:5px;
 	width: 100%;
+	
+}
+
+.main .main-right .content .purchase-order .order-form select {
 
 }
 
@@ -537,6 +549,7 @@ nav .nav-left .user-div .triangle {
 	width: 50%;
 	border-right: 1px solid #ccc;
 	padding-right: 20px;
+	
 }
 
 .main .main-right .content .purchase-order .order-form .right{
@@ -551,6 +564,7 @@ nav .nav-left .user-div .triangle {
 	flex-direction:row;
 	justify-content: space-between;
 	align-items: center;
+
 }
 
 .main .main-right .content .purchase-order .order-bottom {
