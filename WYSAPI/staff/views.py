@@ -10,6 +10,13 @@ class DepartmentViewSet(viewsets.ModelViewSet):
     serializer_class = DepartmentSerializer
     #默认引用系统分页，可以定制自己的分页
     pagination_class = StaffLimitOffsetPagination
+
+class JobsListAPIView(ListAPIView):
+    serializer_class = JobsSerializer
+    def get_queryset(self,*args,**kwargs):
+        dpk = self.kwargs['dpk']
+        queryset_list = Jobs.objects.filter(department__pk=dpk)
+        return queryset_list
     
 class JobsViewSet(viewsets.ModelViewSet):
     queryset = Jobs.objects.filter()

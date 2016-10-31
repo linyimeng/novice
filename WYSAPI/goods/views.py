@@ -1,5 +1,5 @@
 from rest_framework.viewsets import ModelViewSet
-from rest_framework.generics import RetrieveUpdateDestroyAPIView,ListCreateAPIView
+from rest_framework.generics import RetrieveUpdateDestroyAPIView,ListAPIView,CreateAPIView
 from goods.models import Type,TypeAttr,Goods
 from goods.serializers import TypeSerializer,TypeAttrSerializer,GoodsSerializer
 # Create your views here.
@@ -8,13 +8,16 @@ class TypeViewSet(ModelViewSet):
     queryset = Type.objects.filter()
     serializer_class = TypeSerializer
 
-class TypeAttrListCreateAPIView(ListCreateAPIView):
+class TypeAttrListAPIView(ListAPIView):
     serializer_class = TypeAttrSerializer
     def get_queryset(self,*args,**kwargs):
         goodstype = self.kwargs['tid']
         attrtype = self.kwargs['attrtype']
         queryset_list = TypeAttr.objects.filter(goodstype__id=goodstype,attr_type=attrtype)
         return queryset_list
+
+class TypeAttrCreateAPIView(CreateAPIView):
+    serializer_class = TypeAttrSerializer
         
 class TypeAttrRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
     queryset = TypeAttr.objects.all()

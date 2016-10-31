@@ -14,9 +14,13 @@ router_urls = [
     url(r'^',include(router.urls)),
 ]
 
+jobs_urls = format_suffix_patterns([
+    url(r'^djobs/(?P<dpk>[^/.]+)/$',views.JobsListAPIView.as_view(),name='djobs-list')           
+])
+
 emp_urls = format_suffix_patterns([
     url(r'^emp/$',views.EmpInfoListAPIView.as_view(),name='emps-list'),
     url(r'^emp/(?P<pk>[^/.]+)/$',views.EmpInfoRetrieveUpdateAPIView.as_view(),name='emps-detail'),
 ])
 
-urlpatterns = emp_urls + router_urls
+urlpatterns = emp_urls + router_urls + jobs_urls
