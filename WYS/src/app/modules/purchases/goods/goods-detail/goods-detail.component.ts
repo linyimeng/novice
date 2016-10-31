@@ -31,8 +31,6 @@ export class GoodsDetailComponent implements OnInit {
                 this._goodsService.get_goods_detail(pk).subscribe(
                     goods=>{
                         this.static_attr = JSON.parse(goods.static_attr);
-                        console.log('static_attr');
-                        console.log(this.static_attr);
                         this.goods = goods;
                         this.get_static_attr_list();
                     },
@@ -46,8 +44,6 @@ export class GoodsDetailComponent implements OnInit {
         this._typeattrService.get_attr_list('static',this.goods.type).subscribe(
             attr_list=>{
                 this.static_attrs = attr_list;
-                console.log('static_attrs');
-                console.log(attr_list);
                 this.get_attr_and_value();
             },
             error=>alert('获取属性列表失败\n'+error)
@@ -66,8 +62,6 @@ export class GoodsDetailComponent implements OnInit {
             attrs[a] = attr;
         }
         this.attravlues = attrs;
-        console.log('attrvalue');
-        console.log(this.attravlues);
     }
     
     save_goods(goodsForm) {

@@ -86,7 +86,7 @@
                 <div>
                     <label for="office">职位：</label>
                     <div class="group">
-                        <input type="text" [(ngModel)]="staff.job" name="job">
+                        <jobsSelect (jobspk)="setjobspk($event)" [dpk]="dpk"></jobsSelect>
                     </div> 
                 </div>
     

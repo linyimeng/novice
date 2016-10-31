@@ -28,9 +28,12 @@ export class GoodstypeSelectComponent implements OnInit{
         this._goodstypeService.get_goods_type().subscribe(
             goodstypes=>{
                 this.goodstypes=goodstypes;
+                setTimeout(()=>{
+                    this.pk=this.inputpk;
+                    console.log(this.pk);
+                },60);
             },
-            error=>alert(error),
-            ()=>this.pk=this.inputpk
+            error=>alert(error)
         );
     }
     onChange(pk) {

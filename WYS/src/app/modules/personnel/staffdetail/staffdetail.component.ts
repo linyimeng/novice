@@ -22,7 +22,7 @@ export class Staff{
         isarchive:boolean,
         remark:string,
 
-        job:number,
+        public job:number,
         public department:number,
     ){}
 }
@@ -35,6 +35,7 @@ export class Staff{
 export class StaffdetailComponent implements OnInit{
     staff:Staff = new Staff(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
     staff_pk:any;
+    dpk:any;
     constructor(
         private _staffservice:StaffService,
 		private router:Router,
@@ -47,7 +48,10 @@ export class StaffdetailComponent implements OnInit{
                 let pk= +params['pk'];
                 this.staff_pk = pk;
                 this._staffservice.get_emp_detail(pk).subscribe(
-                    staff=>this.staff=staff,
+                    staff=>{
+                        this.staff=staff;
+                        this.dpk = staff.department;
+                    },
                     error=>alert(error)
                 );
             }
@@ -58,17 +62,18 @@ export class StaffdetailComponent implements OnInit{
         let json = JSON.stringify(this.staff);
         let pk = this.staff.pk;
         this._staffservice.put_update_emp(pk,json).subscribe(
-            staff=> {
-                    console.log(JSON.stringify(staff));
-					this.router.navigate(['/personnel/staff/list']);
-                 },
-            error=>{alert(error)},
+            staff=>this.router.navigate(['/personnel/staff/list']),
+            error=>alert(error),
         )
     }
 
     setdepartmentPk(pk) {
         this.staff.department = pk;
-        console.log(pk);
+        this.dpk = pk;
+    }
+
+    setjobspk(jpk) {
+        this.staff.job = jpk;
     }
 
 }

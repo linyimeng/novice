@@ -7,7 +7,7 @@ import { DepartmentService } from '../wysservices/department.service';
    selector: 'departmentSelect',
    template: `
         <select [(ngModel)]="pk" (change)="onChange($event.target.value)">
-            <option value="">无上级部门{{dpk}}</option>
+            <option value="">无所属部门{{dpk}}</option>
             <option [value]="depart.pk" *ngFor="let depart of departments">{{depart.name}}</option>
         </select>
    `,
@@ -29,11 +29,21 @@ export class DepartmentSelectComponent implements OnInit{
         this._departmentService.get_department_list().subscribe(
             departments=>{
                 this.departments=departments;
+                /** 解决刚加载时因为异步加载机制而导致的部门名称无法显示，解决方法，延迟等待 */
+                setTimeout(()=>{
+                    if(typeof(this.dpk)=="object") {
+                        this.pk="";
+                    } else {
+                        this.pk=this.dpk;
+                    }
+                    console.log(this.pk);
+                },80);
             },
-            error=>alert(error),
-            ()=>this.pk=this.dpk
+            error=>alert(error)
         );
+        
     }
+
     onChange(pk) {
         this.departpk.emit(pk);
     }

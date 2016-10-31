@@ -23,7 +23,7 @@ export class Staff{
         isarchive:boolean,
         remark:string,
 
-        job:number,
+        public job:number,
         public department:number,
     ){}
 }
@@ -35,6 +35,7 @@ export class Staff{
 })
 export class StaffcreatComponent{
     staff:Staff = new Staff(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
+    dpk:any;
     constructor(
 		private _staffservice:StaffService,
 		private router:Router
@@ -50,10 +51,14 @@ export class StaffcreatComponent{
 				this.router.navigate(['/personnel/staff/list']);
             },
             error=>alert(error)
-        )
+        );
     }
     setdepartmentPk(pk) {
         this.staff.department = pk;
-        console.log(pk);
+        this.dpk = pk;
+        console.log(this.dpk);
+    }
+    setjobspk(jpk) {
+        this.staff.job = jpk;
     }
 }
