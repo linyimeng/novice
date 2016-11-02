@@ -24,6 +24,7 @@ class JobsViewSet(viewsets.ModelViewSet):
     
 class EmpInfoCreateAPIView(CreateAPIView):
     serializer_class = EmpInfoCreateSerializer
+    
 
 class EmpInfoListAPIView(ListAPIView):
     pagination_class = StaffLimitOffsetPagination

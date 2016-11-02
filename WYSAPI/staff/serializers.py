@@ -6,6 +6,7 @@ from rest_framework import serializers
 from staff.models import Department,Jobs,EmpInfo
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
+from django.db import transaction
 class DepartmentSerializer(serializers.ModelSerializer):
     staff_number = serializers.SerializerMethodField()
     superiors_name = serializers.SerializerMethodField()
@@ -93,13 +94,13 @@ class EmpInfoCreateSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError("loginname already exists")
         except ObjectDoesNotExist:
             return value
+    @transaction.atomic #添加事物支持
     def create(self,validated_data):
         new_user = User(
                     email=validated_data['email'],
                     username=validated_data['loginname']
                 )
         new_user.set_password(validated_data['password'])
-        #需添加事物支持
         new_user.save()
         del validated_data['loginname']
         del validated_data['password']
