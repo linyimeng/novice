@@ -1,13 +1,18 @@
-export class Supplier {
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+
+@Component({
+   
+   selector: 'supplier',
+   templateUrl: 'supplier.html'
+})
+export class SupplierComponent {
     constructor(
-        public pk:number,
-        name:string,
-        public is_vendor:boolean,
-        landline:string,
-        phone:string,
-        email:string,
-        fax:string,
-        address:string,
-        remark:string
-    ){}
+        private router:Router
+    ) {}
+
+    show_supplier_create() {
+        this.router.navigate(['/purchases/supplier/create']);
+    }
 }
+

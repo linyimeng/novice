@@ -1,6 +1,6 @@
 #wys
 WYSAPI:放python django 后端代码
-
+    pip3 install -r requirements.txt
 WYS:放前端文件夹内容
     webpack打包
 
