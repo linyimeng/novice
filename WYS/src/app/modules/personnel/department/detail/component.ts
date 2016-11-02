@@ -31,7 +31,7 @@ export class  DepartmentDetailComponent implements OnInit{
         this.activatedroute.params.forEach(
             params=>{
                 let pk= +params['pk'];
-                this._departmentService.get_department_detail(pk).subscribe(
+                this._departmentService.retrieve(pk).subscribe(
                     department=>this.department=department,
                     error=>alert(error)
                 );
@@ -43,7 +43,7 @@ export class  DepartmentDetailComponent implements OnInit{
         let json = JSON.stringify(this.department);
         let pk = this.department.pk;
         console.log(pk);
-        this._departmentService.put_update_department(pk,json).subscribe(
+        this._departmentService.update(pk,json).subscribe(
             department=> {
                     console.log(JSON.stringify(department));
 					this.router.navigate(['/personnel/department/list']);

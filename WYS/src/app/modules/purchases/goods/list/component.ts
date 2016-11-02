@@ -17,7 +17,7 @@ export class GoodsListComponent{
     ){}
 
     ngOnInit() {
-        this._goodsService.get_goods_list().subscribe(
+        this._goodsService.list().subscribe(
             goodss=>{
                 console.log(goodss);
                 for(let i in goodss){

@@ -26,7 +26,7 @@ export class DepartmentSelectComponent implements OnInit{
     ) { }
 
     ngOnInit() {
-        this._departmentService.get_department_list().subscribe(
+        this._departmentService.list().subscribe(
             departments=>{
                 this.departments=departments;
                 /** 解决刚加载时因为异步加载机制而导致的部门名称无法显示，解决方法，延迟等待 */

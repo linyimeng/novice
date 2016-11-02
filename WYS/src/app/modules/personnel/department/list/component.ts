@@ -20,7 +20,7 @@ export class  DepartmentListComponent implements OnInit{
 	}
 
 	get_list() {
-		this._departmentService.get_department_list().subscribe(
+		this._departmentService.list().subscribe(
 			departments=>this.departments=departments,
 			err=>alert('获取数据失败')
 		)

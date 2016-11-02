@@ -3,9 +3,7 @@ import { Router,ActivatedRoute } from '@angular/router';
 import { FormArray }   from '@angular/forms';
 import { GoodsService } from '../../../wysservices/goods.service';
 import { TypeattrService } from '../../../wysservices/typeattr.service';
-
 import { Goods } from '../model';
-//import { StaticAttr } from '../goods';
 @Component({
    selector: 'goods-detail',
    templateUrl: 'detail.html'
@@ -13,7 +11,6 @@ import { Goods } from '../model';
 
 export class GoodsDetailComponent implements OnInit {
     goods:Goods = new Goods(null,null,null,null,null,null,null,null,null,null,null);
-    //static_attr:StaticAttr = new StaticAttr(null,null);
     static_attr:any;
     static_attrs:any;
     attravlues:any;
@@ -28,7 +25,7 @@ export class GoodsDetailComponent implements OnInit {
         this.activatedRoute.params.forEach(
             params=>{
                 let pk= +params['pk'];
-                this._goodsService.get_goods_detail(pk).subscribe(
+                this._goodsService.retrieve(pk).subscribe(
                     goods=>{
                         this.static_attr = JSON.parse(goods.static_attr);
                         this.goods = goods;
@@ -69,7 +66,7 @@ export class GoodsDetailComponent implements OnInit {
         this.goods.static_attr = a;
         let pk = this.goods.pk;
         let json = JSON.stringify(this.goods);
-        this._goodsService.put_update_goods(pk,json).subscribe(
+        this._goodsService.update(pk,json).subscribe(
             goods=>{
                 this.router.navigate(['/purchases/goods/list']);
             },

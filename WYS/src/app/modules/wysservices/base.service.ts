@@ -1,10 +1,17 @@
 import { Injectable } from '@angular/core';
 import { Http,Headers,RequestOptions,Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
+
 @Injectable()
 export class BaseService {
 
     protected HOST = 'http://127.0.0.1:8000';
+
+    protected post_url:string;
+    protected put_url:string;
+    protected delete_url:string;
+    protected get_url:string;
+    protected retrieve_url:string;
 
     constructor(protected http:Http) { }
 
@@ -16,6 +23,41 @@ export class BaseService {
         return request_url;
     }
 
+    /** 获取列表 */
+    public list() {
+        return this.http.get(this.get_requesr_url(this.get_url),this.get_auth_header())
+                 .map(this.extractData)
+                 .catch(this.httpError);
+    }
+
+    /** 获取单个 */
+    public retrieve(pk:number) {
+        let url = this.get_requesr_url(this.retrieve_url) + String(pk) + '.json';
+        return this.http.get(url,this.get_auth_header())
+                 .map(this.extractData)
+                 .catch(this.httpError);
+    }
+
+    /** 增加，创建 */
+    public create(json:string) {
+        return this.http.post(this.get_requesr_url(this.post_url),json,this.get_auth_header())
+                        .map(this.extractData)
+                        .catch(this.httpError);
+    }
+
+    /** 更新 */
+    public update(pk:number,json:string) {
+        let url:string;
+        if(typeof(this.put_url)=='undefined') {
+            url = this.get_requesr_url(this.retrieve_url) + String(pk) + '.json';
+        } else {
+            url = this.get_requesr_url(this.put_url) + String(pk) + '.json';
+        }
+        return this.http.put(url,json,this.get_auth_header())
+                        .map(this.extractData)
+                        .catch(this.httpError);
+    }
+
     /**
      * 获取可用的http请求头
      */
@@ -24,14 +66,6 @@ export class BaseService {
         let headers = new Headers({ 'Content-Type': 'application/json','Authorization':auth_token});
         let options = new RequestOptions({ headers: headers });
         return options;
-    }
-
-    /**
-     * 获取当前登录用户id
-     */
-    protected getuid() {
-        let uid = 1;
-        return uid;
     }
 
     /**

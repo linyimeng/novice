@@ -26,7 +26,7 @@ export class  DepartmentCreateComponent implements OnInit{
 	) {}
 
 	ngOnInit() {
-		this._departmentService.get_department_list().subscribe(
+		this._departmentService.list().subscribe(
 			departments=>this.departments = departments,
 			error=>alert(error)
 		)
@@ -36,7 +36,7 @@ export class  DepartmentCreateComponent implements OnInit{
         let json = JSON.stringify(this.department);
 		console.log(json);
 		
-        this._departmentService.post_create_department(json).subscribe(
+        this._departmentService.create(json).subscribe(
             department=> {
                     console.log(JSON.stringify(department));
 					this.router.navigate(['/personnel/department/list']);

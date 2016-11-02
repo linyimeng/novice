@@ -47,7 +47,7 @@ export class StaffDetailComponent implements OnInit{
             params=>{
                 let pk= +params['pk'];
                 this.staff_pk = pk;
-                this._staffservice.get_emp_detail(pk).subscribe(
+                this._staffservice.retrieve(pk).subscribe(
                     staff=>{
                         this.staff=staff;
                         this.dpk = staff.department;
@@ -61,7 +61,7 @@ export class StaffDetailComponent implements OnInit{
     save_staff() {
         let json = JSON.stringify(this.staff);
         let pk = this.staff.pk;
-        this._staffservice.put_update_emp(pk,json).subscribe(
+        this._staffservice.update(pk,json).subscribe(
             staff=>this.router.navigate(['/personnel/staff/list']),
             error=>alert(error),
         )

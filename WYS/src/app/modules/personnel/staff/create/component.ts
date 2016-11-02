@@ -45,7 +45,7 @@ export class StaffCreatComponent{
     save_staff(){
         let json = JSON.stringify(this.staff);
         console.log(json);
-        this._staffservice.post_create_emp(json).subscribe(
+        this._staffservice.create(json).subscribe(
             staff=>{
                 console.log(JSON.stringify(staff));
 				this.router.navigate(['/personnel/staff/list']);

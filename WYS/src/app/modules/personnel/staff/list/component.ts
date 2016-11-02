@@ -22,7 +22,7 @@ export class StaffListComponent implements OnInit{
 	}
 
 	get_emp_list() {
-		return this.staffservice.get_emp_list()
+		return this.staffservice.list()
 							    .subscribe(
 									 staffs=>this.staffs = staffs
 								 );

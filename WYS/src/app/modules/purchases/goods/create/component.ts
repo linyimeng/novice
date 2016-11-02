@@ -32,7 +32,7 @@ export class GoodsCreateComponent{
         form.value.type = this.goodstype;
         let json = JSON.stringify(form.value);
         /*console.log(json);*/
-        this._goodsService.post_create_goods(json).subscribe(
+        this._goodsService.create(json).subscribe(
             goods=>{
                 console.log("ok!"+JSON.stringify(goods));
                 this.router.navigate(['/purchases/goods/list']);
