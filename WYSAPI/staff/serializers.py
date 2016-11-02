@@ -61,8 +61,6 @@ class JobsSerializer(serializers.ModelSerializer):
     
     
 class EmpInfoCreateSerializer(serializers.ModelSerializer):
-    department_name = serializers.SerializerMethodField()
-    job_name = serializers.SerializerMethodField()
     loginname = serializers.CharField(write_only=True)
     password = serializers.CharField(max_length=30,write_only=True)
     class Meta:
@@ -101,6 +99,7 @@ class EmpInfoCreateSerializer(serializers.ModelSerializer):
                     username=validated_data['loginname']
                 )
         new_user.set_password(validated_data['password'])
+        #需添加事物支持
         new_user.save()
         del validated_data['loginname']
         del validated_data['password']

@@ -40,7 +40,7 @@ class EmpInfo(models.Model):
     name = models.CharField(_('full name'),max_length=60)
     customid = models.CharField(max_length=30,blank=True,null=True,unique=True)
     department = models.ForeignKey(Department)
-    job = models.ForeignKey(Jobs)
+    job = models.ForeignKey(Jobs,blank=True,null=True)
     work_address = models.CharField(_('work address'),max_length=255,blank=True,null=True)
     office_phone = models.CharField(_('office phone'),max_length=12,unique=True,blank=True,null=True)
     office_address = models.CharField(_('office address'),max_length=255,blank=True,null=True)
