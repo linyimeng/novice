@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 @Component({
 	selector: 'wys-app',
 	template: `
-    <nav *ngIf="wyslogin">
+    <nav>
         <ul>
             <li routerLink="/personnel" routerLinkActive="activity">
                 <a>员工</a>
@@ -39,12 +39,11 @@ import { Router } from '@angular/router';
 	`
 })
 export class AppComponent implements OnInit {
-    wyslogin:boolean;
     constructor(
         private router:Router
     ){}
     ngOnInit() {
-        this.wyslogin=true;
+        
     }
 
     checklogin() {

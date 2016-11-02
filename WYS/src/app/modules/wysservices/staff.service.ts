@@ -5,7 +5,7 @@ import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class StaffService extends BaseService {
-    private GET_EMP_LIST_URL = '/api/staff/emp.json';
+    private GET_EMP_LIST_URL = '/api/staff/emps.json';
     private GET_EMP_DETAIL_URL = '/api/staff/emp/';
     private POST_CREATE_EMP_URL = '/api/staff/emp.json';
     constructor(
