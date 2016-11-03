@@ -1,41 +1,29 @@
 <!-- 创建进货单 -->
 <div class="content">
-<form action="#" class="purchase-order">
+<form class="purchase-order" #orderform="ngForm" (ngSubmit)="save_order()">
     <div class="order-title">
         <strong>进货单</strong>
     </div>
     <div class="order-form">
         <div class="left">
             <div>
-                <label for="orderid">单号：</label>
+                <label for="ordercode">单号：</label>
                 <div class="group">
-                    <input type="text" id="orderid" name="orderid">
+                    <input type="text" id="ordercode" [(ngModel)]="order.ordercode" disabled="true" name="ordercode">
                 </div>
             </div>
             <div>
                 <label for="supplier">供应商：</label>
                 <div class="group">
-                    <input type="text" id="supplier" name="supplier">
-                </div>
-            </div>
-            <div>
-                <label for="purchaser">经手人：</label>
-                <div class="group">
-                    <input type="text" id="purchaser" name="purchaser">
+                    <supplierSelect (supplierpk)="setsupplierPk($event)"></supplierSelect>
                 </div>
             </div>
         </div>
         <div class="right">
             <div>
-                <label for="warehouse">收货仓库：</label>
+                <label for="datetime">订单日期：</label>
                 <div class="group">
-                    <input type="text" id="warehouse" name="warehouse">
-                </div>
-            </div>
-            <div>
-                <label for="orderdate">订单日期：</label>
-                <div class="group">
-                    <input type="text" id="orderdate" name="orderdate">
+                    <input type="text" id="datetime" [value]="datetime" disabled="true">
                 </div>
             </div>
         </div>

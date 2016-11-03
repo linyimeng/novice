@@ -31,12 +31,15 @@ import { TypeattrService } from '../wysservices/typeattr.service';
 import { CompanyService } from '../wysservices/company.service';
 
 import { GoodstypeSelectComponent } from '../formcomponents/goodstype-select';
+import { SupplierSelectComponent } from '../formcomponents/supplier-select';
+
 import { AuthTokenGuard } from '../auth/authtoken.guard';
+
 @NgModule({
     imports:[
         CommonModule,
         FormsModule,
-        purchasesRouting,
+        purchasesRouting
     ],
     declarations:[
         GoodsComponent,
@@ -61,6 +64,7 @@ import { AuthTokenGuard } from '../auth/authtoken.guard';
         SupplierPurchaseListComponent,
         
         GoodstypeSelectComponent,
+        SupplierSelectComponent,
 
     ],
     providers:[

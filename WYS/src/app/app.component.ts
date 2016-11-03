@@ -13,18 +13,22 @@ import { StaffService } from './modules/wysservices/staff.service';
             <li routerLink='/purchases' routerLinkActive="activity">
                 <a >进货</a>
             </li>
+            <!-- 销售模块零售版本的不需要
             <li routerLink='/sales' routerLinkActive="activity">
                 <a>销售</a>
             </li>
+            -->
             <li routerLink='/warehouse' routerLinkActive="activity">
-                <a>仓库</a>
+                <a>库存</a>
             </li>
             <!-- 财务模块暂不启用
             <li><a>财务</a></li>
             -->
+            <!-- 暂无设置模块
             <li routerLink='/setting' routerLinkActive="activity">
                 <a>设置</a>
             </li>
+            -->
         </ul>
 
         <div class="nav-left">
