@@ -14,7 +14,8 @@ class TypeSerializer(ModelSerializer):
 class DetailSerializer(ModelSerializer):
     class Meta:
         model = Detail
-        fields = ('order','goods','quantity','price','dynamic_attr','remark')
+        fields = ('order','goods','quantity',
+                  'price','dynamic_attr','remark')
     
 class OrderSerializer(ModelSerializer):
     class Meta:

@@ -1,9 +1,10 @@
 from rest_framework.viewsets import ModelViewSet
-from rest_framework.generics import ListAPIView,RetrieveUpdateDestroyAPIView
+from rest_framework.generics import ListAPIView,RetrieveUpdateDestroyAPIView,CreateAPIView
 from BP.models import Company,Personal
 from BP.serializers import CompanySerializer,PersonalSerializer
 # Create your views here.
-
+class CompanyCreateAPIView(CreateAPIView):
+    serializer_class = CompanySerializer
 class CompanyListAPIView(ListAPIView):
     '''
     按类型提取公司列表

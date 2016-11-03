@@ -58,3 +58,4 @@ class TypeAttr(models.Model):
     
     
     
+    
