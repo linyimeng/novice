@@ -2,6 +2,7 @@ from django.db import models
 from staff.models import EmpInfo
 from goods.models import Goods
 from BP.models import Company
+from django.utils.translation import ugettext_lazy as _
 
 class Type(models.Model):
     IN = 'I'
@@ -13,27 +14,33 @@ class Type(models.Model):
     name = models.CharField(max_length=30)
     io =  models.CharField(max_length=1,choices=IN_OR_OUT)
     
+    def __str__(self):
+        return self.name
+    
 
 class Order(models.Model):
     ordercode = models.CharField(max_length=30,primary_key=True)
     company = models.ForeignKey(Company)
-    type = models.ForeignKey()
+    type = models.ForeignKey(Type)
     
     totalquantity = models.DecimalField(max_digits=10,decimal_places=2)
-    totalprice = models.DecimalField(max_digits=10,decimal_places=10)
+    totalprice = models.DecimalField(max_digits=18,decimal_places=8)
     
     remark = models.TextField(blank=True,null=True)
     creator = models.ForeignKey(EmpInfo)
     joined = models.DateTimeField(_('joined'),auto_now_add=True)
     updated = models.DateTimeField(_('updated'),auto_now=True)
     deleted = models.DateTimeField(_('deleted'),blank=True,null=True)
+    
+    def __str__(self):
+        return self.ordercode
 
 class Detail(models.Model):
     order = models.ForeignKey(Order)
     goods = models.ForeignKey(Goods)
     
     quantity = models.DecimalField(max_digits=10,decimal_places=2)
-    price = models.DecimalField(max_digits=10,decimal_places=10)
+    price = models.DecimalField(max_digits=18,decimal_places=8)
     
     dynamic_attr = models.TextField(blank=True,null=True)
     
@@ -41,6 +48,9 @@ class Detail(models.Model):
     joined = models.DateTimeField(_('joined'),auto_now_add=True)
     updated = models.DateTimeField(_('updated'),auto_now=True)
     deleted = models.DateTimeField(_('deleted'),blank=True,null=True)
+    
+    def __str__(self):
+        return self.goods.name
     
     
     
