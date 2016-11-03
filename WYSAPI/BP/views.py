@@ -5,6 +5,9 @@ from BP.serializers import CompanySerializer,PersonalSerializer
 # Create your views here.
 
 class CompanyListAPIView(ListAPIView):
+    '''
+    按类型提取公司列表
+    '''
     #queryset = Company.objects.filter(deleted=None)
     serializer_class = CompanySerializer
     

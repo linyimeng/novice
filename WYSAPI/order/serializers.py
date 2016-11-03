@@ -1,5 +1,5 @@
 '''
-Created on 2016-10-5
+Created on 2016-11-3
 
 @author: yimeng
 '''
@@ -16,7 +16,6 @@ class DetailSerializer(ModelSerializer):
         model = Detail
         fields = ('order','goods','quantity','price','dynamic_attr','remark')
     
-        
 class OrderSerializer(ModelSerializer):
     class Meta:
         model = Order
@@ -29,11 +28,4 @@ class OrderSerializer(ModelSerializer):
                   'remark',
                   'creator'
                  )
-    
-
-# class OrderCreateSerializer(serializers.Serializer):
-#     order = OrderSerializer()
-#     detail = DetailSerializer()
-#     def create(self,validated_data):
-#         pass
     

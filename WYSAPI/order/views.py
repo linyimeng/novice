@@ -4,10 +4,23 @@ Created on 2016-10-29
 @author: yimeng
 '''
 from rest_framework.views import APIView
-from order.serializers import OrderSerializer,DetailSerializer
+from rest_framework.generics import ListAPIView
+from order.serializers import OrderSerializer,DetailSerializer,TypeSerializer
+from order.models import Type
 from django.db import transaction
 from rest_framework.response import Response
 from rest_framework import status
+
+class TypeListAPIView(ListAPIView):
+    '''
+    订单类型查询，默认提供两种类型，进货单和销售单
+    '''
+    serializer_class = TypeSerializer
+    def get_queryset(self,*args,**kwargs):
+        io = self.kwargs['io']
+        io = str.upper(io)
+        queryset_list = Type.objects.filter(io=io)
+        return queryset_list
 
 class OrderCreateAPIView(APIView):
     '''
@@ -48,11 +61,11 @@ class OrderCreateAPIView(APIView):
             else:
                 return Response(detail_serializer.errors,status=status.HTTP_400_BAD_REQUEST)
     def sum(self,request):
-        main = request.data.get('order')
-        detail = request.data.get('detail')
         '''
         计算总价和总数
         '''
+        main = request.data.get('order')
+        detail = request.data.get('detail')
         total_quantity = 0
         total_price = 0
         for od in detail:
