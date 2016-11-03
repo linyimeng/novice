@@ -1,5 +1,5 @@
 from rest_framework import viewsets
-from rest_framework.generics import CreateAPIView,RetrieveUpdateAPIView,ListAPIView
+from rest_framework.generics import CreateAPIView,RetrieveUpdateAPIView,ListAPIView,RetrieveAPIView
 from staff.models import Department,Jobs,EmpInfo
 from staff.serializers import DepartmentSerializer,JobsSerializer,EmpInfoCreateSerializer,EmpInfoListDetailSerializer
 from staff.pagination import StaffLimitOffsetPagination
@@ -25,7 +25,6 @@ class JobsViewSet(viewsets.ModelViewSet):
 class EmpInfoCreateAPIView(CreateAPIView):
     serializer_class = EmpInfoCreateSerializer
     
-
 class EmpInfoListAPIView(ListAPIView):
     pagination_class = StaffLimitOffsetPagination
     queryset = EmpInfo.objects.filter(user__is_active=True)
@@ -33,3 +32,8 @@ class EmpInfoListAPIView(ListAPIView):
 class EmpInfoRetrieveUpdateAPIView(RetrieveUpdateAPIView):
     queryset = EmpInfo.objects.filter(user__is_active=True)
     serializer_class = EmpInfoListDetailSerializer
+    
+class EmpInfoRetrieveAPIView(RetrieveAPIView):
+    queryset = EmpInfo.objects.filter(user__is_active=True)
+    serializer_class = EmpInfoListDetailSerializer
+    lookup_field = 'user'

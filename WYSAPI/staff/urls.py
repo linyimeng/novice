@@ -22,6 +22,7 @@ emp_urls = format_suffix_patterns([
     url(r'^emps/$',views.EmpInfoListAPIView.as_view(),name='emps-list'),
     url(r'^emp/$',views.EmpInfoCreateAPIView.as_view(),name='emps-create'),
     url(r'^emp/(?P<pk>[^/.]+)/$',views.EmpInfoRetrieveUpdateAPIView.as_view(),name='emps-detail'),
+    url(r'^emp/user/(?P<user>[^/.]+)/$',views.EmpInfoRetrieveAPIView.as_view(),name='emps-user-detail'),
 ])
 
 urlpatterns = emp_urls + router_urls + jobs_urls
