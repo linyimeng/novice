@@ -10,11 +10,11 @@ export class AuthTokenGuard implements CanActivate {
     constructor(private router:Router) { }
     canActivate() {
         console.log('守卫');
-        let token=localStorage.getItem('wystoken');
+        let token=sessionStorage.getItem('wystoken');
         if(token) {
             return true;
         } else {
-            //this.router.navigate([LoginComponent]);
+            this.router.navigate(['/login']);
             return false;
         }
     }

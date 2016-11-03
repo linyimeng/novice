@@ -22,17 +22,21 @@ import { GoodsPurchaseListComponent } from './reports/goods-purchase/list/compon
 
 import { SupplierPurchaseReportsComponent } from './reports/supplier-purchase/supplier-purchase';
 import { SupplierPurchaseListComponent } from './reports/supplier-purchase/list/component';
+
+import { AuthTokenGuard } from '../auth/authtoken.guard';
 const purchasesRoutes:Routes = [
     // 当URL为 example.com/purchases 时导航到商品 goods
     {
         path:'purchases',
         redirectTo:'/purchases/goods',
-        pathMatch:'full'
+        pathMatch:'full',
+        canActivate:[AuthTokenGuard]
     },
     { path:'purchases',component:PurchasesComponent },
     {
         path:'purchases',
         component:PurchasesComponent,
+        canActivate:[AuthTokenGuard],
         children:[
             {
                 path:'goods',

@@ -13,16 +13,19 @@ import { StaffCreatComponent } from './staff/create/component';
 import { StaffDetailComponent } from './staff/detail/component';
 import { StaffListComponent } from './staff/list/component';
 
+import { AuthTokenGuard } from '../auth/authtoken.guard';
 const personnelRoutes:Routes = [
     // 当URL为 example.com/personnel 时导航到部门
     {
         path:'personnel',
         redirectTo:'/personnel/department',
+        canActivate: [ AuthTokenGuard ],
         pathMatch:'full',
     },
     {
         path:'personnel',
         component:PersonnelComponent,
+        canActivate:[ AuthTokenGuard ],
         children:[
             { 
                 path:'department', 

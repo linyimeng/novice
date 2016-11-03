@@ -18,7 +18,7 @@ import { DepartmentSelectComponent } from '../formcomponents/department-select';
 import { JobsSelectComponent } from '../formcomponents/jobs-select';
 //模块路由
 import { personnelRouting } from './routing';
-
+import { AuthTokenGuard } from '../auth/authtoken.guard';
 @NgModule({
     imports:[
         CommonModule,
@@ -44,7 +44,7 @@ import { personnelRouting } from './routing';
     exports:[
     ],
     providers:[
-        
+        AuthTokenGuard,
     ]
 })
 

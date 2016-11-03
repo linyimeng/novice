@@ -1,5 +1,6 @@
 import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule }   from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { routing } from './app.routing';
 
@@ -12,10 +13,14 @@ import { WarehouseModule } from './modules/warehouse/warehouse.module';
 import { SettingModule } from './modules/setting/setting.module';
 
 import { LoginComponent } from './modules/auth/login.component';
+import { AuthService } from './modules/wysservices/auth.service';
+import { StaffService } from './modules/wysservices/staff.service';
+
 @NgModule({
   imports: [
     BrowserModule,
     HttpModule,
+    FormsModule,
     PersonnelModule,
     PurchasesModule,
     SalesModule,
@@ -30,6 +35,8 @@ import { LoginComponent } from './modules/auth/login.component';
   ],
 
   providers: [
+    StaffService,
+    AuthService,
   ],
 
   bootstrap: [ 

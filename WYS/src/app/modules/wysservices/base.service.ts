@@ -62,7 +62,8 @@ export class BaseService {
      * 获取可用的http请求头
      */
     protected get_auth_header():RequestOptions {
-        let auth_token = 'Token 78cbff35c687a6a67da92df41d6cb2233f51e348';
+        let wystoken = sessionStorage.getItem('wystoken');
+        let auth_token = 'Token ' + wystoken;
         let headers = new Headers({ 'Content-Type': 'application/json','Authorization':auth_token});
         let options = new RequestOptions({ headers: headers });
         return options;

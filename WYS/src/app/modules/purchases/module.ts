@@ -30,7 +30,8 @@ import { GoodsService } from '../wysservices/goods.service';
 import { TypeattrService } from '../wysservices/typeattr.service';
 import { CompanyService } from '../wysservices/company.service';
 
-import { GoodstypeSelectComponent } from '../formcomponents/goodstype-select'
+import { GoodstypeSelectComponent } from '../formcomponents/goodstype-select';
+import { AuthTokenGuard } from '../auth/authtoken.guard';
 @NgModule({
     imports:[
         CommonModule,
@@ -66,6 +67,7 @@ import { GoodstypeSelectComponent } from '../formcomponents/goodstype-select'
         GoodsService,
         TypeattrService,
         CompanyService,
+        AuthTokenGuard,
     ]
 })
 

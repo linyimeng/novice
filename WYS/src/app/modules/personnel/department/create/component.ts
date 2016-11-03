@@ -29,7 +29,7 @@ export class  DepartmentCreateComponent implements OnInit{
 		this._departmentService.list().subscribe(
 			departments=>this.departments = departments,
 			error=>alert(error)
-		)
+		);
 	}
 
 	save_department() {

@@ -1,10 +1,11 @@
 import { Component,OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { StaffService } from './modules/wysservices/staff.service';
 
 @Component({
 	selector: 'wys-app',
 	template: `
-    <nav>
+    <nav [style.display]="islogin ? 'block' : 'none'">
         <ul>
             <li routerLink="/personnel" routerLinkActive="activity">
                 <a>员工</a>
@@ -24,13 +25,13 @@ import { Router } from '@angular/router';
             <li routerLink='/setting' routerLinkActive="activity">
                 <a>设置</a>
             </li>
-            
         </ul>
+
         <div class="nav-left">
             <span class="iconfont">&#xe647;</span>
             <div class="user-div">
                 <span class="iconfont">&#xe621;</span>
-                <span class="user">admin</span>
+                <span class="user">{{username}}</span>
                 <span class="iconfont triangle">&#xe696;</span>
             </div>
         </div>
@@ -39,19 +40,30 @@ import { Router } from '@angular/router';
 	`
 })
 export class AppComponent implements OnInit {
+    username:string;
+    islogin:boolean;
     constructor(
+        private _staffService:StaffService,
         private router:Router
     ){}
+
     ngOnInit() {
-        
-    }
-
-    checklogin() {
+        console.log(this.username);
         setInterval(()=>{
-            console.log('检测中');
-            let wystoken = localStorage.getItem('token');
-            if(!wystoken) this.router.navigate(['/login']); 
-        },300000);
+            let pk = sessionStorage.getItem('user');
+            if(pk) {
+                this.islogin = true;
+                if(typeof(this.username)=="undefined") {
+                    this._staffService.get_user_staff(Number(pk)).subscribe(
+                        staff=>{
+                            this.username = staff.name;
+                        },
+                        error=>alert(error)
+                    );
+                }
+            } else {
+                this.islogin = false;
+            }
+        },2000);
     }
-
  }
