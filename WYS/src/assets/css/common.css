@@ -149,6 +149,27 @@ nav .nav-left .user-div .triangle {
 }
 
 
+/**解决滚动条  **/
+.main .main-right > * {		
+	display: flex;		
+ 	flex-direction: column;		
+ 	height: 100%;		
+ 	width: 100%;		
+ }		
+ 		
+ .main .main-right > * > * {		
+ 	-moz-box-flex: 1;		
+ 	flex: 1 1 auto;		
+ 	overflow: auto;		
+ 	position: relative;		
+ 	display: block;		
+ 		
+ }		
+ .main .main-right router-outlet{		
+ 	display:none;		
+ }
+
+
 /*--------------------------------------------------------------------------------------------------------*/
 /* 左边 布局*/
 .main .main-left {
@@ -423,6 +444,9 @@ nav .nav-left .user-div .triangle {
 	cursor: pointer;
 }
 
+.main .main-right .content > ul li .bottom .edit {
+ 	cursor: pointer;
+}
   
 
 .main .main-right .content > table  tr:nth-child(odd) {
@@ -556,6 +580,17 @@ nav .nav-left .user-div .triangle {
 	justify-content: space-between;
 	align-items: center;
 }
+.main .main-right .content .purchase-order .order-form input,.main .main-right .content .purchase-order .order-form select {
+	line-height: 40px;
+	width: 100%;
+	display: flex;
+	flex-direction:row;
+	justify-content: space-between;
+	align-items: center;
+}
+
+
+ 
 
 .main .main-right .content .purchase-order .order-bottom {
 
