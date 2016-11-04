@@ -24,7 +24,7 @@ export class GoodsDetailComponent implements OnInit {
     ngOnInit() {
         this.activatedRoute.params.forEach(
             params=>{
-                let pk= +params['pk'];
+                let pk=params['pk'];
                 this._goodsService.retrieve(pk).subscribe(
                     goods=>{
                         this.static_attr = JSON.parse(goods.static_attr);

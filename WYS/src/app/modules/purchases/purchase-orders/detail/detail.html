@@ -1,0 +1,81 @@
+<!-- 创建进货单 -->
+<div class="content">
+<form class="purchase-order">
+    <div class="order-title">
+        <strong>进货单</strong>
+    </div>
+    <div class="order-form">
+        <div class="left">
+            <div>
+                <label for="ordercode">单号：</label>
+                <div class="group">
+                    {{orderdetail.ordercode}}
+                </div>
+            </div>
+            <div>
+                <label for="supplier">供应商：</label>
+                <div class="group">
+                    {{orderdetail.company}}
+                </div>
+            </div>
+        </div>
+        <div class="right">
+            <div>
+                <label for="datetime">订单日期：</label>
+                <div class="group">
+                    {{orderdetail.joined | date:"yyyy-MM-dd HH:mm:ss"}}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="goods-list">
+        <table>
+            <thead>
+                <tr>
+                    <th>商品</th>
+                    <th>规格</th>
+                    <th>数量</th>
+                    <th>单位</th>
+                    <th>单价</th>
+                    <th>总额</th>
+                    <th>生产厂商</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let gorder of orderdetail.detail">				
+                    <td>{{gorder.goods.name}}</td>
+                    <td>{{gorder.goods.specification}}</td>
+                    <td>{{gorder.quantity}}</td>
+                    <td>{{gorder.goods.unit}}</td>
+                    <td>{{gorder.price}}</td>
+                    <td>{{gorder.quantity * gorder.price}}</td>
+                    <td>{{gorder.goods.manufacturer}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="order-bottom">				
+        <input type="submit" value="">					
+        <table>
+            <tbody>
+                <!--
+                <tr>
+                    <td><strong>未加税总额：</strong></td>
+                    <td>0.00</td>
+                </tr>
+                -->
+                <tr>
+                    <td><strong>总数量：</strong></td>
+                    <td>{{orderdetail.totalquantity}}</td>
+                </tr>
+                
+                <tr class="last">
+                    <td><strong>合计：</strong></td>
+                    <td><span>{{orderdetail.totalprice}}</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</form>
+</div>

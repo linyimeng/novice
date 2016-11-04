@@ -16,7 +16,7 @@
     <tbody>
         <tr *ngFor="let iorder of iorders">
             <th><input name="radiogroup" type="checkbox"></th>
-            <td>{{iorder.ordercode}}</td>
+            <td routerLink="/purchases/purchaseorder/{{iorder.ordercode}}">{{iorder.ordercode}}</td>
             <td>{{iorder.company}}</td>
             <td>{{iorder.totalquantity}}</td>
             <td>{{iorder.totalprice}}</td>

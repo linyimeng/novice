@@ -18,6 +18,6 @@ export class Order {
         public type:number,
         public remark:string,
         public creator:number,
-        public detail:string
+        public detail:any
     ){}
 }

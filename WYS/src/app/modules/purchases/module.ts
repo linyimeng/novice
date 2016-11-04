@@ -17,6 +17,7 @@ import { SupplierDetailComponent } from './supplier/detail/component';
 import { PurchaseOrdersComponent } from './purchase-orders/purchaseorders';
 import { PurchaseOrdersListComponent } from './purchase-orders/list/component';
 import { PurchaseOrdersCreateComponent } from './purchase-orders/create/component';
+import { PurchaseOrdersDetailComponent } from './purchase-orders/detail/component';
 
 import { GoodsPurchaseReportsComponent } from './reports/goods-purchase/goods-purchase';
 import { GoodsPurchaseListComponent } from './reports/goods-purchase/list/component';
@@ -56,6 +57,7 @@ import { AuthTokenGuard } from '../auth/authtoken.guard';
         PurchaseOrdersComponent,
         PurchaseOrdersListComponent,
         PurchaseOrdersCreateComponent,
+        PurchaseOrdersDetailComponent,
 
         GoodsPurchaseReportsComponent,
         GoodsPurchaseListComponent,

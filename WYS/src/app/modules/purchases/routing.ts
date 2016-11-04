@@ -16,6 +16,7 @@ import { SupplierDetailComponent } from './supplier/detail/component';
 import { PurchaseOrdersComponent } from './purchase-orders/purchaseorders';
 import { PurchaseOrdersListComponent } from './purchase-orders/list/component';
 import { PurchaseOrdersCreateComponent } from './purchase-orders/create/component';
+import { PurchaseOrdersDetailComponent } from './purchase-orders/detail/component';
 
 import { GoodsPurchaseReportsComponent } from './reports/goods-purchase/goods-purchase';
 import { GoodsPurchaseListComponent } from './reports/goods-purchase/list/component';
@@ -64,7 +65,8 @@ const purchasesRoutes:Routes = [
                 children:[
                     { path:'',component:PurchaseOrdersListComponent},
                     { path:'list',component:PurchaseOrdersListComponent},
-                    { path:'create',component: PurchaseOrdersCreateComponent}
+                    { path:'create',component: PurchaseOrdersCreateComponent},
+                    { path:':ordercode',component:PurchaseOrdersDetailComponent}
                 ]
             },
             {
