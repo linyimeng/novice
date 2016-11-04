@@ -299,6 +299,7 @@ nav .nav-left .user-div .triangle {
     position: relative;
     display: block;
     height: 100%;
+    width: 100%;
 	
 }
 .main .main-right .bg {
@@ -864,42 +865,44 @@ nav .nav-left .user-div .triangle {
 }
 
 .main .main-right .content .retail-total {
-	margin:20px auto; 
-	width: 350px;
-
-	
-}
-
-.main .main-right .content .retail-total .btn {
-	
-	text-align: center;
-	margin:30px 0;
-
-}
-
-.main .main-right .content .retail-total .btn .center {
-	margin:0 20px;
-}
-.main .main-right .content .retail-total .btn button {
-	border: 1px solid #2d6da3;
-	background-color: #2d6da3;
-	border-radius: 2px;
-	color: #fff;
-	padding: 5px 10px;
-
-}
-
-.main .main-right .content .retail-total > div > div {
+	position:fixed; 
+	bottom: 0;
 	display: flex;
-	width: 350px;
-	justify-content:space-between;
-	margin-top: 10px;
-	font-size: 15px;
+	width: 100%;
+	padding:30px 0;
+	justify-content:center;
+	background: #f0eeee none repeat scroll 0 0;
+}
+
+.main .main-right .content .retail-total > div{
+	width: 50%;
+	display: flex;
+	justify-content:center;
+
+}
+.main .main-right .content .retail-total > div label{
 	font-weight: bold;
+	color: red;
+	margin-right: 10px;
+	
+	font-size: 20px
 }
-.main .main-right .content .retail-total > div > div input {
-	width: 60%;
+
+.main .main-right .content .retail-total > div input {
+	border:1px solid #ccc;
+	border-radius: 2px;
+	height: 30px;
 }
+
+
+.main .main-right .content .retail-total > div button {
+	background-color: #2d6da3;
+	color: #fff;
+	border:1px solid  #2d6da3;
+	padding:10px 15px;
+	border-radius:2px;
+}
+
 
 
 /*-------------------------------------------------------------------------------------------------------------------------*/
