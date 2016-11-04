@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 @Component({
    selector: 'retail',
    template: `
-   <!--零售-->
+   <!--零售
     <div class="title">
         <div class="left">零售</div>
         <div class="right">
@@ -13,6 +13,7 @@ import { Component } from '@angular/core';
         
         <span class="action">动作<i class="iconfont">&#xe696;</i></span>
     </div>
+    -->
     <router-outlet></router-outlet>
    `
 })
