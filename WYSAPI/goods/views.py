@@ -11,7 +11,8 @@ class TypeViewSet(ModelViewSet):
 class TypeAttrListAPIView(ListAPIView):
     serializer_class = TypeAttrSerializer
     def get_queryset(self,*args,**kwargs):
-        goodstype = self.kwargs['tid']
+        #goodstype = self.kwargs['tid']
+        goodstype = 1
         attrtype = self.kwargs['attrtype']
         queryset_list = TypeAttr.objects.filter(goodstype__id=goodstype,attr_type=attrtype)
         return queryset_list
