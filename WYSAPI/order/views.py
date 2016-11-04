@@ -5,8 +5,8 @@ Created on 2016-10-29
 '''
 from rest_framework.views import APIView
 from rest_framework.generics import ListAPIView
-from order.serializers import OrderSerializer,DetailSerializer,TypeSerializer
-from order.models import Type
+from order.serializers import OrderSerializer,DetailSerializer,TypeSerializer,OrderListSerializer
+from order.models import Type,Order
 from django.db import transaction
 from rest_framework.response import Response
 from rest_framework import status
@@ -74,4 +74,12 @@ class OrderCreateAPIView(APIView):
         main['totalquantity'] = total_quantity
         main['totalprice'] = total_price
         return main
+    
+class OrderIOListAPIView(ListAPIView):
+    serializer_class = OrderListSerializer
+    def get_queryset(self,*args,**kwargs):
+        io = self.kwargs['io']
+        io = str.upper(io)
+        queryset_list = Order.objects.filter(type__io=io)
+        return queryset_list
 
