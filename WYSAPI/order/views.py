@@ -4,9 +4,9 @@ Created on 2016-10-29
 @author: yimeng
 '''
 from rest_framework.views import APIView
-from rest_framework.generics import ListAPIView
-from order.serializers import OrderSerializer,DetailSerializer,TypeSerializer,OrderListSerializer
-from order.models import Type,Order
+from rest_framework.generics import ListAPIView,RetrieveAPIView
+from order.serializers import OrderSerializer,DetailSerializer,TypeSerializer,OrderListSerializer,OrderRetrieveSerializer
+from order.models import Type,Order,Detail
 from django.db import transaction
 from rest_framework.response import Response
 from rest_framework import status
@@ -82,4 +82,12 @@ class OrderIOListAPIView(ListAPIView):
         io = str.upper(io)
         queryset_list = Order.objects.filter(type__io=io)
         return queryset_list
+    
+class OrderDetailRetrieveAPIView(RetrieveAPIView):
+    queryset = Order.objects.all()
+    serializer_class = OrderRetrieveSerializer
+    lookup_field = 'ordercode'
+        
+        
+        
 
