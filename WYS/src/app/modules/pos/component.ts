@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 
 @Component({
-    
     selector:'sales',
     template:`
     <div class="main">
@@ -11,8 +10,7 @@ import { Component } from '@angular/core';
 			</h1>
 
 			<div class="list">
-				<div class="ultitle">零售</div>
-				
+				<div class="ultitle" routerLink='/pos/retail'>零售</div>
 			</div>
 			<div class="footer">欢迎使用</div>
 		</div>
@@ -22,6 +20,6 @@ import { Component } from '@angular/core';
     </div>
     `
 })
-export class SalesComponent {
+export class PosComponent {
 
 }

@@ -8,7 +8,7 @@ import { AppComponent }        from './app.component';
 
 import { PersonnelModule } from './modules/personnel/module';
 import { PurchasesModule } from './modules/purchases/module';
-import { SalesModule } from './modules/Sales/sales.module';
+import { PosModule } from './modules/pos/module';
 import { WarehouseModule } from './modules/warehouse/warehouse.module';
 import { SettingModule } from './modules/setting/setting.module';
 
@@ -23,7 +23,7 @@ import { StaffService } from './modules/wysservices/staff.service';
     FormsModule,
     PersonnelModule,
     PurchasesModule,
-    SalesModule,
+    PosModule,
     WarehouseModule,
     SettingModule,
     routing
