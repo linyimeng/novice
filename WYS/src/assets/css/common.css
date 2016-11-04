@@ -4,9 +4,13 @@
 * {
 	box-sizing: border-box;
 }
+
 *::after, *::before {
     box-sizing: border-box;
 }
+
+
+
 p {
 	margin: 0;
 }
@@ -25,7 +29,7 @@ body {
 	min-width: 500px;
 	height: 100%;
 	margin:0 auto;
-	overflow: hidden;
+	
 
 }
 
@@ -101,7 +105,7 @@ nav ul li a {
 	color:rgb(157,157,157);
 	width: 42px;
 	text-align: center;
-	cursor: pointer;
+
 }
 
 nav ul li a:hover {
@@ -194,7 +198,6 @@ nav .nav-left .user-div .triangle {
 	color: #4c4c4c;
     padding: 8px 4px 5px 18px;
     margin-bottom: 2px;
-	cursor: pointer;
 }
 .main .main-left .list ul .active a{
 	background-color: #7c7bad;
@@ -222,28 +225,6 @@ nav .nav-left .user-div .triangle {
     height: 100%;
     width: 100%;
 }
-
-
-.main .main-right > * {
-	display: flex;
-	flex-direction: column;
-	height: 100%;
-	width: 100%;
-}
-
-.main .main-right > * > * {
-	-moz-box-flex: 1;
-	flex: 1 1 auto;
-	overflow: auto;
-	position: relative;
-	display: block;
-
-}
-.main .main-right router-outlet{
-	display:none;
-}
-
-
 
 .main .main-right .title {
 	-moz-box-flex: 0;
@@ -295,7 +276,7 @@ nav .nav-left .user-div .triangle {
 	display: inline-block;
 }
 
-.main .main-right .title .right input{
+.main .main-right .title .right input {
 	width: 100%;
 	border:1px solid #ccc;
 	border-radius: 3px;
@@ -317,6 +298,7 @@ nav .nav-left .user-div .triangle {
     overflow: auto;
     position: relative;
     display: block;
+    height: 100%;
 	
 }
 .main .main-right .bg {
@@ -423,10 +405,6 @@ nav .nav-left .user-div .triangle {
 	border-radius: 3px;
 }
 
-.main .main-right .content > ul li .bottom .edit {
-	cursor: pointer;
-}
-
 /*--------------------------------------------------------------------------------------------------------------*/
 
 /* 右边列表 */
@@ -517,8 +495,6 @@ nav .nav-left .user-div .triangle {
 	
 }
 
-
-
 .main .main-right .content .purchase-order .order-title {
 	padding-bottom: 10px;
 	border-bottom: 1px solid #ccc;
@@ -541,7 +517,6 @@ nav .nav-left .user-div .triangle {
 
 .main .main-right .content .purchase-order .order-form .group {
 	position: relative;
-	width: 55%;
 }
 
 .main .main-right .content .purchase-order .order-form .group i {
@@ -549,22 +524,15 @@ nav .nav-left .user-div .triangle {
 	right:6px;
 	top:2px;
 	font-size: 10px;
-
 }
 
-
-
-.main .main-right .content .purchase-order .order-form input,.main .main-right .content .purchase-order .order-form select {
+.main .main-right .content .purchase-order .order-form input {
 	
 	border: 1px solid #ccc;
 	border-radius: 3px;
 	height: 25px;
 	padding-left:5px;
 	width: 100%;
-	
-}
-
-.main .main-right .content .purchase-order .order-form select {
 
 }
 
@@ -572,7 +540,6 @@ nav .nav-left .user-div .triangle {
 	width: 50%;
 	border-right: 1px solid #ccc;
 	padding-right: 20px;
-	
 }
 
 .main .main-right .content .purchase-order .order-form .right{
@@ -587,7 +554,6 @@ nav .nav-left .user-div .triangle {
 	flex-direction:row;
 	justify-content: space-between;
 	align-items: center;
-
 }
 
 .main .main-right .content .purchase-order .order-bottom {
@@ -609,7 +575,6 @@ nav .nav-left .user-div .triangle {
 	border:1px solid #2d6da3;
 	border-radius: 3px;
 	color: #fff;
-	cursor: pointer;
 }
 
 /*地址*/
@@ -719,6 +684,20 @@ nav .nav-left .user-div .triangle {
 	padding:10px 0;
 }
 
+
+/*下拉选择*/
+.main .main-right .content .purchase-order .goods-list .updown {
+	border:1px solid #aaa;
+	position: relative;
+	top:-10px;
+	left:10px;
+	background-color: #fff;
+	width: 80%;
+}
+
+.main .main-right .content .purchase-order .goods-list .updown table {
+	
+}
 /*---------------------------------------------------------------------------------------------------------------------*/
 
 
@@ -834,8 +813,93 @@ nav .nav-left .user-div .triangle {
 }
 
 
+/*------------------------------------------------------*/
+
+/*零售*/
+
+.main .main-right .content .retail {
+	
+}
+
+.main .main-right .content .retail ul{
+	display: flex;
+	justify-content:center;
+	padding: 50px 20px;
+	border-bottom: 1px solid #ccc;
+	
+}
+
+.main .main-right .content .retail ul label {
+	font-weight: bold;
+	margin-right: 10px;
+	width: 100px;
+
+}
+
+.main .main-right .content .retail ul .ok {
+	background-color: #2d6da3;
+	color: #fff;
+	border:1px solid  #2d6da3;
+	padding: 0 10px;
+	
+}
 
 
+.main .main-right .content .retail ul input{
+	margin-right: 20px;
+	border-radius: 2px;
+	border:1px solid #ccc;
+	padding-left: 5px;
+	height: 30px;
+}
+
+.main .main-right .content .retail .table {
+	height: 444px;
+	overflow: auto;
+}
+
+
+.main .main-right .content .retail table tr td{
+	border-bottom: 1px solid #ccc;
+}
+
+.main .main-right .content .retail-total {
+	margin:20px auto; 
+	width: 350px;
+
+	
+}
+
+.main .main-right .content .retail-total .btn {
+	
+	text-align: center;
+	margin:30px 0;
+
+}
+
+.main .main-right .content .retail-total .btn .center {
+	margin:0 20px;
+}
+.main .main-right .content .retail-total .btn button {
+	border: 1px solid #2d6da3;
+	background-color: #2d6da3;
+	border-radius: 2px;
+	color: #fff;
+	padding: 5px 10px;
+
+}
+
+.main .main-right .content .retail-total > div > div {
+	display: flex;
+	width: 350px;
+	justify-content:space-between;
+	margin-top: 10px;
+	font-size: 15px;
+	font-weight: bold;
+}
+.main .main-right .content .retail-total > div > div input {
+	width: 60%;
+}
 
 
 /*-------------------------------------------------------------------------------------------------------------------------*/
