@@ -1,2 +1,3 @@
 eclipse.preferences.version=1
 encoding//blog/migrations/0001_initial.py=utf-8
+encoding//goods/migrations/0005_goods_unit.py=utf-8
