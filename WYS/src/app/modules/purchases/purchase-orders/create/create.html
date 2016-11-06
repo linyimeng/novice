@@ -33,35 +33,39 @@
             <thead>
                 <tr>
                     <th>商品</th>
-                    <th>单位</th>
+                    <th>规格</th>
                     <th>数量</th>
-                    <th>单价</th>
+                    <th>进价</th>
+                    <th>批号</th>
+                    <th>有效期</th>
+                    <th>生产日期</th>
                     <th>总额</th>
-                    <th>税率</th>
-                    <th>税后单价</th>
-                    <th>税后总额</th>
+                    <th>单位</th>
+                    <th>生产厂家</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>				
-                    <td>阿莫西林</td>
-                    <td>0.25ml*20</td>
-                    <td>1000</td>
-                    <td>2</td>
-                    <td>2000</td>
-                    <td>10%</td>
-                    <td>1.8</td>
-                    <td>1800</td>
-                </tr>
-                <tr>			
-                    <td>阿莫西林</td>
-                    <td>0.25ml*20</td>
-                    <td>1000</td>
-                    <td>2</td>
-                    <td>2000</td>
-                    <td>10%</td>
-                    <td>1.8</td>
-                    <td>1800</td>
+                    <td *ngFor="let detail of details" (click)="onchose(this)">
+                        <ng-select [allowClear]="true"
+                                    [items]="items"
+                                    [disabled]="disabled"
+                                    (data)="refreshValue($event)"
+                                    (selected)="selected($event)"
+                                    (removed)="removed($event)"
+                                    (typed)="typed($event)"
+                                    placeholder="选择添加商品">
+                        </ng-select>
+                    </td>
+                    <td>specification</td>
+                    <td contentEditable="true">quantity</td>
+                    <td contentEditable="true">price</td>
+                    <td contentEditable="true">dynamic_attr</td>
+                    <td contentEditable="true">dynamic_attr</td>
+                    <td contentEditable="true">dynamic_attr</td>
+                    <td>quantity * price</td>
+                    <td>unit</td>
+                    <td>manufacturer</td>
                 </tr>
             </tbody>
         </table>

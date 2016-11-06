@@ -33,6 +33,7 @@ import { CompanyService } from '../wysservices/company.service';
 
 import { GoodstypeSelectComponent } from '../formcomponents/goodstype-select';
 import { SupplierSelectComponent } from '../formcomponents/supplier-select';
+import { SelectModule } from 'ng2-select';
 
 import { AuthTokenGuard } from '../auth/authtoken.guard';
 
@@ -40,6 +41,7 @@ import { AuthTokenGuard } from '../auth/authtoken.guard';
     imports:[
         CommonModule,
         FormsModule,
+        SelectModule,
         purchasesRouting
     ],
     declarations:[

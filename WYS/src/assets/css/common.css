@@ -502,7 +502,7 @@ nav .nav-left .user-div .triangle {
 /*表单布局*/
 
 .main .main-right .content .purchase-order {
-	max-width: 888px;
+	/*max-width: 888px;*/
 	margin:20px auto;
 	border:1px solid #ccc;
 	background-color:#fff;
