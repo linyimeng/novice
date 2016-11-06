@@ -42,6 +42,10 @@ class Detail(models.Model):
     quantity = models.DecimalField(max_digits=10,decimal_places=2)
     price = models.DecimalField(max_digits=18,decimal_places=8)
     
+    validity = models.DateField(blank=True,null=True)
+    productiondate = models.DateField(blank=True,null=True)
+    batch = models.CharField(max_length=36,blank=True,null=True)
+    
     dynamic_attr = models.TextField(blank=True,null=True)
     
     remark = models.TextField(blank=True,null=True)

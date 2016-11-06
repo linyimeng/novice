@@ -6,7 +6,7 @@ Created on 2016-10-29
 from rest_framework.views import APIView
 from rest_framework.generics import ListAPIView,RetrieveAPIView
 from order.serializers import OrderSerializer,DetailSerializer,TypeSerializer,OrderListSerializer,OrderRetrieveSerializer
-from order.models import Type,Order,Detail
+from order.models import Type,Order
 from django.db import transaction
 from rest_framework.response import Response
 from rest_framework import status
@@ -34,6 +34,9 @@ class OrderCreateAPIView(APIView):
         },
         "detail": [{
             "order": "",
+            "productiondate":"",
+            "validity":"",
+            "batch":"",
             "goods"null:,
             "quantity": null,
             "price": null,
@@ -69,7 +72,7 @@ class OrderCreateAPIView(APIView):
         total_quantity = 0
         total_price = 0
         for od in detail:
-            total_price = total_price + od.get('price')
+            total_price = total_price + (od.get('price') * od.get('quantity'))
             total_quantity = total_quantity + od.get('quantity')
         main['totalquantity'] = total_quantity
         main['totalprice'] = total_price
