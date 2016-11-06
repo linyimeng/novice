@@ -31,6 +31,7 @@ export class LoginComponent{
 			user=>{
 				sessionStorage.setItem('wystoken',user.auth_token);
 				sessionStorage.setItem('user',user.user);
+				sessionStorage.setItem('eid',user.eid);
 				setTimeout(()=>{
 					this.router.navigate(['/']);
 				},800);
