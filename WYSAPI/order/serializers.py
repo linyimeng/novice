@@ -59,7 +59,7 @@ class DetailRetrieveSerializer(ModelSerializer):
     goods = GoodsSerializer()
     class Meta:
         model = Detail
-        fields = ('order','goods','quantity',
+        fields = ('order','goods','quantity','productiondate','validity','batch',
                   'price','dynamic_attr','remark')
     
 class OrderRetrieveSerializer(ModelSerializer):

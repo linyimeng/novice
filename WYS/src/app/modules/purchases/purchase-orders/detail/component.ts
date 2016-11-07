@@ -10,7 +10,7 @@ import { Order } from '../../model';
    providers:[OrderService]
 })
 export class PurchaseOrdersDetailComponent implements OnInit{
-    orderdetail:Order = new Order(null,null,null,null,null,null,null,null);
+    orderdetail:Order = new Order(null,null,null,null,null,null,null);
     constructor(
         private _orderService:OrderService,
         private activatedroute:ActivatedRoute
@@ -23,7 +23,7 @@ export class PurchaseOrdersDetailComponent implements OnInit{
                 this._orderService.get_order_detail(ordercode).subscribe(
                     orderdetail=>{
                         this.orderdetail = orderdetail;
-                        console.log(this.orderdetail.ordercode);
+                        console.log(this.orderdetail);
                     },
                     error=>alert(error)
                 );
