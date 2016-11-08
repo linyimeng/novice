@@ -16,6 +16,7 @@ router_urls = [
 ]
 
 typearre_urls = format_suffix_patterns([
+    url(r'^search/$',views.GoodsSearchListAPIView.as_view(),name='search-goods'),
     url(r'^typeattr/$',views.TypeAttrCreateAPIView.as_view(),name='typeattr-create'),
     url(r'^typeattr/(?P<pk>[^/.]+)/$',views.TypeAttrRetrieveUpdateDestroyAPIView.as_view(),name='typeattr-detail'),
     url(r'^typeattr/(?P<attrtype>[a-z]+)/(?P<tid>[0-9]+)/$',views.TypeAttrListAPIView.as_view(),name='typeattr-name'),

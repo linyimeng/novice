@@ -49,3 +49,21 @@ class GoodsSerializer(serializers.ModelSerializer):
                 'user',
                 'lastmodifyer'
                 )
+        
+class GoodsSearchSerializer(serializers.ModelSerializer):
+    type = serializers.SerializerMethodField()
+    class Meta:
+        model = Goods
+        fields = (
+                  'pk',
+                  'name',
+                  'manufacturer',
+                  'specification',
+                  'unit',
+                  'barcode',
+                  'type',
+                  'salesprice',
+                  'static_attr'
+                 )
+    def get_type(self,obj):
+        return obj.type.name

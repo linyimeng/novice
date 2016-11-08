@@ -10,6 +10,7 @@ api_urls = [
     url(r'^goods/',include('goods.urls')),
     url(r'^bp/',include('BP.urls')),
     url(r'^order/',include('order.urls')),
+    url(r'^wms/',include('wms.urls')),
     #url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]
 

@@ -20,7 +20,7 @@ class Type(models.Model):
 
 class Order(models.Model):
     ordercode = models.CharField(max_length=30,primary_key=True)
-    company = models.ForeignKey(Company)
+    company = models.ForeignKey(Company,blank=True,null=True)
     type = models.ForeignKey(Type)
     
     totalquantity = models.DecimalField(max_digits=10,decimal_places=2)
