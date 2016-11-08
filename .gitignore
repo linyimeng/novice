@@ -4,3 +4,6 @@
 
 __pycache__/
 migrations/
+WYSAPI/.pydevproject
+WYSAPI/npm-debug.log
+
