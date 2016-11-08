@@ -59,7 +59,7 @@ export class PurchaseOrdersCreateComponent implements OnInit{
     ){}
 
     ngOnInit(){
-        this.order.ordercode = this._orderService.get_ordercode();
+        this.order.ordercode = this._orderService.get_ordercode('I');
         this.datetime = new Date().toLocaleString();
         this._goodsService.list().subscribe(
           goodss=>{

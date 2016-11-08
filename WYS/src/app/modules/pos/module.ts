@@ -8,12 +8,14 @@ import { RetailComponent } from './retail/retail';
 import { RetailContentComponent } from './retail/content/component';
 
 import { posRouting } from './routing';
+import { SelectModule } from 'ng2-select';
 
 @NgModule({
     imports:[
         CommonModule,
         FormsModule,
-        posRouting
+        posRouting,
+        SelectModule
     ],
     declarations:[
         PosComponent,

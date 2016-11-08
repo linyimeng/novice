@@ -27,10 +27,11 @@ export class OrderService extends BaseService {
                         .catch(this.httpError);
     }
     /** 获取单号 */
-    get_ordercode() {
+    get_ordercode(type:string) {
         let uid = sessionStorage.getItem('user');
         let timestamp = new Date().getTime();
         let ordercode = uid + timestamp;
+        ordercode = type + ordercode;
         return ordercode;
     }
     get_datetime() {

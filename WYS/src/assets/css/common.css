@@ -853,11 +853,7 @@ nav .nav-left .user-div .triangle {
 
 /*零售*/
 
-.main .main-right .content .retail {
-	
-}
-
-.main .main-right .content .retail ul{
+ .retailul{
 	display: flex;
 	justify-content:center;
 	padding: 50px 20px;
@@ -865,23 +861,21 @@ nav .nav-left .user-div .triangle {
 	
 }
 
-.main .main-right .content .retail ul label {
+ .retailul label {
 	font-weight: bold;
 	margin-right: 10px;
 	width: 100px;
-
 }
 
-.main .main-right .content .retail ul .ok {
+ .retailul .ok {
 	background-color: #2d6da3;
 	color: #fff;
 	border:1px solid  #2d6da3;
 	padding: 0 10px;
-	
 }
 
 
-.main .main-right .content .retail ul input{
+ .retailul input{
 	margin-right: 20px;
 	border-radius: 2px;
 	border:1px solid #ccc;

@@ -9,13 +9,13 @@
             <div>	
                 <label for="name">供应商名称：</label>
                 <div class="group">
-                <input type="text" [(ngModel)]="supplier.name" name="name">
+                <input type="text" [(ngModel)]="supplier.name" name="name" required>
                 </div>
             </div>
             <div>
                 <label for="address">地址：</label>
                 <div class="group">
-                    <input type="text" [(ngModel)]="supplier.address" name="address" placeholder="地址">
+                    <input type="text" [(ngModel)]="supplier.address" name="address" placeholder="地址" required>
                 </div> 
             </div>
             <span class="detail">备注：</span>

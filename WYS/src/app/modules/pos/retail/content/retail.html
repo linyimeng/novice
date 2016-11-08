@@ -1,10 +1,9 @@
-
 <div class="content">
 <div class="retail">
-    <ul>
+    <!--
+    <ul class="retailul">
         <li>
         <label for="">检索</label>
-        <input type="text">
         </li>
         <li>
         <label for="">数量</label>
@@ -19,84 +18,84 @@
         <input type="text">
         </li>
         <li>
-        
         <input type="submit" value="确定" class="ok">
         </li>
-        
-
     </ul>
-
+    -->
     <div class="table">
         <table>
             <thead>
                 <tr>
-                    <th>序号</th>
+                    <th>检索</th>
                     <th>库存</th>
-                    <th>品名</th>
                     <th>规格</th>
                     <th>生产厂商</th>
+                    <th>批号</th>
+                    <th>有效期</th>
                     <th>单位</th>
+                    <th>数量</th>
                     <th>零售价</th>
-                    <th>会员价</th>
-                    <th>产地</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>23123</td>
-                    <td>阿莫西林</td>
-                    <td>20*50ml</td>
-                    <td>是扣篮得分</td>
-                    <td>阿斯顿</td>
-                    <td>211</td>
-                    <td>111</td>
-                    <td>阿斯顿</td>
+                <tr *ngFor="let detail of details">
+                    <td>
+                        <ng-select [allowClear]="true"
+                                    [items]="items"
+                                    [disabled]="disabled"
+                                    (data)="refreshValue($event)"
+                                    (selected)="selected($event,detail)"
+                                    (removed)="removed($event,detail)"
+                                    (typed)="typed($event)"
+                                    placeholder="选择添加商品">
+                        </ng-select>
+                    </td>
+                    <td>{{detail.inventory}}</td>
+                    <td>{{detail.specification}}</td>
+                    <td>{{detail.manufacturer}}</td>
+                    <td>{{detail.batch}}</td>
+                    <td>{{detail.validity}}</td>
+                    <td>{{detail.unit}}</td>
+                    <td>{{detail.quantity}}</td>
+                    <td>{{detail.price}}</td>
                 </tr>
+                <tr><td (click)="init_details()">添加一个商品</td></tr>
             </tbody>
         </table>
-
     </div>
-
-    
 </div>
 <div class="retail-total">
 	<div>
-		<label for="">总金额：</label>
-		<input type="text">
+		<label for="">总金额：{{order.totalprice | currency:'CNY':true:'1.3-3'}}</label>
 	</div>
 	<div>
-		<button>收银</button>
+		<button (click)="show()">收银</button>
 	</div>
-	
 </div>
 </div>
-<div class="model">
+
+<div class="model" [style.display]="isshow ? 'block' : 'none'">
 	<div class="mask"></div>
 	<ul>	
 		<li>
 			<span>总金额：</span>
-			<input type="text">
-
+			<input type="text" [value]="order.totalprice" disabled="true">
 		</li>
 		<li>
 			<span>应收：</span>
-			<input type="text">
-			
+			<input type="text" [value]="order.totalprice" disabled="true">
 		</li>
 		<li>
 			<span>现金：</span>
-			<input type="text">
-			
+			<input type="text" (input)="set_smallchange($event.target.value)" autofocus="autofocus">
 		</li>
 		<li>
 			<span>找零：</span>
-			<input type="text">
-			
+			<input type="text" [value]="order.smallchange" disabled="true">
 		</li>
 		<li class="btn">
 			<div></div>
-			<button class="ok">结账</button>
+			<button class="ok" (click)="checkout()">结账</button>
 		</li>
 	</ul>
 </div>
