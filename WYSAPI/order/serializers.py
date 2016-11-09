@@ -47,7 +47,9 @@ class OrderListSerializer(ModelSerializer):
                   'creator'
                  )
     def get_company(self,obj):
-        return obj.company.name
+        if obj.company:
+            return obj.company.name
+        return None
     
     def get_type(self,obj):
         return obj.type.name
