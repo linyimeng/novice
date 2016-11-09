@@ -149,8 +149,8 @@ export class RetailContentComponent implements OnInit{
         //生成主体订单
         order.ordercode = this._orderService.get_ordercode('O');
         order.type = 2;
-        order.totalprice = this.order.totalprice;
-        order.totalquantity = this.order.totalquantity;
+        order.totalprice = Number(this.order.totalprice.toFixed(8));
+        order.totalquantity = Number(this.order.totalquantity.toFixed(2));
         order.creator = Number(sessionStorage.getItem('eid'));
         //订单详情
         let orderdetail = new Array;

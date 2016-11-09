@@ -84,10 +84,13 @@ export class PurchaseOrdersCreateComponent implements OnInit{
     }
   }
   save_order() {
+      if(!this.checkcompany()) return;
       this.set_total();
       let orderdetail = this.before_save_orderdetail();
       this.order.type = 1;
       this.order.creator = Number(sessionStorage.getItem('eid'));
+      this.order.totalprice = Number(this.order.totalprice.toFixed(8));
+      this.order.totalquantity = Number(this.order.totalquantity.toFixed(2));
       let save_order = new SaveOrder(this.order,orderdetail);
       let json = JSON.stringify(save_order);
       console.log(json);
@@ -97,6 +100,14 @@ export class PurchaseOrdersCreateComponent implements OnInit{
         },
         error=>alert(error)
       )
+  }
+
+  checkcompany() {
+    if(typeof(this.order.company)=="object") {
+      alert('供应商不能为空');
+      return false;
+    }
+    return true;
   }
 
   before_save_orderdetail(){
