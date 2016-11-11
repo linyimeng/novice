@@ -12,6 +12,13 @@ export class OrderService extends BaseService {
         http:Http
     ) { super(http); }
     
+
+    get_ordergoods_list(io:string) {
+        let url = this.get_requesr_url('/api/order/ordergoods/') + io + '.json';
+        return this.http.get(url,this.get_auth_header())
+                        .map(this.extractData)
+                        .catch(this.httpError);
+    }
     /** 根据订单号得到订单详情 */
     get_order_detail(ordercode:string) {
         let url = this.get_requesr_url(this.get_detail_url) + ordercode + '.json';

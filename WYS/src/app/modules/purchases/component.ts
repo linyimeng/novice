@@ -19,7 +19,6 @@ import { Component } from '@angular/core';
 				<div class="ultitle">报表</div>
 				<ul>
 					<li routerLink='/purchases/reports/purchaseorders' routerLinkActive="active"><a>商品进货报表</a></li>
-					<li routerLink='/purchases/reports/supplier' routerLinkActive="active"><a>供应商进货报表</a></li>
 				</ul>
 				
 			</div>

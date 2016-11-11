@@ -13,6 +13,9 @@ import { StaffService } from './modules/wysservices/staff.service';
             <li routerLink='/purchases' routerLinkActive="activity">
                 <a >进货</a>
             </li>
+            <li routerLink='/sales' routerLinkActive="activity">
+                <a>销售</a>
+            </li>
             <li routerLink='/pos' routerLinkActive="activity">
                 <a>零售</a>
             </li>

@@ -1,0 +1,59 @@
+<!-- 商品剩余报表 -->
+<div class="content">
+    <form action="#" class="purchase-order">
+        <div class="order-title">
+            <strong>商品剩余报表</strong>
+        </div>
+        <div class="order-form">
+            <div class="left">
+                <!--
+                <div>
+                    <label for="goodsname">商品：</label>
+                    <div class="group">
+                        <input type="text" id="goodsname" name="client">
+                        <i class="iconfont">&#xe696;</i>
+                    </div>
+                </div>
+                -->
+                
+            </div>
+            <div class="right">					
+                
+            </div>
+        </div>
+        <div class="goods-list">
+            <table>
+                <thead>
+                    <tr>
+                        <th>商品</th>															
+                        <th>规格</th>
+                        <th>厂家</th>
+                        <th>有效期</th>
+                        <th>批号</th>
+                        <th>库存</th>
+                        <th>售价</th>
+                        <th>生产日期</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let goods of goodss">				
+                        <td>{{goods.name}}</td>
+                        <td>{{goods.specification}}</td>
+                        <td>{{goods.manufacturer}}</td>
+                        <td>{{goods.validity}}</td>
+                        <td>{{goods.batch}}</td>
+                        <td>{{goods.inventory}}</td>
+                        <td>{{goods.salesprice}}</td>
+                        <td>{{goods.productiondate}}</td>
+                    </tr>
+                    
+                </tbody>
+            </table>
+        </div>
+
+        <div class="order-bottom">				
+            
+        </div>
+    </form>
+</div>
