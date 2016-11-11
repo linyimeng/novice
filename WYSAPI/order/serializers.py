@@ -12,11 +12,29 @@ class TypeSerializer(ModelSerializer):
         fields = ('name','io')
         
 class DetailSerializer(ModelSerializer):
+    name = SerializerMethodField()
+    manufacturer = SerializerMethodField()
+    specification = SerializerMethodField()
+    company = SerializerMethodField()
     class Meta:
         model = Detail
-        fields = ('order','goods','quantity',
-                  'price','productiondate','validity','batch','dynamic_attr','remark')
+        fields = ('order','goods','name','manufacturer','specification','quantity',
+                  'price','productiondate','validity','batch','dynamic_attr','remark','joined','company')
+        
+    def get_name(self,obj):
+        return obj.goods.name
+
     
+    def get_specification(self,obj):
+        return obj.goods.specification
+    
+    def get_manufacturer(self,obj):
+        return obj.goods.manufacturer
+    
+    def get_company(self,obj):
+        if obj.order.company:
+            return obj.order.company.name
+        return None
 class OrderSerializer(ModelSerializer):
     class Meta:
         model = Order

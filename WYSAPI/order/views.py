@@ -6,7 +6,7 @@ Created on 2016-10-29
 from rest_framework.views import APIView
 from rest_framework.generics import ListAPIView,RetrieveAPIView
 from order.serializers import OrderSerializer,DetailSerializer,TypeSerializer,OrderListSerializer,OrderRetrieveSerializer
-from order.models import Type,Order
+from order.models import Type,Order,Detail
 from django.db import transaction
 from rest_framework.response import Response
 from rest_framework import status
@@ -21,7 +21,14 @@ class TypeListAPIView(ListAPIView):
         io = str.upper(io)
         queryset_list = Type.objects.filter(io=io)
         return queryset_list
-
+    
+class OrderGoodsInOrOutListAPIView(ListAPIView):
+    serializer_class = DetailSerializer
+    def get_queryset(self,*args,**kwargs):
+        io = self.kwargs['io']
+        io = str.upper(io)
+        queryset_list = Detail.objects.filter(order__type__io=io).order_by('order')
+        return queryset_list
 class OrderCreateAPIView(APIView):
     '''
     {
