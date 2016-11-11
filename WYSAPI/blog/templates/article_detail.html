@@ -1,0 +1,32 @@
+<title>{{article.title}}</title>
+<a href="{% url 'article-list' %}"><h1>文章列表</h1></a>
+<h1>{{ article.title }}<span>--{{ article.author.nickname }}</span></h1>
+<h5>{{ article.description }}<h5>
+<div>
+{{ article.content|safe }}
+</div>
+
+<br>
+
+<div>
+<h2>评价及问题提问</h2>
+ <ul>
+{% for comment in comments %}
+    <li>
+    	<p>{{ comment.content }}   <br>--{{ comment.user }},{{ comment.joined|date:"Y-m-d H:i:s" }}</p>
+    </li>
+{% empty %}
+    <li>抱歉，目前还没有评论。</li>
+{% endfor %}
+</ul>
+</div>
+
+<div>
+<h2>评论，提问表单</h2>
+<form method='post' action="{% url 'comment-create' article.pk %}">
+	{% csrf_token %}
+	{{ commentform }}
+	<br>
+	<input type='submit' value="提交">
+</form>
+

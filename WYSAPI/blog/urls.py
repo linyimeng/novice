@@ -1,25 +1,14 @@
+'''
+Created on 2016-11-10
+
+@author: yimeng
+'''
 from django.conf.urls import url
 from blog import views
-from rest_framework.urlpatterns import format_suffix_patterns
-'''
-from rest_framework.routers import DefaultRouter
-router = DefaultRouter()
-router.register(r'article',views.ArticleViewSet)
-router.register(r'user',views.BlogUserViewSet)
-router.register(r'comment',views.CommentViewSet)
 
 urlpatterns = [
-    url(r'^', include(router.urls)),
-    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    url('^$',views.article_list),
+    url('^article/$',views.article_list,name='article-list'),
+    url('^article/(?P<pk>[0-9]+)/$',views.article_detail,name='article-detail'),
+    url('^comment/create/(?P<apk>[0-9]+)/$',views.comment_create,name='comment-create'),
 ]
-'''
-urlpatterns = [
-    #url(r'^$',views.api_root),
-    url(r'^articles/$',views.article_list),
-    url(r'^article/(?P<pk>[0-9]+)/$',views.article_detail),
-    url(r'user/(?P<pk>[0-9]+)/$',views.BlogUserDetailAPIView.as_view()),
-    url(r'comments/(?P<apk>[0-9]+)/$',views.CommentList.as_view(),name='comment-list'),
-    url(r'comment/(?P<pk>[0-9]+)/$',views.CommentDetail.as_view(),name='comment-detail'),
-]
-
-urlpatterns = format_suffix_patterns(urlpatterns)

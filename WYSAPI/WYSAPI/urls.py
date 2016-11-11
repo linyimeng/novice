@@ -2,10 +2,9 @@ from django.conf.urls import include, url
 from django.contrib import admin
 from django.conf import settings
 from plugin.editors.DjangoUeditor import urls as ueditorurl
-
 api_urls = [
     url(r'^user/',include('user.urls')),
-    url(r'^blog/',include('blog.urls')),
+    url(r'^blog/',include('blog.api.urls')),
     url(r'^staff/',include('staff.urls')),
     url(r'^goods/',include('goods.urls')),
     url(r'^bp/',include('BP.urls')),
@@ -19,6 +18,7 @@ urlpatterns = [
     url(r'^admin/',include(admin.site.urls)),
     url(r'^api/',include(api_urls)),
     url(r'^ueditor/', include(ueditorurl)),
+    url(r'^blog/',include('blog.urls')),
 ]
 if settings.DEBUG:
     from django.conf.urls.static import static

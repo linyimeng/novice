@@ -37,7 +37,7 @@ class Comment(models.Model):
     '''
     comment table
     '''
-    user        = models.ForeignKey(BlogUser)
+    user        = models.CharField(max_length=30)
     article     = models.ForeignKey(Article)
     content     = models.TextField()
     joined = models.DateTimeField(auto_now_add=True)

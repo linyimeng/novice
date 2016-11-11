@@ -1,0 +1,17 @@
+
+
+<h1>{{ info }}</h1>
+<p>将在 <span id="mes">2</span> 秒后返回！</p>
+<script>
+	var i = 2;  
+	var intervalid;  
+	intervalid = setInterval("fun()", 1000);  
+	function fun() {  
+	    if (i == 0) {  
+	        window.location.href = "{% url 'article-detail' apk %}";
+	        clearInterval(intervalid);  
+	    }  
+	    document.getElementById("mes").innerHTML = i;  
+	    i--;   
+	}
+</script>
