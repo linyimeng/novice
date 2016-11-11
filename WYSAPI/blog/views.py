@@ -8,7 +8,7 @@ from django.shortcuts import render
 from blog.forms import CommentForm
 
 def article_list(request):
-    article_list = Article.objects.filter(published=True).values('pk','title','author','joined')
+    article_list = Article.objects.filter(published=True).values('pk','title','author','joined').order_by('updated')
     return render(request,'article_list.html',{'articles':article_list})
 
 
