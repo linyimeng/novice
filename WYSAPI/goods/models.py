@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
 from django_pgjsonb import JSONField
-
+import json
 
 class Type(models.Model):
     name = models.CharField(max_length=30,unique=True)
@@ -16,7 +16,7 @@ class Type(models.Model):
 
 class Goods(models.Model):
     customid = models.CharField(max_length=30,unique=True,blank=True,null=True)
-    sav = JSONField()
+    sav = JSONField(default={},decode_kwargs={},encode_kwargs={},db_index=False,db_index_options={})
 #     name = models.CharField(max_length=120)
 #     manufacturer = models.CharField(max_length=226)
 #     specification= models.CharField(max_length=30,blank=True,null=True)
@@ -35,6 +35,10 @@ class Goods(models.Model):
     updated = models.DateTimeField(auto_now=True)
     deleted = models.DateTimeField(_('deleted'),blank=True,null=True)
     
+    def save(self,*args,**kwargs):
+        self.sav = json.loads(self.sav)
+        super(Goods,self).save(*args,**kwargs)
+     
 
 class TypeAttr(models.Model):
     STATIC_ATTR_TYPE = 's'
@@ -57,6 +61,7 @@ class TypeAttr(models.Model):
     
     def __str__(self):
         return self.name
+    
     
     
     

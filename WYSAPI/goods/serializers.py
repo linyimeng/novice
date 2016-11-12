@@ -44,10 +44,21 @@ class GoodsSerializer(serializers.ModelSerializer):
                 'type',
                 'sav'
                 )
-    
+    #处理customid为‘’的情况
+    def validate_customid(self,value):
+        if value == '':
+            value = None
+        return value
     def validate_sav(self,value):
         try:
-            loads(value)
+            sav = loads(value)
         except ValueError:
             raise serializers.ValidationError("不是合法的json数据")
+        keys = sav.keys()
+        attrs = TypeAttr.objects.filter(type='ss')
+        self.checkkey(attrs, keys)
         return value
+    def checkkey(self,attrs,keys):
+        for attr in attrs:
+            if attr.keyname not in keys:
+                raise serializers.ValidationError("数据非法，系统定义属性不能为空,当前系统自定义可调用相关接口查看，具体调用方法查看接口文档")

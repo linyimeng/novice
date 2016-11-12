@@ -15,12 +15,11 @@ router_urls = [
     url(r'^',include(router.urls)),
 ]
 
-typearre_urls = format_suffix_patterns([
+goodsattr_urls = format_suffix_patterns([
     url(r'^attrs/$',views.TypeAttrCreateAPIView.as_view(),name='typeattr-create'),
     url(r'^attrs/(?P<gtid>[0-9]+)/$',views.TypeAttrListAPIView.as_view(),name='goodsattr-all-list'),
     url(r'^attrs/(?P<gtid>[0-9]+)/(?P<type>[a-z]+)/$',views.TypeAttrListAPIView.as_view(),name='goodsattr-list'),
     url(r'^attr/(?P<keyname>[^/.]+)/$',views.TypeAttrRetrieveUpdateDestroyAPIView.as_view(),name='goodsattr-detail'),
-    
 ])
 
-urlpatterns = typearre_urls + router_urls
+urlpatterns = goodsattr_urls + router_urls

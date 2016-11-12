@@ -2,7 +2,7 @@ from rest_framework.viewsets import ModelViewSet
 from rest_framework.generics import RetrieveUpdateDestroyAPIView,ListAPIView,CreateAPIView
 from goods.models import Type,TypeAttr,Goods
 from goods.serializers import TypeSerializer,TypeAttrSerializer,GoodsSerializer
-from rest_framework.filters import SearchFilter,OrderingFilter
+# from rest_framework.filters import SearchFilter,OrderingFilter
 # Create your views here.
 
 class TypeViewSet(ModelViewSet):
@@ -39,11 +39,11 @@ class TypeAttrRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
     lookup_field = 'keyname'
 
 class GoodsViewSet(ModelViewSet):
-    queryset = Goods.objects.filter()
+    queryset = Goods.objects.filter(sav__is_active=True)
     serializer_class = GoodsSerializer
+    
 # class GoodsSearchListAPIView(ListAPIView):
 #     queryset = Goods.objects.filter()
 #     serializer_class = GoodsSearchSerializer
 #     filter_backends = [SearchFilter,OrderingFilter]
 #     search_fields = ['name','barcode']
-#     
