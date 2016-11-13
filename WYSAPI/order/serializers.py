@@ -5,7 +5,7 @@ Created on 2016-11-3
 '''
 from rest_framework.serializers import ModelSerializer,SerializerMethodField
 from order.models import Type,Order,Detail
-from goods.serializers import GoodsSerializer
+from goods.serializers import GoodsListSerializer
 class TypeSerializer(ModelSerializer):
     class Meta:
         model = Type
@@ -76,7 +76,7 @@ class OrderListSerializer(ModelSerializer):
         return obj.creator.name
     
 class DetailRetrieveSerializer(ModelSerializer):
-    goods = GoodsSerializer()
+    goods = GoodsListSerializer()
     class Meta:
         model = Detail
         fields = ('order','goods','quantity','productiondate','validity','batch',

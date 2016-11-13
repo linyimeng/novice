@@ -1,7 +1,7 @@
 from rest_framework.viewsets import ModelViewSet
-from rest_framework.generics import RetrieveUpdateDestroyAPIView,ListAPIView,CreateAPIView
+from rest_framework.generics import RetrieveUpdateDestroyAPIView,ListAPIView,CreateAPIView,ListCreateAPIView
 from goods.models import Type,TypeAttr,Goods
-from goods.serializers import TypeSerializer,TypeAttrSerializer,GoodsSerializer
+from goods.serializers import TypeSerializer,TypeAttrSerializer,GoodsCreateUpdateSerializer,GoodsListSerializer
 # from rest_framework.filters import SearchFilter,OrderingFilter
 # Create your views here.
 
@@ -38,10 +38,24 @@ class TypeAttrRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
     serializer_class = TypeAttrSerializer
     lookup_field = 'keyname'
 
-class GoodsViewSet(ModelViewSet):
+class GoodsListCreateAPIView(ListCreateAPIView):
     queryset = Goods.objects.filter(sav__is_active=True)
-    serializer_class = GoodsSerializer
+    def get_serializer_class(self):
+        if self.request.method == 'POST':
+            self.serializer_class = GoodsCreateUpdateSerializer
+        else:
+            self.serializer_class = GoodsListSerializer
+        return self.serializer_class
     
+class GoodsRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
+    queryset = Goods.objects.filter(sav__is_active=True)
+    def get_serializer_class(self):
+        if self.request.method == 'PUT' or 'PETCH':
+            self.serializer_class = GoodsCreateUpdateSerializer
+        else:
+            self.serializer_class = GoodsListSerializer
+        return self.serializer_class
+
 # class GoodsSearchListAPIView(ListAPIView):
 #     queryset = Goods.objects.filter()
 #     serializer_class = GoodsSearchSerializer

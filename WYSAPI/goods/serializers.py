@@ -6,6 +6,7 @@ Created on 2016-10-3
 from rest_framework import serializers
 from goods.models import Type,TypeAttr,Goods
 from json import loads
+from django.core.exceptions import ObjectDoesNotExist
 class TypeSerializer(serializers.ModelSerializer):
     '''
     商品类别，现只支持单一行业商品
@@ -34,8 +35,7 @@ class TypeAttrSerializer(serializers.ModelSerializer):
         model = TypeAttr
         fields= ('goodstype','keyname','name','type')
         
-        
-class GoodsSerializer(serializers.ModelSerializer):
+class GoodsCreateUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Goods
         fields=(
@@ -44,7 +44,6 @@ class GoodsSerializer(serializers.ModelSerializer):
                 'type',
                 'sav'
                 )
-    #处理customid为‘’的情况
     def validate_customid(self,value):
         if value == '':
             value = None
@@ -54,11 +53,32 @@ class GoodsSerializer(serializers.ModelSerializer):
             sav = loads(value)
         except ValueError:
             raise serializers.ValidationError("不是合法的json数据")
+        self.valid_json(sav)
+        return value
+    def valid_json(self,sav):
         keys = sav.keys()
         attrs = TypeAttr.objects.filter(type='ss')
-        self.checkkey(attrs, keys)
-        return value
-    def checkkey(self,attrs,keys):
         for attr in attrs:
             if attr.keyname not in keys:
-                raise serializers.ValidationError("数据非法，系统定义属性不能为空,当前系统自定义可调用相关接口查看，具体调用方法查看接口文档")
+                raise serializers.ValidationError('''数据非法，系统定义属性不能为空,当前系统自定义可调用相关接口查看，
+                具体调用方法请查看接口文档''')
+        name = sav.get('name')
+        try:
+            Goods.objects.get(sav__name=name)
+        except ObjectDoesNotExist:
+            return True
+        raise serializers.ValidationError('药品名称重复')
+
+class GoodsListSerializer(serializers.ModelSerializer):
+    sav = serializers.SerializerMethodField()
+    class Meta:
+        model = Goods
+        fields=(
+                'pk',
+                'customid',
+                'type',
+                'sav'
+                )
+    def get_sav(self,obj):
+        sav = obj.sav
+        return sav
