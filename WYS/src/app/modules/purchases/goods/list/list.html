@@ -9,24 +9,18 @@
                 <th>单位</th>
                 <th>条形码</th>
                 <th>生产厂家</th>
-                <th>预成本价</th>
                 <th>售价</th>
-                <th>批准文号</th>
-                <th>产地</th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let goods of goodss">
                 <th><input name="radiogroup" type="checkbox"></th>
-                <td routerLink="/purchases/goods/{{goods.pk}}">{{goods.name}}</td>
-                <td>{{goods.specification}}</td>
-                <td>{{goods.unit}}</td>
-                <td>{{goods.barcode}}</td>
-                <td>{{goods.manufacturer}}</td>
-                <td>{{goods.costprice}}</td>
-                <td>{{goods.salesprice}}</td>
-                <td>{{goods.static_attr.approvalnumber}}</td>
-                <td>{{goods.static_attr.origin}}</td>
+                <td routerLink="/purchases/goods/{{goods.pk}}">{{goods.sav.name}}</td>
+                <td>{{goods.sav.specification}}</td>
+                <td>{{goods.sav.unit}}</td>
+                <td>{{goods.sav.barcode}}</td>
+                <td>{{goods.sav.manufacturer}}</td>
+                <td>{{goods.sav.saleprice}}</td>
             </tr>
         </tbody>
     </table>
