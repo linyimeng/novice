@@ -5,8 +5,38 @@ Created on 2016-11-10
 '''
 from blog.models import Article,Comment
 from django.shortcuts import render
-from blog.forms import CommentForm
-
+from blog.forms import CommentForm,LoginForm
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate, login
+from django.http import HttpResponseRedirect
+def loginx(request):
+    if request.method=="GET":
+        print(request.GET.get('next',''))
+        return render(request,'login.html',{
+                'next':request.GET.get('next',''),
+                'app_path':'accounts/login/',
+                'form':LoginForm,
+                'title':'登录',
+                'content_title':'登录',
+               })
+    else:
+        userform = LoginForm(request.POST)
+        if userform.is_valid():
+            username = userform.cleaned_data['username']
+            password = userform.cleaned_data['password']
+            user = authenticate(username=username,password=password)
+            if user is not None:
+                if user.is_active:
+                    login(request,user)
+                    return HttpResponseRedirect(request.POST.get('next','/blog/'))
+        return render(request, 'login.html', {
+                        'next':request.POST.get('next','/blog/'),
+                        'app_path':'accounts/login/',
+                        'form':LoginForm,
+                        'title':'登录',
+                        'content_title':'登录',
+                        'is_authenticated':True,
+                      })
 def article_list(request):
     article_list = Article.objects.filter(published=True).values('pk','title','author','joined')
     return render(request,'article_list.html',{'articles':article_list})
@@ -22,7 +52,7 @@ def article_detail(request,pk):
                     'commentform':CommentForm({'article':pk})
                    } 
                  )
-    
+@login_required
 def comment_create(request,apk):
     if request.method == "POST":
         form = CommentForm(request.POST)
@@ -34,8 +64,9 @@ def comment_create(request,apk):
             return render(request,'ok_or_fail.html',{'info':'评论或提问成功','apk':apk })
         else:
             return render(request,'ok_or_fail.html',{'info':'评论或提问失败！！！','apk':apk })
-        
-            
+    else:
+        article_url = '/blog/article/' + str(apk) + '/'
+        return HttpResponseRedirect(article_url)
     
     
     
