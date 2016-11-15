@@ -19,6 +19,7 @@ urlpatterns = [
     url(r'^api/',include(api_urls)),
     url(r'^ueditor/', include(ueditorurl)),
     url(r'^blog/',include('blog.urls')),
+    url(r'accounts/login/', 'blog.views.loginx'),
 ]
 if settings.DEBUG:
     from django.conf.urls.static import static
