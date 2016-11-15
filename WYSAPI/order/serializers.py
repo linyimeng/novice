@@ -18,23 +18,8 @@ class DetailSerializer(ModelSerializer):
     company = SerializerMethodField()
     class Meta:
         model = Detail
-        fields = ('order','goods','name','manufacturer','specification','quantity',
-                  'price','productiondate','validity','batch','dynamic_attr','remark','joined','company')
-        
-    def get_name(self,obj):
-        return obj.goods.name
+        fields = ('order','goods','joined')
 
-    
-    def get_specification(self,obj):
-        return obj.goods.specification
-    
-    def get_manufacturer(self,obj):
-        return obj.goods.manufacturer
-    
-    def get_company(self,obj):
-        if obj.order.company:
-            return obj.order.company.name
-        return None
 class OrderSerializer(ModelSerializer):
     class Meta:
         model = Order
@@ -82,6 +67,7 @@ class DetailRetrieveSerializer(ModelSerializer):
         fields = ('order','goods','quantity','productiondate','validity','batch',
                   'price','dynamic_attr','remark')
     
+
 class OrderRetrieveSerializer(ModelSerializer):
     company = SerializerMethodField()
     type = SerializerMethodField()

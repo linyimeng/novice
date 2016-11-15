@@ -1,9 +1,9 @@
 from django.db import models
 from staff.models import EmpInfo
 from goods.models import Goods
-from BP.models import Company
+from BP.models import Company,Personal
 from django.utils.translation import ugettext_lazy as _
-
+from django_pgjsonb import JSONField
 class Type(models.Model):
     IN = 'I'
     OUT= 'O'
@@ -17,10 +17,10 @@ class Type(models.Model):
     def __str__(self):
         return self.name
     
-
 class Order(models.Model):
     ordercode = models.CharField(max_length=30,primary_key=True)
     company = models.ForeignKey(Company,blank=True,null=True)
+    personal= models.ForeignKey(Personal,blank=True,null=True)
     type = models.ForeignKey(Type)
     
     totalquantity = models.DecimalField(max_digits=10,decimal_places=2)
@@ -39,16 +39,9 @@ class Detail(models.Model):
     order = models.ForeignKey(Order)
     goods = models.ForeignKey(Goods)
     
-    quantity = models.DecimalField(max_digits=10,decimal_places=2)
-    price = models.DecimalField(max_digits=18,decimal_places=8)
+    gdav = JSONField()
+    gsav = JSONField()
     
-    validity = models.DateField(blank=True,null=True)
-    productiondate = models.DateField(blank=True,null=True)
-    batch = models.CharField(max_length=36,blank=True,null=True)
-    
-    dynamic_attr = models.TextField(blank=True,null=True)
-    
-    remark = models.TextField(blank=True,null=True)
     joined = models.DateTimeField(_('joined'),auto_now_add=True)
     updated = models.DateTimeField(_('updated'),auto_now=True)
     deleted = models.DateTimeField(_('deleted'),blank=True,null=True)
