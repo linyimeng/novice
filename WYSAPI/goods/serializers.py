@@ -42,27 +42,27 @@ class GoodsCreateUpdateSerializer(serializers.ModelSerializer):
                 'pk',
                 'customid',
                 'type',
-                'sav'
+                'gsav'
                 )
     def validate_customid(self,value):
         if value == '':
             value = None
         return value
-    def validate_sav(self,value):
+    def validate_gsav(self,value):
         try:
             sav = loads(value)
         except ValueError:
             raise serializers.ValidationError("不是合法的json数据")
         self.valid_json(sav)
         return value
-    def valid_json(self,sav):
-        keys = sav.keys()
+    def valid_json(self,gsav):
+        keys = gsav.keys()
         attrs = TypeAttr.objects.filter(type='ss')
         for attr in attrs:
             if attr.keyname not in keys:
                 raise serializers.ValidationError('''数据非法，系统定义属性不能为空,当前系统自定义可调用相关接口查看，
                 具体调用方法请查看接口文档''')
-        name = sav.get('name')
+        name = gsav.get('name')
         try:
             Goods.objects.get(sav__name=name)
         except ObjectDoesNotExist:
@@ -70,15 +70,15 @@ class GoodsCreateUpdateSerializer(serializers.ModelSerializer):
         raise serializers.ValidationError('药品名称重复')
 
 class GoodsListSerializer(serializers.ModelSerializer):
-    sav = serializers.SerializerMethodField()
+    gsav = serializers.SerializerMethodField()
     class Meta:
         model = Goods
         fields=(
                 'pk',
                 'customid',
                 'type',
-                'sav'
+                'gsav'
                 )
     def get_sav(self,obj):
-        sav = obj.sav
-        return sav
+        gsav = obj.gsav
+        return gsav

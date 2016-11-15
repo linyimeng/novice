@@ -15,8 +15,7 @@ class Type(models.Model):
         return self.name
 
 class Goods(models.Model):
-    customid = models.CharField(max_length=30,unique=True,blank=True,null=True)
-    sav = JSONField(default={},decode_kwargs={},encode_kwargs={},db_index=False,db_index_options={})
+    gsav = JSONField()
 #     name = models.CharField(max_length=120)
 #     manufacturer = models.CharField(max_length=226)
 #     specification= models.CharField(max_length=30,blank=True,null=True)
@@ -29,12 +28,14 @@ class Goods(models.Model):
 #     static_attr = models.TextField(blank=True,null=True)
 #     #dynamic_attr = models.TextField(blank=True,null=True)
 #     remark = models.TextField(blank=True,null=True)
-    user = models.ForeignKey(User,blank=True,null=True)
+    creator = models.ForeignKey(User,blank=True,null=True)
     lastmodifyer = models.ForeignKey(User,blank=True,null=True,related_name='lastmodifyer')
     joined = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     deleted = models.DateTimeField(_('deleted'),blank=True,null=True)
     
+    def __str__(self):
+        return str(self.gsav.get('name','无名称'))
     def save(self,*args,**kwargs):
         self.sav = json.loads(self.sav)
         super(Goods,self).save(*args,**kwargs)
