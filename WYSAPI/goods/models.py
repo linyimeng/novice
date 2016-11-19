@@ -37,7 +37,7 @@ class Goods(models.Model):
     def __str__(self):
         return str(self.gsav.get('name','无名称'))
     def save(self,*args,**kwargs):
-        self.sav = json.loads(self.sav)
+        self.gsav = json.loads(self.gsav)
         super(Goods,self).save(*args,**kwargs)
      
 
