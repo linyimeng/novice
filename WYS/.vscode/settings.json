@@ -1,3 +1,6 @@
 {
-    "typescript.tsdk": "./node_modules/typescript/lib"
+    "typescript.tsdk": "./node_modules/typescript/lib",
+    "editor.fontFamily":"WenQuanYi Micro Hei Mono",
+    "editor.fontSize":14,
+    "editor.wrappingColumn": 80
 }

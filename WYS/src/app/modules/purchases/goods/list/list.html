@@ -15,12 +15,12 @@
         <tbody>
             <tr *ngFor="let goods of goodss">
                 <th><input name="radiogroup" type="checkbox"></th>
-                <td routerLink="/purchases/goods/{{goods.pk}}">{{goods.sav.name}}</td>
-                <td>{{goods.sav.specification}}</td>
-                <td>{{goods.sav.unit}}</td>
-                <td>{{goods.sav.barcode}}</td>
-                <td>{{goods.sav.manufacturer}}</td>
-                <td>{{goods.sav.saleprice}}</td>
+                <td routerLink="/purchases/goods/{{goods.pk}}">{{goods.gsav.name}}</td>
+                <td>{{goods.gsav.specification}}</td>
+                <td>{{goods.gsav.unit}}</td>
+                <td>{{goods.gsav.barcode}}</td>
+                <td>{{goods.gsav.manufacturer}}</td>
+                <td>{{goods.gsav.saleprice}}</td>
             </tr>
         </tbody>
     </table>

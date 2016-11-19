@@ -11,7 +11,6 @@
                     <label for="name">商品类别：</label>
                     <div class="group">
                         <goodstypeSelect [inputpk]='1' (outputpk)="setgoodstype($event)"></goodstypeSelect>
-                        <input type="hidden" ngModel name="type">
                     </div>
                 </div>
                 <div>	
@@ -54,19 +53,21 @@
                 <div>
                     <label for="salesprice">零售价：</label>	
                     <div class="group">
-                        <input type="text" ngModel name="salesprice" required>
+                        <input type="text" ngModel name="saleprice" required>
                     </div>
                 </div>
                 <span class="detail">备注：</span>
                 <textarea ngModel name="remark" id="" cols="30" rows="3"></textarea>
             </div>
-            <div class="right" ngModelGroup="static_attr">
-                <div *ngFor="let attr of static_attrs">
+            <div class="right">
+                <div *ngFor="let attr of other_attrs">
                     <label for="price">{{attr.name}}：</label>	
                     <div class="group">
-                        <input type="text" ngModel name="{{attr.logicname}}">
+                        <input type="text" ngModel name="{{attr.keyname}}">
                     </div>
                 </div>
+                <input type="hidden" ngModel name="is_active">
+                <input type="hidden" ngModel name="customid">
             </div>
         </div>
         <div class="order-bottom">

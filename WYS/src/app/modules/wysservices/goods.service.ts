@@ -20,7 +20,7 @@ export class GoodsService extends BaseService {
                         .map(this.extractData)
                         .catch(this.httpError);
     }
-
+    
     public search(keyword:string) {
         let url = this.get_requesr_url('/api/goods/search.json?search=') + keyword;
         return this.http.get(url,this.get_auth_header())
