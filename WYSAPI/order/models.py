@@ -4,6 +4,7 @@ from goods.models import Goods
 from BP.models import Company,Personal
 from django.utils.translation import ugettext_lazy as _
 from django_pgjsonb import JSONField
+import json
 class Type(models.Model):
     IN = 'I'
     OUT= 'O'
@@ -51,6 +52,11 @@ class Detail(models.Model):
     
     def __str__(self):
         return self.goods.name
+    
+    def save(self,*args,**kwargs):
+        self.gsav = json.loads(self.gsav)
+        self.gdav = json.loads(self.gdav)
+        super(Detail,self).save(*args,**kwargs)
     
     
     

@@ -4,7 +4,14 @@ Created on 2016-10-29
 '''
 from rest_framework.views import APIView
 from rest_framework.generics import ListAPIView,RetrieveAPIView
-from order.serializers import OrderSerializer,DetailSerializer,TypeSerializer,OrderListSerializer,OrderRetrieveSerializer
+from order.serializers import (
+                                OrderSerializer,DetailSerializer,
+                                TypeSerializer,
+                                OrderListSerializer,
+                                OrderRetrieveSerializer,
+                                DetailRetrieveSerializer,
+                                OrderGoodsInOrOutSerializer
+                               )
 from order.models import Type,Order,Detail
 from django.db import transaction
 from rest_framework.response import Response
@@ -17,6 +24,9 @@ def api_root(request,format=None):
     return Response({
         '订单类型列表按(IO)查询':reverse('type-list',request=request,args=('i',),format=format),
         '创建订单':reverse('order-create',request=request,format=format),
+        '根据订单号得到订单详情':reverse('order-detail',request=request,args=('I11479651772605',),format=format),
+        '入出库订单列表':reverse('order-list-io',request=request,args=('i',),format=format),
+        '入出库明细':reverse('order-goods-list',request=request,args=('i',),format=format),
     })
 
 class TypeListAPIView(ListAPIView):
@@ -86,8 +96,11 @@ class OrderCreateAPIView(APIView):
         return main
     
     
-#订单相关报表
+#订单查询
 class OrderIOListAPIView(ListAPIView):
+    '''
+    入出库订单查询列表
+    '''
     serializer_class = OrderListSerializer
     def get_queryset(self,*args,**kwargs):
         io = self.kwargs['io']
@@ -96,12 +109,18 @@ class OrderIOListAPIView(ListAPIView):
         return queryset_list
     
 class OrderDetailRetrieveAPIView(RetrieveAPIView):
+    '''
+    订单详情，根据单号提取
+    '''
     queryset = Order.objects.all()
     serializer_class = OrderRetrieveSerializer
     lookup_field = 'ordercode'
         
 class OrderGoodsInOrOutListAPIView(ListAPIView):
-    serializer_class = DetailSerializer
+    '''
+    入出库明细
+    '''
+    serializer_class = OrderGoodsInOrOutSerializer
     def get_queryset(self,*args,**kwargs):
         io = self.kwargs['io']
         io = str.upper(io)

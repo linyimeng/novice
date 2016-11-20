@@ -8,7 +8,7 @@ class TypeAdmin(admin.ModelAdmin):
     list_display = ('__str__','name','superiors','updated','joined')
     
 class TypeAttrAdmin(admin.ModelAdmin):
-    list_display = ('__str__','goodstype','type')
+    list_display = ('__str__','keyname','goodstype','type')
 admin.site.register(Goods,GoodsAdmin)
 admin.site.register(Type,TypeAdmin)
 admin.site.register(TypeAttr,TypeAttrAdmin)
