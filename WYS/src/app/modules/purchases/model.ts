@@ -1,16 +1,24 @@
+export class Gdav {
+    constructor(
+        public batch,
+        public productiondate,
+        public validity,
+        public remark
+    ){}
+}
+
 export class OrderDetail {
     constructor(
         public order:string,
         public goods:number,
-        public validity:string,
-        public productiondate:string,
-        public batch:string,
         public quantity:number,
         public price:number,
-        public dynamic_attr:string,
-        public remark:string
+        public gdav:string,
+        public gsav:string
     ){}
 }
+
+
 
 export class Order {
     constructor(

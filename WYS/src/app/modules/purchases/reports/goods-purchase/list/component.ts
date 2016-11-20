@@ -10,6 +10,7 @@ import { OrderService } from '../../../../wysservices/order.service';
 export class GoodsPurchaseListComponent implements OnInit{
 
     ordergoodss:any;
+    filtered_data:any;
 
     constructor(
         private _orderService:OrderService
@@ -19,9 +20,21 @@ export class GoodsPurchaseListComponent implements OnInit{
         this._orderService.get_ordergoods_list('i').subscribe(
             ordergoodss=>{
                 this.ordergoodss = ordergoodss;
+                this.filtered_data = ordergoodss;
             },
             error=>alert(error)
         )
     }
+
+    setsupplierPk(pk) {
+        this.filtered_data = this.ordergoodss.filter(item=>item.company==pk);
+    }
+
+    filter_goodsname(value) {
+        this.filtered_data = this.ordergoodss.filter(item=>
+            item.gsav.name.indexOf(value)!=-1);
+    }
+
+    
 
 }
