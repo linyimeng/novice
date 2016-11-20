@@ -1,7 +1,7 @@
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.generics import RetrieveUpdateDestroyAPIView,ListAPIView,CreateAPIView,ListCreateAPIView
 from goods.models import Type,TypeAttr,Goods
-from goods.serializers import TypeSerializer,TypeAttrSerializer,GoodsCreateUpdateSerializer,GoodsListSerializer
+from goods.serializers import TypeSerializer,TypeAttrSerializer,GoodsCreateSerializer,GoodsUpdateSerializer,GoodsListSerializer
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
 from rest_framework.decorators import api_view
@@ -55,7 +55,7 @@ class GoodsListCreateAPIView(ListCreateAPIView):
     queryset = Goods.objects.filter(gsav__is_active=True)
     def get_serializer_class(self):
         if self.request.method == 'POST':
-            self.serializer_class = GoodsCreateUpdateSerializer
+            self.serializer_class = GoodsCreateSerializer
         else:
             self.serializer_class = GoodsListSerializer
         return self.serializer_class
@@ -63,10 +63,12 @@ class GoodsListCreateAPIView(ListCreateAPIView):
 class GoodsRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
     queryset = Goods.objects.filter(gsav__is_active=True)
     def get_serializer_class(self):
-        if self.request.method == 'PUT' or 'PETCH':
-            self.serializer_class = GoodsCreateUpdateSerializer
-        else:
+        print(self.request.method)
+        if self.request.method == 'GET':
             self.serializer_class = GoodsListSerializer
+        else:
+            self.serializer_class = GoodsUpdateSerializer
+        print(self.serializer_class)
         return self.serializer_class
 
 # class GoodsSearchListAPIView(ListAPIView):

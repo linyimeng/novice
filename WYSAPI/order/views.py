@@ -9,6 +9,15 @@ from order.models import Type,Order,Detail
 from django.db import transaction
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.decorators import api_view
+from rest_framework.reverse import reverse
+
+@api_view(('GET',))
+def api_root(request,format=None):
+    return Response({
+        '订单类型列表按(IO)查询':reverse('type-list',request=request,args=('i',),format=format),
+        '创建订单':reverse('order-create',request=request,format=format),
+    })
 
 class TypeListAPIView(ListAPIView):
     '''
@@ -21,15 +30,10 @@ class TypeListAPIView(ListAPIView):
         queryset_list = Type.objects.filter(io=io)
         return queryset_list
     
-class OrderGoodsInOrOutListAPIView(ListAPIView):
-    serializer_class = DetailSerializer
-    def get_queryset(self,*args,**kwargs):
-        io = self.kwargs['io']
-        io = str.upper(io)
-        queryset_list = Detail.objects.filter(order__type__io=io).order_by('order')
-        return queryset_list
 class OrderCreateAPIView(APIView):
     '''
+    订单创建
+    json数据格式如下：
     {
         "order": {
             "ordercode": "",
@@ -40,14 +44,11 @@ class OrderCreateAPIView(APIView):
         },
         "detail": [{
             "order": "",
-            "productiondate":"",
-            "validity":"",
-            "batch":"",
             "goods"null:,
             "quantity": null,
             "price": null,
-            "dynamic_attr": "",
-            "remark": ""
+            "gsav": "",
+            "gdav":""
         }]
     }
     '''
@@ -84,6 +85,8 @@ class OrderCreateAPIView(APIView):
         main['totalprice'] = total_price
         return main
     
+    
+#订单相关报表
 class OrderIOListAPIView(ListAPIView):
     serializer_class = OrderListSerializer
     def get_queryset(self,*args,**kwargs):
@@ -97,6 +100,13 @@ class OrderDetailRetrieveAPIView(RetrieveAPIView):
     serializer_class = OrderRetrieveSerializer
     lookup_field = 'ordercode'
         
+class OrderGoodsInOrOutListAPIView(ListAPIView):
+    serializer_class = DetailSerializer
+    def get_queryset(self,*args,**kwargs):
+        io = self.kwargs['io']
+        io = str.upper(io)
+        queryset_list = Detail.objects.filter(order__type__io=io).order_by('order')
+        return queryset_list
         
         
 

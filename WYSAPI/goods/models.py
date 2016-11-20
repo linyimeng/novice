@@ -16,18 +16,7 @@ class Type(models.Model):
 
 class Goods(models.Model):
     gsav = JSONField()
-#     name = models.CharField(max_length=120)
-#     manufacturer = models.CharField(max_length=226)
-#     specification= models.CharField(max_length=30,blank=True,null=True)
-#     unit = models.CharField(max_length=10,blank=True,null=True)
-#     barcode = models.CharField(max_length=30,blank=True,null=True)
-#     salesprice = models.DecimalField(max_digits=12,decimal_places=4)
-#     costprice = models.DecimalField(max_digits=12,decimal_places=4)
     type = models.ForeignKey(Type)
-#     is_active = models.BooleanField(default=True)
-#     static_attr = models.TextField(blank=True,null=True)
-#     #dynamic_attr = models.TextField(blank=True,null=True)
-#     remark = models.TextField(blank=True,null=True)
     creator = models.ForeignKey(User,blank=True,null=True)
     lastmodifyer = models.ForeignKey(User,blank=True,null=True,related_name='lastmodifyer')
     joined = models.DateTimeField(auto_now_add=True)

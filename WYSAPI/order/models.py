@@ -39,6 +39,9 @@ class Detail(models.Model):
     order = models.ForeignKey(Order)
     goods = models.ForeignKey(Goods)
     
+    quantity = models.DecimalField(max_digits=10,decimal_places=2)
+    price = models.DecimalField(max_digits=18,decimal_places=8)
+    
     gdav = JSONField()
     gsav = JSONField()
     

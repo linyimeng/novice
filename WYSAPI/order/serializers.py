@@ -12,13 +12,9 @@ class TypeSerializer(ModelSerializer):
         fields = ('name','io')
         
 class DetailSerializer(ModelSerializer):
-    name = SerializerMethodField()
-    manufacturer = SerializerMethodField()
-    specification = SerializerMethodField()
-    company = SerializerMethodField()
     class Meta:
         model = Detail
-        fields = ('order','goods','joined')
+        fields = ('order','goods','gdav','gsav','quantity','price')
 
 class OrderSerializer(ModelSerializer):
     class Meta:

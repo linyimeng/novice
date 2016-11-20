@@ -35,7 +35,7 @@ class TypeAttrSerializer(serializers.ModelSerializer):
         model = TypeAttr
         fields= ('goodstype','keyname','name','type')
         
-class GoodsCreateUpdateSerializer(serializers.ModelSerializer):
+class GoodsCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Goods
         fields=(
@@ -64,7 +64,23 @@ class GoodsCreateUpdateSerializer(serializers.ModelSerializer):
         except ObjectDoesNotExist:
             return True
         raise serializers.ValidationError('药品名称重复')
-
+    
+class GoodsUpdateSerializer(GoodsCreateSerializer):
+    def valid_json(self,gsav):
+        keys = gsav.keys()
+        attrs = TypeAttr.objects.filter(type='ss')
+        for attr in attrs:
+            if attr.keyname not in keys:
+                print(attr.keyname)
+                raise serializers.ValidationError('''数据非法，系统定义属性不能为空,当前系统自定义可调用相关接口查看，
+                具体调用方法请查看接口文档''')
+    def validate_gsav(self,value):
+        try:
+            gsav = loads(value)
+        except ValueError:
+            raise serializers.ValidationError("不是合法的json数据")
+        self.valid_json(gsav)
+        return value
 class GoodsListSerializer(serializers.ModelSerializer):
     gsav = serializers.SerializerMethodField()
     class Meta:
