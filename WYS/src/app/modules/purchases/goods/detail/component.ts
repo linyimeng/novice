@@ -3,16 +3,48 @@ import { Router,ActivatedRoute } from '@angular/router';
 import { FormArray }   from '@angular/forms';
 import { GoodsService } from '../../../wysservices/goods.service';
 import { TypeattrService } from '../../../wysservices/typeattr.service';
-import { Goods } from '../model';
+
+class Gsav {
+    constructor(
+        public name,
+        public specification,
+        public unit,
+        public barcode,
+        public manufacturer,
+        public saleprice,
+        public is_active,
+        public customid,
+        public approvalnumber,
+        public origin,
+        public percent
+    ){ }
+}
+
+class Detail {
+    constructor(
+        public pk,
+        public type,
+        public gsav:Gsav
+    ){}
+}
+
+class Save_goods {
+    constructor(
+        public pk,
+        public type,
+        public gsav:string
+    ){}
+}
 @Component({
    selector: 'goods-detail',
    templateUrl: 'detail.html'
 })
 
 export class GoodsDetailComponent implements OnInit {
-    goods:Goods = new Goods(null,null,null,null,null,null,null,null,null,null,null);
-    static_attr:any;
-    static_attrs:any;
+    gsav:Gsav = new Gsav(null,null,null,null,null,null,null,null,null,null,null);
+    goods:Detail = new Detail(null,null,this.gsav);
+    other_attr:any;
+    other_attrs:any;
     attravlues:any;
     constructor(
         private _goodsService:GoodsService,
@@ -27,8 +59,10 @@ export class GoodsDetailComponent implements OnInit {
                 let pk=params['pk'];
                 this._goodsService.retrieve(pk).subscribe(
                     goods=>{
-                        this.static_attr = JSON.parse(goods.static_attr);
-                        this.goods = goods;
+                        this.other_attr = goods.gsav;
+                        this.goods.gsav = goods.gsav;
+                        this.goods.pk = goods.pk;
+                        this.goods.type = goods.type;
                         this.get_static_attr_list();
                     },
                     error=>alert(error)
@@ -38,10 +72,11 @@ export class GoodsDetailComponent implements OnInit {
     }
 
     get_static_attr_list(){
-        this._typeattrService.get_attr_list('static',this.goods.type).subscribe(
+        this._typeattrService.get_attr_list('s',this.goods.type).subscribe(
             attr_list=>{
-                this.static_attrs = attr_list;
+                this.other_attrs = attr_list.filter(attr=>attr.type=='s');
                 this.get_attr_and_value();
+                console.log(this.attravlues);
             },
             error=>alert('获取属性列表失败\n'+error)
         );
@@ -50,23 +85,26 @@ export class GoodsDetailComponent implements OnInit {
     /** 整理json数据至attrs[0].value格式 */
     get_attr_and_value() {
         let attrs = new Array();
-        for(let a in this.static_attrs){
-            let key = this.static_attrs[a].logicname;
+        console.log(this.other_attr);
+        console.log(this.other_attrs);
+        for(let a in this.other_attrs){
+            let key = this.other_attrs[a].keyname;
             let attr = new Array();
-            attr['value'] = this.static_attr[key];
-            attr['name'] = this.static_attrs[a].name;
-            attr['logicname'] = this.static_attrs[a].logicname;
+            attr['value'] = this.other_attr[key];
+            attr['name'] = this.other_attrs[a].name;
+            attr['keyname'] = this.other_attrs[a].keyname;
             attrs[a] = attr;
         }
         this.attravlues = attrs;
     }
     
     save_goods(goodsForm) {
-        let a = JSON.stringify(goodsForm.value.static_attr);
-        this.goods.static_attr = a;
-        let pk = this.goods.pk;
-        let json = JSON.stringify(this.goods);
-        this._goodsService.update(pk,json).subscribe(
+        /** 商品是否可用 */
+        goodsForm.value.is_active = true;
+        let save_goods = new Save_goods(this.goods.pk,this.goods.type,JSON.stringify(goodsForm.value));
+        let json = JSON.stringify(save_goods);
+        console.log(json);
+        this._goodsService.update(this.goods.pk,json).subscribe(
             goods=>{
                 this.router.navigate(['/purchases/goods/list']);
             },

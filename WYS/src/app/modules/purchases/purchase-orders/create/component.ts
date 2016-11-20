@@ -94,12 +94,13 @@ export class PurchaseOrdersCreateComponent implements OnInit{
       let save_order = new SaveOrder(this.order,orderdetail);
       let json = JSON.stringify(save_order);
       console.log(json);
+      /*
       this._orderService.create(json).subscribe(
         order=>{
           this.router.navigate(['/purchases/purchaseorder/list']);
         },
         error=>alert(error)
-      )
+      ); */
   }
 
   checkcompany() {
@@ -144,7 +145,7 @@ export class PurchaseOrdersCreateComponent implements OnInit{
     for(let i of goodss) {
       let item=new Item(null,null);
       item.id = i.pk;
-      item.text = i.name;
+      item.text = i.gsav.name;
       items[a] = item;
       a = a+1;
     }
@@ -173,9 +174,9 @@ export class PurchaseOrdersCreateComponent implements OnInit{
     let index = this.index(detail);
     let goods = this.goodss.find(goods => goods.pk === value.id);
     this.details[index].gpk = goods.pk;
-    this.details[index].specification = goods.specification;
-    this.details[index].unit = goods.unit;
-    this.details[index].manufacturer = goods.manufacturer;
+    this.details[index].specification = goods.gsav.specification;
+    this.details[index].unit = goods.gsav.unit;
+    this.details[index].manufacturer = goods.gsav.manufacturer;
     console.log(goods);
     console.log(value.id);
     console.log(this.details[index]);
