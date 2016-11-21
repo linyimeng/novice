@@ -3,7 +3,7 @@ import { Component,Input } from '@angular/core';
 @Component({
    
    selector: 'warehouse-loss-create',
-   templateUrl: 'warehouse-loss-create.component.html'
+   templateUrl: 'create.html'
 })
 export class WarehouseLossCreateComponent{
     

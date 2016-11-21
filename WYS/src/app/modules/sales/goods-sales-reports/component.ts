@@ -10,7 +10,5 @@ export class GoodsSalesReportsRightComponent {
     constructor(
         private router:Router
     ) {}
-
-   
 }
 

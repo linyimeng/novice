@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 
 @Component({
    selector: 'goods-list-reports',
-   templateUrl: 'warehouse-loss-right.html'
+   templateUrl: 'goods-last-reports.html'
 })
 export class WarehouseGoodsReportsRightComponent {
 

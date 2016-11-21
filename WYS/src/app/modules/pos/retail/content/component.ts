@@ -92,6 +92,10 @@ export class RetailContentComponent implements OnInit{
     chose_goods(detail,value) {
         let index = this.get_index(detail);
         let goods = this.goodss.find(goods=>goods.gpk==value);
+        if(Number(goods.inventory)<=0) {
+            alert('商品已无库存，禁止销售');
+            return false;
+        }
         this.details[index].gpk = goods.gpk;
         this.details[index].inventory = goods.inventory;
         this.details[index].goodsname = goods.gsav.name;
@@ -107,6 +111,11 @@ export class RetailContentComponent implements OnInit{
     /** 设置单个商品数量 */
     set_quantity(detail,value){
         let index = this.get_index(detail);
+        let goods = this.goodss.find(goods=>goods.gpk==this.details[index].gpk);
+        if(Number(value)>Number(goods.inventory)){
+            alert('出售数量不得大于库存数');
+            return false;
+        }
         this.details[index].quantity = value;
         console.log(this.details[index].quantity);
         this.set_total();

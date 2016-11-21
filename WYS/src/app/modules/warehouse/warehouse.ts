@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 
 @Component({
-    
     selector:'warehouse',
     template:`
    	<div class="main">

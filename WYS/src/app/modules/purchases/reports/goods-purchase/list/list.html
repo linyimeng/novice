@@ -7,15 +7,15 @@
     <div class="order-form">
         <div class="left">
             <div>
-                <label for="startdate">开始日期：</label>
+                <label for="startdate">开始时间：</label>
                 <div class="group">
-                    <input type="text" id="startdate" name="startdate">
+                    <input type="text" id="startdate" name="startdate" #startdate  (keyup.enter)="filter_date(startdate.value,enddate.value)">
                 </div>
             </div>
             <div>
-                <label for="enddate">结束日期：</label>
+                <label for="enddate">结束时间：</label>
                 <div class="group">
-                    <input type="text" id="enddate" name="enddate">
+                    <input type="text" id="enddate" name="enddate" #enddate (keyup.enter)="filter_date(startdate.value,enddate.value)">
                 </div>
             </div>
         </div>
@@ -73,7 +73,19 @@
     </div>
 
     <div class="order-bottom">				
-        
+        <input>
+        <table>
+            <tbody>
+                <tr>
+                    <td><strong>总数量：{{totalquantity}}</strong></td>
+                    <td></td>
+                </tr>
+                <tr class="last">
+                    <td><strong>合计金额：{{totalprice | currency:'CNY':true:'1.3-3'}}</strong></td>
+                    <td><span></span></td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </form>
 </div>

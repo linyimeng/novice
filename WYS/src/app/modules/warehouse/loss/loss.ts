@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 @Component({
    
    selector: 'warehouse-loss-right-title',
-   templateUrl: 'warehouse-loss-right-title.component.html'
+   templateUrl: 'loss.html'
 })
 export class WarehouseLossRightComponent {
     

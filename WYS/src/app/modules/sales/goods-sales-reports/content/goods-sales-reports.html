@@ -1,38 +1,31 @@
 <!-- 商品销售报表 -->
-<form action="#" class="create purchase-order">
+<form class="create purchase-order">
     <div class="order-title">
         <strong>商品销售报表</strong>
     </div>
     <div class="order-form">
-        <!--
         <div class="left">
             <div>
                 <label for="startdate">开始时间：</label>
                 <div class="group">
-                    <input type="text" id="startdate" name="startdate">
+                    <input type="text" id="startdate" name="startdate" #startdate  (keyup.enter)="filter_date(startdate.value,enddate.value)">
                 </div>
             </div>
-            <div>
-                <label for="goodsname">商品名：</label>
-                <div class="group">
-                    <input type="text" id="goodsname" name="goodsname">
-
-                </div>
-            </div>
-
-            
-            
-            
-        </div>
-        <div class="right">					
             <div>
                 <label for="enddate">结束时间：</label>
                 <div class="group">
-                    <input type="text" id="enddate" name="enddate">
+                    <input type="text" id="enddate" name="enddate" #enddate (keyup.enter)="filter_date(startdate.value,enddate.value)">
                 </div>
             </div>
         </div>
-        -->
+        <div class="right">					
+            <div>
+                <label for="goodsname">商品名：</label>
+                <div class="group">
+                    <input type="text" id="goodsname" name="goodsname" #goodsname (keyup.enter)="filter_goodsname(goodsname.value)">
+                </div>
+            </div>
+        </div>
     </div>
     <div class="goods-list">
         <table>
@@ -52,25 +45,35 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let order of ordergoodss">
+                <tr *ngFor="let order of filtered_data">
                     <td>{{order.order}}</td>
                     <td>{{order.joined | date:"yyyy-MM-dd hh:mm:ss"}}</td>
-                    <td>{{order.name}}</td>
-                    <td>{{order.specification}}</td>
-                    <td>{{order.manufacturer}}</td>
-                    <td>{{order.batch}}</td>
-                    <td>{{order.validity}}</td>
-                    <td>{{order.productiondate}}</td>
+                    <td>{{order.gsav.name}}</td>
+                    <td>{{order.gsav.specification}}</td>
+                    <td>{{order.gsav.manufacturer}}</td>
+                    <td>{{order.gdav.batch}}</td>
+                    <td>{{order.gdav.validity}}</td>
+                    <td>{{order.gdav.productiondate}}</td>
                     <td>{{order.quantity}}</td>
-                    <td>{{order.price}}</td>
+                    <td>{{order.price | currency:'CNY':true:'1.3-3'}}</td>
                     <td>{{order.quantity * order.price | currency:'CNY':true:'1.3-3'}}</td>						
                 </tr>
-                
             </tbody>
         </table>
     </div>
-
-    <div class="order-bottom">				
-        
+    <div class="order-bottom">
+        <input>
+        <table>
+            <tbody>
+                <tr>
+                    <td><strong>总数量：{{totalquantity}}</strong></td>
+                    <td></td>
+                </tr>
+                <tr class="last">
+                    <td><strong>合计金额：{{totalprice}}</strong></td>
+                    <td><span></span></td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </form>

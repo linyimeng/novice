@@ -10,7 +10,7 @@ import { PersonnelModule } from './modules/personnel/module';
 import { PurchasesModule } from './modules/purchases/module';
 import { SalesModule } from './modules/sales/module';
 import { PosModule } from './modules/pos/module';
-import { WarehouseModule } from './modules/warehouse/warehouse.module';
+import { WarehouseModule } from './modules/warehouse/module';
 import { SettingModule } from './modules/setting/setting.module';
 
 

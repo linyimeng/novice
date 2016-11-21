@@ -3,7 +3,7 @@ import { Component} from '@angular/core';
 @Component({
    
    selector: 'warehouse-loss-list',
-   templateUrl: 'warehouse-loss-list.component.html'
+   templateUrl: 'list.html'
 })
 export class WarehouseLossListComponent{
 
