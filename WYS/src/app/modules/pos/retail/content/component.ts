@@ -12,20 +12,15 @@ class SaleOrder{
         public smallchange:number
     ){}
 }
-class Item{
-    constructor(
-        public id,
-        public text
-    ){}
-}
 
 class Detail{
   constructor(
     public gpk,
+    public goodsname,
     public specification,
     public quantity,
     public price,
-    public batch_number,
+    public batch,
     public validity,
     public production_date,
     public unit,
@@ -39,6 +34,15 @@ class SaveOrder {
     public detail
   ){}
 }
+
+
+/** 商品input下拉 */
+class Item {
+    constructor(
+        public value:string,
+        public name:string
+    ){}
+}
 @Component({
    selector: 'pos',
    templateUrl: 'retail.html',
@@ -50,6 +54,10 @@ export class RetailContentComponent implements OnInit{
     goodss:any;
     details:any = new Array;
     isshow:boolean;
+
+    /** input商品下拉 */
+    items = new Array;
+
     constructor(
         private _goodsService:GoodsService,
         private _orderService:OrderService
@@ -59,65 +67,103 @@ export class RetailContentComponent implements OnInit{
         this._goodsService.get_wms_goods().subscribe(
             goodss=>{
                 this.goodss=goodss;
-                this.set_items(goodss);
+                this.set_items();
+                console.log('goodss');
+                console.log(this.goodss);
             },
         );
     }
 
-    set_items(goodss:any) {
-        let items:any = new Array;
-        let a = 0;
-        for(let i of goodss) {
-            let item=new Item(null,null);
-            item.id = i.goods;
-            item.text = i.name;
-            items[a] = item;
-            a = a+1;
+    /** 设置商品下拉列表 */
+    set_items(){
+        for(let goods of this.goodss){
+            let item:Item = new Item(goods.gpk,goods.gsav.name);
+            this.items.push(item);
         }
-        console.log(items);
-        this.items = items;
+        console.log(this.items);
     }
 
-    public items:any;
-
-    private value:any;
-
-    public selected(value:any,detail):void{
-        let index = this.index(detail);
-        let goods = this.goodss.find(goods => goods.goods === value.id);
-        this.details[index].gpk = goods.goods;
-        this.details[index].specification = goods.specification;
-        this.details[index].unit = goods.unit;
-        this.details[index].manufacturer = goods.manufacturer;
-        this.details[index].price = goods.salesprice;
-        this.details[index].quantity = 1;
-        this.details[index].batch = goods.batch;
-        this.details[index].validity = goods.validity;
-        this.details[index].inventory = goods.inventory;
-        this.set_total();
-        console.log(value);
-    }
-
-    set_total(){
-        let totalprice = 0;
-        let totalquantity = 0;
-        for(let i of this.details){
-            totalprice = totalprice + Number(i.price);
-            totalquantity = totalquantity + Number(i.quantity);
-        }
-        this.order.totalprice = totalprice;
-        this.order.totalquantity = Number(totalquantity);
-        console.log(totalprice);
-    }
-
-    init_details(){
-        let detail = new Detail(null,null,null,null,null,null,null,null,null,null);
+    /** 添加一个空行 */
+    init_details() {
+        let detail = new Detail(null,null,null,null,null,null,null,null,null,null,null);
         this.details.push(detail);
-        console.log(this.details);
+    }
+
+    chose_goods(detail,value) {
+        let index = this.get_index(detail);
+        let goods = this.goodss.find(goods=>goods.gpk==value);
+        this.details[index].gpk = goods.gpk;
+        this.details[index].inventory = goods.inventory;
+        this.details[index].goodsname = goods.gsav.name;
+        this.details[index].unit = goods.gsav.unit;
+        this.details[index].specification = goods.gsav.specification;
+        this.details[index].manufacturer = goods.gsav.manufacturer;
+        this.details[index].batch = goods.gdav.batch;
+        this.details[index].validity = goods.gdav.validity;
+        this.details[index].price = goods.gsav.saleprice;
+        this.details[index].quantity = 1;
+        this.set_total();
+    }
+    /** 设置单个商品数量 */
+    set_quantity(detail,value){
+        let index = this.get_index(detail);
+        this.details[index].quantity = value;
+        console.log(this.details[index].quantity);
+        this.set_total();
+    }
+    /** 设置单个商品价格 */
+    set_price(detail,value) {
+        let index = this.get_index(detail);
+        this.details[index].price = value;
+        this.set_total();
+    }
+
+    /** 计算总数量和总价 */
+    set_total(){
+        let total_price = 0;
+        let total_quantity = 0;
+        for(let detail of this.details) {
+            total_quantity = total_quantity + Number(detail.quantity);total_price = total_price + (Number(detail.price) * Number(detail.quantity));
+        }
+        this.order.totalprice = total_price;
+        this.order.totalquantity = total_quantity;
+    }
+
+    /** 结帐 */
+    checkout() {
+        /** 订单主体 */
+        let ordercode = this._orderService.get_ordercode('RO');
+        let order:Order = new Order(ordercode,null,null,null,2,null,Number(sessionStorage.getItem('eid')));
+        order.totalprice = Number(this.order.totalprice);
+        order.totalquantity = Number(this.order.totalquantity);
+        /** 订单详情 */
+        let details = new Array;
+        for(let d of this.details) {
+            let detail:OrderDetail = new OrderDetail(null,null,null,null,null,null);
+            let goods = this.goodss.find(goods=>goods.gpk==d.gpk);
+            detail.gdav = JSON.stringify(goods.gdav);
+            detail.gsav = JSON.stringify(goods.gsav);
+            detail.goods = d.gpk;
+            detail.order = ordercode;
+            detail.price = Number(d.price);
+            detail.quantity = Number(d.quantity);
+            details.push(detail);
+        }
+        let save_order:SaveOrder = new SaveOrder(order,details);
+        let json = JSON.stringify(save_order);
+        console.log(json);
+        this._orderService.create(json).subscribe(
+            order=>{
+                this.isshow = false;
+                this.sub_inventory();
+                this.details = [];
+            },
+            error=>alert(error)
+        );
     }
 
     /** 获取当前元素索引值 */
-    index(current){
+    get_index(current){
         let obj = this.details;
         for (var i = 0;i < obj.length; i++) {
         if (obj[i] == current) {
@@ -125,75 +171,19 @@ export class RetailContentComponent implements OnInit{
         }
         }
     }
-    public removed(value:any,detail):void {
-        let index = this.index(detail);
-        this.details.splice(index,1);
-        console.log('Removed value is: ', value);
-    }
-
-    public typed(value:any):void {
-    console.log('New search input: ', value);
-    }
-
-    public refreshValue(value:any):void {
-    this.value = value;
-    }
-
     show(){
         this.isshow = true;
     }
-
-    checkout() {
-        this.set_total();
-        let order:Order = new Order(null,null,null,null,null,null,null)
-        //生成主体订单
-        order.ordercode = this._orderService.get_ordercode('O');
-        order.type = 2;
-        order.totalprice = Number(this.order.totalprice.toFixed(8));
-        order.totalquantity = Number(this.order.totalquantity.toFixed(2));
-        order.creator = Number(sessionStorage.getItem('eid'));
-        //订单详情
-        let orderdetail = new Array;
-        let i = 0;
-        for(let detail of this.details) {
-            let item:any = new OrderDetail(null,null,null,null,null,null,null,null,null);
-            item.order = order.ordercode;
-            item.goods = Number(detail.gpk);
-            item.quantity = Number(detail.quantity);
-            item.productiondate = detail.productiondate;
-            item.batch = detail.batch;
-            item.validity = detail.validity;
-            item.price = Number(detail.price);
-            orderdetail.push(item);
-        }
-        let save_order = new SaveOrder(order,orderdetail);
-        let json = JSON.stringify(save_order);
-        console.log(json);
-        this._orderService.create(json).subscribe(
-            order=>{
-                console.log(order);
-                this.isshow = false;
-                this.sub_inventory();
-                this.details = [];
-            },
-            error=>alert(error)
-        )
-    }
-
-    set_smallchange(money:number) {
-        let result = money - this.order.totalprice;
-        if(result>0){
-            this.order.smallchange = result;
-        }
+    no_show() {
+        this.isshow = false;
     }
 
     /** 减本地库存 */
     sub_inventory(){
         for(let detail of this.details) {
-            let index = this.goodss.findIndex(goods => goods.goods === detail.gpk);
+            let index = this.goodss.findIndex(goods => goods.gpk === detail.gpk);
             this.goodss[index].inventory = Number(this.goodss[index].inventory) - Number(detail.quantity);
         }
     }
-
 }
 

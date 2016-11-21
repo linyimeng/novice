@@ -27,6 +27,7 @@
             <thead>
                 <tr>
                     <th>检索</th>
+                    <th>品名</th>
                     <th>库存</th>
                     <th>规格</th>
                     <th>生产厂商</th>
@@ -40,24 +41,20 @@
             <tbody>
                 <tr *ngFor="let detail of details">
                     <td>
-                        <ng-select [allowClear]="true"
-                                    [items]="items"
-                                    [disabled]="disabled"
-                                    (data)="refreshValue($event)"
-                                    (selected)="selected($event,detail)"
-                                    (removed)="removed($event,detail)"
-                                    (typed)="typed($event)"
-                                    placeholder="选择添加商品">
-                        </ng-select>
+                        <input type="text" style="width:80px" list="goods"  #goods (keyup.enter)="chose_goods(detail,goods.value)">
+                        <datalist id="goods">
+                            <option *ngFor="let item of items" [value]="item.value">{{item.name}}</option>
+                        </datalist>
                     </td>
+                    <td>{{detail.goodsname}}</td>
                     <td>{{detail.inventory}}</td>
                     <td>{{detail.specification}}</td>
                     <td>{{detail.manufacturer}}</td>
                     <td>{{detail.batch}}</td>
                     <td>{{detail.validity}}</td>
                     <td>{{detail.unit}}</td>
-                    <td>{{detail.quantity}}</td>
-                    <td>{{detail.price}}</td>
+                    <td><input #quantity (keyup)="set_quantity(detail,quantity.value)" [value]="detail.quantity"></td>
+                    <td><input #price (keyup)="set_price(detail,price.value)" [value]="detail.price"></td>
                 </tr>
                 <tr><td (click)="init_details()">添加一个商品</td></tr>
             </tbody>
@@ -75,7 +72,7 @@
 </div>
 
 <div class="model" [style.display]="isshow ? 'block' : 'none'">
-	<div class="mask"></div>
+	<div class="mask" (click)="no_show()"></div>
 	<ul>	
 		<li>
 			<span>总金额：</span>
@@ -94,7 +91,7 @@
 			<input type="text" [value]="order.smallchange" disabled="true">
 		</li>
 		<li class="btn">
-			<div></div>
+            <button class="ok" (click)="no_show()">关闭</button>
 			<button class="ok" (click)="checkout()">结账</button>
 		</li>
 	</ul>

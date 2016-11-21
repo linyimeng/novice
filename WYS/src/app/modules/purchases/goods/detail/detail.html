@@ -16,57 +16,59 @@
                 <div>	
                     <label for="name">名称：</label>
                     <div class="group">
-                    <input type="text" [(ngModel)]="goods.name" name="name" required>
+                    <input type="text" [(ngModel)]="goods.gsav.name" name="name" required>
                     </div>
                 </div>
                 <div>
                     <label for="specification">规格：</label>
                     <div class="group">
-                    <input type="text" [(ngModel)]="goods.specification" name="specification">
+                    <input type="text" [(ngModel)]="goods.gsav.specification" name="specification">
                     </div>
                 </div>
                 <div>
                     <label for="unit">单位：</label>
                     <div class="group">
-                    <input type="text" [(ngModel)]="goods.unit" name="unit">
+                    <input type="text" [(ngModel)]="goods.gsav.unit" name="unit">
                     </div>
                 </div>
                 <div>
                     <label for="barcode">条形码：</label>
                     <div class="group">
-                    <input type="text" [(ngModel)]="goods.barcode" name="barcode">
+                    <input type="text" [(ngModel)]="goods.gsav.barcode" name="barcode">
                     </div>
                 </div>
                 
                 <div>
                     <label for="manufacturer">生产厂家：</label>
                     <div class="group">
-                    <input type="text" [(ngModel)]="goods.manufacturer" name="manufacturer">
+                    <input type="text" [(ngModel)]="goods.gsav.manufacturer" name="manufacturer">
                     </div>
                 </div>
                 <div>
                     <label for="costprice">预成本价：</label>
                     <div class="group">
-                        <input type="text" [(ngModel)]="goods.costprice" name="costprice">
+                        <input type="text" [(ngModel)]="goods.gsav.costprice" name="costprice">
                     </div>
                 </div>
                 <div>
                     <label for="salesprice">零售价：</label>	
                     <div class="group">
-                        <input type="text" [(ngModel)]="goods.salesprice" name="salesprice">
+                        <input type="text" [(ngModel)]="goods.gsav.saleprice" name="saleprice">
                     </div>
                 </div>
                 <span class="detail">备注：</span>
-                <textarea [(ngModel)]="goods.remark" name="remark" cols="30" rows="3"></textarea>
+                <textarea [(ngModel)]="goods.gsav.remark" name="remark" cols="30" rows="3"></textarea>
             </div>
-            <div class="right" ngModelGroup="static_attr">
+            <div class="right">
                 <div *ngFor="let attr of attravlues">
                     <label>{{attr.name}}：</label>
                     <div class="group">
-                        <input type="text" [ngModel]="attr.value" name="{{attr.logicname}}">
+                        <input type="text" [ngModel]="attr.value" name="{{attr.keyname}}">
                     </div>
                 </div>
             </div>
+            <input type="hidden" ngModel name="is_active">
+            <input type="hidden" ngModel name="customid">
         </div>
         <div class="order-bottom">
             <div></div>

@@ -5,36 +5,48 @@ Created on 2016-11-3
 '''
 from rest_framework.serializers import ModelSerializer,SerializerMethodField
 from order.models import Type,Order,Detail
-from goods.serializers import GoodsSerializer
 class TypeSerializer(ModelSerializer):
+    '''
+    订单类型
+    '''
     class Meta:
         model = Type
         fields = ('name','io')
         
 class DetailSerializer(ModelSerializer):
-    name = SerializerMethodField()
-    manufacturer = SerializerMethodField()
-    specification = SerializerMethodField()
+    class Meta:
+        model = Detail
+        fields = ('order','goods','gdav','gsav','quantity','price')
+        
+        
+class DetailRetrieveSerializer(ModelSerializer):
+    gdav = SerializerMethodField()
+    gsav = SerializerMethodField()
+    class Meta:
+        model = Detail
+        fields = ('order','goods','gdav','gsav','quantity','price')
+    def get_gdav(self,obj):
+        gdav = obj.gdav
+        return gdav
+    def get_gsav(self,obj):
+        gsav = obj.gsav
+        return gsav
+
+#报表相关
+class OrderGoodsInOrOutSerializer(DetailRetrieveSerializer):
+    '''入出库明细'''
+    companyname = SerializerMethodField()
     company = SerializerMethodField()
     class Meta:
         model = Detail
-        fields = ('order','goods','name','manufacturer','specification','quantity',
-                  'price','productiondate','validity','batch','dynamic_attr','remark','joined','company')
-        
-    def get_name(self,obj):
-        return obj.goods.name
-
-    
-    def get_specification(self,obj):
-        return obj.goods.specification
-    
-    def get_manufacturer(self,obj):
-        return obj.goods.manufacturer
-    
+        fields = ('order','goods','gdav','gsav','quantity','price','joined','companyname','company')
+    def get_companyname(self,obj):
+        company_name = obj.order.company.name
+        return company_name
     def get_company(self,obj):
-        if obj.order.company:
-            return obj.order.company.name
-        return None
+        return obj.order.company.pk
+        
+        
 class OrderSerializer(ModelSerializer):
     class Meta:
         model = Order
@@ -74,14 +86,7 @@ class OrderListSerializer(ModelSerializer):
     
     def get_creator(self,obj):
         return obj.creator.name
-    
-class DetailRetrieveSerializer(ModelSerializer):
-    goods = GoodsSerializer()
-    class Meta:
-        model = Detail
-        fields = ('order','goods','quantity','productiondate','validity','batch',
-                  'price','dynamic_attr','remark')
-    
+
 class OrderRetrieveSerializer(ModelSerializer):
     company = SerializerMethodField()
     type = SerializerMethodField()
@@ -113,7 +118,6 @@ class OrderRetrieveSerializer(ModelSerializer):
         detail_set = Detail.objects.filter(order__pk=obj.ordercode)
         detail = DetailRetrieveSerializer(detail_set,many=True).data
         return detail
-    
         
         
         
