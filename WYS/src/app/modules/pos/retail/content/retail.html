@@ -27,6 +27,7 @@
             <thead>
                 <tr>
                     <th>检索</th>
+                    <th>品名</th>
                     <th>库存</th>
                     <th>规格</th>
                     <th>生产厂商</th>
@@ -40,16 +41,12 @@
             <tbody>
                 <tr *ngFor="let detail of details">
                     <td>
-                        <ng-select [allowClear]="true"
-                                    [items]="items"
-                                    [disabled]="disabled"
-                                    (data)="refreshValue($event)"
-                                    (selected)="selected($event,detail)"
-                                    (removed)="removed($event,detail)"
-                                    (typed)="typed($event)"
-                                    placeholder="选择添加商品">
-                        </ng-select>
+                        <input type="text" list="goods"  #goods (keyup.enter)="chose_goods(detail,goods.value)">
+                        <datalist id="goods">
+                            <option *ngFor="let item of items" [value]="item.value">{{item.name}}</option>
+                        </datalist>
                     </td>
+                    <td>{{detail.goodsname}}</td>
                     <td>{{detail.inventory}}</td>
                     <td>{{detail.specification}}</td>
                     <td>{{detail.manufacturer}}</td>
