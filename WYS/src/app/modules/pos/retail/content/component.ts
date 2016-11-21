@@ -133,9 +133,9 @@ export class RetailContentComponent implements OnInit{
     checkout() {
         /** 订单主体 */
         let ordercode = this._orderService.get_ordercode('RO');
-        let order:Order = new Order(ordercode,null,null,null,2,null,Number(localStorage.getItem('eid')));
-        order.totalprice = this.order.totalprice;
-        order.totalquantity = this.order.totalquantity;
+        let order:Order = new Order(ordercode,null,null,null,2,null,Number(sessionStorage.getItem('eid')));
+        order.totalprice = Number(this.order.totalprice);
+        order.totalquantity = Number(this.order.totalquantity);
         /** 订单详情 */
         let details = new Array;
         for(let d of this.details) {
@@ -145,8 +145,8 @@ export class RetailContentComponent implements OnInit{
             detail.gsav = JSON.stringify(goods.gsav);
             detail.goods = d.gpk;
             detail.order = ordercode;
-            detail.price = d.price;
-            detail.quantity = d.quantity;
+            detail.price = Number(d.price);
+            detail.quantity = Number(d.quantity);
             details.push(detail);
         }
         let save_order:SaveOrder = new SaveOrder(order,details);
@@ -154,8 +154,11 @@ export class RetailContentComponent implements OnInit{
         console.log(json);
         this._orderService.create(json).subscribe(
             order=>{
-                this.details
-            }
+                this.isshow = false;
+                this.sub_inventory();
+                this.details = [];
+            },
+            error=>alert(error)
         );
     }
 
@@ -173,6 +176,14 @@ export class RetailContentComponent implements OnInit{
     }
     no_show() {
         this.isshow = false;
+    }
+
+    /** 减本地库存 */
+    sub_inventory(){
+        for(let detail of this.details) {
+            let index = this.goodss.findIndex(goods => goods.gpk === detail.gpk);
+            this.goodss[index].inventory = Number(this.goodss[index].inventory) - Number(detail.quantity);
+        }
     }
 }
 
