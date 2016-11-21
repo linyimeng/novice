@@ -53,6 +53,7 @@ export class RetailContentComponent implements OnInit{
     order:SaleOrder = new SaleOrder(0,0,0);
     goodss:any;
     details:any = new Array;
+    isshow:boolean;
 
     /** input商品下拉 */
     items = new Array;
@@ -127,6 +128,37 @@ export class RetailContentComponent implements OnInit{
         this.order.totalprice = total_price;
         this.order.totalquantity = total_quantity;
     }
+
+    /** 结帐 */
+    checkout() {
+        /** 订单主体 */
+        let ordercode = this._orderService.get_ordercode('RO');
+        let order:Order = new Order(ordercode,null,null,null,2,null,Number(localStorage.getItem('eid')));
+        order.totalprice = this.order.totalprice;
+        order.totalquantity = this.order.totalquantity;
+        /** 订单详情 */
+        let details = new Array;
+        for(let d of this.details) {
+            let detail:OrderDetail = new OrderDetail(null,null,null,null,null,null);
+            let goods = this.goodss.find(goods=>goods.gpk==d.gpk);
+            detail.gdav = JSON.stringify(goods.gdav);
+            detail.gsav = JSON.stringify(goods.gsav);
+            detail.goods = d.gpk;
+            detail.order = ordercode;
+            detail.price = d.price;
+            detail.quantity = d.quantity;
+            details.push(detail);
+        }
+        let save_order:SaveOrder = new SaveOrder(order,details);
+        let json = JSON.stringify(save_order);
+        console.log(json);
+        this._orderService.create(json).subscribe(
+            order=>{
+                this.details
+            }
+        );
+    }
+
     /** 获取当前元素索引值 */
     get_index(current){
         let obj = this.details;
@@ -136,6 +168,11 @@ export class RetailContentComponent implements OnInit{
         }
         }
     }
-
+    show(){
+        this.isshow = true;
+    }
+    no_show() {
+        this.isshow = false;
+    }
 }
 
