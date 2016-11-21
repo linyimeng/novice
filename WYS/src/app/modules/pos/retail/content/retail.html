@@ -41,7 +41,7 @@
             <tbody>
                 <tr *ngFor="let detail of details">
                     <td>
-                        <input type="text" list="goods"  #goods (keyup.enter)="chose_goods(detail,goods.value)">
+                        <input type="text" style="width:80px" list="goods"  #goods (keyup.enter)="chose_goods(detail,goods.value)">
                         <datalist id="goods">
                             <option *ngFor="let item of items" [value]="item.value">{{item.name}}</option>
                         </datalist>
@@ -53,8 +53,8 @@
                     <td>{{detail.batch}}</td>
                     <td>{{detail.validity}}</td>
                     <td>{{detail.unit}}</td>
-                    <td>{{detail.quantity}}</td>
-                    <td>{{detail.price}}</td>
+                    <td><input #quantity (keyup)="set_quantity(detail,quantity.value)" [value]="detail.quantity"></td>
+                    <td><input #price (keyup)="set_price(detail,price.value)" [value]="detail.price"></td>
                 </tr>
                 <tr><td (click)="init_details()">添加一个商品</td></tr>
             </tbody>

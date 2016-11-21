@@ -20,7 +20,7 @@ class Detail{
     public specification,
     public quantity,
     public price,
-    public batch_number,
+    public batch,
     public validity,
     public production_date,
     public unit,
@@ -89,7 +89,52 @@ export class RetailContentComponent implements OnInit{
     }
 
     chose_goods(detail,value) {
+        let index = this.get_index(detail);
+        let goods = this.goodss.find(goods=>goods.gpk==value);
+        this.details[index].gpk = goods.gpk;
+        this.details[index].inventory = goods.inventory;
+        this.details[index].goodsname = goods.gsav.name;
+        this.details[index].unit = goods.gsav.unit;
+        this.details[index].specification = goods.gsav.specification;
+        this.details[index].manufacturer = goods.gsav.manufacturer;
+        this.details[index].batch = goods.gdav.batch;
+        this.details[index].validity = goods.gdav.validity;
+        this.details[index].price = goods.gsav.saleprice;
+        this.details[index].quantity = 1;
+        this.set_total();
+    }
+    /** 设置单个商品数量 */
+    set_quantity(detail,value){
+        let index = this.get_index(detail);
+        this.details[index].quantity = value;
+        console.log(this.details[index].quantity);
+        this.set_total();
+    }
+    /** 设置单个商品价格 */
+    set_price(detail,value) {
+        let index = this.get_index(detail);
+        this.details[index].price = value;
+        this.set_total();
+    }
 
+    /** 计算总数量和总价 */
+    set_total(){
+        let total_price = 0;
+        let total_quantity = 0;
+        for(let detail of this.details) {
+            total_quantity = total_quantity + Number(detail.quantity);total_price = total_price + (Number(detail.price) * Number(detail.quantity));
+        }
+        this.order.totalprice = total_price;
+        this.order.totalquantity = total_quantity;
+    }
+    /** 获取当前元素索引值 */
+    get_index(current){
+        let obj = this.details;
+        for (var i = 0;i < obj.length; i++) {
+        if (obj[i] == current) {
+            return i;
+        }
+        }
     }
 
 }
