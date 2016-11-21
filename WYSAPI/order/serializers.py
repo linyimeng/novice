@@ -41,10 +41,14 @@ class OrderGoodsInOrOutSerializer(DetailRetrieveSerializer):
         model = Detail
         fields = ('order','goods','gdav','gsav','quantity','price','joined','companyname','company')
     def get_companyname(self,obj):
-        company_name = obj.order.company.name
-        return company_name
+        if obj.order.company is not None:
+            company_name = obj.order.company.name
+            return company_name
+        return None
     def get_company(self,obj):
-        return obj.order.company.pk
+        if obj.order.company is not None:
+            return obj.order.company.pk
+        return None
         
         
 class OrderSerializer(ModelSerializer):
