@@ -1,63 +1,52 @@
-<!-- 客户列表 -->
+<!-- 创建供应商 -->
 <div class="content">
-<!-- 创建客户 -->
-    <form action="#" class="purchase-order" >
-        <div class="order-title">
-            <img src="/assets/img/mr.png" alt="">
-            <a href="">上传头像</a>
-        </div>
-        <div class="order-form">
-            <div class="left">
-                <div>	
-                    <label for="name">姓名：</label>
-                    <div class="group">
-                    <input type="text" id="name">
-                    </div>
-                </div>
-                <div>	
-                    <label for="unit">单位：</label>
-                    <div class="group">
-                    <input type="text" id="unit">
-                    </div>
-                </div>
-
-
-                <div>
-                    <label for="phone" class="phone">手机号码：</label>
-                    <div class="group">
-                    <input type="text" id="name">
-                    </div>
-                </div>
-
-                <div>
-                    <label for="email">邮箱：</label>
-                    <div class="group">
-                    <input type="email" id="email">
-                    </div>
-
-                </div>
-                <div  style="align-items: flex-start;">
-                    <label for="remarks">备注：</label>
-                    <div class="group">
-                    <textarea name="remarks" id="" cols="30" rows="10"></textarea>
-                    </div>
-
+<form class="purchase-order"  #clientForm="ngForm" (ngSubmit)="save_goods()">
+    <div class="order-title">
+        <h1>购货单位</h1>
+    </div>
+    <div class="order-form">
+        <div class="left">
+            <div>	
+                <label for="name">供应商名称：</label>
+                <div class="group">
+                <input type="text" [(ngModel)]="client.name" name="name" required>
                 </div>
             </div>
-            <div class="right">
-                <div class="group address">
-                    <label>地址：</label>
-                    <input type="text" placeholder="城市">
-                    <input type="text" placeholder="省份">
-                    
-                </div>
-                <span class="detail">详细地址：</span>
-                <textarea name="" id="" cols="30" rows="10" ></textarea>
+            <div>
+                <label for="address">地址：</label>
+                <div class="group">
+                    <input type="text" [(ngModel)]="client.address" name="address" placeholder="地址" required>
+                </div> 
             </div>
+            <span class="detail">备注：</span>
+            <textarea [(ngModel)]="client.remark" name="remark" cols="30" rows="3"></textarea>
         </div>
-        <div class="order-bottom">
-            <div></div>
-            <input type="submit" value="提交">
+        <div class="right">
+            <div>
+                <label for="phone" class="phone">手机号码：</label>
+                <div class="group">
+                <input type="text" [(ngModel)]="client.phone" name="phone">
+                </div>
+            </div>
+
+            <div>
+                <label for="email">邮箱：</label>
+                <div class="group">
+                <input type="email" [(ngModel)]="client.email" name="email">
+                </div>
+            </div>
+            <div>
+                <label for="landline">座机：</label>
+                <div class="group">
+                <input type="text" [(ngModel)]="client.landline" name="landline">
+                </div>
+            </div>
+            
         </div>
-    </form>
+    </div>
+    <div class="order-bottom">
+        <div></div>
+        <input type="submit" value="提交">
+    </div>
+</form>
 </div>

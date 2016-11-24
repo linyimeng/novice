@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule }   from '@angular/forms';
 
 import { SalesComponent } from './sales';
 
@@ -20,6 +21,7 @@ import { salesRouting } from './routing';
 @NgModule({
     imports:[
         CommonModule,
+        FormsModule,
         salesRouting,
     ],
     declarations:[

@@ -33,7 +33,7 @@ const salesRoutes:Routes = [
                     { path:'',component:ClientListComponent },
                     { path:'list',component:ClientListComponent },
                     { path:'create',component:ClientCreateComponent},
-                    { path:'detail',component:ClientDetailComponent },
+                    { path:':pk',component:ClientDetailComponent },
                 ]
             },
             {

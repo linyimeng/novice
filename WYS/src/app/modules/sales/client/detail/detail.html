@@ -1,60 +1,53 @@
-<!-- 客户详情 -->
+<!-- 创建购货单位 -->
 <div class="content">
-<div class="purchase-order" >
+<form class="purchase-order"  #clientForm="ngForm" (ngSubmit)="save_goods()">
     <div class="order-title">
-        <img src="/assets/img/mr.png" alt="">
-        <a href="">上传头像</a>
+        <h1>购货单位</h1>
     </div>
     <div class="order-form">
         <div class="left">
-            <div>	
-                <label for="name">姓名：</label>
-                <p>
-                阿斯顿
-                </p>
+            <div>
+                <label for="name">客户名称：</label>
+                <div class="group">
+                <input type="text" [(ngModel)]="client.name" name="name">
+                <input type="hidden" [(ngModel)]="client.is_vendor" name="is_vendor">
+                </div>
             </div>
-            <div>	
-                <label for="unit">单位：</label>
-                <p>
-                阿斯顿公司
-                </p>
+            <div>
+                <label for="address">地址：</label>
+                <div class="group">
+                    <input type="text" [(ngModel)]="client.address" name="address" placeholder="地址">
+                </div>
             </div>
-
-
+            <span class="detail">备注：</span>
+            <textarea [(ngModel)]="client.remark" name="remark" cols="30" rows="3"></textarea>
+        </div>
+        <div class="right">
             <div>
                 <label for="phone" class="phone">手机号码：</label>
-                <p>
-                17865326541
-                </p>
+                <div class="group">
+                <input type="text" [(ngModel)]="client.phone" name="phone">
+                </div>
             </div>
 
             <div>
                 <label for="email">邮箱：</label>
-                <p>
-                1141564@126.com
-                </p>
-
+                <div class="group">
+                <input type="email" [(ngModel)]="client.email" name="email">
+                </div>
             </div>
-
             <div>
-                <label for="remarks">备注：</label>
-                <p>
-                无备注
-                </p>
-
+                <label for="landline">座机：</label>
+                <div class="group">
+                <input type="text" [(ngModel)]="client.landline" name="landline">
+                </div>
             </div>
-        </div>
-        <div class="right">
-            <span>地址：</span>
-            <span style="font-weight:400;">海口市\海南省</span>		
-            <span class="detail">详细地址：</span>
-            <p>
-                啊顺利打开立刻就飞哦了解哦临时搭建啊撒大大大大啊顺利打开立刻就飞哦了解哦临时搭建啊撒大大大大
-            </p>
+            
         </div>
     </div>
     <div class="order-bottom">
-        
+        <div></div>
+        <input type="submit" value="提交">
     </div>
-</div>
+</form>
 </div>

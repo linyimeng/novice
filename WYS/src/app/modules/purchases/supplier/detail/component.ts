@@ -6,7 +6,6 @@ import { CompanyService } from '../../../wysservices/company.service';
 import { Supplier } from '../model';
 
 @Component({
-   
    selector: 'supplier-detail',
    templateUrl: 'detail.html'
 })
