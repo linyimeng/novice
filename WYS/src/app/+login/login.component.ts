@@ -3,9 +3,8 @@ import { Router } from '@angular/router';
 
 @Component({
 	selector: 'login',
-	template: `
-    <h1>this is login</h1>
-	`
+	templateUrl:'login.html',
+	styleUrls:['login.css']
 })
 export class LoginComponent {
 

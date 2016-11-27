@@ -17,7 +17,7 @@ const HtmlElementsPlugin = require('./html-elements-plugin');
  * Webpack Constants
  */
 const METADATA = {
-  title: '天会智数车门店',
+  title: '思创',
   baseUrl: '/',
   isDevServer: helpers.isWebpackDevServer()
 };

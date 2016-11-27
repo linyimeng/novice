@@ -1,7 +1,7 @@
 {
-  "name": "angular2-webpack-starter-h5",
-  "version": "5.0.5",
-  "description": "An Angular 2 Webpack Starter kit featuring Angular 2 (Router, Http, Forms, Services, Tests, E2E, Coverage), Karma, Protractor, Jasmine, Istanbul, TypeScript, and Webpack by AngularClass",
+  "name": "wys",
+  "version": "0.0.1",
+  "description": "wys",
   "keywords": [
     "angular2",
     "webpack",

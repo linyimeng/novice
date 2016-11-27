@@ -1,0 +1,12 @@
+<div class="logo">
+    <h1>
+        <span style="color:rgb(164,74,140)">s</span>c
+    </h1>
+    <form #loginform="ngForm" (ngSubmit)="loginx()">
+        <label for="name">用户名</label>
+        <input type="text" id="name" autofocus="autofocus" [(ngModel)]="login.username" name="username" required>
+        <label for="passwd">密码</label>
+        <input type="password" id="passwd" [(ngModel)]="login.password" name="password" required>
+        <input type="submit" value="登录" class="submit" >
+    </form>
+</div>

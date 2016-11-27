@@ -9,7 +9,6 @@ from order.serializers import (
                                 TypeSerializer,
                                 OrderListSerializer,
                                 OrderRetrieveSerializer,
-                                DetailRetrieveSerializer,
                                 OrderGoodsInOrOutSerializer
                                )
 from order.models import Type,Order,Detail
