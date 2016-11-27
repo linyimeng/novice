@@ -2,11 +2,11 @@ import { Component,OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
-	selector: 'wys-app',
+	selector: 'home',
 	template: `
-    <router-outlet></router-outlet>
+    <h1>this is home</h1>
 	`
 })
-export class AppComponent {
+export class HomeComponent {
 
  }

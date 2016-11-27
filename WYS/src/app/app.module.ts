@@ -2,44 +2,27 @@ import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule }   from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { routing } from './app.routing';
+import { RouterModule } from '@angular/router';
 
-import { AppComponent }        from './app.component';
+import { AppComponent } from './app.component';
+import { HomeComponent } from './home';
 
-import { PersonnelModule } from './modules/personnel/module';
-import { PurchasesModule } from './modules/purchases/module';
-import { SalesModule } from './modules/sales/module';
-import { PosModule } from './modules/pos/module';
-import { WarehouseModule } from './modules/warehouse/module';
-import { SettingModule } from './modules/setting/setting.module';
-
-
-import { LoginComponent } from './modules/auth/login.component';
-import { AuthService } from './modules/wysservices/auth.service';
-import { StaffService } from './modules/wysservices/staff.service';
-
+import { appRoutes } from './app.routing';
+ 
 @NgModule({
   imports: [
     BrowserModule,
     HttpModule,
     FormsModule,
-    PersonnelModule,
-    SalesModule,
-    PurchasesModule,
-    PosModule,
-    WarehouseModule,
-    SettingModule,
-    routing
+    RouterModule.forRoot(appRoutes)
   ],
 
   declarations: [
     AppComponent,
-    LoginComponent
+    HomeComponent
   ],
 
   providers: [
-    StaffService,
-    AuthService,
   ],
 
   bootstrap: [ 

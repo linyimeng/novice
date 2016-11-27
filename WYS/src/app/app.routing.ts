@@ -1,16 +1,8 @@
-import { ModuleWithProviders }  from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { LoginComponent } from './modules/auth/login.component';
+import { HomeComponent } from './home';
 
-const appRoutes: Routes = [
-    {
-        path:'',
-        redirectTo:'/personnel/department',
-        pathMatch:'full'
-    },
-    { path:'login',component: LoginComponent}
+export const appRoutes: Routes = [
+    { path:'',component:HomeComponent },
+    { path:'login',loadChildren: ()=>System.import("./+login")}
 ];
-
-export const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
-
