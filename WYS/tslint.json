@@ -51,6 +51,7 @@
     ],
     "no-construct": true,
     "no-debugger": true,
+    "no-duplicate-key": true,
     "no-duplicate-variable": true,
     "no-empty": false,
     "no-eval": true,
@@ -76,12 +77,12 @@
 
     "eofline": true,
     "indent": [
-      true,
+      false,
       "spaces"
     ],
     "max-line-length": [
       true,
-      100
+      300
     ],
     "no-require-imports": false,
     "no-trailing-whitespace": true,
