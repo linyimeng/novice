@@ -1,7 +1,7 @@
 import { ModuleWithProviders }  from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { PersonnelComponent } from './component';
+import { staffComponent } from './component';
 
 import { DepartmentComponent } from './department/department';
 import { DepartmentListComponent } from './department/list/component';
@@ -14,17 +14,17 @@ import { StaffDetailComponent } from './staff/detail/component';
 import { StaffListComponent } from './staff/list/component';
 
 import { AuthTokenGuard } from '../auth/authtoken.guard';
-const personnelRoutes:Routes = [
-    // 当URL为 example.com/personnel 时导航到部门
+const staffRoutes:Routes = [
+    // 当URL为 example.com/staff 时导航到部门
     {
-        path:'personnel',
-        redirectTo:'/personnel/department',
+        path:'staff',
+        redirectTo:'/staff/department',
         canActivate: [ AuthTokenGuard ],
         pathMatch:'full',
     },
     {
-        path:'personnel',
-        component:PersonnelComponent,
+        path:'staff',
+        component:staffComponent,
         canActivate:[ AuthTokenGuard ],
         children:[
             { 
@@ -51,4 +51,4 @@ const personnelRoutes:Routes = [
     },
 ];
 
-export const personnelRouting:ModuleWithProviders = RouterModule.forChild(personnelRoutes);
+export const staffRouting:ModuleWithProviders = RouterModule.forChild(staffRoutes);

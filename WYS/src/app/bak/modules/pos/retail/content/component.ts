@@ -1,7 +1,7 @@
 import { Component,OnInit } from '@angular/core';
 
-import { GoodsService } from '../../../wysservices/goods.service';
-import { OrderService } from '../../../wysservices/order.service';
+import { GoodsService } from '../../../../../services//goods.service';
+import { OrderService } from '../../../../../services//order.service';
 
 import { OrderDetail,Order } from '../../../purchases/model';
 

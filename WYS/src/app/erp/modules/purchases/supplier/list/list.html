@@ -1,0 +1,30 @@
+<!-- 供应商列表 -->
+<div class="content">
+<table >
+    <thead>
+        <tr>
+            <th><input type="checkbox"></th>
+            <th>供应商名称</th>
+            <th>地址</th>
+            <th>手机号码</th>
+            <th>座机</th>
+            <th>邮件</th>
+            <th>传真</th>
+            <th>备注</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let supplier of suppliers">
+            <th><input name="radiogroup" type="checkbox"></th>
+            <td routerLink="/purchases/supplier/{{supplier.pk}}">{{supplier.name}}</td>
+            <td>{{supplier.address}}</td>
+            <td>{{supplier.phone}}</td>
+            <td>{{supplier.landline}}</td>
+            <td>{{supplier.email}}</td>
+            <td>{{supplier.fax}}</td>
+            <td>{{supplier.remark}}</td>
+        </tr>
+    </tbody>
+    
+</table>
+</div>

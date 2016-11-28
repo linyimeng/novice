@@ -4,9 +4,9 @@ import { Router } from '@angular/router';
 @Component({
 	selector: 'home',
 	template: `
-    <h1>this is home</h1>
+    <h1>这是官网页面</h1>
 	`
 })
 export class HomeComponent {
-	
+
 }

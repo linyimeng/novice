@@ -6,7 +6,7 @@ import { LoginComponent } from './modules/auth/login.component';
 const appRoutes: Routes = [
     {
         path:'',
-        redirectTo:'/personnel/department',
+        redirectTo:'/staff/department',
         pathMatch:'full'
     },
     { path:'login',component: LoginComponent}

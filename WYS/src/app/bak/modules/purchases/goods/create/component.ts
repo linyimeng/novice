@@ -1,8 +1,8 @@
 import { Component,OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 
-import { GoodsService } from '../../../wysservices/goods.service';
-import { TypeattrService } from '../../../wysservices/typeattr.service';
+import { GoodsService } from '../../../../../services//goods.service';
+import { TypeattrService } from '../../../../../services//typeattr.service';
 
 export class Goods{
     constructor(

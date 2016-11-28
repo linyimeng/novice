@@ -1,5 +1,5 @@
 import { Component,OnInit } from '@angular/core';
-import { GoodsService } from '../../../../wysservices/goods.service';
+import { GoodsService } from '../../../../../../services//goods.service';
 
 @Component({   
    selector: 'goods-last-reports',

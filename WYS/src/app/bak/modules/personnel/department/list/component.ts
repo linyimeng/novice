@@ -1,6 +1,6 @@
 import { Component,OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { DepartmentService } from '../../../wysservices/department.service';
+import { DepartmentService } from '../../../../../services//department.service';
 
 @Component({
 	
@@ -27,7 +27,7 @@ export class  DepartmentListComponent implements OnInit{
 	}
 
 	gotodetail(pk){
-		this.router.navigate(['/personnel/department',pk]);
+		this.router.navigate(['/staff/department',pk]);
 	}
 }
 

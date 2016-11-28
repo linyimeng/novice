@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule }   from '@angular/forms';
 
-import { PersonnelComponent } from './component';
+import { staffComponent } from './component';
 
 import { DepartmentComponent } from './department/department';
 import { DepartmentListComponent } from './department/list/component';
@@ -17,16 +17,16 @@ import { StaffListComponent } from './staff/list/component';
 import { DepartmentSelectComponent } from '../formcomponents/department-select';
 import { JobsSelectComponent } from '../formcomponents/jobs-select';
 //模块路由
-import { personnelRouting } from './routing';
+import { staffRouting } from './routing';
 import { AuthTokenGuard } from '../auth/authtoken.guard';
 @NgModule({
     imports:[
         CommonModule,
         FormsModule,
-        personnelRouting,
+        staffRouting,
     ],
     declarations:[
-        PersonnelComponent,
+        staffComponent,
 
         DepartmentComponent,
         DepartmentListComponent,
@@ -48,5 +48,5 @@ import { AuthTokenGuard } from '../auth/authtoken.guard';
     ]
 })
 
-export class PersonnelModule {}
+export class staffModule {}
 

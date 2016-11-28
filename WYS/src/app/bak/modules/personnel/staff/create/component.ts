@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { StaffService } from '../../../wysservices/staff.service';
+import { StaffService } from '../../../../../services//staff.service';
 
 export class Staff{
     constructor(
@@ -48,7 +48,7 @@ export class StaffCreatComponent{
         this._staffservice.create(json).subscribe(
             staff=>{
                 console.log(JSON.stringify(staff));
-				this.router.navigate(['/personnel/staff/list']);
+				this.router.navigate(['/staff/staff/list']);
             },
             error=>alert(error)
         );

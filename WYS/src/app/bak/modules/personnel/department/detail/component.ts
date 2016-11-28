@@ -1,6 +1,6 @@
 import { Component,OnInit } from '@angular/core';
 import { Router,ActivatedRoute } from '@angular/router';
-import { DepartmentService } from '../../../wysservices/department.service';
+import { DepartmentService } from '../../../../../services//department.service';
 
 export class Department {
     constructor(
@@ -46,7 +46,7 @@ export class  DepartmentDetailComponent implements OnInit{
         this._departmentService.update(pk,json).subscribe(
             department=> {
                     console.log(JSON.stringify(department));
-					this.router.navigate(['/personnel/department/list']);
+					this.router.navigate(['/staff/department/list']);
                  },
             error=>{alert(error)},
         )

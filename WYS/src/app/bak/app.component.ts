@@ -7,7 +7,7 @@ import { StaffService } from './modules/wysservices/staff.service';
 	template: `
     <nav [style.display]="islogin ? 'block' : 'none'">
         <ul>
-            <li routerLink="/personnel" routerLinkActive="activity">
+            <li routerLink="/staff" routerLinkActive="activity">
                 <a>员工</a>
             </li>
             <li routerLink='/purchases' routerLinkActive="activity">

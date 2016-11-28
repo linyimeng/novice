@@ -1,0 +1,27 @@
+<!-- 商品列表 -->
+<div class="content"> 
+    <table>
+        <thead>
+            <tr>
+                <th><input type="checkbox"></th>
+                <th>商品名称</th>
+                <th>规格</th>
+                <th>单位</th>
+                <th>条形码</th>
+                <th>生产厂家</th>
+                <th>售价</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let goods of goodss">
+                <th><input name="radiogroup" type="checkbox"></th>
+                <td routerLink="/purchases/goods/{{goods.pk}}">{{goods.gsav.name}}</td>
+                <td>{{goods.gsav.specification}}</td>
+                <td>{{goods.gsav.unit}}</td>
+                <td>{{goods.gsav.barcode}}</td>
+                <td>{{goods.gsav.manufacturer}}</td>
+                <td>{{goods.gsav.saleprice}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

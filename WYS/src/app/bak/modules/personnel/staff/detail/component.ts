@@ -1,7 +1,7 @@
 import { Component,OnInit } from '@angular/core';
 import { Router,ActivatedRoute } from '@angular/router';
 
-import { StaffService } from '../../../wysservices/staff.service';
+import { StaffService } from '../../../../../services//staff.service';
 
 export class Staff{
     constructor(
@@ -62,7 +62,7 @@ export class StaffDetailComponent implements OnInit{
         let json = JSON.stringify(this.staff);
         let pk = this.staff.pk;
         this._staffservice.update(pk,json).subscribe(
-            staff=>this.router.navigate(['/personnel/staff/list']),
+            staff=>this.router.navigate(['/staff/staff/list']),
             error=>alert(error),
         )
     }

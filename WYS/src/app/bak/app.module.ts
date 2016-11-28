@@ -6,7 +6,7 @@ import { routing } from './app.routing';
 
 import { AppComponent }        from './app.component';
 
-import { PersonnelModule } from './modules/personnel/module';
+import { staffModule } from './modules/staff/module';
 import { PurchasesModule } from './modules/purchases/module';
 import { SalesModule } from './modules/sales/module';
 import { PosModule } from './modules/pos/module';
@@ -23,7 +23,7 @@ import { StaffService } from './modules/wysservices/staff.service';
     BrowserModule,
     HttpModule,
     FormsModule,
-    PersonnelModule,
+    staffModule,
     SalesModule,
     PurchasesModule,
     PosModule,

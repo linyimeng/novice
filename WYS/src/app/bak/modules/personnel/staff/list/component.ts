@@ -1,7 +1,7 @@
 import { Component,OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 
-import { StaffService } from '../../../wysservices/staff.service';
+import { StaffService } from '../../../../../services//staff.service';
 
 @Component({
    

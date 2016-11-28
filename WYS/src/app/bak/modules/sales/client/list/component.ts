@@ -1,5 +1,5 @@
 import { Component,OnInit} from '@angular/core';
-import { CompanyService } from '../../../wysservices/company.service';
+import { CompanyService } from '../../../../../services//company.service';
 
 @Component({
    selector: 'client-list',

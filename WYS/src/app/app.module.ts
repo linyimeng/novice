@@ -8,6 +8,8 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home';
 
 import { appRoutes } from './app.routing';
+
+import { AuthGuard } from './auth.guard';
  
 @NgModule({
   imports: [
@@ -23,6 +25,7 @@ import { appRoutes } from './app.routing';
   ],
 
   providers: [
+    AuthGuard,
   ],
 
   bootstrap: [ 

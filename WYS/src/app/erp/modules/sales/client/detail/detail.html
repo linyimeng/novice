@@ -1,0 +1,53 @@
+<!-- 创建购货单位 -->
+<div class="content">
+<form class="purchase-order"  #clientForm="ngForm" (ngSubmit)="save_goods()">
+    <div class="order-title">
+        <h1>购货单位</h1>
+    </div>
+    <div class="order-form">
+        <div class="left">
+            <div>
+                <label for="name">客户名称：</label>
+                <div class="group">
+                <input type="text" [(ngModel)]="client.name" name="name">
+                <input type="hidden" [(ngModel)]="client.is_vendor" name="is_vendor">
+                </div>
+            </div>
+            <div>
+                <label for="address">地址：</label>
+                <div class="group">
+                    <input type="text" [(ngModel)]="client.address" name="address" placeholder="地址">
+                </div>
+            </div>
+            <span class="detail">备注：</span>
+            <textarea [(ngModel)]="client.remark" name="remark" cols="30" rows="3"></textarea>
+        </div>
+        <div class="right">
+            <div>
+                <label for="phone" class="phone">手机号码：</label>
+                <div class="group">
+                <input type="text" [(ngModel)]="client.phone" name="phone">
+                </div>
+            </div>
+
+            <div>
+                <label for="email">邮箱：</label>
+                <div class="group">
+                <input type="email" [(ngModel)]="client.email" name="email">
+                </div>
+            </div>
+            <div>
+                <label for="landline">座机：</label>
+                <div class="group">
+                <input type="text" [(ngModel)]="client.landline" name="landline">
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    <div class="order-bottom">
+        <div></div>
+        <input type="submit" value="提交">
+    </div>
+</form>
+</div>
