@@ -4,13 +4,24 @@ from django.utils.translation import ugettext_lazy as _
 from django_pgjsonb import JSONField
 import json
 
+class TypeManager(models.Manager):
+    def getsuperPk(self,tid):
+        '''递归寻找对应商品类型的最顶层的祖先Pk'''
+        supertype = Type.objects.get(pk=tid)
+        if supertype.superiors is None or supertype.superiors.pk == 0:
+            return supertype.pk
+        else:
+            superId = self.getsuperPk(supertype.superiors.pk)
+        return superId
+
 class Type(models.Model):
     name = models.CharField(max_length=30,unique=True)
     superiors = models.ForeignKey("self",blank=True,null=True,default=None)
     joined = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     deleted = models.DateTimeField(_('deleted'),blank=True,null=True)
-    
+    objects = TypeManager()
+        
     def __str__(self):
         return self.name
 

@@ -16,6 +16,7 @@ import { StaffListComponent } from './staff/list/component';
 
 import { DepartmentSelectComponent } from '../erpform/department-select';
 import { JobsSelectComponent } from '../erpform/jobs-select';
+import { ImgUploadComponent } from '../erpform/imgupload';
 
 //模块路由
 import { staffRouting } from './staff.routing';
@@ -41,7 +42,8 @@ import { staffRouting } from './staff.routing';
 
         /** 表单组件依赖 */
         DepartmentSelectComponent,
-        JobsSelectComponent
+        JobsSelectComponent,
+        ImgUploadComponent,
     ],
 })
 

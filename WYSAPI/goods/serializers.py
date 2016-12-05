@@ -26,7 +26,7 @@ class TypeSerializer(serializers.ModelSerializer):
         检查处理superiors为空或者有父类别的情况
         '''
         if value=='' or value is None:
-            raise serializers.ValidationError("暂不支持多行业功能，请期待1.x版本的更新")
+            value = 0
         else:
             return value
     

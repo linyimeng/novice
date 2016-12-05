@@ -6,8 +6,7 @@ import { DepartmentService } from '../../../services/department.service';
 @Component({
    selector: 'jobsSelect',
    template: `
-        <select [(ngModel)]="pk" (change)="onChange($event.target.value)">
-            <option value="">无职位</option>
+        <select [(ngModel)]="pk" (change)="onChange($event.target.value)" required>
             <option [value]="job.pk" *ngFor="let job of jobs">{{job.name}}</option>
         </select>
    `,
@@ -56,6 +55,11 @@ export class JobsSelectComponent {
 
     onChange(pk) {
         this.jobspk.emit(pk);
+    }
+
+    go_create_job() {
+        console.log('this is create job');
+        return;
     }
 }
 

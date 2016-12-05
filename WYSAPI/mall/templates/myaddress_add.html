@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block head_title %}新增地址{% endblock head_title %}
+{% block content %}
+	<!-- 顶部 -->
+	<div class="head white pos_rel"><i class="iconfont f26">&#xe60b;</i><span class="f34">新增地址</span><a href="javascript:;" class="more pos_abs"><span class="nav_cir"></span><span class="nav_cir"></span><span class="nav_cir"></span></a></div>
+	<form name="add_address" action="" method="post" target="_self" onSubmit="return docheck()" class="p20 f26 add_address">
+		<div class="pb10"><span class="tit vertical_middle">收货人</span><input type="text" name="user_name" value="姓名" class="text" onclick="this.value=''" onblur="if(this.value=='') this.value='姓名'"></div>
+		<div class="line_gray pt20 pb10"><span class="tit vertical_middle">联系方式</span><input type="text" name="mobile" value="手机号" class="text" onclick="this.value=''" onblur="if(this.value=='') this.value='手机号'"></div>
+		<div class="line_gray pt20 pb10">
+			<span class="vertical_middle">省</span>
+			<select id="s_province" name="s_province" class="select"></select>
+			<span class="vertical_middle">市</span>
+			<select id="s_city" name="s_city" class="select"></select>
+			<span class="vertical_middle">区/县</span>
+			<select id="s_county" name="s_county" class="select"></select>
+		</div>
+		<div class="line_gray pt20 pb10"><span class="tit vertical_middle">详细地址</span><input type="text" name="address" value="街道门牌信息" class="text" onclick="this.value=''" onblur="if(this.value=='') this.value='街道门牌信息'"></div>
+		<div class="f20 pb25 line_gray pt20"><span class="mr10 radio f18 vertical_middle"></span>设为默认地址</div>
+		<input type="submit" value="确认" class="btn_pay_input f30 white mt20">
+	</form>
+	<script src="{% static "js/area.js" %}"></script>
+	<script type="text/javascript">
+		_init_area();//三级联动地址
+	
+		$(function(){
+			$('.radio').bind('click',function(){
+				if($(this).html()==''){
+					$(this).html('●');
+				}else{
+					$(this).html('');
+				}
+	
+			});
+		});
+	
+	  function docheck() {
+	    if (add_address.user_name.value == "姓名") {
+	      alert("请填写收货人姓名");
+	      return false;
+	    } else if (add_address.mobile.value == "手机号") {
+	      alert("请填写收货人手机号码");
+	      return false;
+	    } else if(!chkMobile(add_address.mobile.value)){
+	      alert("请填写正确的手机号码");
+	    }else if(add_address.s_province.value == "-- 选择 --"){
+	    	alert("请选择所在省份");
+	    }else if(add_address.s_city.value == "-- 选择 --"){
+	    	alert("请选择所在市");
+	    }else if(add_address.s_county.value == "-- 选择 --"){
+	    	alert("请选择所在区/县");
+	    }else if (add_address.address.value == "街道门牌信息") {
+	      alert("请填写详细的收货地址");
+	      return false;
+	    } else {
+	      return true;
+	    }
+	  }
+	</script>
+{% endblock content %}

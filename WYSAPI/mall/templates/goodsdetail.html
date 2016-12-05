@@ -1,0 +1,124 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block head_load_static %}
+	<script type="text/javascript" src="{% static "js/jquery.flexslider-min.js" %}"></script>
+{% endblock head_load_static %}
+
+{% block content %}
+
+	<!-- 顶部 -->
+	<div class="head white pos_rel"><i class="iconfont f26">&#xe60b;</i><span class="f34">商品详情</span><a href="javascript:;" class="more pos_abs"><span class="nav_cir"></span><span class="nav_cir"></span><span class="nav_cir"></span></a></div>
+	<!-- 轮播图 -->
+	<div class="flexslider pos_rel banner_prod">
+	    <ul class="slides pos_rel">
+	    	<li>
+	    		<div class="slide"> <img src="{% static "images/none/pd-1.jpg" %}" alt="" /></div>
+	        </li>
+	    	<li>
+	    		<div class="slide"> <img src="{% static "images/none/pd-2.jpg" %}" alt="" /></div>
+	        </li>
+	        <li>
+	    		<div class="slide"> <img src="{% static "images/none/pd-3.jpg" %}" alt="" /></div>
+	        </li>
+	    </ul>
+	</div>
+	<div class="p20 pro_info_box">
+		<h4 class="normal f28 pt10">新西兰进口Red Seal/红印 薄荷茶 花草茶袋装茶包 提神抗疲劳</h4>
+		<div class="address f22 pt10 pb10"><i class="icon_newZealand vertical_middle mr10"></i><span class="vertical_middle">新西兰品牌 广州机场保税区发货</span></div>
+		<div class="price"><span class="new f30 red mr10">￥69.00</span><span class="old f20">￥99.60</span><span class="fr f20 pt10">30天已售出<i>0</i>件</span></div>
+	</div>
+	<div class="pro_number p20 f20">
+		<span>数量：</span><a href="javascript:;" class="btn_less failed">-</a><span class="num">1</span><a href="javascript:;" class="btn_plus">+</a><span class="gray_light pl10">(库存<i class="stock">10000</i>件)</span>
+		<div class="pb10"></div>
+	</div>
+	<div class="tab_details">
+		<ul class="tab_details_hd clearfix txt-center f26">
+			<li class="cur"><span>商品详情</span></li>
+			<li>评价(<i>0</i>)</li>
+		</ul>
+		<!-- 商品详情 -->
+		<div class="tab_details_bd mt10" style="display: block;">
+			<h5 class="normal f26 border_bot_light pt10 mlr20">商品规格</h5>
+			<ul class="list_special clearfix pt10 f20">
+				<li>厂名：<span>RED SEAL</span></li>
+				<li>厂址：<span>新西兰</span></li>
+				<li>厂家联系方式：<span>155656 1515</span></li>
+				<li>配料表：<span>薄荷精华</span></li>
+				<li>储藏方法：<span>阴凉干燥处保存</span></li>
+				<li>保质期：<span>730天</span></li>
+				<li>食品添加剂：<span>无</span></li>
+				<li>净含量:<span>43g</span></li>
+				<li>商品条形码：<span>45454545外</span></li>
+				<li>包装类型：<span>包装</span></li>
+				<li>包装种类：<span>盒装</span></li>
+				<li>茶种类：<span>其他/other</span></li>
+				<li>产地：<span>新西兰</span></li>
+				<li>是否含糖：<span>无糖</span></li>
+				<li>品牌：<span>RED SEAL/无印</span></li>
+				<li>系列：<span>薄荷茶</span></li>
+				<li>价格段：<span>60-99元</span></li>
+				<li>是否进口：<span>进口</span></li>
+			</ul>
+			<h5 class="normal f26 border_bot_light pt10 mlr20">商品介绍</h5>
+			<div class="full_img pro_details pt20">
+				<img src="{% static "images/none/detail-1.jpg" %}">
+				<img src="{% static "images/none/detail-2.jpg" %}">
+				<img src="{% static "images/none/detail-3.jpg" %}">
+				<img src="{% static "images/none/detail-4.jpg" %}">
+				<img src="{% static "images/none/detail-5.jpg" %}">
+				<img src="{% static "images/none/detail-6.jpg" %}">
+				<img src="{% static "images/none/detail-7.jpg" %}">
+				<img src="{% static "images/none/detail-8.jpg" %}">
+				<img src="{% static "images/none/detail-9.jpg" %}">
+				<img src="{% static "images/none/detail-10.jpg" %}">
+				<img src="{% static "images/none/detail-11.jpg" %}">
+				<img src="{% static "images/none/detail-12.jpg" %}">
+				<img src="{% static "images/none/detail-13.jpg" %}">
+				<img src="{% static "images/none/detail-14.jpg" %}">
+				<img src="{% static "images/none/detail-15.jpg" %}">
+				<img src="{% static "images/none/detail-16.jpg" %}">
+				<img src="{% static "images/none/detail-17.jpg" %}">
+				<img src="{% static "images/none/detail-18.jpg" %}">
+				<img src="{% static "images/none/detail-19.jpg" %}">
+				<img src="{% static "images/none/detail-20.jpg" %}">
+			</div>
+		</div>
+		<!-- 商品评价 -->
+		<!-- <div class="tab_details_bd">商品评价</div> -->
+	</div>
+	<!-- 页脚导航 -->
+	<div class="foot bg-white p0">
+		<ul class="bot_shop_btn txt-center clearfix">
+			<li><a href="{% url "mall:view-carts" %}" class="iconfont car f48">&#xe605;</a></li>
+			<li><a href="{% url "mall:view-carts" %}" class="btn f26 join">加入购物车</a></li>
+			<li><a href="{% url "mall:view-carts" %}" class="btn white buy f26">立即购买</a></li>
+		</ul>
+	</div>
+	<script type="text/javascript">
+	$(function () {
+		//轮播图
+		$('.banner_prod').flexslider({
+			animation : 'slide',
+			controlNav : true,
+			directionNav : false,
+			animationLoop : true,
+			slideshow : true,
+			useCSS : false
+		});
+		//数量加
+		$('.btn_plus').bind('click', function() {
+			numPlus($(this), '.num', '.btn_less');
+		});
+		//数量减
+		$('.btn_less').bind('click', function() {
+			numLess($(this), '.num');
+		});
+		
+		//选项卡
+		fnTab('.tab_details');
+	
+	});
+	</script>
+{% endblock content %}
+{% block footer %}{% endblock footer %}

@@ -8,7 +8,8 @@ export class Department {
         public name:string,
         public superiors: string,
         public manager: string,
-		public remark: string
+		public remark: string,
+        public imgurl:string
     ){}
 }
 
@@ -20,7 +21,7 @@ export class Department {
 })
 
 export class  DepartmentDetailComponent implements OnInit{
-	department:Department = new Department(null,'','','','');
+	department:Department = new Department(null,null,null,null,null,null);
 	constructor(
 		private _departmentService:DepartmentService,
 		private router:Router,
@@ -55,5 +56,8 @@ export class  DepartmentDetailComponent implements OnInit{
     setdepartpk(pk) {
         this.department.superiors = pk;
         console.log(pk);
+    }
+    setimgurl(imgurl){
+        this.department.imgurl = imgurl;
     }
 }

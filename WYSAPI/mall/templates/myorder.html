@@ -1,0 +1,133 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block head_title %}我的订单{% endblock head_title %}
+{% block bodyclass %}bg-gray-f6{% endblock bodyclass %}
+
+{% block content %}
+
+	<!-- 顶部 -->
+	<div class="head white pos_rel"><i class="iconfont f26">&#xe60b;</i><span class="f34">我的订单</span></div>
+	{% include "search-order.html" %}
+	
+	<!-- 订单 -->
+	<div class="tab_order">
+		<ul class="tab_order_hd clearfix txt-center f28">
+			<li class="cur"><span>全部订单</span></li>
+			<li><span>待付款</span></li>
+			<li><span>待收货</span></li>
+			<li><span>待评价</span></li>
+		</ul>
+		<!-- 全部订单 -->
+		<div class="tab_order_bd mt10 dis_none" style="display: block;">
+			<div class="commod_box bg-white mb10">
+				<dl class="commodity pt20 pb20 border_bot_e1">
+					<dt class="full_img pl20 pr20"><a href="#"><img src="images/none/p-3.jpg"></a></dt>
+					<dd class="vertical_middle pr20">
+						<h4 class="normal f20 title"><a href="#">Braun/博朗欧乐 BType3744 电动牙刷博朗欧乐 BType3744 电动牙刷</a></h4>
+						<p class="f18 gray_90 mt5">颜色：<span>蓝色</span></p>
+						<div class="f22"><span class="red">￥<span class="price">1.01</span></span><span class="fr">x1</span></div>
+					</dd>
+				</dl>
+				<div class="txt-right f20 pr20 pt15">合计：<span class="red">￥395.00</span></div>
+				<div class="txt-right pr20 border_bot_e1 f20 mt10 pb20"><a href="javascript:;" class="btn_ope btn_del ml10">删除订单</a><a href="confirm_order.html" class="btn_ope btn_red ml10">去支付</a><a href="#" class="btn_ope ml10">去评价</a></div>
+			</div>
+			<div class="commod_box bg-white mb10">
+				<dl class="commodity pt20 pb20 border_bot_e1">
+					<dt class="full_img pl20 pr20"><a href="#"><img src="images/none/p-2.jpg"></a></dt>
+					<dd class="vertical_middle pr20">
+						<h4 class="normal f20 title"><a href="#">Braun/博朗欧乐 BType3744 电动牙刷博朗欧乐 BType3744 电动牙刷</a></h4>
+						<p class="f18 gray_90 mt5">颜色：<span>蓝色</span></p>
+						<div class="f22"><span class="red">￥<span class="price">1.01</span></span><span class="fr">x1</span></div>
+					</dd>
+				</dl>
+				<div class="txt-right f20 pr20 pt15">合计：<span class="red">￥395.00</span></div>
+				<div class="txt-right pr20 border_bot_e1 f20 mt10 pb20"><a href="javascript:;" class="btn_ope btn_del ml10">删除订单</a><a href="confirm_order.html" class="btn_ope btn_red ml10">去支付</a><a href="#" class="btn_ope ml10">去评价</a></div>
+			</div>
+		</div>
+		<!-- 待付款 -->
+		<div class="tab_order_bd mt10 dis_none">
+			<div class="commod_box bg-white mb10">
+				<dl class="commodity pt20 pb20 border_bot_e1">
+					<dt class="full_img pl20 pr20"><a href="#"><img src="images/none/p-1.jpg"></a></dt>
+					<dd class="vertical_middle pr20">
+						<h4 class="normal f20 title"><a href="#">Braun/博朗欧乐 BType3744 电动牙刷博朗欧乐 BType3744 电动牙刷</a></h4>
+						<p class="f18 gray_90 mt5">颜色：<span>蓝色</span></p>
+						<div class="f22"><span class="red">￥<span class="price">1.01</span></span><span class="fr">x1</span></div>
+					</dd>
+				</dl>
+				<div class="txt-right f20 pr20 pt15">合计：<span class="red">￥395.00</span></div>
+				<div class="txt-right pr20 border_bot_e1 f20 mt10 pb20"><a href="javascript:;" class="btn_ope btn_del ml10">删除订单</a><a href="confirm_order.html" class="btn_ope btn_red ml10">去支付</a><a href="#" class="btn_ope ml10">去评价</a></div>
+			</div>
+			<div class="commod_box bg-white mb10">
+				<dl class="commodity pt20 pb20 border_bot_e1">
+					<dt class="full_img pl20 pr20"><a href="#"><img src="images/none/p-3.jpg"></a></dt>
+					<dd class="vertical_middle pr20">
+						<h4 class="normal f20 title"><a href="#">Braun/博朗欧乐 BType3744 电动牙刷博朗欧乐 BType3744 电动牙刷</a></h4>
+						<p class="f18 gray_90 mt5">颜色：<span>蓝色</span></p>
+						<div class="f22"><span class="red">￥<span class="price">1.01</span></span><span class="fr">x1</span></div>
+					</dd>
+				</dl>
+				<div class="txt-right f20 pr20 pt15">合计：<span class="red">￥395.00</span></div>
+				<div class="txt-right pr20 border_bot_e1 f20 mt10 pb20"><a href="javascript:;" class="btn_ope btn_del ml10">删除订单</a><a href="confirm_order.html" class="btn_ope btn_red ml10">去支付</a><a href="#" class="btn_ope ml10">去评价</a></div>
+			</div>
+		</div>
+		<!-- 待收货 -->
+		<div class="tab_order_bd mt10 dis_none">
+			<div class="commod_box bg-white mb10">
+				<dl class="commodity pt20 pb20 border_bot_e1">
+					<dt class="full_img pl20 pr20"><a href="#"><img src="images/none/p-2.jpg"></a></dt>
+					<dd class="vertical_middle pr20">
+						<h4 class="normal f20 title"><a href="#">Braun/博朗欧乐 BType3744 电动牙刷博朗欧乐 BType3744 电动牙刷</a></h4>
+						<p class="f18 gray_90 mt5">颜色：<span>蓝色</span></p>
+						<div class="f22"><span class="red">￥<span class="price">1.01</span></span><span class="fr">x1</span></div>
+					</dd>
+				</dl>
+				<div class="txt-right f20 pr20 pt15">合计：<span class="red">￥395.00</span></div>
+				<div class="txt-right pr20 border_bot_e1 f20 mt10 pb20"><a href="javascript:;" class="btn_ope btn_del ml10">删除订单</a><a href="confirm_order.html" class="btn_ope btn_red ml10">去支付</a><a href="#" class="btn_ope ml10">去评价</a></div>
+			</div>
+			<div class="commod_box bg-white mb10">
+				<dl class="commodity pt20 pb20 border_bot_e1">
+					<dt class="full_img pl20 pr20"><a href="#"><img src="images/none/p-3.jpg"></a></dt>
+					<dd class="vertical_middle pr20">
+						<h4 class="normal f20 title"><a href="#">Braun/博朗欧乐 BType3744 电动牙刷博朗欧乐 BType3744 电动牙刷</a></h4>
+						<p class="f18 gray_90 mt5">颜色：<span>蓝色</span></p>
+						<div class="f22"><span class="red">￥<span class="price">1.01</span></span><span class="fr">x1</span></div>
+					</dd>
+				</dl>
+				<div class="txt-right f20 pr20 pt15">合计：<span class="red">￥395.00</span></div>
+				<div class="txt-right pr20 border_bot_e1 f20 mt10 pb20"><a href="javascript:;" class="btn_ope btn_del ml10">删除订单</a><a href="confirm_order.html" class="btn_ope btn_red ml10">去支付</a><a href="#" class="btn_ope ml10">去评价</a></div>
+			</div>
+		</div>
+		<!-- 待评价 -->
+		<div class="tab_order_bd mt10 dis_none">
+			<div class="commod_box bg-white mb10">
+				<dl class="commodity pt20 pb20 border_bot_e1">
+					<dt class="full_img pl20 pr20"><a href="#"><img src="images/none/p-3.jpg"></a></dt>
+					<dd class="vertical_middle pr20">
+						<h4 class="normal f20 title"><a href="#">Braun/博朗欧乐 BType3744 电动牙刷博朗欧乐 BType3744 电动牙刷</a></h4>
+						<p class="f18 gray_90 mt5">颜色：<span>蓝色</span></p>
+						<div class="f22"><span class="red">￥<span class="price">1.01</span></span><span class="fr">x1</span></div>
+					</dd>
+				</dl>
+				<div class="txt-right f20 pr20 pt15">合计：<span class="red">￥395.00</span></div>
+				<div class="txt-right pr20 border_bot_e1 f20 mt10 pb20"><a href="javascript:;" class="btn_ope btn_del ml10">删除订单</a><a href="confirm_order.html" class="btn_ope btn_red ml10">去支付</a><a href="#" class="btn_ope ml10">去评价</a></div>
+			</div>
+			<div class="commod_box bg-white mb10">
+				<dl class="commodity pt20 pb20 border_bot_e1">
+					<dt class="full_img pl20 pr20"><a href="#"><img src="images/none/p-3.jpg"></a></dt>
+					<dd class="vertical_middle pr20">
+						<h4 class="normal f20 title"><a href="#">Braun/博朗欧乐 BType3744 电动牙刷博朗欧乐 BType3744 电动牙刷</a></h4>
+						<p class="f18 gray_90 mt5">颜色：<span>蓝色</span></p>
+						<div class="f22"><span class="red">￥<span class="price">1.01</span></span><span class="fr">x1</span></div>
+					</dd>
+				</dl>
+				<div class="txt-right f20 pr20 pt15">合计：<span class="red">￥395.00</span></div>
+				<div class="txt-right pr20 border_bot_e1 f20 mt10 pb20"><a href="javascript:;" class="btn_ope btn_del ml10">删除订单</a><a href="confirm_order.html" class="btn_ope btn_red ml10">去支付</a><a href="#" class="btn_ope ml10">去评价</a></div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+		fnTab('.tab_order');  //选项卡
+		delOrder('.btn_del','.commod_box'); //删除订单
+	</script>
+{% endblock content %}

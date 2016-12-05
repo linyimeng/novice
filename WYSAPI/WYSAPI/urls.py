@@ -10,6 +10,8 @@ api_urls = [
     url(r'^bp/',include('BP.urls')),
     url(r'^order/',include('order.urls')),
     url(r'^wms/',include('wms.urls')),
+    url(r'^fileupload/',include('file.urls')),
+#     url(r'^mall/',include('mall.urls')),
     #url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]
 
@@ -19,7 +21,8 @@ urlpatterns = [
     url(r'^api/',include(api_urls)),
     url(r'^ueditor/', include(ueditorurl)),
     url(r'^blog/',include('blog.urls')),
-    url(r'accounts/login/', 'blog.views.loginx'),
+    url(r'^accounts/login/', 'blog.views.loginx'),
+    url(r'^mall/',include('mall.urls',namespace="mall")),
 ]
 if settings.DEBUG:
     from django.conf.urls.static import static

@@ -2,12 +2,12 @@
 <!-- 创建部门 -->
     <form class="purchase-order" (ngSubmit)="save_department()" #departmentForm="ngForm">
         <div class="order-title">
-            <img src="/assets/img/mr.png" alt="">
-            <a href="">上传图像</a>
+            <img [src]="department.imgurl" onerror="this.src='/assets/img/xsb.png'" alt="">
+            <imgupload [type]="imgtype" (imgurl)="setimgurl($event)"></imgupload>
         </div>
         <div class="order-form">
             <div class="left">
-                <div>	
+                <div>
                     <label for="name">部门名称：</label>
                     <div class="group">
                     <input type="text" [(ngModel)]="department.name" name="name" required #spy>
@@ -26,7 +26,7 @@
                     </div>
                 </div>
             </div>
-            <div class="right">											
+            <div class="right">
                 <span class="detail">备注：</span>
                 <textarea name="remark" [(ngModel)]="department.remark" cols="30" rows="7"></textarea>
             </div>

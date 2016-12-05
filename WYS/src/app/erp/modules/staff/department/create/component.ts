@@ -7,7 +7,8 @@ export class Department {
         public name:string,
         public superiors: string,
         public manager: string,
-		public remark: string
+		public remark: string,
+		public imgurl:string
     ){}
 }
 
@@ -18,8 +19,9 @@ export class Department {
 })
 
 export class  DepartmentCreateComponent implements OnInit{
-	department:Department = new Department('','','','');
+	department:Department = new Department('','','','','');
 	departments:any;
+	imgtype:string = 'department';
 	constructor(
 		private _departmentService:DepartmentService,
 		private router:Router
@@ -30,6 +32,7 @@ export class  DepartmentCreateComponent implements OnInit{
 			departments=>this.departments = departments,
 			error=>alert(error)
 		);
+		this.department.imgurl = '/assets/img/mr.png';
 	}
 
 	save_department() {
@@ -47,6 +50,10 @@ export class  DepartmentCreateComponent implements OnInit{
 
 	setdepartmentPk(pk:string){
 		this.department.superiors = pk;
+	}
+	setimgurl(imgurl) {
+		this.department.imgurl = imgurl;
+		console.log(imgurl);
 	}
 }
 

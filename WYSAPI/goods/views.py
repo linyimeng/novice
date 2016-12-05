@@ -32,7 +32,7 @@ class TypeAttrListAPIView(ListAPIView):
     '''
     serializer_class = TypeAttrSerializer
     def get_queryset(self,*args,**kwargs):
-        goodstype = self.kwargs['gtid']
+        goodstype = Type.objects.getsuperPk(self.kwargs['gtid'])
         attrtype = self.kwargs.get('type',None)
         if attrtype is None:
             queryset_list = TypeAttr.objects.filter(goodstype__id__in=[goodstype,0])

@@ -2,8 +2,8 @@
 <!-- 创建部门 -->
     <form class="purchase-order" (ngSubmit)="save_department()" #departmentForm="ngForm">
         <div class="order-title">
-            <img src="/assets/img/mr.png" alt="">
-            <a href="">上传图像</a>
+            <img [src]="department.imgurl" alt="">
+            <imgupload [type]="imgtype" (imgurl)="setimgurl($event)"></imgupload>
         </div>
         <div class="order-form">
             <div class="left">
@@ -17,12 +17,6 @@
                     <label for="manager" >上级部门：{{pk}}</label>
                     <div class="group">
                         <departmentSelect (departpk)="setdepartmentPk($event)"></departmentSelect>
-                        <!--
-                        <select [(ngModel)]="department.superiors" name="superiors">
-                            <option value="null">无上级部门</option>
-                            <option [value]="depart.pk" *ngFor="let depart of departments">{{depart.name}}</option>
-                        </select>
-                        -->
                     </div>
                 </div>
                 <div>

@@ -19,6 +19,7 @@ class DepartmentSerializer(serializers.ModelSerializer):
                     'superiors',
                     'manager',
                     'customid',
+                    'imgurl',
                     'remark',
                     
                     'staff_number',

@@ -1,0 +1,57 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>{% block head_title %}{% endblock head_title %}-思创商城</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='stylesheet' href='{% static "css/public.css" %}' />
+    <link rel='stylesheet' href='{% static "css/main_style.css" %}' />
+    
+	<script type="text/javascript" src='{% static "js/jquery1.10.2.js" %}'></script>
+	<script type="text/javascript" src='{% static "js/fontsize.js" %}'></script>
+	<script type="text/javascript" src='{% static "js/public.js" %}'></script>
+	{% block head_load_static %}{% endblock head_load_static %}
+</head>
+
+<body class="pb100 {% block bodyclass %}{% endblock bodyclass %}">
+
+{% block content %}{% endblock content %}
+
+{% block footer %}
+<!-- 页脚导航 -->
+<ul class="foot clearfix txt-center bg-white foot_nav">
+	<li id="cur-home"><a href="{% url "mall:view-home" %}"><i class="iconfont f48">&#xe603;</i><span>商城首页</span></a></li>
+	<li id="cur-category"><a href="{% url "mall:view-category" %}"><i class="iconfont f48">&#xe604;</i><span>商品分类</span></a></li>
+	<li id="cur-carts"><a href="{% url "mall:view-carts" %}"><i class="iconfont f48">&#xe605;</i><span>购物车</span></a></li>
+	<li id="cur-user-center"><a href="{% url "mall:view-user-center" %}"><i class="iconfont f48">&#xe606;</i><span>个人中心</span></a></li>
+</ul>
+{% endblock footer %}
+<script>
+	title = $("title").html().split("-")[0];
+	switch(title){
+		case "首页":
+			curid = "cur-home";
+			break;
+		case "分类":
+			curid = "cur-category";
+			break;
+		case "我的":
+			curid = "cur-user-center";
+			break;
+		case "我的订单":
+			curid = "cur-user-center";
+			break;
+		case "我的收货地址":
+			curid = "cur-user-center";
+			break;
+		case "新增地址":
+			curid = "cur-user-center";
+			break;
+		default:break;
+	}
+	$('#'+curid).addClass('cur');
+</script>
+{% block js %}{% endblock js %}
+</body>
+</html>

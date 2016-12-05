@@ -10,6 +10,8 @@ class Department(models.Model):
     superiors = models.ForeignKey('self',default=None,blank=True,null=True)
     customid = models.CharField(max_length=30,unique=True,null=True,default=None,blank=True)
     manager = models.ForeignKey('EmpInfo',related_name='empinfo',blank=True,null=True)
+    
+    imgurl = models.CharField(max_length=120,blank=True,null=True)
     remark = models.TextField(blank=True,null=True)
     joined = models.DateTimeField(_('joined'),auto_now_add=True)
     updated = models.DateTimeField(_('updated'),auto_now=True)
