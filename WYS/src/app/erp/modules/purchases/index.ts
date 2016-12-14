@@ -33,8 +33,8 @@ import { CompanyService } from '../../../services/company.service';
 
 import { GoodstypeSelectComponent } from '../erpform/goodstype-select';
 import { SupplierSelectComponent } from '../erpform/supplier-select';
+import { ImgUploadComponent } from '../erpform/imgupload';
 import { SelectModule } from 'ng2-select';
-
 @NgModule({
     imports:[
         CommonModule,
@@ -67,7 +67,7 @@ import { SelectModule } from 'ng2-select';
         
         GoodstypeSelectComponent,
         SupplierSelectComponent,
-
+        ImgUploadComponent,
     ],
     providers:[
         GoodsService,

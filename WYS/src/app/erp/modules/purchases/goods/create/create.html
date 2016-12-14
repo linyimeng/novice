@@ -2,8 +2,9 @@
 <div class="content"> 
     <form class="purchase-order"  #goodsForm="ngForm" (ngSubmit)="save_goods(goodsForm)">
         <div class="order-title">
-            <img src="/assets/img/mr.png" alt="">
-            <a href="">上传图像</a>
+            <img [src]="imgurl" alt="">
+            <imgupload [type]="imgtype" (imgurl)="setimgurl($event)"></imgupload>
+            <input type="hidden" [(ngModel)]="imgurl" name="imgurl">
         </div>
         <div class="order-form">
             <div class="left">

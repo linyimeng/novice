@@ -5,7 +5,6 @@ import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 
 import { ErpHomeComponent } from './erp.component';
-
 import { ErpRoutes } from './erp.routing';
  
 @NgModule({
@@ -17,7 +16,7 @@ import { ErpRoutes } from './erp.routing';
   ],
 
   declarations: [
-    ErpHomeComponent
+    ErpHomeComponent,
   ],
 
   providers: [

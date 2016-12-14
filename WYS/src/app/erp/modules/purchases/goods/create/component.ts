@@ -12,11 +12,11 @@ export class Goods{
 }
 
 @Component({
-   
    selector: 'goods-create',
    templateUrl: 'create.html'
 })
 export class GoodsCreateComponent{
+    imgurl = '/assets/img/mr.png';
     other_attrs:any;
     goodstype:any = 1;
     constructor(
@@ -61,5 +61,9 @@ export class GoodsCreateComponent{
         this.goodstype = pk;
         this.get_static_attr_list();
         console.log(pk);
+    }
+
+    setimgurl(url){
+        this.imgurl = url;
     }
 }

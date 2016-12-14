@@ -21,7 +21,7 @@ export class FileUploadService extends BaseService {
         return options;
     }
     
-    /** 获取相关部门的职位 */
+    /** 上传图片 */
     uploadimg(formdata){
         return this.http.post(this.get_requesr_url(this.upload_img_url),formdata,this.get_auth_header())
                         .map(this.extractData)
