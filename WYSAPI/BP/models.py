@@ -15,7 +15,7 @@ class Company(models.Model):
     fax = models.CharField(_('fax'),max_length=30,blank=True,null=True)
     address = models.CharField(max_length=225,blank=True,null=True)
     remark = models.TextField(blank=True,null=True)
-    
+    imgurl = models.CharField(max_length=120,blank=True,null=True)
     joined = models.DateTimeField(_('joined'),auto_now_add=True)
     updated = models.DateTimeField(_('updated'),auto_now=True)
     deleted = models.DateTimeField(_('deleted'),blank=True,null=True)
@@ -34,7 +34,7 @@ class Personal(models.Model):
     email = models.EmailField(blank=True,null=True,unique=True)
     fax = models.CharField(_('fax'),max_length=30,blank=True,null=True)
     remark = models.TextField(blank=True,null=True)
-    
+    imgurl = models.CharField(max_length=120,blank=True,null=True)
     joined = models.DateTimeField(_('joined'),auto_now_add=True)
     updated = models.DateTimeField(_('updated'),auto_now=True)
     deleted = models.DateTimeField(_('deleted'),blank=True,null=True)

@@ -58,6 +58,8 @@ class EmpInfo(models.Model):
     
     isarchive = models.BooleanField(_('is archive'),default=False)
     entry_time = models.DateTimeField(blank=True,null=True)
+    
+    imgurl = models.CharField(max_length=120,blank=True,null=True)
     joined = models.DateTimeField(_('joined'),auto_now_add=True)
     updated = models.DateTimeField(_('updated'),auto_now=True)
     deleted = models.DateTimeField(_('deleted'),blank=True,null=True)
