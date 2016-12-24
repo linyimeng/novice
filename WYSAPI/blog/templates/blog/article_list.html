@@ -1,0 +1,32 @@
+{% extends "blog/base.html" %}
+{% load staticfiles %}
+
+{% block head_title %}文章列表{% endblock head_title %}
+
+{% block content %}
+	<div class="content-wrapper">
+		<div class="w-container">
+			<h1 class="section-header">文章列表</h1>
+			<div class="w-dyn-list">
+				<div class="w-dyn-items">
+					{% for article in articles %}
+					<div class="w-dyn-item">
+						<div class="post-wrapper">
+							<a class="blog-title-link w-inline-block" href="{% url 'article-detail' article.pk %}">
+								<h1 class="blog-title">{{ article.title }}</h1>
+							</a>
+							<div class="post-info-wrapper">
+								<div class="post-info">{{ article.updated|date:"Y-m-d H:i:s" }}</div>
+								<div class="post-info">|</div>
+								<span class="post-info">一梦</span>
+							</div>
+							<p class="post-summary">{{ article.description }}</p>
+							<a class="button-round w-button" href="{% url 'article-detail' article.pk %}">阅读详情</a>
+						</div>
+					</div>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock content %}

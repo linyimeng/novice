@@ -1,0 +1,82 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{% block head_title %}{% endblock head_title %}</title>
+	<meta charset=UTF-8">
+	<meta content="width=device-width, initial-scale=1" name="viewport">
+	<link href="{% static 'css/public.css' %}" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" href="{% static './css/bsae.css' %}">
+</head>
+
+<body>
+{% block header %}
+<header class="header-section" id="header">
+	<div class="w-container">
+		<a class="main-title" href="{% url 'article-list' %}">一梦</a>
+		<p class="main-subheading">很简单</p>
+		<div class="dropdown-wrapper w-dropdown" data-delay="0">
+			<div class="dropdown-menu w-clearfix w-dropdown-toggle">
+				<img class="menu-icon" height="12" src="{% static 'imgs/menu.svg' %}" width="12">
+					<div class="menu-text">菜单</div>
+			</div>
+			<nav class="menu-list w-dropdown-list">
+				<a class="home menu-link w-dropdown-link" href="{% url 'article-list' %}">首页</a>
+				<a class="menu-link w-dropdown-link" href="#">关于我</a>
+				<a class="menu-link w-dropdown-link" href="#">联系我</a>
+			</nav>
+		</div>
+		<!-- 社交链接
+		<div class="social-link-group">
+			<a class="social-icon-link w-inline-block" href="#">
+				<img src="#" width="25">
+			</a>
+			<a class="social-icon-link w-inline-block" href="#">
+				<img src="#" width="25">
+			</a>
+			<a class="social-icon-link w-inline-block" href="#">
+				<img src="#" width="25">
+			</a>
+			<a class="social-icon-link w-inline-block" href="#">
+				<img src="#" width="25">
+			</a>
+			<a class="social-icon-link w-inline-block" href="#">
+				<img src="#" width="25">
+			</a>
+			<a class="social-icon-link w-inline-block" href="#">
+				<img src="#" width="25">
+			</a>
+			<a class="social-icon-link w-inline-block" href="#">
+				<img src="#" width="25">
+			</a>
+		</div>
+		-->
+	</div>
+</header>
+{% endblock header %}
+
+{% block content %}{% endblock content %}
+
+<footer class="footer">
+	<div class="w-container">
+		<div class="navigation-bar">
+			<a class="nav-link w--current" href="{% url 'article-list' %}">首页</a>
+			<a class="nav-link" href="#">关于我</a>
+			<a class="nav-link" href="#">联系我</a>
+			<a class="float-right nav-link w--current" href="#header">回到顶部</a>
+		</div>
+	</div>
+</footer>
+
+<script src="{% static 'js/jquery.min.js' %}" type="text/javascript"></script>
+<script>
+	$('.dropdown-menu').click(function(){
+		if($('.menu-list').css('display')=='none') {
+			$(".menu-list").show();
+		} else {
+			$(".menu-list").hide();
+		}
+	})
+</script>
+</body>
+</html>
