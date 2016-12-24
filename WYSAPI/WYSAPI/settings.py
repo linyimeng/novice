@@ -33,7 +33,7 @@ INSTALLED_APPS = (
     'blog',
     'staff',
     'goods',
-    'BP',
+    'bp',
     'order',
     'file',
     'mall',

@@ -9,3 +9,6 @@ class Images(models.Model):
     creator = models.ForeignKey(User)
     joined = models.DateTimeField(_('joined'),auto_now_add=True)
     updated = models.DateTimeField(_('updated'),auto_now=True)
+    
+    def __str__(self):
+        return self.img
