@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "wemall/base.html" %}
 {% load staticfiles %}
 
 {% block content %}

@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "wemall/base.html" %}
 {% load staticfiles %}
 {% block head_title %}购物车{% endblock head_title %}
 {% block bodyclass %}bg-gray-f0{% endblock bodyclass %}
@@ -9,7 +9,7 @@
 	<!-- 页脚导航 -->
 	<div class="foot bg-white select_all">
 		<div class="p10 ml10 mr10 clearfix f26">
-			<div class="fl"><i class="iconfont check vertical_middle"></i><span class="vertical_middle ml10">全选</span></div>
+			<div class="fl"><i class="iconfont check vertical_middle checked"></i><span class="vertical_middle ml10">全选</span></div>
 			<div class="txt-right fr">
 				总计：<span class="red mr40">￥<i class="total"></i></span>
 				<a href="{% url "mall:view-confirm-order" %}" class="white btn_billing confirm_order">去结算(<i class="sum_num"></i>)</a>
@@ -18,37 +18,18 @@
 	</div>
 	<!-- 购物车 -->
 	<div class="carts">
+		{% for cartgoods in cartgoodss %}
 		<ul class="bg-white mb10 pt20 pb20">
-			<li class="carts_check"><i class="iconfont check" id="001"></i></li>
-			<li class="carts_img full_img"><a href="#"><img src="images/none/p-3.jpg"></a></li>
+			<li class="carts_check"><i class="iconfont check checked" id="001"></i></li>
+			<li class="carts_img full_img"><a href="#"><img src="{{cartgoods.goods.gsav.imgurl}}"></a></li>
 			<li class="carts_info pl20 pr20">
-				<h5 class="normal f20"><a href="#" class="txt-nowrap">  Braun/博朗欧乐 BType3744 电动牙刷博朗欧乐 BType3744 电动牙刷</a></h5>
+				<h5 class="normal f20"><a href="#" class="txt-nowrap">{{cartgoods.goods.gsav.name}}</a></h5>
 				<p class="f18 gray_90">颜色：<span>蓝色</span></p>
-				<div class="red f22">￥<span class="price">1.01</span></div>
-				<div class="num_box f18"><i class="btn-del fr">删除</i><a href="javascript:;" class="btn_less">-</a><span class="num">3</span><a href="javascript:;" class="btn_plus">+</a></div>
+				<div class="red f22">￥<span class="price">{{cartgoods.goods.gsav.saleprice}}</span></div>
+				<div class="num_box f18"><i class="btn-del fr">删除</i><a href="javascript:;" class="btn_less">-</a><span class="num">{{cartgoods.num}}</span><a href="javascript:;" class="btn_plus">+</a></div>
 			</li>
 		</ul>
-		<ul class="bg-white mb10 pt20 pb20">
-			<li class="carts_check"><i class="iconfont check checked" id="002">&#xe610;</i></li>
-			<li class="carts_img full_img"><a href="#"><img src="images/none/p-3.jpg"></a></li>
-			<li class="carts_info pl20 pr20">
-				<h5 class="normal f20"><a href="#" class="txt-nowrap">Braun/博朗欧乐 BType3744 电动牙刷博朗欧乐 BType3744 电动牙刷</a></h5>
-				<p class="f18 gray_90">颜色：<span>蓝色</span></p>
-				<div class="red f22">￥<span class="price">10.00</span></div>
-				<div class="num_box f18"><i class="btn-del fr">删除</i><a href="javascript:;" class="btn_less">-</a><span class="num">1</span><a href="javascript:;" class="btn_plus">+</a></div>
-			</li>
-		</ul>
-		<ul class="bg-white mb10 pt20 pb20">
-			<li class="carts_check"><i class="iconfont check checked" id="003">&#xe610;</i></li>
-			<li class="carts_img full_img"><a href="#"><img src="images/none/p-3.jpg"></a></li>
-			<li class="carts_info pl20 pr20">
-				<h5 class="normal f20"><a href="#" class="txt-nowrap">Braun/博朗欧乐 BType3744 电动牙刷博朗欧乐 BType3744 电动牙刷</a></h5>
-				<p class="f18 gray_90">颜色：<span>蓝色</span></p>
-				<div class="red f22">￥<span class="price">99.00</span></div>
-				<div class="num_box f18"><i class="btn-del fr">删除</i><a href="javascript:;" class="btn_less">-</a><span class="num">1</span><a href="javascript:;" class="btn_plus">+</a></div>
-			</li>
-		</ul>
-	
+		{% endfor %}
 	</div>
 	<div>总计：<input type="hidden" id="totalcartnumb" /></div>
 	<div class="count bg-white pl20 pr20 pt10 pb10 f26"><span>已选择<i class="sum_num"></i>件商品</span><span class="fr">应付：<span class="red">￥<i class="total"></i></span></span></div>
@@ -69,7 +50,7 @@
 .dialog .close{ font-size:0.2rem; display:block; position:absolute; top:5px; right:10px; }
 .select_all .unable{ background:#ccc; }
 </style>
-<script type="text/javascript" src="{% static "js/carts.js" %}"></script>
+<script type="text/javascript" src="{% static "mall/js/carts.js" %}"></script>
 <script type="text/javascript">
 $(function(){
 	fnSelect(".select_all", ".carts", ".check");

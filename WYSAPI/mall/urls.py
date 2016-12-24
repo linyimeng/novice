@@ -5,13 +5,14 @@ Created on 2016-11-30
 '''
 from django.conf.urls import url
 from mall import views
+from mall import ajax
 urlpatterns = [
     url('^$',views.view_home),
     url('^home/$',views.view_home,name="view-home"),
     
-    url('^category/$',views.view_category_list,name='view-category'),
+    url('^category/(?P<categorypk>[^/.]+)/$',views.view_category_list,name='view-category'),
     
-    url('^detail/$',views.view_detail,name='view-goods-detail'),
+    url('^detail/(?P<gpk>[^/.]+)/$',views.view_detail,name='view-goods-detail'),
     
     url('^carts/$',views.view_carts,name="view-carts"),
     url('^confirmorder/$',views.view_confirm_order,name="view-confirm-order"),
@@ -21,4 +22,7 @@ urlpatterns = [
     url('^addaddress/$',views.add_address,name="add-address"),
     url('^myorder/$',views.view_order,name="view-order"),
     url('^mycollection/$',views.view_mycollection,name="view-collection"),
+    
+    url('^pushcart/$',ajax.push_cart,name="ajax-push-cart"),
+    url('^lesscart/$',ajax.less_cart,name="ajax-less-cart"),
 ]

@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "wemall/base.html" %}
 {% load staticfiles %}
 {% block head_title %}新增地址{% endblock head_title %}
 {% block content %}
@@ -19,7 +19,7 @@
 		<div class="f20 pb25 line_gray pt20"><span class="mr10 radio f18 vertical_middle"></span>设为默认地址</div>
 		<input type="submit" value="确认" class="btn_pay_input f30 white mt20">
 	</form>
-	<script src="{% static "js/area.js" %}"></script>
+	<script src="{% static "mall/js/area.js" %}"></script>
 	<script type="text/javascript">
 		_init_area();//三级联动地址
 	

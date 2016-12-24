@@ -5,12 +5,12 @@
 	<meta charset="UTF-8">
 	<title>{% block head_title %}{% endblock head_title %}-思创商城</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel='stylesheet' href='{% static "css/public.css" %}' />
-    <link rel='stylesheet' href='{% static "css/main_style.css" %}' />
+    <link rel='stylesheet' href='{% static "mall/css/public.css" %}' />
+    <link rel='stylesheet' href='{% static "mall/css/main_style.css" %}' />
     
-	<script type="text/javascript" src='{% static "js/jquery1.10.2.js" %}'></script>
-	<script type="text/javascript" src='{% static "js/fontsize.js" %}'></script>
-	<script type="text/javascript" src='{% static "js/public.js" %}'></script>
+	<script type="text/javascript" src='{% static "mall/js/jquery1.10.2.js" %}'></script>
+	<script type="text/javascript" src='{% static "mall/js/fontsize.js" %}'></script>
+	<script type="text/javascript" src='{% static "mall/js/public.js" %}'></script>
 	{% block head_load_static %}{% endblock head_load_static %}
 </head>
 
@@ -22,7 +22,7 @@
 <!-- 页脚导航 -->
 <ul class="foot clearfix txt-center bg-white foot_nav">
 	<li id="cur-home"><a href="{% url "mall:view-home" %}"><i class="iconfont f48">&#xe603;</i><span>商城首页</span></a></li>
-	<li id="cur-category"><a href="{% url "mall:view-category" %}"><i class="iconfont f48">&#xe604;</i><span>商品分类</span></a></li>
+	<li id="cur-category"><a href="{% url "mall:view-category" 888888 %}"><i class="iconfont f48">&#xe604;</i><span>商品分类</span></a></li>
 	<li id="cur-carts"><a href="{% url "mall:view-carts" %}"><i class="iconfont f48">&#xe605;</i><span>购物车</span></a></li>
 	<li id="cur-user-center"><a href="{% url "mall:view-user-center" %}"><i class="iconfont f48">&#xe606;</i><span>个人中心</span></a></li>
 </ul>
