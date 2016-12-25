@@ -16,23 +16,17 @@
 		</li>
 		<li class="more txt-right vertical_middle pr20"><a class="iconfont f26" href="#">&#xe60f;</a></li>
 	</ul>
+	{% for goods in order.details %}
 	<dl class="commodity bg-white mb10 pt20 pb20" id="0011">
-		<dt class="full_img pl20 pr20"><a href="#"><img src="{% static "mall/images/none/p-3.jpg" %}"></a></dt>
+		<dt class="full_img pl20 pr20"><a href="#"><img src="{{goods.gsav.imgurl}}"></a></dt>
 		<dd class="vertical_middle pr20">
-			<h4 class="normal f20"><a href="#" class="txt-nowrap">Braun/博朗欧乐 BType3744 电动牙刷博朗欧乐 BType3744 电动牙刷</a></h4>
+			<h4 class="normal f20"><a href="#" class="txt-nowrap">{{goods.gsav.name}}</a></h4>
 			<p class="f18 gray_90 mt5">颜色：<span>蓝色</span></p>
-			<div class="f30 mt10"><span class="red">￥<span class="price">1.01</span></span><span class="fr">x1</span></div>
+			<div class="f30 mt10"><span class="red">￥<span class="price">{{goods.price}}</span></span><span class="fr">x{{goods.quantity}}</span></div>
 		</dd>
 	</dl>
-	<dl class="commodity bg-white mb10 pt20 pb20" id="0012">
-		<dt class="full_img pl20 pr20"><a href="#"><img src="{% static "mall/images/none/p-3.jpg" %}"></a></dt>
-		<dd class="vertical_middle pr20">
-			<h4 class="normal f20"><a href="#" class="txt-nowrap">Braun/博朗欧乐 BType3744 电动牙刷博朗欧乐 BType3744 电动牙刷</a></h4>
-			<p class="f18 gray_90 mt5">颜色：<span>蓝色</span></p>
-			<div class="f30 mt10"><span class="red">￥<span class="price">1.01</span></span><span class="fr">x1</span></div>
-		</dd>
-	</dl>
-	<div class="txt-center f30 bg-white pt10 pb10">总价：<span class="red">￥899.00</span></div>
+	{% endfor %}
+	<div class="txt-center f30 bg-white pt10 pb10">总价：<span class="red">￥{{order.ordermain.totalprice}}</span></div>
 	<a href="#" class="btn_pay m20 f30 white txt-center dis_block pt5 pb5">微信支付</a>
 	<div>总计：<input type="hidden" id="totalcartnumb" /></div>
 	
@@ -43,19 +37,6 @@
 {% block js %}
 	<script>
 		confirmTotalNum();
-		
-		/*function confirmTotalNum(){
-			var str='';
-			$('.mod_list li').each(function(){
-				if(str==''){
-					str=$(this).attr('id');
-				}else{
-					str=str+','+$(this).attr('id');
-				}
-			});
-			$('#totalcartnumb').val(str);
-		}*/
-		
 		function confirmTotalNum(){
 			var str='';
 			$('.commodity').each(function(){

@@ -1,7 +1,8 @@
 from django.shortcuts import render
-from mall.business import MallGoods
-from mall.business import MallGoodsType
-
+from mall.business import MallGoods,MallGoodsType,MallOrder
+from urllib.parse import unquote
+from django.http.response import HttpResponse
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 def view_home(request):
     home_goods_list = MallGoods.objects.get_home_goods_list()
@@ -27,15 +28,29 @@ def view_detail(request,gpk):
                    'goods':goodsdetail,
                  })
 
-#需判断是否登录
 def view_carts(request):
-    carts_json = '[{"gid":"34","num":"3"},{"gid":"33","num":"7"},{"gid":"35","num":"1"}]'
+    carts_json = request.COOKIES.get('carts')
+    if carts_json is None:
+        return HttpResponse('空购物车')
+    else:
+        carts_json = unquote(carts_json)
     cartgoodss = MallGoods.objects.get_cart_goods_list(carts_json)
     return render(request,"wemall/carts.html",{
                     'cartgoodss':cartgoodss,
                  })
     
     
+#需判断是否登录
+@login_required
+def view_confirm_order(request):
+    order_json = request.COOKIES.get('order')
+    if order_json is None:
+        return HttpResponse('空订单')
+    else:
+        order_json = unquote(order_json)
+    order = MallOrder.objects.create_order(order_json,request.user)
+    print(order)
+    return render(request,"wemall/confirm_order.html",{'order':order})
 
 def view_user_center(request):
     return render(request,"wemall/user_center.html")
@@ -55,8 +70,7 @@ def view_order(request):
 def view_mycollection(request):
     return render(request,"wemall/mycollection.html")
 
-def view_confirm_order(request):
-    return render(request,"wemall/confirm_order.html")
+
     
 
     
