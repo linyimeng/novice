@@ -68,6 +68,12 @@ REST_FRAMEWORK = {
     'TEST_REQUEST_DEFAULT_FORMAT': 'json',
 }
 
+#mall config
+MALL = {
+    'ORDER_STATUS' : (
+        
+    ),
+}
 
 TEMPLATES = [
     {
@@ -94,7 +100,7 @@ WSGI_APPLICATION = 'WYSAPI.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'WYSAPI',
+        'NAME': 'sc',
         'USER':'ym',
         'PASSWORD':'panyuli1314520',
         'HOST':'127.0.0.1',

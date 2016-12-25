@@ -24,7 +24,7 @@ class Company(models.Model):
     
 class Personal(models.Model):
     name = models.CharField(max_length=30)
-    user = models.ForeignKey(User,blank=True,null=True)
+    user = models.ForeignKey(User,blank=True,null=True,related_name='user_personal')
     company = models.ForeignKey(Company,blank=True,null=True)
     job = models.CharField(max_length=20,blank=True,null=True)
     is_job = models.BooleanField(default=True)
