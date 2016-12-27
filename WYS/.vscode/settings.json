@@ -1,5 +1,0 @@
-{
-    "typescript.tsdk": "./node_modules/typescript/lib",
-    "editor.fontFamily":"WenQuanYi Micro Hei Mono",
-    "editor.fontSize":14
-}
