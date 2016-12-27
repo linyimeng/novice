@@ -1,0 +1,30 @@
+<!-- 进货单列表 -->
+<div class="content">
+<table>
+    <thead>
+        <tr>
+            <th><input type="checkbox"></th>
+            <th>单号</th>
+            <th>供应商</th>
+            <th>总数</th>
+            <th>总金额</th>
+            <th>创建人</th>
+            <th>订单日期</th>
+            <th>备注</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let iorder of iorders">
+            <th><input name="radiogroup" type="checkbox"></th>
+            <td routerLink="/purchases/purchaseorder/{{iorder.ordercode}}">{{iorder.ordercode}}</td>
+            <td>{{iorder.company}}</td>
+            <td>{{iorder.totalquantity}}</td>
+            <td>{{iorder.totalprice}}</td>
+            <td>{{iorder.creator}}</td>
+            <td>{{iorder.joined | date:"yyyy-MM-dd HH:mm:ss"}}</td>
+            <td>{{iorder.remark}}</td>
+        </tr>
+    </tbody>
+    
+</table>
+</div>

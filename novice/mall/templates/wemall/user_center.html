@@ -1,0 +1,29 @@
+{% extends "wemall/base.html" %}
+{% load staticfiles %}
+{% block head_title %}我的{% endblock head_title %}
+{% block content %}
+	<!-- 顶部 -->
+	<div class="head white pos_rel"><i class="iconfont f26">&#xe60b;</i><span class="f34">用户中心</span><a href="javascript:;" class="more pos_abs"><span class="nav_cir"></span><span class="nav_cir"></span><span class="nav_cir"></span></a></div>
+	<!-- 用户名 -->
+	<div class="user_name pos_rel">
+		<span class="user_photo pos_abs full_img"><img src="{% static "mall/images/none/user_img.jpg" %}"></span>
+		<span class="name white f36">wx_60nfdq</span>
+	</div>
+	<!-- 我的订单 -->
+	<div class="bg-gray-f0 pt10 pb20">
+		<div class="bg-white my_order">
+			<h3 class="f30 normal border_bot_light pt10 pb10 pl20"><a href="{% url "mall:view-order" %}">我的订单</a></h3>
+			<ul class="txt-center clearfix">
+				<li><a href="{% url "mall:view-order" %}"><i class="iconfont f48">&#xe607;</i><span>全部订单</span></a></li>
+				<li><a href="#"><i class="iconfont f48">&#xe608;</i><span>待付款</span></a></a></li>
+				<li><a href="#"><i class="iconfont f48">&#xe609;</i><span>待收货</span></a></a></li>
+				<li><a href="#"><i class="iconfont f48">&#xe60a;</i><span>待评价</span></a></a></li>
+			</ul>
+		</div>
+	</div>
+	<ul class="fastway_list">
+		<li><a href="{% url "mall:view-address" %}"><i class="iconfont mr10 f30">&#xe602;</i>收货地址<i class="iconfont fr">&#xe60f;</i></a></li>
+		<li><a href="#"><i class="iconfont mr10 f30">&#xe600;</i>在线充值<i class="iconfont fr">&#xe60f;</i></a></li>
+		<li><a href="{% url "mall:view-collection" %}"><i class="iconfont mr10 f30">&#xe601;</i>我的收藏<i class="iconfont fr">&#xe60f;</i></a></li>
+	</ul>
+{% endblock content %}

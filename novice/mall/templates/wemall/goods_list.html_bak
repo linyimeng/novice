@@ -1,0 +1,100 @@
+{% extends "wemall/base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+
+<!-- 顶部 -->
+<div class="head white pos_rel">
+	<i class="iconfont f26">&#xe60b;</i>
+	<span class="f34">商品列表</span>
+	<a href="javascript:;" class="more pos_abs">
+		<span class="nav_cir"></span>
+		<span class="nav_cir"></span>
+		<span class="nav_cir"></span>
+	</a>
+</div>
+{% include "search-goods.html" %}
+
+<!-- 排序 -->
+<div class="over-scroll-x">
+	<ul class="sequence clearfix txt-center f24">
+		<li><a href="#" class="cur">综合</a></li>
+		<li><a href="#">人气</a></li>
+		<li><a href="#">销售</a></li>
+		<li><a href="#">价格</a></li>
+		<li><a href="#">人气1</a></li>
+		<li><a href="#">销售1</a></li>
+		<li><a href="#">价格1</a></li>
+		<li><a href="#">人气2</a></li>
+		<li><a href="#">销售2</a></li>
+		<li><a href="#">价格2</a></li>
+		<li><a href="#">人气3</a></li>
+		<li><a href="#">销售3</a></li>
+		<li><a href="#">价格3</a></li>
+	</ul>
+</div>
+<!-- 商品列表 start -->
+<dl class="products_box pos_rel">
+	<dt class="pos_abs full_img"><a href="products_content.html"><img src="images/none/p-1.jpg"></a></dt>
+	<dd class="pos_rel">
+		<h4 class="normal f20"><a href="#">商场同款ROEM罗燕新品气质优雅小香风RCJK66305Ba专柜正品</a></h4>
+		<div class="country f30"><i class="icon_korea"></i><span class="vertical_middle">韩国</span></div>
+		<div class="red f30 price">￥598.00</div>
+		<span class="evaluation pos_abs f18"><i>0</i>人评价</span>
+	</dd>
+</dl>
+<dl class="products_box pos_rel">
+	<dt class="pos_abs full_img"><a href="products_content.html"><img src="images/none/p-2.jpg"></a></dt>
+	<dd class="pos_rel">
+		<h4 class="normal f20"><a href="#">商场同款ROEM罗燕新品气质优雅小香风RCJK66305Ba专柜正品</a></h4>
+		<div class="country f30"><i class="icon_usa"></i><span class="vertical_middle">美国</span></div>
+		<div class="red f30 price">￥598.00</div>
+		<span class="evaluation pos_abs f18"><i>0</i>人评价</span>
+	</dd>
+</dl>
+<dl class="products_box pos_rel">
+	<dt class="pos_abs full_img"><a href="products_content.html"><img src="images/none/p-1.jpg"></a></dt>
+	<dd class="pos_rel">
+		<h4 class="normal f20"><a href="#">商场同款ROEM罗燕新品气质优雅小香风RCJK66305Ba专柜正品</a></h4>
+		<div class="country f30"><i class="icon_italy"></i><span class="vertical_middle">意大利</span></div>
+		<div class="red f30 price">￥598.00</div>
+		<span class="evaluation pos_abs f18"><i>0</i>人评价</span>
+	</dd>
+</dl>
+<dl class="products_box pos_rel">
+	<dt class="pos_abs full_img"><a href="products_content.html"><img src="images/none/p-2.jpg"></a></dt>
+	<dd class="pos_rel">
+		<h4 class="normal f20"><a href="#">商场同款ROEM罗燕新品气质优雅小香风RCJK66305Ba专柜正品</a></h4>
+		<div class="country f30"><i class="icon_korea"></i><span class="vertical_middle">韩国</span></div>
+		<div class="red f30 price">￥598.00</div>
+		<span class="evaluation pos_abs f18"><i>0</i>人评价</span>
+	</dd>
+</dl>
+<dl class="products_box pos_rel">
+	<dt class="pos_abs full_img"><a href="products_content.html"><img src="images/none/p-1.jpg"></a></dt>
+	<dd class="pos_rel">
+		<h4 class="normal f20"><a href="#">商场同款ROEM罗燕新品气质优雅小香风RCJK66305Ba专柜正品</a></h4>
+		<div class="country f30"><i class="icon_korea"></i><span class="vertical_middle">韩国</span></div>
+		<div class="red f30 price">￥598.00</div>
+		<span class="evaluation pos_abs f18"><i>0</i>人评价</span>
+	</dd>
+</dl>
+<dl class="products_box pos_rel">
+	<dt class="pos_abs full_img"><a href="products_content.html"><img src="images/none/p-2.jpg"></a></dt>
+	<dd class="pos_rel">
+		<h4 class="normal f20"><a href="#">商场同款ROEM罗燕新品气质优雅小香风RCJK66305Ba专柜正品</a></h4>
+		<div class="country f30"><i class="icon_england"></i><span class="vertical_middle">英国</span></div>
+		<div class="red f30 price">￥598.00</div>
+		<span class="evaluation pos_abs f18"><i>0</i>人评价</span>
+	</dd>
+</dl>
+<!-- 商品列表 end -->
+
+{% endblock content %}
+{% block js %}
+	<script type="text/javascript">
+		toggleClass('.sequence li','cur');
+	
+		setTotalWidth('.sequence');
+	</script>
+{% endblock js %}

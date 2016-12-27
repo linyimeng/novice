@@ -1,0 +1,29 @@
+<!-- 人员列表 -->
+<div class="content">
+    <!-- 人员列表 -->
+    <table>
+        <thead>
+            <tr>
+                <th><input type="checkbox"></th>
+                <th>工号</th>
+                <th>姓名</th>
+                <th>电话</th>
+                <th>邮箱</th>
+                <th>部门</th>
+                <th>职位</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let staff of staffs">
+                <th><input name="radiogroup" type="checkbox"></th>
+                <td>{{staff.pk}}</td>
+                <td routerLink="/staff/staff/{{staff.pk}}">{{staff.name}}</td>
+                <td>{{staff.office_phone}}</td>
+                <td>{{staff.email}}</td>
+                <td>{{staff.department_name}}</td>
+                <td>{{staff.job_name}}</td>
+            </tr>
+        </tbody>
+        
+    </table>
+</div>

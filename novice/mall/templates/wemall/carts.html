@@ -1,0 +1,212 @@
+{% extends "wemall/base.html" %}
+{% load staticfiles %}
+{% block head_title %}购物车{% endblock head_title %}
+{% block head_load_static %}
+	<script type="text/javascript" src='{% static "mall/js/jquery.cookie.js" %}'></script>
+{% endblock head_load_static %}
+{% block bodyclass %}bg-gray-f0{% endblock bodyclass %}
+
+{% block content %}
+	<!-- 顶部 -->
+	<div class="head white head_cen f26"><a class="iconfont back white" href="javascript:history.go(-1);">&#xe60c;</a><span class="f34 txt-center">购物车</span><!--<a href="javascript:;" class="edit txt-right white">编辑</a>--></div>
+	<!-- 页脚导航 -->
+	<div class="foot bg-white select_all">
+		<div class="p10 ml10 mr10 clearfix f26">
+			<div class="fl"><i class="iconfont check vertical_middle checked"></i><span class="vertical_middle ml10">全选</span></div>
+			<div class="txt-right fr">
+				总计：<span class="red mr40">￥<i class="total"></i></span>
+				<a href="{% url "mall:view-confirm-order" %}" class="white btn_billing confirm_order">去结算(<i class="sum_num confirm-num"></i>)</a>
+			</div>
+		</div>
+	</div>
+	<!-- 购物车 -->
+	<div class="carts">
+		{% for cartgoods in cartgoodss %}
+		<ul class="bg-white mb10 pt20 pb20">
+			<li class="carts_check"><i class="iconfont check checked" id="001"></i></li>
+			<li class="carts_img full_img"><a href="#"><img src="{{cartgoods.goods.gsav.imgurl}}"></a></li>
+			<li class="carts_info pl20 pr20">
+				<h5 class="normal f20"><a href="#" class="txt-nowrap">{{cartgoods.goods.gsav.name}}</a><span class="goodspk" style="display:none">{{cartgoods.goods.pk}}</span></h5>
+				<p class="f18 gray_90">颜色：<span>蓝色</span></p>
+				<div class="red f22">￥<span class="price">{{cartgoods.goods.gsav.saleprice}}</span></div>
+				<div class="num_box f18">
+					<i class="btn-del fr">删除<span class="goodspk-del" style="display:none">{{cartgoods.goods.pk}}</span></i>
+					
+					<a href="javascript:;" class="btn_less">-</a>
+						<span class="num">{{cartgoods.num}}</span>
+					<a href="javascript:;" class="btn_plus">+</a>
+				</div>
+			</li>
+		</ul>
+		{% endfor %}
+	</div>
+	<div>总计：<input type="hidden" id="totalcartnumb" /></div>
+	<div class="count bg-white pl20 pr20 pt10 pb10 f26"><span>已选择<i class="sum_num"></i>件商品</span><span class="fr">应付：<span class="red">￥<i class="total"></i></span></span></div>
+	<div id="dialog-select" class="dialog">
+		<i id="close" onclick="BtPopHide('dialog-select')" class="iconfont close">&#xe60b;</i> 
+		<h4 class="normal">提示：</h4>
+		<p>请选择选择商品</p>
+	</div>
+{% endblock content %}
+
+{% block footer %}
+{% endblock footer %}
+
+{% block js %}
+	<style>
+.dialog{ border:1px solid #ccc; width:70%; background:#fff; padding:0.05rem 0.15rem; display:none;} 
+.dialog h4{ font-size:0.2rem; }
+.dialog .close{ font-size:0.2rem; display:block; position:absolute; top:5px; right:10px; }
+.select_all .unable{ background:#ccc; }
+</style>
+<script type="text/javascript" src="{% static "mall/js/carts.js" %}"></script>
+<script type="text/javascript">
+function reset_carts_cookie(obj){
+	var carts = get_carts_obj();
+	var num = Number(obj.find('.num').text());
+	var gid = Number(obj.find('.goodspk').text());
+	var cart = {"gid":gid,"num":num};
+	//替换原有的
+	for(var i in carts){
+		if( carts[i].gid == gid ) {
+			carts[i] = cart;
+		}
+	}
+	carts_json = JSON.stringify(carts);
+	$.cookie('carts',carts_json,{'path':'/'});
+}
+
+function delete_carts_cookie(obj){
+	var carts = get_carts_obj();
+	var gid = Number(obj.find('.goodspk-del').text());
+	console.log(gid)
+	for(var i in carts){
+		if( carts[i].gid == gid ) {
+			carts.splice(i,1);
+		}
+	}
+	carts_json = JSON.stringify(carts);
+	console.log(carts_json);
+	$.cookie('carts',carts_json,{'path':'/'});
+}
+
+function get_carts_obj(){
+	var carts_json = $.cookie('carts');
+	if(carts_json == undefined) {
+		var carts = Array();
+	} else {
+		var carts = JSON.parse(carts_json);
+	}
+	return carts;
+}
+
+$(function(){
+	fnSelect(".select_all", ".carts", ".check");
+
+	$(".carts ul").each(function(){
+		var _this=$(this);
+
+		_this.find('.btn_plus').bind('click', function() {
+			numPlus($(this), '.num', '.btn_less');
+			reset_carts_cookie(_this);
+			sum(".select_all", ".carts", ".check",'.count');//计算金额
+		});
+
+		//判断当前“减”按钮是否可用
+		_this.find('.num_box .num').each(function() {
+			var $this=$(this);
+			if(parseInt($this.text())==1){
+				$this.siblings('.btn_less').addClass('failed');
+			}
+		});
+
+		_this.find('.btn_less').bind('click', function() {
+			numLess($(this), '.num');
+			reset_carts_cookie(_this);
+			sum(".select_all", ".carts", ".check",'.count');//计算金额
+		});
+
+	});
+	
+	//删除商品
+	$('.carts .btn-del').bind('click',function(){
+		var $this=$(this);
+		delete_carts_cookie($this);
+		$this.parentsUntil('ul').parent().remove();
+		sum(".select_all", ".carts", ".check",'.count');//计算金额
+	});
+	
+});
+</script>
+<script>
+	$(function(){
+		cartsTotalNum();
+	
+		$('.carts .carts_check i').bind('click',function(){
+			cartsTotalNum();
+		});
+	
+		//去结算
+		$('.confirm_order').bind('click', function() {
+			if($(this).hasClass('unable')){
+				return false;
+			}else{
+				//获取订单和gid数组
+				var gids = Array();
+				var order = Array();
+				$(".carts ul").each(function(){
+					var _this=$(this);
+					if(_this.find('.carts_check i').hasClass('checked')){
+						gid = Number(_this.find('.goodspk').text());
+						num = Number(_this.find('.num').text());
+						cart = {"gid":gid,"num":num};
+						gids.push(gid);
+						order.push(cart);
+					}
+				});
+				//设置临时cookie上传order至服务端
+				order_json = JSON.stringify(order);
+				$.cookie('order',order_json,{'path':'/'});
+				//改写购物车cookie
+				carts = get_carts_obj();
+				for(var i in carts){
+					if(gids.indexOf(Number(carts[i].gid))>-1){
+						carts.splice(i,1);
+					}
+				}
+				carts_json = JSON.stringify(carts);
+				$.cookie('carts',carts_json,{'path':'/'});
+				return true;
+			};
+		});	
+	
+		if($('.confirm-num').text()==0){
+			$('.confirm_order').addClass('unable');
+		}
+	
+		$('.select_all .check').click(function(){
+			cartsTotalNum();
+		});
+	
+	});
+	
+	function cartsTotalNum(){
+		var str='';
+		$('.carts .carts_check i').each(function(){
+			if($(this).hasClass('checked')){
+				if(str==''){
+					str=$(this).attr('id');
+				}else{
+					str=str+','+$(this).attr('id');
+				}
+			}
+		});
+		$('#totalcartnumb').val(str);
+		if($('.confirm-num').text()=='0'){
+			$('.confirm_order').addClass('unable');
+		} else {
+			$('.confirm_order').removeClass('unable');
+		}
+	}
+</script>
+{% endblock js %}
