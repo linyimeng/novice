@@ -24,7 +24,7 @@ def getgids(obj):
         gids.append(cart['gid'])
     return gids
 
-class GoodsMallManager(Manager):
+class GoodsMallBusiness(Manager):
     '''商品业务类'''
     def get_home_goods_list(self):
         '''获取首页推荐商品列表'''
@@ -55,7 +55,7 @@ class GoodsMallManager(Manager):
             cartgoodss.append(cg)
         return cartgoodss
     
-class TypeMallManager(TypeManager):
+class TypeMallBusiness(TypeManager):
     '''商品类型业务类'''
     def __get_category_goods_list(self,categorypk):
         '''根据分类id获取对应商品列表，默认只提取20个'''
@@ -83,16 +83,16 @@ class TypeMallManager(TypeManager):
         return child_category_goods_list
     
     
-class MallOrderManager(OrderManager):
+class MallOrderBusiness(OrderManager):
     '''订单业务类'''
-    def create_order(self,order_json,user):
+    def create_order(self,order_json,user,is_save):
         '''根据购物车信息创建订单'''
         order = loads(order_json)
         #提取出gid
         gids = getgids(order)
         goodss = Goods.objects.filter(pk__in=gids)
         
-        ordertype = OrderType.objects.get(pk=3)
+        ordertype = OrderType.objects.get(pk=1)
         ordernum = self.__get_ordernum(user.pk,ordertype.io)
         
         totalprice = float(0)
@@ -118,30 +118,36 @@ class MallOrderManager(OrderManager):
                      )
             details.append(detail)
             #计算总额和总数量
-            totalprice = totalprice + float(goods.gsav['saleprice'])
+            totalprice = totalprice + float(goods.gsav['saleprice']) * int(num)
             totalquantity = totalquantity + int(num)
         ordermain.totalprice = totalprice
         ordermain.totalquantity = totalquantity
-        with transaction.atomic():
-            ordermain.save()
-            Detail.objects.bulk_create(details)
+        if is_save:
+            with transaction.atomic():
+                ordermain.save()
+                Detail.objects.bulk_create(details)
 
-        order = {'mian':ordermain,'details':details}
+        order = {'mian':ordermain,'details':details,'is_save':is_save}
         return order
-        
-        
         
     def __get_ordernum(self,userpk,ordertype):
         ordernum = 'M' + ordertype + str(userpk) + datetime.now().strftime("%Y%m%d%H%M%S")
         return ordernum
-
+    
+    def update_address(self,address,ordercode):
+        order = Order.objects.get(ordercode=ordercode)
+        order.recipient = address.recipient
+        order.phone = address.mobile
+        order.address = address.province + address.city + address.county + address.address
+        order.save()
+        return order
         
+
+class MallGoods():
+    objects = GoodsMallBusiness()
+   
+class MallGoodsType():
+    objects = TypeMallBusiness()
     
-class MallGoods(Goods):
-    objects = GoodsMallManager()
-    
-class MallGoodsType(Type):
-    objects = TypeMallManager()
-    
-class MallOrder(Order):
-    objects = MallOrderManager()
+class MallOrder():
+    objects = MallOrderBusiness()

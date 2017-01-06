@@ -8,7 +8,7 @@ from django.contrib.auth import authenticate
 from django.utils.translation import ugettext_lazy as _
 from rest_framework import serializers
 from rest_framework.authtoken.models import Token
-from staff.models import EmpInfo
+from employee.models import EmpInfo
 class UserLoginSerializer(serializers.Serializer):
     username = serializers.CharField(required=True)
     password = serializers.CharField(required=True)
@@ -34,14 +34,9 @@ class UserLoginSerializer(serializers.Serializer):
 
 class TokenSerializer(serializers.ModelSerializer):
     auth_token = serializers.CharField(source='key')
-    eid = serializers.SerializerMethodField()
     class Meta:
         model = Token
-        fields = ("auth_token",'user','eid')
-    
-    def get_eid(self,obj):
-        eid = EmpInfo.objects.get(user__pk=obj.user.pk).pk
-        return eid;
+        fields = ("auth_token",'user')
         
 class UserSerializer(serializers.Serializer):
     username = serializers.CharField(max_length=30)

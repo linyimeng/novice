@@ -1,38 +1,42 @@
 {% extends "wemall/base.html" %}
 {% load staticfiles %}
+
 {% block head_title %}我的收货地址{% endblock head_title %}
+{% block head_load_static %}
+	<script type="text/javascript" src='{% static "mall/js/jquery.cookie.js" %}'></script>
+{% endblock head_load_static %}
 {% block bodyclass %}bg-gray-f6{% endblock bodyclass %}
 
 {% block content %}
-
 	<!-- 顶部 -->
 	<div class="head white pos_rel"><i class="iconfont f26">&#xe60b;</i><span class="f34">我的收货地址</span><a href="javascript:;" class="more pos_abs"><span class="nav_cir"></span><span class="nav_cir"></span><span class="nav_cir"></span></a></div>
+	
+	{% for address in addresses %}
 	<ul class="address f18 bg-white mt10 pt20 pb20">
-		<li class="icon vertical_middle pl20"><i class="iconfont radio">●</i></li>
-		<li class="vertical_middle">
-			<div>收件人：<span class="mr100">韩寒</span>电话：<span>159*****1281</span>
-			</div>
-			<div>收货地址：北京市朝阳区万达广场5号楼503室</div>
+		
+		<li class="icon vertical_middle pl20">
+			{% if is_choose %}
+			<a onclick="set_addresspk({{address.pk}})" href="{% url 'mall:view-confirm-order' %}">
+			{% endif %}
+				<i class="iconfont radio"></i>
+			{% if is_choose %}
+			</a>
+			{% endif %}
 		</li>
-		<li class="more txt-right vertical_middle pr20"><a class="iconfont" href="#">编辑</a></li>
-	</ul>
-	<ul class="address f18 bg-white mt10 pt20 pb20">
-		<li class="icon vertical_middle pl20"><i class="iconfont radio"></i></li>
+		
 		<li class="vertical_middle">
-			<div>收件人：<span class="mr100">韩寒</span>电话：<span>159*****1281</span>
+			<div>收件人：<span class="mr100">{{address.recipient}}</span>电话：<span>{{address.mobile}}</span>
 			</div>
-			<div>收货地址：北京市朝阳区万达广场5号楼503室</div>
+			<div>收货地址：{{address.province}}{{address.city}}{{address.county}}{{address.address}}</div>
 		</li>
-		<li class="more txt-right vertical_middle pr20"><a class="iconfont" href="#">编辑</a></li>
+		<li class="more txt-right vertical_middle pr20"><a class="iconfont" href="{% url 'mall:edit-address' address.pk %}">编辑</a></li>
 	</ul>
+	{% endfor %}
 	<div class="add_address f26 p20 bg-white mt10">新增收货地址<a class="fr add iconfont mt9 f26" href="{% url "mall:add-address" %}">+</a></div>
 	<script type="text/javascript">
-		$(function(){
-			$('.address .radio').bind('click',function(){
-				$(this).html('●');
-				$(this).parent().parent().siblings('.address').find('.radio').html('');
-			});
-		});
+		function set_addresspk(addresspk){
+			$.cookie('addresspk',addresspk,{'path':'/'});
+			$.cookie('addressischoose',null,{'path':'/'});
+		}
 	</script>
-
 {% endblock content %}

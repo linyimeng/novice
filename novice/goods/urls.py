@@ -15,7 +15,7 @@ type_url = [
 ]
 
 urlpatterns = format_suffix_patterns([
-    url(r'^$',views.api_root,name='api-root'),
+    url(r'^doc/$',views.api_root,name='goods-doc'),
     url(r'^goods/$',views.GoodsListCreateAPIView.as_view(),name='goods-list'),
     url(r'^goods/(?P<pk>[^/.]+)/$',views.GoodsRetrieveUpdateDestroyAPIView.as_view(),name='goods-detail'),
     url(r'^attrs/$',views.TypeAttrCreateAPIView.as_view(),name='typeattr-create'),

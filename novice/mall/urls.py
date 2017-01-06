@@ -5,7 +5,6 @@ Created on 2016-11-30
 '''
 from django.conf.urls import url
 from mall import views
-from mall import ajax
 urlpatterns = [
     url('^$',views.view_home),
     url('^home/$',views.view_home,name="view-home"),
@@ -16,13 +15,14 @@ urlpatterns = [
     
     url('^carts/$',views.view_carts,name="view-carts"),
     url('^confirmorder/$',views.view_confirm_order,name="view-confirm-order"),
+    url('^createorder/$',views.create_order,name="create-order"),
     
     url('^my/$',views.view_user_center,name="view-user-center"),
+    
     url('^myaddress/$',views.view_address,name="view-address"),
     url('^addaddress/$',views.add_address,name="add-address"),
+    url('^editaddress/(?P<address_pk>[^/.]+)/$',views.edit_address,name="edit-address"),
+    
     url('^myorder/$',views.view_order,name="view-order"),
     url('^mycollection/$',views.view_mycollection,name="view-collection"),
-    
-    url('^pushcart/$',ajax.push_cart,name="ajax-push-cart"),
-    url('^lesscart/$',ajax.less_cart,name="ajax-less-cart"),
 ]

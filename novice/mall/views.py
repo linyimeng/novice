@@ -1,8 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render,render_to_response,redirect,get_object_or_404
 from mall.business import MallGoods,MallGoodsType,MallOrder
 from urllib.parse import unquote
 from django.http.response import HttpResponse
 from django.contrib.auth.decorators import login_required
+from mall.forms import ShippingaddressForm
+from mall.models import Shippingaddress
 # Create your views here.
 def view_home(request):
     home_goods_list = MallGoods.objects.get_home_goods_list()
@@ -48,22 +50,72 @@ def view_confirm_order(request):
         return HttpResponse('空订单')
     else:
         order_json = unquote(order_json)
-    order = MallOrder.objects.create_order(order_json,request.user)
-    print(order)
-    return render(request,"wemall/confirm_order.html",{'order':order})
+    order = MallOrder.objects.create_order(order_json,request.user,False)
+    #确定地址
+    addressmark = request.COOKIES.get('addresspk')
+    if addressmark is None:
+        address = Shippingaddress.objects.get(user=request.user,is_default=True)
+    else:
+        address = Shippingaddress.objects.get(pk=addressmark)
+    response = render_to_response('wemall/confirm_order.html', {'order':order,'address':address})
+    return response
+
+def create_order(request):
+    order_json = request.COOKIES.get('order')
+    if order_json is None:
+        return HttpResponse('空订单')
+    else:
+        order_json = unquote(order_json)
+    order = MallOrder.objects.create_order(order_json,request.user,True)
+    
+    addressmark = request.COOKIES.get('addresspk')
+    if addressmark is None:
+        address = Shippingaddress.objects.get(user=request.user,is_default=True)
+    else:
+        address = Shippingaddress.objects.get(pk=addressmark)
+    
+    order = MallOrder.objects.update_address(address, order['mian'].ordercode)
+    response = render_to_response("wemall/payorder.html",{"order":order})
+    response.delete_cookie('order')
+    response.delete_cookie('addresspk')
+    return response
 
 def view_user_center(request):
     return render(request,"wemall/user_center.html")
 
 def view_address(request):
-    return render(request,"wemall/myaddress.html")
+    is_choose=request.COOKIES.get('addressischoose')
+    if is_choose == '1':
+        is_choose = True
+    else:
+        is_choose = False
+    addresses = Shippingaddress.objects.filter(user=request.user).order_by('-updated')
+    print(is_choose)
+    return render(request,"wemall/myaddress.html",{"addresses":addresses,'is_choose':is_choose})
+
+def edit_address(request,address_pk):
+    address = get_object_or_404(Shippingaddress,pk=address_pk)
+    if request.method == "GET":
+        return render(request,"wemall/myaddress_edit.html",{"address":address})
+    else:
+        form = ShippingaddressForm(request.POST.copy(),instance=address)
+        if form.is_valid():
+            address = form.save()
+            return redirect("wemall/myaddress.html")
+        else:
+            return HttpResponse(form.errors)
 
 def add_address(request):
     if request.method=="GET":
         return render(request,"wemall/myaddress_add.html")
     else:
-        pass
-    
+        form = ShippingaddressForm(request.POST.copy())
+        if form.is_valid():
+            form.save()
+            return redirect("wemall/myaddress.html")
+        else:
+            return HttpResponse(form.errors)
+        
 def view_order(request):
     return render(request,"wemall/myorder.html")
 

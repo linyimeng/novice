@@ -7,6 +7,17 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import status
 from user.serializers import UserLoginSerializer, TokenSerializer,UserSerializer
+from rest_framework.reverse import reverse
+from rest_framework.decorators import api_view
+
+@api_view(('GET',))
+def api_root(request,format=None):
+    return Response({
+        '用户创建':reverse('create',request=request,format=format),
+        '用户登录':reverse('login',request=request,format=format),
+        '用户注销':reverse('logout',request=request,format=format)
+    })
+
 
 class UserLoginAPIView(GenericAPIView):
     '''

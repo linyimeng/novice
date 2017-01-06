@@ -3,11 +3,11 @@
 {% block head_title %}新增地址{% endblock head_title %}
 {% block content %}
 	<!-- 顶部 -->
-	<div class="head white pos_rel"><i class="iconfont f26">&#xe60b;</i><span class="f34">新增地址</span><a href="javascript:;" class="more pos_abs"><span class="nav_cir"></span><span class="nav_cir"></span><span class="nav_cir"></span></a></div>
-	<form name="add_address" action="{% url 'mall:add-address'%}" method="post" target="_self" onSubmit="return docheck()" class="p20 f26 add_address">
+	<div class="head white pos_rel"><i class="iconfont f26">&#xe60b;</i><span class="f34">编辑地址</span><a href="javascript:;" class="more pos_abs"><span class="nav_cir"></span><span class="nav_cir"></span><span class="nav_cir"></span></a></div>
+	<form name="add_address" action="{% url 'mall:edit-address' address.pk%}" method="post" target="_self" onSubmit="return docheck()" class="p20 f26 add_address">
 		{% csrf_token %}
-		<div class="pb10"><span class="tit vertical_middle">收货人</span><input type="text" name="recipient" value="姓名" class="text" onclick="this.value=''" onblur="if(this.value=='') this.value='姓名'"></div>
-		<div class="line_gray pt20 pb10"><span class="tit vertical_middle">联系方式</span><input type="text" name="mobile" value="手机号" class="text" onclick="this.value=''" onblur="if(this.value=='') this.value='手机号'"></div>
+		<div class="pb10"><span class="tit vertical_middle">收货人</span><input type="text" name="recipient" value="{{address.recipient}}" class="text" onblur="if(this.value=='') this.value='姓名'"></div>
+		<div class="line_gray pt20 pb10"><span class="tit vertical_middle">联系方式</span><input type="text" name="mobile" value="{{address.mobile}}" class="text" onblur="if(this.value=='') this.value='手机号'"></div>
 		<div class="line_gray pt20 pb10">
 			<span class="vertical_middle">省</span>
 			<select id="s_province" name="province" class="select"></select>
@@ -16,16 +16,17 @@
 			<span class="vertical_middle">区/县</span>
 			<select id="s_county" name="county" class="select"></select>
 		</div>
-		<div class="line_gray pt20 pb10"><span class="tit vertical_middle">详细地址</span><input type="text" name="address" value="街道门牌信息" class="text" onclick="this.value=''" onblur="if(this.value=='') this.value='街道门牌信息'"></div>
-		<div class="f20 pb25 line_gray pt20"><span class="mr10 radio f18 vertical_middle"></span>设为默认地址</div>
+		<div class="line_gray pt20 pb10"><span class="tit vertical_middle">详细地址</span><input type="text" name="address" value="{{address.address}}" class="text" onblur="if(this.value=='') this.value='街道门牌信息'"></div>
+		<div class="f20 pb25 line_gray pt20"><span class="mr10 radio f18 vertical_middle">{% if address.is_default %}●{% endif %}</span>设为默认地址</div>
 		<input type="hidden" value="false" name="is_default" id="is_default">
 		<input type="hidden" value="{{request.user.pk}}" name="user">
 		<input type="submit" value="确认" class="btn_pay_input f30 white mt20">
 	</form>
 	<script src="{% static "mall/js/area.js" %}"></script>
 	<script type="text/javascript">
+		var opt0 = ["{{address.province}}","{{address.city}}","{{address.county}}"];//初始值
 		_init_area();//三级联动地址
-	
+		
 		$(function(){
 			$('.radio').bind('click',function(){
 				if($(this).html()==''){
@@ -35,7 +36,6 @@
 					$(this).html('');
 					$('#is_default').val(false);
 				}
-	
 			});
 		});
 	

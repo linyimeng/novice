@@ -28,9 +28,9 @@ INSTALLED_APPS = (
     'rest_framework.authtoken',
     'corsheaders',
     'user',
-    'staff',
+    'employee',
     'goods',
-    'bp',
+    'partner',
     'order',
     'file',
     'mall',
@@ -55,10 +55,11 @@ ROOT_URLCONF = 'novice.urls'
 
 
 REST_FRAMEWORK = {
-                  '''
+    '''
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.TokenAuthentication',
-    ),'''
+    ),
+    '''
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticated',
     ),
@@ -97,7 +98,7 @@ WSGI_APPLICATION = 'novice.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'sc',
+        'NAME': 'novice',
         'USER':'ym',
         'PASSWORD':'panyuli1314520',
         'HOST':'127.0.0.1',

@@ -1,6 +1,6 @@
 from django.db import models
 from goods.models import Goods
-from bp.models import Company,Personal
+from partner.models import Company,Personal
 from django.utils.translation import ugettext_lazy as _
 from django_pgjsonb import JSONField
 from django.conf import settings
@@ -62,6 +62,10 @@ class Order(models.Model):
     
     totalquantity = models.DecimalField(max_digits=10,decimal_places=2)
     totalprice = models.DecimalField(max_digits=18,decimal_places=8)
+    
+    recipient = models.CharField(max_length=30,blank=True,null=True)
+    phone = models.CharField(max_length=20,blank=True,null=True)
+    address = models.CharField(max_length=300,blank=True,null=True)
     
     remark = models.TextField(blank=True,null=True)
     creator = models.ForeignKey(User)

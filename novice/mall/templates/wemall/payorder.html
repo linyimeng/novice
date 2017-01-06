@@ -1,0 +1,28 @@
+{% extends "wemall/base.html" %}
+{% load staticfiles %}
+{% block head_title %}支付订单{% endblock head_title %}
+{% block bodyclass %}bg-gray-f0{% endblock bodyclass %}
+
+{% block content %}
+	<!-- 顶部 -->
+	<div class="head white pos_rel"><i class="iconfont f26">&#xe60b;</i><span class="f34">支付</span><a href="javascript:;" class="more pos_abs"><span class="nav_cir"></span><span class="nav_cir"></span><span class="nav_cir"></span></a></div>
+	
+	<ul class="address bg-white mt10 mb10">
+		<li class="icon vertical_middle pl20 pr20"><i class="iconfont f48">&#xe602;</i></li>
+		<li class="vertical_middle f18">
+			<div>收件人：<span class="mr100">{{order.recipient}}</span>电话：<span>{{order.phone}}</span>
+			</div>
+			<div>收货地址：{{order.address}}</div>
+		</li>
+	</ul>
+	
+	<div class="txt-center f30 bg-white pt10 pb10">订单编号：<span class="red">{{order.ordercode}}</span></div>
+	<div class="txt-center f30 bg-white pt10 pb10">商品总量：<span class="red">{{order.totalquantity | floatformat:"2"}}</span></div>
+	<div class="txt-center f30 bg-white pt10 pb10">总价：<span class="red">￥{{order.totalprice | floatformat:"2"}}</span></div>
+	<a href="#" class="btn_pay m20 f30 white txt-center dis_block pt5 pb5">微信支付</a>
+{% endblock content %}
+
+{% block footer %}{% endblock footer %}
+
+{% block js %}
+{% endblock js %}
