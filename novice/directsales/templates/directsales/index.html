@@ -1,0 +1,146 @@
+{% extends "directsales/base.html" %}
+{% load staticfiles %}
+{% block head_load_static %}
+    
+{% endblock head_load_static %}
+{% block content %}
+	<div class="row">
+		<div class="col-lg-12">
+		    <h5 class="page-header">今日收入</h5>
+		</div>
+		<!-- /.col-lg-12 -->
+	</div>
+	<!-- /.row -->
+	<div class="row">
+	    <div class="col-lg-4 col-md-6">
+	        <div class="panel panel-primary">
+	            <div class="panel-heading">
+	                <div class="row">
+	                    <div class="col-xs-3">
+	                        <i class="fa fa-cny fa-5x"></i>
+	                    </div>
+	                    <div class="col-xs-9 text-right">
+	                        <div class="huge">{{today_bonus.cash}}</div>
+	                        <div>金币</div>
+	                    </div>
+	                </div>
+	            </div>
+	            <a href="{% url "directsale:view-bonus_detail" %}">
+	                <div class="panel-footer">
+	                    <span class="pull-left">查看历史记录</span>
+	                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+	                    <div class="clearfix"></div>
+	                </div>
+	            </a>
+	        </div>
+	    </div>
+	    <div class="col-lg-4 col-md-6">
+	        <div class="panel panel-green">
+	            <div class="panel-heading">
+	                <div class="row">
+	                    <div class="col-xs-3">
+	                        <i class="fa fa-cubes fa-5x"></i>
+	                    </div>
+	                    <div class="col-xs-9 text-right">
+	                        <div class="huge">{{today_bonus.integral}}</div>
+	                        <div>积分</div>
+	                    </div>
+	                </div>
+	            </div>
+	            <a href="{% url "directsale:view-bonus_detail" %}">
+	                <div class="panel-footer">
+	                    <span class="pull-left">查看历史记录</span>
+	                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+	                    <div class="clearfix"></div>
+	                </div>
+	            </a>
+	        </div>
+	    </div>
+	    <div class="col-lg-4 col-md-6">
+	        <div class="panel panel-yellow">
+	            <div class="panel-heading">
+	                <div class="row">
+	                    <div class="col-xs-3">
+	                        <i class="fa fa-shopping-cart fa-5x"></i>
+	                    </div>
+	                    <div class="col-xs-9 text-right">
+	                        <div class="huge">{{today_bonus.shoppingcoupons}}</div>
+	                        <div>购物劵</div>
+	                    </div>
+	                </div>
+	            </div>
+	            <a href="{% url "directsale:view-bonus_detail" %}">
+	                <div class="panel-footer">
+	                    <span class="pull-left">查看历史记录</span>
+	                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+	                    <div class="clearfix"></div>
+	                </div>
+	            </a>
+	        </div>
+	    </div>
+	</div>
+	<!-- /.row -->
+	
+	
+	<div class="col-lg-6">
+	        <div class="panel-heading">
+	            历史收入统计,总收入:<span style="color:red" id="total"></span>
+	        </div>
+	        <!-- /.panel-heading -->
+	        <div class="panel-body">
+	            <div class="flot-chart">
+	                <div class="flot-chart-content" id="flot-pie-chart"></div>
+	            </div>
+	        </div>
+	        <!-- /.panel-body -->
+	    </div>
+	    <!-- /.panel -->
+	</div>
+{% endblock content %}
+{% block js %}
+<!-- Flot Charts JavaScript -->
+<script src="{% static "directsales/sbadmin/vendor/flot/excanvas.min.js" %}"></script>
+<script src="{% static "directsales/sbadmin/vendor/flot/jquery.flot.js" %}"></script>
+<script src="{% static "directsales/sbadmin/vendor/flot/jquery.flot.pie.js" %}"></script>
+<script src="{% static "directsales/sbadmin/vendor/flot/jquery.flot.resize.js" %}"></script>
+<script src="{% static "directsales/sbadmin/vendor/flot/jquery.flot.time.js" %}"></script>
+<script src="{% static "directsales/sbadmin/vendor/flot-tooltip/jquery.flot.tooltip.min.js" %}"></script>
+<script>
+    $(function() {
+        //饼状图
+        $.ajax({
+            url:"{% url "directsale:awards_statistics_data" %}",
+            type:"get",
+            success:function(data){
+                $('#total').text(data.total);
+                var plotObj = $.plot($("#flot-pie-chart"), data.data, {
+		        series: {
+		            pie: {
+		                show: true
+		            }
+		        },
+		        grid: {
+		            hoverable: true
+		        },
+		        tooltip: true,
+		        tooltipOpts: {
+		            content: "%p.0%, %s", // show percentages, rounding to 2 decimal places
+		            shifts: {
+		                x: 20,
+		                y: 0
+		            },
+		            defaultTheme: false
+		        }
+		    });
+            }
+        });
+        
+        
+	    
+	    
+	    
+	    //条形图
+	    
+    });
+</script>
+{% endblock %}

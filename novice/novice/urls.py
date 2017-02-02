@@ -12,10 +12,12 @@ api_urls = [
 #     url(r'^mall/',include('mall.urls')),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]
-
+handler404 = 'directsales.views.page_not_found'
+handler500 = 'directsales.views.page_error'
 urlpatterns = [
     #不能使用namespace='first'
     url(r'^admin/',include(admin.site.urls)),
     url(r'^api/',include(api_urls)),
     url(r'^mall/',include('mall.urls',namespace="mall")),
+    url(r'^directsale/',include('directsales.urls',namespace="directsale")),
 ]

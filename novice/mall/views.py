@@ -117,6 +117,7 @@ def add_address(request):
             return HttpResponse(form.errors)
         
 def view_order(request):
+    
     return render(request,"wemall/myorder.html")
 
 def view_mycollection(request):

@@ -1,0 +1,11 @@
+﻿--得到某个节点下所有的子节点
+WITH RECURSIVE child
+AS (
+     --第一个查询作为递归的基点(锚点)
+     SELECT * FROM directsales_doubletrack WHERE id=1
+     UNION ALL
+     --第二个查询作为递归成员,下属成员的结果为空时，此递归结束。
+     SELECT directsales_doubletrack.* FROM directsales_doubletrack INNER JOIN child ON child.id = directsales_doubletrack.parent_id 
+   )
+SELECT * FROM child
+

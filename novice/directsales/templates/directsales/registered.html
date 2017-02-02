@@ -1,0 +1,318 @@
+{% extends "directsales/base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+<div class="row">
+    <div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h1>会员注册</h1>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                  <form role="form" name="registered" action="{% url "directsale:registered" %}" method="post" onSubmit="return docheck()" id="regform">
+                  {% csrf_token %}
+                    <div class="col-lg-6">
+                    	<div class="form-group">
+                            <label>会员账户</label>
+                            <input class="form-control" name="username" placeholder="会员账户">
+                        </div>
+                        <div class="form-group">
+                            <label>会员姓名</label>
+                            <input class="form-control" name="name" placeholder="会员姓名">
+                        </div>
+                        <div class="form-group">
+                            <label>手机号码</label>
+                            <input class="form-control" name="phone" placeholder="手机号码">
+                        </div>
+                        <div class="form-group">
+                            <label>联系住址</label>
+                            <input class="form-control" name="address" placeholder="联系住址">
+                        </div>
+                        <div class="form-group">
+                            <label>电子邮箱</label>
+                            <input class="form-control" name="email" placeholder="电子邮箱">
+                        </div>
+                        <div class="form-group">
+                            <label>身份证</label>
+                            <input class="form-control" name="idcard" placeholder="身份证">
+                        </div>
+                        <div class="form-group">
+                            <label>登陆密码</label>
+                            <input class="form-control" type="password" name="password" placeholder="登陆密码">
+                        </div>
+                    </div>
+                    <!-- /.col-lg-6 (nested) -->
+                    <div class="col-lg-6">
+	                    <div class="form-group">
+                            <label>会员级别</label>
+                            <select class="form-control" name="identity" id="identity_select">
+                                <option>请选择</option>
+                                <option value="1">普卡1000</option>
+                                <option value="2">银卡3000</option>
+                                <option value="3">金卡10000</option>
+                                <option value="4">钻卡30000</option>
+                            </select>
+                            <input type="hidden" value="no_ength" id="is_ength"/>
+                        </div>
+                        <div class="form-group">
+                            <label>直荐会员</label>
+                            <input class="form-control" name="directpushuser" placeholder="直荐会员">
+                        </div>
+                        <div class="form-group">
+                            <label>节点会员</label>
+                            <input class="form-control" name="parent" placeholder="节点会员">
+                        </div>
+                        <div class="form-group">
+                            <label>市场位置</label>
+                            <label class="radio-inline">
+                                <input type="radio" name="isright" id="optionsRadiosInline1" value="false">左边
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="isright" id="optionsRadiosInline2" value="true">右边
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label>开户银行</label>
+                            <select class="form-control" name="bank">
+                                <option value="1">工商银行</option>
+                                <option value="2">建设银行</option>
+                                <option value="3">农业银行</option>
+                                <option value="4">邮政银行</option>
+                                <option value="5">中国银行</option>
+                                <option value="6">招商银行</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>银行卡号</label>
+                            <input class="form-control" name="bank_account" placeholder="银行卡号">
+                        </div>
+                        <div class="form-group">
+                            <label>支付密码</label>
+                            <input class="form-control" type="password" name="pay_password" placeholder="支付密码">
+                        </div>
+                         <input class="btn btn-primary btn-lg btn-block" value="注册" id="submitreg">
+                    </div>
+                    <!-- /.col-lg-6 (nested) -->
+                    </form>
+                </div>
+                <!-- /.row (nested) -->
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->
+
+{% include "directsales/confirm_pay_modal.html" %}
+{% endblock content %}
+{% block js %}
+<script src="{% static "directsales/js/confirmpay.js" %}"></script>
+<script>
+	$(function(){
+	     $('#submitreg').click(function(){
+	         if(docheck()){
+	             $('#confirmpayModal').modal('show');
+	         }
+	     });
+	     
+	    $('#confirmpay').click(function(){
+		    confirm_pay('regform');
+		    
+		});
+	
+	    //验证金币
+	     $("#identity_select").change(function(){
+	        var option = $("#identity_select").val();
+	        $.ajax({
+	            url:"{% url "directsale:chk-isenough" %}",
+	            type:"post",
+	            data:{"identity_id":option},
+	            timeout:5000,
+	            dataType:"json",
+	            success:function(data) {
+	                if(data.result) {
+	                    $('#is_ength').val('1');
+	                }
+	            }
+	        });
+	     });
+		//验证用户名
+		$(registered.username).blur(function(){
+		  	$.ajax({
+				url:"{% url "directsale:chk-user" %}",
+				type:"post",
+				data:{"username":registered.username.value},
+				timeout:5000,
+				dataType:"json",
+				success:function(data){
+					if(data.result) {
+						if(registered.username.value==""){
+							$(registered.username).parent().attr('class',"form-group has-error");
+						} else {
+							$(registered.username).parent().attr('class',"form-group has-success");
+						}
+					} else {
+						$(registered.username).parent().attr('class',"form-group has-error");
+					}
+				}
+			});
+		});
+		
+		$(registered.name).blur(function(){
+			if (registered.name.value == "") {
+				$(registered.name).parent().attr('class',"form-group has-error");
+			} else {
+				$(registered.name).parent().attr('class',"form-group has-success");
+			}
+		});
+		
+		$(registered.phone).blur(function(){
+			phone = registered.phone.value;
+			var pattern = /^1[34578]\d{9}$/;
+			if (pattern.test(phone)) {
+				$(registered.phone).parent().attr('class',"form-group has-success");
+			} else {
+				$(registered.phone).parent().attr('class',"form-group has-error");
+			}
+		});
+		
+		$(registered.email).blur(function(){
+			email = registered.email.value;
+			var reg = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/;
+			if (reg.test(email)) {
+				$(registered.email).parent().attr('class',"form-group has-success");
+			} else {
+				$(registered.email).parent().attr('class',"form-group has-error");
+			}
+		})
+		
+		//验证节点并自动设置节点位置
+		$(registered.parent).blur(function(){
+			$.ajax({
+				url:"{% url "directsale:chk-parent" %}",
+				type:"post",
+				data:{"username":registered.parent.value},
+				timeout:5000,
+				dataType:"json",
+				success:function(data){
+					if(data.result) {
+						$(registered.parent).parent().attr('class',"form-group has-success");
+					} else {
+						$(registered.parent).parent().attr('class',"form-group has-error");
+					}
+				}
+			});
+		});
+		
+		//验证直荐用户
+		$(registered.directpushuser).blur(function(){
+			$.ajax({
+				url:"{% url "directsale:chk-track" %}",
+				type:"post",
+				data:{"username":registered.directpushuser.value},
+				timeout:5000,
+				dataType:"json",
+				success:function(data){
+					if(data.result) {
+						$(registered.directpushuser).parent().attr('class',"form-group has-success");
+					} else {
+						console.log(data.result);
+						$(registered.directpushuser).parent().attr('class',"form-group has-error");
+					}
+				}
+			});
+		});
+		
+		$(registered.isright).change(function() { 
+			if(registered.parent.value=="") {
+				alert('请先填写节点会员');
+				$(registered.parent).focus();
+				return;
+			}
+			if(!$(registered.parent).parent().is('.has-success')){
+				alert('请先确认正确的节点会员');
+				$(registered.parent).focus();
+				return;
+			}
+			$.ajax({
+				url:"{% url "directsale:chk-isright" %}",
+				type:"post",
+				data:{"username":registered.parent.value,"isright":registered.isright.value},
+				timeout:5000,
+				dataType:"json",
+				success:function(data){
+					if(data.result) {
+						return;
+					} else {
+						console.log(data.recommend);
+						if(data.recommend){
+							alert('左树已有节点，请选择右节点;未更改，系统将自动划分为右节点');
+						} else {
+							alert('右树已有节点，请选择左节点;未更改，系统将自动划分为做节点');
+						}
+					}
+				}
+			});
+		});
+	});
+	
+	function docheck() {
+	    if(registered.username.value==''){
+			alert('会员账户不能为空');
+			$(registered.username).focus();
+			return false;
+		} else if(registered.name.value==''){
+			alert('会员姓名不能为空');
+			$(registered.name).focus();
+			return false;
+		} else if(registered.phone.value==''){
+			alert('手机不能为空');
+			$(registered.phone).focus();
+			return false;
+		} else if(registered.email.value==''){
+			alert('邮箱姓名不能为空');
+			$(registered.email).focus();
+			return false;
+		} else if(registered.password.value==''){
+			alert('密码不能为空');
+			$(registered.password).focus();
+			return false;
+		} else if(registered.directpushuser.value==''){
+			alert('直荐会员不能为空');
+			$(registered.directpushuser).focus();
+			return false;
+		} else if(registered.parent.value==''){
+			alert('节点会员不能为空');
+			$(registered.parent).focus();
+			return false;
+		} else if(registered.bank_account.value==''){
+			alert('银行帐号不能为空');
+			$(registered.bank_account).focus();
+			return false;
+		} else if(registered.pay_password.value==''){
+			alert('支付密码不能为空');
+			$(registered.pay_password).focus();
+			return false;
+		} else if(registered.idcard.value=="") {
+			alert('身份正不能为空');
+			$(registered.idcard).focus();
+			return false;
+		}else if($('#is_ength').val()=='no_ength') {
+	        alert('金币不足，请充值后进行操作');
+	        return false;
+	    }
+		has_error = $('.has-error');
+		console.log(has_error.length);
+		if(has_error.length>0) {
+			alert("表单中存在错误");
+			$('.has-error:nth-of-type(1)').focus();
+			return false;
+		} else {
+			return true;
+		}
+	}
+</script>
+{% endblock js %}

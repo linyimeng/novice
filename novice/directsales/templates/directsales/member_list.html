@@ -1,0 +1,68 @@
+{% extends "directsales/base.html" %}
+{% load staticfiles %}
+{% block head_load_static %}
+	<link href="{% static "directsales/vendor/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" %}" rel="stylesheet">
+{% endblock head_load_static %}
+{% block content %}
+<div class="row">
+	<div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <h5 class="page-header">会员列表</h5>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+    </div>
+	<div class="row">
+		<form role="form">
+			<div class="form-group col-lg-2">
+	            <input class="form-control form_datetime" name="username" placeholder="注册时间从">
+	        </div>
+	        <div class="form-group col-lg-2">
+	            <input class="form-control form_datetime" name="username" placeholder="注册时间截止">
+	        </div>
+	        <div class="form-group col-lg-3">
+	           	<button type="submit" class="btn btn-primary">查询</button>
+	        </div>
+		</form>
+	</div>
+	<div class="table-responsive">
+	    <table class="table table-striped">
+	        <thead>
+	            <tr>
+	                <th>会员编号</th>
+	                <th>会员帐号</th>
+	                <th>会员级别</th>
+	                <th>直荐人数</th>
+	                <th>左会员数</th>
+	                <th>右会员数</th>
+	                <th>注册时间</th>
+	            </tr>
+	        </thead>
+	        <tbody>
+	        	{% for member in member_list%}
+	            <tr>
+	                <td>{{member.pk}}</td>
+	                <td>{{member.user.username}}</td>
+	                <td>{{member.identity.name}}</td>
+	                <td>{{member.directpushcount}}</td>
+	                <td>{{member.leftcount}}</td>
+	                <td>{{member.rightcount}}</td>
+	                <td>{{member.joined | date:"Y-m-d H:i:s"}}</td>
+	            </tr>
+	            {% endfor %}
+	        </tbody>
+	    </table>
+	</div>
+	<!-- /.table-responsive -->
+</div>
+<!-- /.row -->
+{% endblock content %}
+{% block js %}
+<script src="{% static "directsales/vendor/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js" %}"></script>
+<script src="{% static "directsales/vendor/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js" %}"></script>
+<script type="text/javascript">
+    $(".form_datetime").datetimepicker({format: 'yyyy-mm-dd',language:'zh-CN',autoclose:true,minView:2});
+</script>
+{% endblock js %}

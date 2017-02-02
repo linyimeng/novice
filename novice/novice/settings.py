@@ -13,7 +13,7 @@ SECRET_KEY = '0t1z6qr^r_dud+7zn3b4t!t9n+sw#xugv=ec+m$x^=pd0$kxft'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -34,6 +34,7 @@ INSTALLED_APPS = (
     'order',
     'file',
     'mall',
+    'directsales',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -84,6 +85,9 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                
+                #directsales模块的上下文渲染器
+                'directsales.context_processor.get_bonus',
             ],
         },
     },
@@ -129,4 +133,49 @@ STATIC_ROOT = os.path.join(BASE_DIR,"static")
 #public static file ,example:jquery.js
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+
+
+
+LOGGING = {  
+    'disable_existing_loggers': False,  
+    'version': 1,  
+    'handlers': {  
+        'console': {  
+            # logging handler that outputs log messages to terminal  
+            'class': 'logging.StreamHandler',  
+            'level': 'DEBUG', # message level to be written to console  
+        },  
+    },  
+    'loggers': {  
+        '': {  
+            # this sets root level logger to log debug and higher level  
+            # logs to console. All other loggers inherit settings from  
+            # root level logger.  
+            'handlers': ['console'],  
+            'level': 'DEBUG',  
+            'propagate': False, # this tells logger to send logging message  
+                                # to its parent (will send if set to True)  
+        },  
+        'django.db': {  
+            # django also has database level logging  
+        },  
+    },  
+}
+
+#email
+SEND_BROKEN_LINK_EMAILS = True
+#EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.exmail.qq.com'
+EMAIL_PORT = 25
+# EMAIL_USE_SSL = True
+EMAIL_HOST_USER = 'yimeng88@loongkylin.com'
+EMAIL_HOST_PASSWORD = 'Lqh1314520'
+EMAIL_SUBJECT_PREFIX = '[novice-django]'
+DEFAULT_FROM_EMAIL = 'yimeng <yimeng88@loongkylin.com>'
+ADMINS = (
+    ('yimeng', 'yimeng88@loongkylin.com'),
+)
+MANAGERS = (
+    ('yimeng', 'yimeng88@loongkylin.com'),
+)
 

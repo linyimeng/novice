@@ -1,0 +1,213 @@
+{% extends "directsales/base.html" %}
+{% load staticfiles %}
+{% block head_load_static %}
+	<!-- DataTables CSS -->
+    <link href="{% static "directsales/sbadmin/vendor/datatables-plugins/dataTables.bootstrap.css" %}" rel="stylesheet">
+    <!-- DataTables Responsive CSS -->
+    <link href="{% static "directsales/sbadmin/vendor/datatables-responsive/dataTables.responsive.css" %}" rel="stylesheet">
+    <style>
+        .panel-body {
+		    padding: 0px;
+		}
+    </style>
+{% endblock head_load_static %}
+{% block content %}
+<div style="height:10px"></div>
+<!-- /.panel-heading -->
+<div class="panel-body">
+    <!-- Nav tabs -->
+    <ul class="nav nav-pills">
+    	<li class="active">
+    	  <a href="#all-pills" data-toggle="tab">综合</a>
+        </li>
+        <li>
+          <a href="#cash-pills" data-toggle="tab">现金</a>
+        </li>
+        <li>
+          <a href="#integral-pills" data-toggle="tab">积分</a>
+        </li>
+        <li>
+          <a href="#shoppingcoupons-pills" data-toggle="tab">购物劵</a>
+        </li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <div class="tab-pane fade in active" id="all-pills">
+            <div style="height:22px"></div>
+	         <!-- /.panel-heading -->
+			<div class="panel-body">
+			    <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-all">
+			        <thead>
+			            <tr>
+			                <th>编号</th>
+			                <th>类型</th>
+			                <th>金额</th>
+			                <th>当时余额</th>
+			                <th>支付方式</th>
+			                <th>备注</th>
+			                <th>时间</th>
+			            </tr>
+			        </thead>
+			        <tbody>
+			            {% for th in transaction_history %}
+			            <tr class="gradeA">
+			                <td>{{th.pk}}</td>
+			                <td>{{th.get_type_display}}</td>
+			                <td style="color:red">{% if th.io == 'I' %}+{% else %}-{% endif %}{{th.price | floatformat:"2" }}</td>
+			                <td style="color:red">{{th.overage | floatformat:"2" }}</td>
+			                <td class="center">{{th.get_pay_by_display}}</td>
+			                <td class="center">{{th.remark}}</td>
+			                <td>{{th.joined | date:"Y-n-d H:i:s"}}</td>
+			            </tr>
+			            {% endfor %}
+			        </tbody>
+			    </table>
+			</div>
+			<!-- /.panel-body -->
+        </div>
+        
+        
+        
+        <div class="tab-pane fade" id="cash-pills">
+        <div style="height:22px"></div>
+			  <!-- /.panel-heading -->
+			<div class="panel-body">
+			    <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-cash">
+			        <thead>
+			            <tr>
+			                <th>编号</th>
+			                <th>类型</th>
+			                <th>金额</th>
+			                <th>当时余额</th>
+			                <th>支付方式</th>
+			                <th>备注</th>
+			                <th>时间</th>
+			            </tr>
+			        </thead>
+			        <tbody>
+			            {% for ch in cash_history %}
+			            <tr class="gradeA">
+			                <td>{{ch.pk}}</td>
+			                <td>{{ch.get_type_display}}</td>
+			                <td style="color:red">{% if th.io == 'I' %}+{% else %}-{% endif %}{{ch.price | floatformat:"2" }}</td>
+			                <td style="color:red">{{ch.overage | floatformat:"2" }}</td>
+			                <td class="center">{{ch.get_pay_by_display}}</td>
+			                <td class="center">{{ch.remark}}</td>
+			                <td>{{ch.joined | date:"Y-n-d H:i:s"}}</td>
+			            </tr>
+			            {% endfor %}
+			        </tbody>
+			    </table>
+			</div>
+			<!-- /.panel-body -->
+        </div>
+        
+        <div class="tab-pane fade" id="integral-pills">
+        <div style="height:22px"></div>
+			<!-- /.panel-heading -->
+			<div class="panel-body">
+			    <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-integral">
+			        <thead>
+			            <tr>
+			                <th>编号</th>
+			                <th>类型</th>
+			                <th>金额</th>
+			                <th>当时余额</th>
+			                <th>支付方式</th>
+			                <th>备注</th>
+			                <th>时间</th>
+			            </tr>
+			        </thead>
+			        <tbody>
+			            {% for ih in integral_history %}
+			            <tr class="gradeA">
+			                <td>{{ih.pk}}</td>
+			                <td>{{ih.get_type_display}}</td>
+			                <td style="color:red">{% if th.io == 'I' %}+{% else %}-{% endif %}{{ih.price | floatformat:"2" }}</td>
+			                <td style="color:red">{{ih.overage | floatformat:"2" }}</td>
+			                <td class="center">{{ih.get_pay_by_display}}</td>
+			                <td class="center">{{ih.remark}}</td>
+			                <td>{{ih.joined | date:"Y-n-d H:i:s"}}</td>
+			            </tr>
+			            {% endfor %}
+			        </tbody>
+			    </table>
+			</div>
+			<!-- /.panel-body -->
+        </div>
+           
+        <div class="tab-pane fade" id="shoppingcoupons-pills">
+        <div style="height:22px"></div>
+            <!-- /.panel-heading -->
+			<div class="panel-body">
+			    <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-shoppingcoupons">
+			        <thead>
+			            <tr>
+			                <th>编号</th>
+			                <th>类型</th>
+			                <th>金额</th>
+			                <th>当时余额</th>
+			                <th>支付方式</th>
+			                <th>备注</th>
+			                <th>时间</th>
+			            </tr>
+			        </thead>
+			        <tbody>
+			            {% for sh in shoppingcoupons_history %}
+			            <tr class="gradeA">
+			                <td>{{sh.pk}}</td>
+			                <td>{{sh.get_type_display}}</td>
+			                <td style="color:red">{% if th.io == 'I' %}+{% else %}-{% endif %}{{sh.price | floatformat:"2" }}</td>
+			                <td style="color:red">{{sh.overage | floatformat:"2" }}</td>
+			                <td class="center">{{sh.get_pay_by_display}}</td>
+			                <td class="center">{{sh.remark}}</td>
+			                <td>{{sh.joined | date:"Y-n-d H:i:s"}}</td>
+			            </tr>
+			            {% endfor %}
+			        </tbody>
+			    </table>
+			</div>
+			<!-- /.panel-body -->
+			
+        </div>
+    </div>
+</div>
+<!-- /.panel-body -->
+{% endblock content %}
+{% block js %}
+<!-- DataTables JavaScript -->
+<script src="{% static "directsales/sbadmin/vendor/datatables/js/jquery.dataTables.min.js" %}"></script>
+<script src="{% static "directsales/sbadmin/vendor/datatables-plugins/dataTables.bootstrap.min.js" %}"></script>
+<script src="{% static "directsales/sbadmin/vendor/datatables-responsive/dataTables.responsive.js" %}"></script>
+<!-- Page-Level Demo Scripts - Tables - Use for reference -->
+<script>
+function initTable(idstr) {
+   return $('#'+idstr).dataTable( {
+       responsive: true,
+    "oLanguage":{
+        "sLengthMenu": "每页 _MENU_ 条记录",
+        "oPaginate": {
+            "sFirst":"第一页",
+            "sLast":"最末页",
+            "sNext":"下一页",
+            "sPrevious":"上一页",
+        },
+        "sInfo":"共_TOTAL_条记录",
+        "sInfoEmpty": "找不到符合关键词的记录",
+        "sZeroRecords": "找不到符合关键词的记录",
+        "sInfoFiltered":"总记录数:_MAX_",
+        "sSearch":"搜索(输入关键词)","sEmptyTable":"找不到相关记录"
+        }
+   });
+}
+
+$(document).ready(function() {
+    initTable('dataTables-all');
+    initTable('dataTables-cash');
+    initTable('dataTables-integral');
+    initTable('dataTables-shoppingcoupons');
+    
+});
+</script>
+{% endblock js %}

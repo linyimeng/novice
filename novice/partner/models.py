@@ -24,11 +24,12 @@ class Company(models.Model):
     
 class Personal(models.Model):
     name = models.CharField(max_length=30)
-    user = models.ForeignKey(User,blank=True,null=True,related_name='user_personal')
+    user = models.OneToOneField(User,blank=True,null=True,related_name='user_personal')
     company = models.ForeignKey(Company,blank=True,null=True)
     job = models.CharField(max_length=20,blank=True,null=True)
     is_job = models.BooleanField(default=True)
     address = models.CharField(max_length=255,blank=True,null=True)
+    
     
     landline = models.CharField(_('landline'),max_length=20,blank=True,null=True)
     phone = models.CharField(_('phone'),max_length=12,unique=True,blank=True,null=True)

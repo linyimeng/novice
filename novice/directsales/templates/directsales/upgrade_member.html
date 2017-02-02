@@ -1,0 +1,89 @@
+{% extends "directsales/base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+<div class="row">
+    <div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h1>会员升级</h1>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                  <form role="form" name="registered" action="{% url "directsale:upgrade_member" %}" method="post" id="upgradeform">
+                  {% csrf_token %}
+                    <div class="col-lg-6">
+                    	<div class="form-group">
+                            <label>会员账户</label>
+                            <input class="form-control" value="{{request.user}}" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label>当前级别</label>
+                            <input class="form-control" value="{{track.identity.name}}" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label>升级会员至</label>
+                            <select class="form-control" name="identity" id="identity_select">
+                                <option>请选择</option>
+                                {% for level in memberlevel %}
+                                {% if level.price > track.identity.price %}
+                                <option value="{{level.pk}}">{{level.name}}{{level.price | floatformat:"2"}}</option>
+                                {% endif %}
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <input class="btn btn-primary btn-lg btn-block" disabled id="upgrade_door" value="确认升级"/>
+                    </div>
+                    </form>
+                </div>
+                <!-- /.row (nested) -->
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->
+{% include "directsales/confirm_pay_modal.html" %}
+{% endblock content %}
+
+{% block js %}
+<script src="{% static "directsales/js/confirmpay.js" %}"></script>
+<script>
+	
+	$(function(){
+	     $('#upgrade_door').click(function(){
+	         $('#confirmpayModal').modal('show');
+	     });
+		     
+	     $('#confirmpay').click(function(){
+		    confirm_pay('upgradeform');
+		    
+		 });
+	//验证金币
+	     $("#identity_select").change(function(){
+	         dochk();
+	     });
+	});
+	
+	function dochk(){
+		var option = $("#identity_select").val();
+	    $.ajax({
+	        url:"{% url "directsale:chk-isenough" %}",
+	        type:"post",
+	        data:{"identity_id":option},
+	        timeout:5000,
+	        dataType:"json",
+	        success:function(data) {
+	            if(data.result) {
+	                $('#upgrade_door').removeAttr('disabled');
+	            } else {
+	                alert('金币不足，请充值后继续操作');
+	                $('#upgrade_door').attr('disabled',true);
+	            }
+	        }
+	    });
+	}
+</script>
+{% endblock js %}

@@ -1,0 +1,119 @@
+{% extends "directsales/base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+<div class="row">
+    <div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h1>金币提现</h1>
+                <ul class="list-unstyled spaced inline bigger-110 margin-15">
+						<li>
+							<i class="ace-icon fa fa-hand-o-right blue"></i>
+							<strong style="color:red">申请提现需{{tax_rate | floatformat:"1"}}%税额和{{fee | floatformat:"1"}}%的提现手续费</strong>
+						</li>
+						<li>
+							<i class="ace-icon fa fa-hand-o-right blue"></i>
+							<strong style="color:red">如有疑问，请联系管理员</strong>
+						</li>
+					</ul>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                  <form role="form" action="{% url "directsale:withdrawal" %}" method="post" onSubmit="return docheck()" id="withdrawalform">
+                  {% csrf_token %}
+                    <div class="col-lg-6">
+                    	<div class="form-group">
+                            <label>账户金币余额</label>
+                            <input class="form-control" value="{{bonus.cash}}" disabled>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>银行帐号</label>
+                            <input class="form-control" placeholder="银行" name="bank" id="bank" value="{{track.bank}}">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>银行帐号</label>
+                            <input class="form-control" placeholder="银行帐号" name="bank_account" id="bank_account" value="{{track.bank_account}}">
+                        </div>
+                        <div class="form-group input-group">
+                            <span class="input-group-addon">￥</span>
+                            <input type="number" class="form-control" placeholder="提现金额" id="goldnum" name="gold">
+                            <span class="input-group-addon">.00</span>
+                        </div>
+                        <input class="btn btn-primary btn-lg btn-block" disabled id="withdrawal" value="提交申请"/>
+                    </div>
+                    </form>
+                </div>
+                <!-- /.row (nested) -->
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->
+{% include "directsales/confirm_pay_modal.html" %}
+{% endblock content %}
+
+{% block js %}
+<script src="{% static "directsales/js/confirmpay.js" %}"></script>
+<script>
+	$(function(){
+	    $('#withdrawal').click(function(){
+	         if(docheck()){
+	             $('#confirmpayModal').modal('show');
+	         }
+	     });
+	     
+	    $('#confirmpay').click(function(){
+		    confirm_pay('withdrawalform');
+		    
+		});
+		
+	     //验证金币
+	    $('#goldnum').bind('input propertychange',function(){
+	        chk_gold();
+	    });
+	});
+
+	function docheck(){
+	    if(!chk_gold()){
+	        alert('请输入整数');
+	        $('#goldnum').focus();
+	        return false;
+	    } else if($('bank').val()=='') {
+	        alert('请输入银行');
+	        $('#bank_account').focus();
+	        return false;
+	    } else if($('#bank_account').val()==''){
+	        alert('请输入银行帐号');
+	        $('#bank').focus();
+	        return false;
+	    } else {
+	        return true;
+	    }
+	}
+	
+	function chk_gold(){
+	    goldnum = $('#goldnum').val();
+	    if(goldnum==""){
+	        $('#goldnum').parent().attr('class',"form-group input-group has-error");
+	        $('#goldnum').focus();
+	        return false;
+	    }
+        if(Number(goldnum) > {{bonus.cash}}){
+            alert('账户金币不足，请充值后继续');
+            $('#goldnum').parent().attr('class',"form-group input-group has-error");
+            $('#goldnum').focus();
+            return false;
+        } else {
+            $('#goldnum').parent().attr('class',"form-group input-group has-success");
+            $('#withdrawal').removeAttr('disabled');
+            return true;
+        }
+	}
+</script>
+{% endblock js %}
