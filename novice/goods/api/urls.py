@@ -4,7 +4,7 @@ Created on 2016-10-3
 @author: yimeng
 '''
 from django.conf.urls import url,include
-from goods import views
+from goods.api import views
 from rest_framework.urlpatterns import format_suffix_patterns
 from rest_framework.routers import DefaultRouter
 

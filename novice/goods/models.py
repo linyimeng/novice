@@ -21,7 +21,7 @@ class Type(models.Model):
     updated = models.DateTimeField(auto_now=True)
     deleted = models.DateTimeField(_('deleted'),blank=True,null=True)
     objects = TypeManager()
-        
+
     def __str__(self):
         return self.name
 
@@ -62,10 +62,3 @@ class TypeAttr(models.Model):
     
     def __str__(self):
         return self.name
-    
-    
-    
-    
-    
-    
-    
