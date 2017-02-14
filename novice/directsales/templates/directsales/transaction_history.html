@@ -21,7 +21,7 @@
     	  <a href="#all-pills" data-toggle="tab">综合</a>
         </li>
         <li>
-          <a href="#cash-pills" data-toggle="tab">现金</a>
+          <a href="#gold-pills" data-toggle="tab">现金</a>
         </li>
         <li>
           <a href="#integral-pills" data-toggle="tab">积分</a>
@@ -69,11 +69,11 @@
         
         
         
-        <div class="tab-pane fade" id="cash-pills">
+        <div class="tab-pane fade" id="gold-pills">
         <div style="height:22px"></div>
 			  <!-- /.panel-heading -->
 			<div class="panel-body">
-			    <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-cash">
+			    <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-gold">
 			        <thead>
 			            <tr>
 			                <th>编号</th>
@@ -86,11 +86,11 @@
 			            </tr>
 			        </thead>
 			        <tbody>
-			            {% for ch in cash_history %}
+			            {% for ch in gold_history %}
 			            <tr class="gradeA">
 			                <td>{{ch.pk}}</td>
 			                <td>{{ch.get_type_display}}</td>
-			                <td style="color:red">{% if th.io == 'I' %}+{% else %}-{% endif %}{{ch.price | floatformat:"2" }}</td>
+			                <td style="color:red">{% if ch.io == 'I' %}+{% else %}-{% endif %}{{ch.price | floatformat:"2" }}</td>
 			                <td style="color:red">{{ch.overage | floatformat:"2" }}</td>
 			                <td class="center">{{ch.get_pay_by_display}}</td>
 			                <td class="center">{{ch.remark}}</td>
@@ -124,7 +124,7 @@
 			            <tr class="gradeA">
 			                <td>{{ih.pk}}</td>
 			                <td>{{ih.get_type_display}}</td>
-			                <td style="color:red">{% if th.io == 'I' %}+{% else %}-{% endif %}{{ih.price | floatformat:"2" }}</td>
+			                <td style="color:red">{% if ih.io == 'I' %}+{% else %}-{% endif %}{{ih.price | floatformat:"2" }}</td>
 			                <td style="color:red">{{ih.overage | floatformat:"2" }}</td>
 			                <td class="center">{{ih.get_pay_by_display}}</td>
 			                <td class="center">{{ih.remark}}</td>
@@ -158,7 +158,7 @@
 			            <tr class="gradeA">
 			                <td>{{sh.pk}}</td>
 			                <td>{{sh.get_type_display}}</td>
-			                <td style="color:red">{% if th.io == 'I' %}+{% else %}-{% endif %}{{sh.price | floatformat:"2" }}</td>
+			                <td style="color:red">{% if sh.io == 'I' %}+{% else %}-{% endif %}{{sh.price | floatformat:"2" }}</td>
 			                <td style="color:red">{{sh.overage | floatformat:"2" }}</td>
 			                <td class="center">{{sh.get_pay_by_display}}</td>
 			                <td class="center">{{sh.remark}}</td>
@@ -204,7 +204,7 @@ function initTable(idstr) {
 
 $(document).ready(function() {
     initTable('dataTables-all');
-    initTable('dataTables-cash');
+    initTable('dataTables-gold');
     initTable('dataTables-integral');
     initTable('dataTables-shoppingcoupons');
     

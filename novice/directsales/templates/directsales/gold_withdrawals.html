@@ -8,15 +8,15 @@
             <div class="panel-heading">
                 <h1>金币提现</h1>
                 <ul class="list-unstyled spaced inline bigger-110 margin-15">
-						<li>
-							<i class="ace-icon fa fa-hand-o-right blue"></i>
-							<strong style="color:red">申请提现需{{tax_rate | floatformat:"1"}}%税额和{{fee | floatformat:"1"}}%的提现手续费</strong>
-						</li>
-						<li>
-							<i class="ace-icon fa fa-hand-o-right blue"></i>
-							<strong style="color:red">如有疑问，请联系管理员</strong>
-						</li>
-					</ul>
+					<li>
+						<i class="ace-icon fa fa-hand-o-right blue"></i>
+						<strong style="color:red">申请提现需{{tax_rate | floatformat:"1"}}%税额和{{fee | floatformat:"1"}}%的提现手续费</strong>
+					</li>
+					<li>
+						<i class="ace-icon fa fa-hand-o-right blue"></i>
+						<strong style="color:red">如有疑问，请联系管理员</strong>
+					</li>
+				</ul>
             </div>
             <div class="panel-body">
                 <div class="row">
@@ -25,7 +25,7 @@
                     <div class="col-lg-6">
                     	<div class="form-group">
                             <label>账户金币余额</label>
-                            <input class="form-control" value="{{bonus.cash}}" disabled>
+                            <input class="form-control" value="{{bonus.gold}}" disabled>
                         </div>
                         
                         <div class="form-group">
@@ -42,6 +42,7 @@
                             <input type="number" class="form-control" placeholder="提现金额" id="goldnum" name="gold">
                             <span class="input-group-addon">.00</span>
                         </div>
+                        <input type="hidden" value="yimeng" name="yimeng"/>
                         <input class="btn btn-primary btn-lg btn-block" disabled id="withdrawal" value="提交申请"/>
                     </div>
                     </form>
@@ -104,7 +105,7 @@
 	        $('#goldnum').focus();
 	        return false;
 	    }
-        if(Number(goldnum) > {{bonus.cash}}){
+        if(Number(goldnum) > {{bonus.gold}}){
             alert('账户金币不足，请充值后继续');
             $('#goldnum').parent().attr('class',"form-group input-group has-error");
             $('#goldnum').focus();

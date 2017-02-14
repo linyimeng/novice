@@ -1,0 +1,371 @@
+{% extends "directsales/base.html" %}
+{% load staticfiles %}
+{% block head_load_static %}
+    <link href="{% static "directsales/css/goods.css" %}" rel="stylesheet">
+{% endblock head_load_static %}
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <h5 class="page-header">商品列表</h5>
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+    <!-- /.row -->
+</div>
+<!--
+	描述：商品内容
+-->
+<div class="row">
+	<div class="shopping_table">
+		<table class="table table-striped table-bordered table-hover" border="1" bordercolor="#cccccc" cellspacing="0" cellpadding="0">
+		
+			<tr>
+				<th>商品图片</th>
+				<th>商品名称</th>
+				<th>供应商家</th>
+				<th>商品介绍</th>
+				<th>商品价格</th>
+				<th>商品数量</th>
+{#				<th>商品操作</th>#}
+			</tr>
+			{% for goods in goodss %}
+			<tr>
+				<td>
+					<a><img src="{{goods.image.url}}" style="width:80px;height:80px"/></a>
+				</td>
+				<td><span>{{goods.name}}</span></td>
+				<td>{{goods.supplier.name}}</td>
+				<td>
+					{{goods.description}}
+				</td>
+				<td>
+					<div class="">金币:￥<span class="span_momey" style="color:red;">{{goods.price|floatformat:"2"}}</span></div>
+				    <div class="">积分:￥<span class="span_integral_momey" style="color:red;">{{goods.integral|floatformat:"2"}}</span></div>
+					<div class="">购物劵:￥<span class="span_shop_momey" style="color:red;">{{goods.shoppingcoupons|floatformat:"2"}}</span></div>
+				</td>
+				<td>
+					<button class="btn_reduce" onclick="javascript:onclick_reduce(this);">-</button>
+					<input class="momey_input" data="{{goods.pk}}" value="0" disabled="disabled" />
+					<button class="btn_add" onclick="javascript:onclick_btnAdd(this);">+</button>
+				</td>
+{#				<td>#}
+{#					<button class="btn_r" onclick="javascript:onclick_remove(this);">删除</button>#}
+{#				</td>#}
+			</tr>
+			{% endfor %}
+		</table>
+		<div class="Caddress">
+			<div class="open_new">
+				<button class="open_btn" onclick="javascript:onclick_open();">使用新地址</button>
+			</div>
+			{% for address in addresses %}
+			<div class="add_mi" data="{{address.pk}}">
+				<p style="border-bottom:1px dashed #ccc;line-height:28px;">{{address.recipient}}({{address.mobile}})</p>
+				<p>{{address.address}}</p>
+			</div>
+			{% empty %}
+			<div class="add_mi" data="0">
+				<p style="border-bottom:1px dashed #ccc;line-height:28px;">{{bonus.track.name}}({{bonus.track.phone}})</p>
+				<p>{{bonus.track.address}}</p>
+			</div>
+			{% endfor %}
+		</div>
+		<div class="row"></div>
+		<div class="row" style="width: 100%; text-align: right; margin-top:10px;">
+{#			<div class="div_outMumey" style="float: left;margin-left:10px">#}
+{#				金币：<span class="out_momey">0</span>#}
+{#			</div>#}
+{#			<div class="div_outMumey" style="float: left;margin-left:10px">#}
+{#				积分：<span class="out_integral_momey">0</span>#}
+{#			</div>#}
+{#			<div class="div_outMumey" style="float: left; margin-left:10px">#}
+{#				购物劵：<span class="out_shop_momey">0</span>#}
+{#			</div>#}
+			<button class="btn_closing" id="goldsub">金币结算<br/>(<span class="out_momey">0</span>)</button>
+			<button class="btn_closing" id="integralsub">积分结算<br/>(<span class="out_integral_momey">0</span>)</button>
+			<button class="btn_closing" id="shopsub">购物劵结算<br/>(<span class="out_shop_momey">0</span>)</button>
+			<input type="hidden" id="address" value=""/>
+			<input type="hidden" id="pay_by" value=""/>
+		</div>
+	</div>
+</div>
+
+
+<!--
+	描述：shade 遮罩层
+-->
+<div class="shade" style="display:none">
+</div>
+<div class="shade_content" style="display:none">
+	<div class="col-xs-12 shade_colse">
+		<button onclick="javascript:onclick_close();">x</button>
+	</div>
+	<div class="nav shade_content_div">
+		<div class="col-xs-12 shade_title">
+			新增收货地址
+		</div>
+		<div class="col-xs-12 shade_from">
+			<form action="{% url "directsale:add_address" %}" method="post">
+			    {%csrf_token%}
+				<div class="col-xs-12">
+					<span class="span_style" class="span_sty" id="">姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名</span>
+					<input class="input_style" type="" name="recipient" id="name_" value="{{bonus.track.name}}" placeholder="&nbsp;&nbsp;请输入您的姓名" />
+				</div>
+				<div class="col-xs-12">
+					<span class="span_style" id="">手机号码</span>
+					<input class="input_style" type="" name="mobile" id="phone" value="{{bonus.track.phone}}" placeholder="&nbsp;&nbsp;请输入您的手机号码" />
+				</div>
+				<div class="col-xs-12">
+					<span class="span_style" id="">收货地址</span>
+					<input class="input_style" type="" name="address" id="address" value="" placeholder="&nbsp;&nbsp;请输入您的收货地址" />
+				</div>
+				<div class="col-xs-12">
+					<input class="btn_remove" type="button" id="" onclick="javascript:onclick_close();" value="取消" />
+					<input type="submit" class="sub_set" id="sub_setID" value="提交" />
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+{% include "directsales/confirm_pay_modal.html" %}
+{% endblock content %}
+
+{% block js %}
+<script src="{% static "directsales/js/confirmpay.js" %}"></script>
+<script type="text/javascript">
+	$(function() {
+	    $('#address').val('');
+		var region = $("#region");
+		var address = $("#address");
+		var number_this = $("#number_this");
+		var name = $("#name_");
+		var phone = $("#phone");
+		$("#sub_setID").click(function() {
+			var input_out = $(".input_style");
+			for (var i = 0; i <= input_out.length; i++) {
+				if ($(input_out[i]).val() == "") {
+					$(input_out[i]).css("border", "1px solid red");
+					return false;
+				} else {
+					$(input_out[i]).css("border", "1px solid #cccccc");
+				}
+			}
+		});
+		var momey_input = $(".momey_input");
+		var b = 0;
+		for (var i = 0; i < momey_input.length; i++) {
+			$(momey_input[i]).val(0);
+		}
+		var out_momey = $(".out_momey");
+		out_momey.html(b);
+		$(".shade_content").hide();
+		$(".shade").hide();
+		$('.nav_mini ul li').hover(function() {
+			$(this).find('.two_nav').show(100);
+		}, function() {
+			$(this).find('.two_nav').hide(100);
+		})
+		$('.left_nav').hover(function() {
+			$(this).find('.nav_mini').show(100);
+		}, function() {
+			$(this).find('.nav_mini').hide(100);
+		})
+		$('#jia').click(function() {
+			$('input[name=num]').val(parseInt($('input[name=num]').val()) + 1);
+		})
+		$('#jian').click(function() {
+			$('input[name=num]').val(parseInt($('input[name=num]').val()) - 1);
+		})
+		$('.Caddress .add_mi').click(function() {
+			$(this).css('background', 'url("/static/directsales/img/mail_1.jpg") no-repeat').siblings('.add_mi').css('background', 'url("/static/directsales/img/mail.jpg") no-repeat')
+			$('#address').val($(this).attr('data'))
+{#			alert($('#address').val());#}
+		})
+		
+	     //金币提交
+	    $('#goldsub').click(function(){
+		    if (chkiszero('goldsub','out_momey')) {
+		        if(chkaddress()){
+		            if(parseFloat($('#goldsub').find('.out_momey').html()) > {{bonus.gold}}) {
+		                alert('金币不足');
+		                return;
+		            }
+		            $('#pay_by').val('gold');
+		            $('#confirmpayModal').modal('show');
+		        }
+		    } else {
+		        return false;
+		    };
+		});
+	
+		//积分提交
+		$('#integralsub').click(function(){
+		    if (chkiszero('integralsub','out_integral_momey')){
+		    	if(chkaddress()){
+			        if(parseFloat($('#integralsub').find('.out_integral_momey').html()) > {{bonus.integral}}) {
+		                alert('积分不足');
+		                return;
+		            }
+		            $('#pay_by').val('integral');
+	            	$('#confirmpayModal').modal('show');
+		        }
+	            
+		    } else {
+		        return false;
+		    }
+		});
+	
+		//购物劵提交
+		$('#shopsub').click(function(){
+		    if (chkiszero('shopsub','out_shop_momey')) {
+		        if(chkaddress()){
+			        if(parseFloat($('#shopsub').find('.out_shop_momey').html()) > {{bonus.shoppingcoupons}}) {
+		                alert('购物劵不足');
+		                return;
+		            }
+		            $('#pay_by').val('shoppingcoupons');
+		            $('#confirmpayModal').modal('show');
+		        }
+		    } else {
+		        return false;
+		    }
+		});
+	
+		$('#confirmpay').click(function(){
+		    paypwd = $('#confirmpaypwd').val();
+		    $.post("/directsale/confirmpay/", {"paypwd":paypwd}, function(data){
+		        if(data.result){
+		            var pay_by = $('#pay_by').val();
+		            sendorder();
+		        } else {
+		            $('#confirmpaypwd').focus();
+		            $('#confirmpaypwd').popover('show');
+		        }
+		        },"json");
+		});
+	})
+	var x = Array();
+	
+	function sendorder(){
+	    var momey_input = $(".momey_input");
+		var goodss = Array();
+		for (var i = 0; i < momey_input.length; i++) {
+			goodss[i] = {"gpk":$(momey_input[i]).attr('data'),"quantity":$(momey_input[i]).val()};
+		}
+		var address = $('#address').val();
+		var pay_by = $('#pay_by').val();
+		var json = {"address":address,"pay_by":pay_by,"goodsdetail":JSON.stringify(goodss)}
+        $.ajax({
+            url:"{% url "directsale:createorder" %}",
+            type:"post",
+            data:json,
+            timeout:5000,
+            dataType:"json",
+            success:function(data) {
+            	if (data.result) {
+            	    window.location.href= "/directsale/createordersuccess/" + data.ordercode;
+            	}
+            }
+        });
+	}
+	
+	function func(a, b) {
+		x[b] = a.html();
+		alert(x)
+		a.css('border', '2px solid #f00').siblings('.min_mx').css('border', '2px solid #ccc');
+	}
+
+	function onclick_close() {
+		var shade_content = $(".shade_content");
+		var shade = $(".shade");
+		if (confirm("确认关闭么！此操作不可恢复")) {
+			shade_content.hide();
+			shade.hide();
+		}
+	}
+
+	function onclick_open() {
+		$(".shade_content").show();
+		$(".shade").show();
+	}
+
+	function onclick_remove(r) {
+		if (confirm("确认删除么！此操作不可恢复")) {
+			var out_momey = $(".out_momey");
+			var input_val = $(r).parent().prev().children().eq(1).val();
+			var span_html = $(r).parent().prev().prev().children().html();
+			var out_add = parseFloat(input_val).toFixed(2) * parseFloat(span_html).toFixed(2);
+			var reduce = parseFloat(out_momey.html()).toFixed(2)- parseFloat(out_add).toFixed(2);
+			console.log(parseFloat(reduce).toFixed(2));
+			out_momey.text(parseFloat(reduce).toFixed(2))
+			$(r).parent().parent().remove();
+		}
+	}
+
+	function onclick_btnAdd(a) {
+		var out_momey = $(".out_momey");
+		var out_integral_momey = $(".out_integral_momey");
+		var out_shop_momey = $(".out_shop_momey");
+		var input_ = $(a).prev();
+		var input_val = $(a).prev().val();
+		var input_add = parseInt(input_val) + 1;
+		input_.val(input_add);
+		var btn_momey = parseFloat($(a).parent().prev().children().find('.span_momey').html());
+		var span_integral_momey = parseFloat($(a).parent().prev().children().find('.span_integral_momey').html());
+		var span_shop_momey = parseFloat($(a).parent().prev().children().find('.span_shop_momey').html());
+		
+		var out_momey_float = parseFloat(out_momey.html()) + btn_momey;
+		var span_integral_momey_f = parseFloat(out_integral_momey.html()) + span_integral_momey;
+		var span_shop_momey_f = parseFloat(out_shop_momey.html()) + span_shop_momey;
+		out_momey.text(out_momey_float.toFixed(2));
+		out_integral_momey.text(span_integral_momey_f.toFixed(2));
+		out_shop_momey.text(span_shop_momey_f.toFixed(2));
+	}
+
+	function onclick_reduce(b) {
+		var out_momey = $(".out_momey");
+		var out_integral_momey = $(".out_integral_momey");
+		var out_shop_momey = $(".out_shop_momey");
+		var input_ = $(b).next();
+		var input_val = $(b).next().val();
+		if (input_val <= 0) {
+			alert("商品个数不能小于0！")
+		} else {
+			var input_add = parseInt(input_val) - 1;
+			input_.val(input_add);
+			var btn_momey = parseFloat($(b).parent().prev().children().find('.span_momey').html());
+			var span_integral_momey = parseFloat($(b).parent().prev().children().find('.span_integral_momey').html());
+			var span_shop_momey = parseFloat($(b).parent().prev().children().find('.span_shop_momey').html());
+			
+			var out_momey_float = parseFloat(out_momey.html()) - btn_momey;
+			var span_integral_momey_f = parseFloat(out_integral_momey.html()) - span_integral_momey;
+			var span_shop_momey_f = parseFloat(out_shop_momey.html()) - span_shop_momey;
+			out_momey.text(out_momey_float.toFixed(2));
+			out_integral_momey.text(span_integral_momey_f.toFixed(2));
+			out_shop_momey.text(span_shop_momey_f.toFixed(2));
+		}
+	}
+	
+	function chkiszero(id,classname){
+	    if($('#'+id).find('.'+classname).html()=="0"){
+	        alert("请先选择商品");
+	        return false;
+	    } else {
+	        return true;
+	    }
+	}
+	
+	function chkaddress() {
+	    if($('#address').val()==""){
+	        alert('请选择收货地址');
+	        return false;
+	    } else {
+	        return true;
+	    }
+	}
+	
+
+</script>
+{% endblock js %}
+

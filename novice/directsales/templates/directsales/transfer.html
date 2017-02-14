@@ -1,0 +1,149 @@
+{% extends "directsales/base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+<div class="row">
+    <div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h1>资金转账</h1>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                  <form role="form" action="{% url "directsale:transfergold" %}" method="post" onSubmit="return docheck()" id="transfergoldform">
+                  {% csrf_token %}
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label>转账类型</label>
+	                    	<select class="form-control" name="transaction_type" id="transaction_type">
+	                            <option>请选择</option>
+	                            <option value="gold">金币</option>
+	                            <option value="integral">积分</option>
+	                            <option value="shoppingcoupons">购物劵</option>
+	                        </select>
+                        </div>
+                        <div class="form-group">
+                            <label>接收用户</label><span style="color:red;" id="acceptname"></span>
+                            <input class="form-control" placeholder="接收转账的用户名/手机号/邮箱" id="accept" name="accept">
+                        </div>
+                        <div class="form-group input-group">
+                            <span class="input-group-addon">￥</span>
+                            <input type="number" class="form-control" placeholder="转账金额" id="pricenum" name="num">
+                            <span class="input-group-addon">.00</span>
+                        </div>
+                        <input class="btn btn-primary btn-lg btn-block" disabled id="transfer" value="确认转账"/>
+                    </div>
+                    </form>
+                </div>
+                <!-- /.row (nested) -->
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->
+{% include "directsales/confirm_pay_modal.html" %}
+{% endblock content %}
+
+{% block js %}
+<script src="{% static "directsales/js/confirmpay.js" %}"></script>
+<script>
+	$(function(){
+	    $('#transfer').click(function(){
+	         if(docheck()){
+	             $('#confirmpayModal').modal('show');
+	         }
+	     });
+	     
+	    $('#confirmpay').click(function(){
+		    confirm_pay('transfergoldform');
+		    
+		});
+		
+		$('#transaction_type').change(function(){
+		    chk_isenough();
+		});
+		
+	    //验证用户是否存在
+        $('#accept').blur(function(){
+            chk_user();
+        });
+	     //验证金币
+	    $('#pricenum').blur(function(){
+	        chk_isenough();
+	    });
+	});
+
+	function docheck(){
+	    if(!chk_isenough()){
+	        alert('请输入不为0的整数');
+	        $('#goldnum').focus();
+	        return false;
+	    } else if($('#transaction_type').val()=="请选择"){
+	        alert('请选中转账类型！');
+	        return false;
+	    } else {
+	        return true;
+	    }
+	}
+	
+	function chk_isenough(){
+	    var type = $('#transaction_type').val();
+	    var isenough = false;
+	    var num = $('#pricenum').val();
+	    if(num=="" || num==0){
+	        $('#pricenum').parent().attr('class',"form-group input-group has-error");
+	        $('#pricenum').focus();
+	        return false;
+	    }
+	    if(type=="gold") {
+	        if(Number(num) > {{bonus.gold}}){
+                isenough = false;
+	        } else {
+	           isenough = true;
+	        }
+	    } else if(type="integral"){
+	        if(Number(num) > {{bonus.integral}}) {
+	            isenough = false;
+	        } else {
+	            isenough = true;
+	        }
+	    } else {
+	        if(Number(num)>{{bonus.shoppingcoupons}}) {
+	            isenough = false;
+	        } else {
+	            isenough = true;
+	        }
+	    }
+	    if(isenough) {
+	        $('#pricenum').parent().attr('class',"form-group input-group has-success");
+	        return true;
+	    } else {
+	        alert('账户余额不足！');
+            $('#pricenum').parent().attr('class',"form-group input-group has-error");
+            $('#pricenum').focus();
+            return false;
+	    }
+	}
+	
+	function chk_user(){
+	    username = $('#accept').val();
+        $.post("{% url "directsale:chk-user" %}",{"username":username},function(data){
+            if(data.result) {
+                $('#accept').parent().attr('class',"form-group has-error");
+            } else {
+                if("{{request.user.username}}" == data.username) {
+                    alert('不能给自己转账');
+                    $('#accept').parent().attr('class',"form-group has-error");
+                } else {
+	                $('#transfer').removeAttr('disabled');
+	                $('#accept').parent().attr('class',"form-group has-success");
+	                $('#acceptname').text(":"+data.username+",姓名:"+data.trackname);
+                }
+            }
+        },"json");
+	}
+</script>
+{% endblock js %}

@@ -20,7 +20,7 @@
 	                        <i class="fa fa-cny fa-5x"></i>
 	                    </div>
 	                    <div class="col-xs-9 text-right">
-	                        <div class="huge">{{today_bonus.cash}}</div>
+	                        <div class="huge">{%if gold.gold %}{{gold.gold | floatformat:"2"}}{%else%}0{%endif%}</div>
 	                        <div>金币</div>
 	                    </div>
 	                </div>
@@ -42,7 +42,7 @@
 	                        <i class="fa fa-cubes fa-5x"></i>
 	                    </div>
 	                    <div class="col-xs-9 text-right">
-	                        <div class="huge">{{today_bonus.integral}}</div>
+	                        <div class="huge">{%if integral.integral%}{{integral.integral | floatformat:"2"}}{%else%}0{%endif%}</div>
 	                        <div>积分</div>
 	                    </div>
 	                </div>
@@ -64,7 +64,7 @@
 	                        <i class="fa fa-shopping-cart fa-5x"></i>
 	                    </div>
 	                    <div class="col-xs-9 text-right">
-	                        <div class="huge">{{today_bonus.shoppingcoupons}}</div>
+	                        <div class="huge">{%if shoppingcoupons.shoppingcoupons%}{{shoppingcoupons.shoppingcoupons | floatformat:"2"}}{%else%}0{%endif%}</div>
 	                        <div>购物劵</div>
 	                    </div>
 	                </div>

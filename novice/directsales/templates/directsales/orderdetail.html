@@ -1,0 +1,60 @@
+{% extends "directsales/base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+<div class="row">
+	<div class="col-lg-12">
+	    <h3 class="page-header">订单:{{order.ordercode}} 详情</h3>
+	</div>
+	<!-- /.col-lg-12 -->
+</div>
+<h3 class="lighter smaller">
+	收货人：{{order.ship_recipient}}
+</h3>
+<h3 class="lighter smaller">
+	联系电话：{{order.ship_mobile}}
+</h3>
+<h3 class="lighter smaller">
+	收货地址：{{order.ship_address}}
+</h3>
+<h3 class="lighter smaller">
+	结算方式：{{order.get_pay_by_display}}
+</h3>
+<h3 class="lighter smaller">
+	总数量：{{order.totalquantity|floatformat:"2"}}
+</h3>
+<h3 class="lighter smaller">
+	总金额：{{order.totalprice|floatformat:"2"}}
+</h3>
+<h3 class="lighter smaller">
+	商品详情:
+</h3>
+<div class="row">
+    <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-all">
+        <thead>
+            <tr>
+                <th>商品名称</th>
+                <th>供应商</th>
+                <th>数量</th>
+                <th>单价</th>
+                <th>状态</th>
+                <th>下单时间</th>
+                <th>发货时间</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for detail in details %}
+            <tr class="gradeA">
+                <td>{{detail.goodsname}}</td>
+                <td>{{detail.supplier.name}}</td>
+                <td style="color:red">{{detail.quantity |floatformat:"2" }}</td>
+                <td style="color:red">{{detail.price |floatformat:"2" }}</td>
+                <td>{{detail.get_status_display}}</td>
+                <td>{{detail.joined |date:"Y-n-d H:i:s"}}</td>
+                <td>{% if detail.status == 'ship' %}{{detail.updated |date:"Y-n-d H:i:s"}}{%else%}--{% endif %}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock content %}

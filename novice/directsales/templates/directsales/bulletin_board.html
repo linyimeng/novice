@@ -1,0 +1,36 @@
+{% extends "directsales/base.html" %}
+{% load staticfiles %}
+
+{% block head_load_static %}
+    <style>
+        .jumbotron {
+		    padding-top: 2px;
+		    padding-bottom: 1px;
+		}
+    </style>
+{% endblock head_load_static %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">公告栏</h1>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+
+{% for bulletin in bulletins %}
+<div class="row">
+    <div class="col-lg-12">
+        <div class="jumbotron">
+            <h3>{{bulletin.title}} <small>发布时间:{{bulletin.joined}}</small></h3> 
+            <p style="font-size:16px">{{bulletin.content}}</p>
+            <p><a href="{% url "directsale:send_mail" %}" class="btn btn-primary btn-lg" role="button">如有疑问，联系管理员</a></p>
+        </div>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+{% endfor %}
+
+
+{% endblock content %}

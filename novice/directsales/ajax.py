@@ -7,11 +7,12 @@ from django.shortcuts import render
 from django.http.response import HttpResponse
 # from django.views.decorators.csrf import csrf_exempt
 from django.db.models import Sum
-from directsales.models import Transactionhistory
+from directsales.models import Transactionhistory,Orderdetail,Order
 from json import dumps
 from decimal import Decimal
 def test(request):
     return render(request,"directsales/500.html")
+
 def get_awards_statistics_data(request):
     all_awards = Transactionhistory.objects.filter(track__user=request.user)
     gold = Decimaltofloat(all_awards.filter(type="gold").aggregate(Sum('price'))['price__sum'])
@@ -42,3 +43,24 @@ def Decimaltofloat(decimal):
         return "%.2f" % decimal
     else:
         return '0';
+    
+    
+def ship(request):
+    pk = request.GET.get('pk')
+    detail = Orderdetail.objects.get(pk=pk)
+    ordernum = Orderdetail.objects.filter(ordercode=detail.ordercode).count()
+    num = Orderdetail.objects.filter(ordercode=detail.ordercode,status='ship').count()
+    if ordernum==num:
+        return HttpResponse(dumps({'result':False}),content_type='application/json')
+    elif (ordernum-num)>1:
+        detail.status = "ship"
+        detail.save()
+        return HttpResponse(dumps({'result':True}),content_type='application/json')
+    elif (ordernum-num)==1:
+        detail.status = "ship"
+        detail.save()
+        order = detail.ordercode
+        order.status = "ship"
+        order.save()
+        return HttpResponse(dumps({'result':True}),content_type='application/json')
+    

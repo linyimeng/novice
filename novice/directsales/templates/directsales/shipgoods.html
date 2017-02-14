@@ -1,0 +1,151 @@
+{% extends "directsales/base.html" %}
+{% load staticfiles %}
+{% block head_load_static %}
+	<!-- DataTables CSS -->
+    <link href="{% static "directsales/sbadmin/vendor/datatables-plugins/dataTables.bootstrap.css" %}" rel="stylesheet">
+    <!-- DataTables Responsive CSS -->
+    <link href="{% static "directsales/sbadmin/vendor/datatables-responsive/dataTables.responsive.css" %}" rel="stylesheet">
+    <style>
+        .panel-body {
+		    padding: 0px;
+		}
+    </style>
+{% endblock head_load_static %}
+{% block content %}
+<div style="height:10px"></div>
+<!-- /.panel-heading -->
+<div class="panel-body">
+    <!-- Nav tabs -->
+    <ul class="nav nav-pills">
+    	<li class="active">
+          <a href="#gold-pills" data-toggle="tab">未发货</a>
+        </li>
+        <li>
+          <a href="#integral-pills" data-toggle="tab">已发货</a>
+        </li>
+{#        <li>#}
+{#          <a href="#shoppingcoupons-pills" data-toggle="tab">未付款</a>#}
+{#        </li>#}
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+     <div class="tab-pane fade in active" id="gold-pills">
+        <div style="height:22px"></div>
+			  <!-- /.panel-heading -->
+			<div class="panel-body">
+			    <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-gold">
+			        <thead>
+			            <tr>
+			                <th>订单编号</th>
+			                <th>商品名称</th>
+			                <th>单价</th>
+			                <th>数量</th>
+			                <th>状态</th>
+			                <th>下单时间</th>
+			                <th>操作</th>
+			            </tr>
+			        </thead>
+			        <tbody>
+			            {% for ch in pay %}
+			            <tr class="gradeA">
+			                <td>{{ch.ordercode}}</td>
+			                <td>{{ch.goodsname}}</td>
+			                <td style="color:red">{{ch.price|floatformat:"2"}}</td>
+			                <td>{{ch.quantity|floatformat:"2"}}</td>
+			                <td class="center">{{ch.get_status_display}}</td>
+			                <td>{{ch.joined | date:"Y-n-d H:i:s"}}</td>
+			                <td><a class="ship" data="{{ch.pk}}">发货</a></td>
+			            </tr>
+			            {% endfor %}
+			        </tbody>
+			    </table>
+			</div>
+			<!-- /.panel-body -->
+        </div>
+        
+        
+        
+        <div class="tab-pane fade" id="integral-pills">
+        <div style="height:22px"></div>
+			<!-- /.panel-heading -->
+			<div class="panel-body">
+			    <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-integral">
+			        <thead>
+			            <tr>
+			                <th>订单编号</th>
+			                <th>商品名称</th>
+			                <th>单价</th>
+			                <th>数量</th>
+			                <th>状态</th>
+			                <th>下单时间</th>
+			                <th>发货时间</th>
+			            </tr>
+			        </thead>
+			        <tbody>
+			            {% for ch in ship %}
+			            <tr class="gradeA">
+			                <td>{{ch.ordercode}}</td>
+			                <td>{{ch.goodsname}}</td>
+			                <td style="color:red">{{ch.price|floatformat:"2"}}</td>
+			                <td>{{ch.quantity|floatformat:"2"}}</td>
+			                <td class="center">{{ch.get_status_display}}</td>
+			                <td>{{ch.joined | date:"Y-n-d H:i:s"}}</td>
+			                <td>{{ch.updated|date:"Y-n-d H:i:s"}}</td>
+			            </tr>
+			            {% endfor %}
+			        </tbody>
+			    </table>
+			</div>
+			<!-- /.panel-body -->
+        </div>
+           
+    </div>
+</div>
+<!-- /.panel-body -->
+{% endblock content %}
+{% block js %}
+<!-- DataTables JavaScript -->
+<script src="{% static "directsales/sbadmin/vendor/datatables/js/jquery.dataTables.min.js" %}"></script>
+<script src="{% static "directsales/sbadmin/vendor/datatables-plugins/dataTables.bootstrap.min.js" %}"></script>
+<script src="{% static "directsales/sbadmin/vendor/datatables-responsive/dataTables.responsive.js" %}"></script>
+<!-- Page-Level Demo Scripts - Tables - Use for reference -->
+<script>
+function initTable(idstr) {
+   return $('#'+idstr).dataTable( {
+       responsive: true,
+    "oLanguage":{
+        "sLengthMenu": "每页 _MENU_ 条记录",
+        "oPaginate": {
+            "sFirst":"第一页",
+            "sLast":"最末页",
+            "sNext":"下一页",
+            "sPrevious":"上一页",
+        },
+        "sInfo":"共_TOTAL_条记录",
+        "sInfoEmpty": "找不到符合关键词的记录",
+        "sZeroRecords": "找不到符合关键词的记录",
+        "sInfoFiltered":"总记录数:_MAX_",
+        "sSearch":"搜索(输入关键词)","sEmptyTable":"找不到相关记录"
+        }
+   });
+}
+
+
+$(document).ready(function() {
+    initTable('dataTables-gold');
+    initTable('dataTables-integral');
+    
+    $('.ship').bind('click',function(){
+        detailpk = $(this).attr('data');
+        if(confirm('确定发货')) {
+        $.get('{% url "directsale:ship" %}',{"pk":detailpk},function(data){
+	            if(data.result){
+			        window.location.reload();
+	            }
+	        },"json");
+	    }
+    });
+});
+</script>
+{% endblock js %}

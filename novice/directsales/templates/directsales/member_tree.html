@@ -1,0 +1,697 @@
+{% extends "directsales/base.html" %}
+{% load staticfiles %}
+{% block head_load_static %}
+	<!-- DataTables CSS -->
+    <link href="{% static "directsales/css/tree_style.css" %}" rel="stylesheet">
+{% endblock head_load_static %}
+
+{% block content %}
+<div class="ibox-content" style="overflow: scroll">
+  <p class="small">本网络图仅显示3层</p>
+  <div class="row" style="margin-left:0px;">
+    <form role="form" class="form-inline" action="{% url 'directsale:view_member_tree' %}" method="get">
+      <div class="form-group">
+        <label for="userid" class="sr-only">会员用户名：</label>
+        <input name="username" placeholder="请输入会员用户名" id="userid" class="form-control" type="text">
+      </div>
+      <button class="btn btn-primary" type="submit" id="susername" disabled >搜索</button>
+    </form>
+  </div>
+  <!-- 拓扑图开始 -->
+{#  <table class="Topology-table2" width="100%">#}
+{#    <tbody>#}
+{#      <tr>#}
+{#        <td bgcolor="#1ab394" width="60" valign="middle" align="center"><font color="#FFFFFF">普卡</font>#}
+
+{#        </td>#}
+{#        <td bgcolor="#8891ed" width="60" valign="middle" align="center"><font color="#FFFFFF">银卡</font>#}
+
+{#        </td>#}
+{#        <td bgcolor="#ff6700" width="60" valign="middle" align="center"><font color="#FFFFFF">金卡</font>#}
+
+{#        </td>#}
+{#        <td bgcolor="#aa3939" width="60" valign="middle" align="center"><font color="#FFFFFF">钻卡</font>#}
+
+{#        </td>#}
+{#        <td bgcolor="#336699" width="60" valign="middle" align="center"><font color="#FFFFFF">中心</font>#}
+
+{#        </td>#}
+{#      </tr>#}
+{#    </tbody>#}
+{#  </table>#}
+  <!--颜色区分-->
+  <!--第一层-->
+  <br/>
+  <!-- <div align="center" class="Register_a">
+          <input type="button" name="btnSearch" value="上一层" id="btnSearch"
+                 onClick="location.href='?periods=&userid=rj888&psearch=&periods1='">
+          <input type="button" name="btnSearch" value="置顶" id="btnSearch"
+                 onClick="location.href='?periods=&userid=lq8888&psearch=&periods1='">
+      </div>-->
+  <br/>
+  <table cellspacing="0" cellpadding="0" width="100%" align="center">
+    <tbody>
+      <tr>
+        <td valign="top" align="center">
+          <table cellspacing="0" cellpadding="0" border="0" bgcolor="#1ab394" width="160" align="center">
+            <tbody>
+              <tr>
+                <td bgcolor="#FFFFFF" align="center">
+                <!--根节点 -->
+                  <table class="Topology-table" width="180">
+                    <tbody>
+                      <tr>
+                        <td bgcolor="#8891ed" height="15" align="center">
+                            <a href="javascript:history.back()"><i class="fa fa-reply-all fa-fw"></i></a>
+                            <a style="WIDTH: 80px; BACKGROUND-COLOR:" href="#"><font color="ffffff"><strong>{{track0.user.username}}</strong></font>
+                            </a>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td bgcolor="#8891ed" height="15" align="center">	<font color="ffffff">{{track0.name}}</font>
+
+                        </td>
+                      </tr>
+                      <tr>
+                        <td bgcolor="#8891ed" height="15" align="center"> <font color="ffffff">{{track0.identity.name}}</font>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td bgcolor="#66c2cd" align="center">
+                          <table cellspacing="0" cellpadding="0" border="0" bgcolor="#E7F2FB" width="100%">
+                            <tbody bgcolor="#c9e8ec">
+                              <tr>
+                                <td>&nbsp;</td>
+                                <td height="15" align="center">左</td>
+                                <td height="15" align="center">右</td>
+                              </tr>
+                              <tr>
+                                <td width="30%" height="15" align="center">人数</td>
+                                <td height="15" align="center">{{track0.left_num}}</td>
+                                <td height="15" align="center">{{track0.right_num}}</td>
+                              </tr>
+                              <tr>
+                                <td width="30%" height="15" align="center">累计</td>
+                                <td colspan="2" height="15" align="center">{{track0.left_num|add:track0.right_num}}</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td style="color: #333" align="center">{{track0.joined}}</td>
+                      </tr>
+                      <tr></tr>
+                    </tbody>
+                  </table>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <!--根节点结束-->
+  <div class="center2"></div>
+  
+  
+  
+  
+  
+  
+  <!-- 第二层 -->
+  <table cellspacing="0" cellpadding="0" width="100%" align="center">
+    <tbody>
+     <!-- 左树 -->
+      <tr>
+        <td valign="top">
+          <!--左线条-->
+          <table cellspacing="0" cellpadding="0" border="0" width="100%">
+            <tbody>
+              <tr>
+                <td align="center">
+                  <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                    <tbody>
+                      <tr>
+                        <td width="50%" height="1"></td>
+                        <td bgcolor="#999" width="50%" height="1"></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <div class="center2"></div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <!--左线条结束 -->
+          <!--左节点-->
+          {% if track1 %}
+          <table class="Topology-table" cellspacing="0" cellpadding="0" border="0" bgcolor="#517DBF" width="180px" align="center">
+            <tbody>
+              <tr>
+                <td bgcolor="#FFFFFF" align="center">
+                  <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                    <tbody>
+                      <tr>
+                        <td bgcolor="#8891ed" align="center">	<a style="WIDTH: 80px; BACKGROUND-COLOR: " href="{% url 'directsale:view_member_tree_other' track1.user.username %}"><font color="ffffff"><strong>{{track1.user.username}}</strong></font>
+														</a>
+
+                        </td>
+                      </tr>
+                      <tr>
+                        <td bgcolor="#8891ed" height="20" align="center"><font color="ffffff">{{track1.name}}</font>
+
+                        </td>
+                      </tr>
+                      <tr>
+                        <td bgcolor="#8891ed" align="center"><font color="ffffff">
+        												{{track1.identity.name}}</font>
+
+                        </td>
+                      </tr>
+                      <tr>
+                        <td bgcolor="#B0E0E6" align="center">
+                          <table cellspacing="1" cellpadding="0" border="0" bgcolor="#E7F2FB" width="100%">
+                            <tbody bgcolor="#c9e8ec">
+                              <tr>
+                                <td>&nbsp;</td>
+                                <td align="center">左</td>
+                                <td align="center">右</td>
+                              </tr>
+                              <tr>
+                                <td width="30%" align="center">人数</td>
+                                <td align="center">{{track1.left_num}}</td>
+                                <td align="center">{{track1.right_num}}</td>
+                              </tr>
+                              <tr>
+                                <td width="30%" align="center">累计</td>
+                                <td colspan="2" height="15" align="center">{{track1.left_num|add:track1.right_num}}</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td style="color: #333" align="center">{{track1.joined}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          {% else %}
+          <table style="margin:0px auto 0 auto;" cellspacing="0" cellpadding="0" border="0" align="center">
+              <tbody>
+                <tr>
+                  <td class="Register_a1" width="70" align="center"> <a href="{% url "directsale:registered_parent" track0.user.username 'left' %}">注册</a>
+
+                  </td>
+                </tr>
+              </tbody>
+           </table>
+          {% endif %}
+          
+          <!-- 三层 左 左 -->
+          <div style="display:{% if track1%}{% else %}none{% endif %}" id="table_">
+            <div class="center2"></div>
+            <table cellspacing="0" cellpadding="0" width="100%" align="center">
+              <tbody>
+                <tr>
+                  <td valign="top">
+                  <!-- 三层 左 左 线条-->
+                    <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                      <tbody>
+                        <tr>
+                          <td align="center">
+                            <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                              <tbody>
+                                <tr>
+                                  <td width="50%" height="1"></td>
+                                  <td bgcolor="#999" width="50%" height="1"></td>
+                                </tr>
+                              </tbody>
+                            </table>
+                            <div class="center2"></div>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <!-- 三层 左 左 线条 结束-->
+                    <!---->
+                    {% if track3 %}
+                    <table class="Topology-table" cellspacing="0" cellpadding="0" border="0" bgcolor="#517DBF" width="180px" align="center">
+                      <tbody>
+                        <tr>
+                          <td bgcolor="#FFFFFF" align="center">
+                            <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                              <tbody>
+                                <tr>
+                                  <td bgcolor="#8891ed" align="center"><a style="WIDTH: 80px; BACKGROUND-COLOR: " href="{% url 'directsale:view_member_tree_other' track3.user.username %}"><font color="ffffff"><strong>{{track3.user.username}}</strong></font></a>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td bgcolor="#8891ed" height="20" align="center"><font color="ffffff">{{track3.name}}</font>
+
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td bgcolor="#8891ed" align="center"><font color="ffffff">
+																{{track3.identity.name}}</font>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td bgcolor="#B0E0E6" align="center">
+                                    <table cellspacing="1" cellpadding="0" border="0" bgcolor="#E7F2FB" width="100%">
+                                      <tbody bgcolor="#c9e8ec">
+                                        <tr>
+                                          <td>&nbsp;</td>
+                                          <td align="center">左</td>
+                                          <td align="center">右</td>
+                                        </tr>
+                                        <tr>
+                                          <td width="30%" align="center">人数</td>
+                                          <td align="center">{{track3.left_num}}</td>
+                                          <td align="center">{{track3.right_num}}</td>
+                                        </tr>
+                                        <tr>
+                                          <td width="30%" align="center">累计</td>
+                                          <td colspan="2" height="15" align="center">{{track3.left_num|add:track3.right_num}}</td>
+                                        </tr>
+                                      </tbody>
+                                    </table>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td style="color: #333" align="center">{{track3.joined}}</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    {% else %}
+                    <table style="margin:0px auto 0 auto;" cellspacing="0" cellpadding="0" border="0" align="center">
+		              <tbody>
+		                <tr>
+		                  <td class="Register_a1" width="70" align="center">{% if track1 %}<a href="{% url "directsale:registered_parent" track1.user.username 'left' %}">注册</a>{% endif %}
+		                  </td>
+		                </tr>
+		              </tbody>
+		           </table>
+                    {% endif %}
+                  <div style="display:none" id="table_"></div>
+                  </td>
+                  
+                  <td valign="top">
+                    <!-- 三层 左 右 线条 -->
+                    <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                      <tbody>
+                        <tr>
+                          <td align="center">
+                            <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                              <tbody>
+                                <tr>
+                                  <td bgcolor="#999" width="50%" height="1"></td>
+                                  <td width="50%" height="1"></td>
+                                </tr>
+                              </tbody>
+                            </table>
+                            <div class="center2"></div>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <!-- 三层 左 右 线条 结束-->
+                    <!---->
+                    {% if track4 %}
+                    <table class="Topology-table" cellspacing="0" cellpadding="0" border="0" bgcolor="#517DBF" width="180px" align="center">
+                      <tbody>
+                        <tr>
+                          <td bgcolor="#FFFFFF" align="center">
+                            <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                              <tbody>
+                                <tr>
+                                  <td bgcolor="#8891ed" align="center"><a style="WIDTH: 80px; BACKGROUND-COLOR: " href="{% url 'directsale:view_member_tree_other' track4.user.username %}"><font color="ffffff"><strong>{{track4.user.username}}</strong></font></a>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td bgcolor="#8891ed" height="20" align="center"><font color="ffffff">{{track4.name}}</font>
+
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td bgcolor="#8891ed" align="center"><font color="ffffff">
+																{{track4.identity.name}}</font>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td bgcolor="#B0E0E6" align="center">
+                                    <table cellspacing="1" cellpadding="0" border="0" bgcolor="#E7F2FB" width="100%">
+                                      <tbody bgcolor="#c9e8ec">
+                                        <tr>
+                                          <td>&nbsp;</td>
+                                          <td align="center">左</td>
+                                          <td align="center">右</td>
+                                        </tr>
+                                        <tr>
+                                          <td width="30%" align="center">人数</td>
+                                          <td align="center">{{track4.left_num}}</td>
+                                          <td align="center">{{track4.right_num}}</td>
+                                        </tr>
+                                        <tr>
+                                          <td width="30%" align="center">累计</td>
+                                          <td colspan="2" height="15" align="center">{{track4.left_num|add:track4.right_num}}</td>
+                                        </tr>
+                                      </tbody>
+                                    </table>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td style="color: #333" align="center">{{track4.joined}}</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    {% else %}
+                    <table style="margin:0px auto 0 auto;" cellspacing="0" cellpadding="0" border="0" align="center">
+                      <tbody>
+                        <tr>
+                          <td class="Register_a1" width="70" align="center"> {% if track1 %}<a href="{% url "directsale:registered_parent" track1.user.username 'right' %}">注册</a>{% endif %}
+
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    {% endif %}
+                    <div style="display:" id="table_"></div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </td>
+        
+        <td valign="top">
+        <!-- 右树 线条-->
+          <table cellspacing="0" cellpadding="0" border="0" width="100%">
+            <tbody>
+              <tr>
+                <td align="center">
+                  <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                    <tbody>
+                      <tr>
+                        <td bgcolor="#999" width="50%" height="1"></td>
+                        <td width="50%" height="1"></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <div class="center2"></div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          
+          
+          <!-- 右树 -->
+          {% if track2 %}
+          <table class="Topology-table" cellspacing="0" cellpadding="0" border="0" bgcolor="#517DBF" width="180px" align="center">
+            <tbody>
+              <tr>
+                <td bgcolor="#FFFFFF" align="center">
+                  <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                    <tbody>
+                      <tr>
+                        <td bgcolor="#8891ed" align="center"><a style="WIDTH: 80px; BACKGROUND-COLOR: " href="{% url 'directsale:view_member_tree_other' track2.user.username %}"><font color="ffffff"><strong>{{track2.user.username}}</strong></font></a>
+
+                        </td>
+                      </tr>
+                      <tr>
+                        <td bgcolor="#8891ed" height="20" align="center"><font color="ffffff">{{track2.name}}</font>
+
+                        </td>
+                      </tr>
+                      <tr>
+                        <td bgcolor="#8891ed" align="center"><font color="ffffff">
+        {{track2.identity.name}}</font>
+
+                        </td>
+                      </tr>
+                      <tr>
+                        <td bgcolor="#B0E0E6" align="center">
+                          <table cellspacing="1" cellpadding="0" border="0" bgcolor="#E7F2FB" width="100%">
+                            <tbody bgcolor="#c9e8ec">
+                              <tr>
+                                <td>&nbsp;</td>
+                                <td align="center">左</td>
+                                <td align="center">右</td>
+                              </tr>
+                              <tr>
+                                <td width="30%" align="center">人数</td>
+                                <td align="center">{{track2.left_num}}</td>
+                                <td align="center">{{track2.right_num}}</td>
+                              </tr>
+                              <tr>
+                                <td width="30%" align="center">累计</td>
+                                <td colspan="2" height="15" align="center">{{track2.left_num|add:track2.right_num}}</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td style="color: #333" align="center">{{track2.joined}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          {% else %}
+          <table style="margin:0px auto 0 auto;" cellspacing="0" cellpadding="0" border="0" align="center">
+              <tbody>
+                <tr>
+                  <td class="Register_a1" width="70" align="center"> <a href="{% url "directsale:registered_parent" track0.user.username 'right' %}">注册</a>
+
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          {% endif %}
+          <div style="display:{% if track2 %}{% else %}none{% endif %}" id="table_">
+            <div class="center2"></div>
+            <table cellspacing="0" cellpadding="0" width="100%" align="center">
+              <tbody>
+                <tr>
+                  <td valign="top">
+                    <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                      <tbody>
+                        <tr>
+                          <td align="center">
+                            <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                              <tbody>
+                                <tr>
+                                  <td width="50%" height="1"></td>
+                                  <td bgcolor="#999" width="50%" height="1"></td>
+                                </tr>
+                              </tbody>
+                            </table>
+                            <div class="center2"></div>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <!---->
+                    {% if track5 %}
+                    <table class="Topology-table" cellspacing="0" cellpadding="0" border="0" bgcolor="#517DBF" width="180px" align="center">
+                      <tbody>
+                        <tr>
+                          <td bgcolor="#FFFFFF" align="center">
+                            <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                              <tbody>
+                                <tr>
+                                  <td bgcolor="#8891ed" align="center"><a style="WIDTH: 80px; BACKGROUND-COLOR: " href="{% url 'directsale:view_member_tree_other' track5.user.username %}"><font color="ffffff"><strong>{{track5.user.username}}</strong></font></a>
+
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td bgcolor="#8891ed" height="20" align="center"><font color="ffffff">{{track5.name}}</font>
+
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td bgcolor="#8891ed" align="center"><font color="ffffff">
+        {{track5.identity.name}}</font>
+
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td bgcolor="#B0E0E6" align="center">
+                                    <table cellspacing="1" cellpadding="0" border="0" bgcolor="#E7F2FB" width="100%">
+                                      <tbody bgcolor="#c9e8ec">
+                                        <tr>
+                                          <td>&nbsp;</td>
+                                          <td align="center">左</td>
+                                          <td align="center">右</td>
+                                        </tr>
+                                        <tr>
+                                          <td width="30%" align="center">人数</td>
+                                          <td align="center">{{track5.left_num}}</td>
+                                          <td align="center">{{track5.right_num}}</td>
+                                        </tr>
+                                        <tr>
+                                          <td width="30%" align="center">累计</td>
+                                          <td colspan="2" height="15" align="center">{{track5.left_num|add:track5.right_num}}</td>
+                                        </tr>
+                                      </tbody>
+                                    </table>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td style="color: #333" align="center">{{track5.joined}}</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    {% else %}
+                    <table style="margin:0px auto 0 auto;" cellspacing="0" cellpadding="0" border="0" align="center">
+		              <tbody>
+		                <tr>
+		                  <td class="Register_a1" width="70" align="center"> {% if track2 %}<a href="{% url "directsale:registered_parent" track2.user.username 'left' %}">注册</a> {% endif %}
+		
+		                  </td>
+		                </tr>
+		              </tbody>
+		            </table>
+                    {% endif %}
+                 <div style="display:" id="table_"></div>
+                  </td>
+                  <td valign="top">
+                    <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                      <tbody>
+                        <tr>
+                          <td align="center">
+                            <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                              <tbody>
+                                <tr>
+                                  <td bgcolor="#999" width="50%" height="1"></td>
+                                  <td width="50%" height="1"></td>
+                                </tr>
+                              </tbody>
+                            </table>
+                            <div class="center2"></div>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <!---->
+                    {% if track6 %}
+                    <table class="Topology-table" cellspacing="0" cellpadding="0" border="0" bgcolor="#517DBF" width="180px" align="center">
+                      <tbody>
+                        <tr>
+                          <td bgcolor="#FFFFFF" align="center">
+                            <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                              <tbody>
+                                <tr>
+                                  <td bgcolor="#8891ed" align="center"><a style="WIDTH: 80px; BACKGROUND-COLOR: " href="{% url 'directsale:view_member_tree_other' track6.user.username %}"><font color="ffffff"><strong>{{track6.user.username}}</strong></font></a>
+
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td bgcolor="#8891ed" height="20" align="center"><font color="ffffff">{{track6.name}}</font>
+
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td bgcolor="#8891ed" align="center"><font color="ffffff">
+        {{track6.identity.name}}</font>
+
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td bgcolor="#B0E0E6" align="center">
+                                    <table cellspacing="1" cellpadding="0" border="0" bgcolor="#E7F2FB" width="100%">
+                                      <tbody bgcolor="#c9e8ec">
+                                        <tr>
+                                          <td>&nbsp;</td>
+                                          <td align="center">左</td>
+                                          <td align="center">右</td>
+                                        </tr>
+                                        <tr>
+                                          <td width="30%" align="center">人数</td>
+                                          <td align="center">{{track6.left_num}}</td>
+                                          <td align="center">{{track6.right_num}}</td>
+                                        </tr>
+                                        <tr>
+                                          <td width="30%" align="center">累计</td>
+                                          <td colspan="2" height="15" align="center">{{track6.left_num|add:track6.right_num}}</td>
+                                        </tr>
+                                      </tbody>
+                                    </table>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td style="color: #333" align="center">{{track6.joined}}</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    {%else%}
+                    <table style="margin:0px auto 0 auto;" cellspacing="0" cellpadding="0" border="0" align="center">
+		              <tbody>
+		                <tr>
+		                  <td class="Register_a1" width="70" align="center"> {% if track2 %}<a href="{% url "directsale:registered_parent" track2.user.username 'right' %}">注册</a>{% endif %}
+		
+		                  </td>
+		                </tr>
+		              </tbody>
+		            </table>
+                    {%endif%}
+                    <div style="display:" id="table_"></div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <br>
+</div>
+{% endblock content %}
+{% block js %}
+<script>
+$(function(){
+    $('#userid').bind('input propertychange',function(){
+        chk_user();
+    });
+});
+
+function chk_user(){
+	    username = $('#userid').val();
+        $.post("{% url "directsale:chk-user" %}",{"username":username},function(data){
+            if(data.result) {
+                $('#userid').parent().attr('class',"form-group has-error");
+                $('#susername').attr('disabled','true');
+            } else {
+	                $('#susername').removeAttr('disabled');
+	                $('#userid').parent().attr('class',"form-group has-success");
+	                //$('#nametext').text(":"+data.username+",姓名:"+data.trackname);
+            }
+        },"json");
+	}
+</script>
+{% endblock js %}

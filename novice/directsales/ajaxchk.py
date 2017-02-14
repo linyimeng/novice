@@ -14,16 +14,31 @@ from directsales.models import Doubletrack,Bonus,Memberlevel
 def chkUser(request):
     username = request.POST.get('username')
     try:
-        User.objects.get(username=username)
+        user = User.objects.get(username=username)
+        if request.user.is_authenticated():
+            track = Doubletrack.objects.get(user=user)
+            trackname = track.name
+        else:
+            trackname = None
     except ObjectDoesNotExist:
         return HttpResponse(dumps({'result':True}),content_type='application/json')
     else:
-        return HttpResponse(dumps({'result':False}),content_type='application/json')
+        return HttpResponse(dumps({'result':False,'username':user.username,'trackname':trackname}),content_type='application/json')
 
 @csrf_exempt   
 def chkpwd(request):
     user = authenticate(username = request.user.username, password=request.POST.get('password'))
     if user is not None:
+        return HttpResponse(dumps({'result':True}),content_type='application/json')
+    else:
+        return HttpResponse(dumps({'result':False}),content_type='application/json')
+
+@csrf_exempt   
+def chkpaypwd(request):
+    track = Doubletrack.objects.get(user=request.user)
+    print(track.pay_password)
+    print(request.POST.get('oldpaypwd'))
+    if track.pay_password == request.POST.get('oldpaypwd'):
         return HttpResponse(dumps({'result':True}),content_type='application/json')
     else:
         return HttpResponse(dumps({'result':False}),content_type='application/json')
@@ -73,12 +88,12 @@ def chkisright(request):
 @csrf_exempt
 def chkisenough(request):
     identity_id = request.POST.get('identity_id')
-    #获取当前用户cash的余额
+    #获取当前用户gold的余额
     track = Doubletrack.objects.get(user = request.user)
-    cash = Bonus.objects.get(track=track).cash
+    gold = Bonus.objects.get(track=track).gold
     #获取当前所需的现金
-    need_cash = Memberlevel.objects.get(pk=identity_id).price
-    if cash >= need_cash:
+    need_gold = Memberlevel.objects.get(pk=identity_id).price
+    if gold >= need_gold:
         print(identity_id)
         return HttpResponse(dumps({'result':True}),content_type='application/json')
     else:
@@ -105,10 +120,10 @@ def confirmpay(request):
     
 def isenough(identity_id,user):
     track = Doubletrack.objects.get(user = user)
-    cash = Bonus.objects.get(track=track).cash
+    gold = Bonus.objects.get(track=track).gold
     #获取当前所需的现金
-    need_cash = Memberlevel.objects.get(pk=identity_id).price
-    if cash >= need_cash:
+    need_gold = Memberlevel.objects.get(pk=identity_id).price
+    if gold >= need_gold:
         return True
     else:
         return False

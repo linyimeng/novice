@@ -1,0 +1,54 @@
+{% extends "directsales/base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+<div class="row">
+	<div class="col-lg-12">
+	    <h5 class="page-header">历史订单</h5>
+	</div>
+	<!-- /.col-lg-12 -->
+</div>
+<div class="row">
+	<form role="form">
+		<div class="form-group col-lg-2">
+            <input class="form-control form_datetime" name="username" placeholder="注册时间从">
+        </div>
+        <div class="form-group col-lg-2">
+            <input class="form-control form_datetime" name="username" placeholder="注册时间截止">
+        </div>
+        <div class="form-group col-lg-3">
+           	<button type="submit" class="btn btn-primary">查询</button>
+        </div>
+	</form>
+</div>
+<div class="row">
+    <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-all">
+        <thead>
+            <tr>
+                <th>订单编号</th>
+                <th>支付方式</th>
+                <th>总数量</th>
+                <th>金额</th>
+                <th>订单状态</th>
+                <th>下单时间</th>
+                <th>最后更新时间</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for order in orders %}
+            <tr class="gradeA">
+                <td>{{order.ordercode}}</td>
+                <td>{{order.get_pay_by_display}}</td>
+                <td style="color:red">{{order.totalquantity |floatformat:"2" }}</td>
+                <td style="color:red">{{order.totalprice |floatformat:"2" }}</td>
+                <td class="center">{{order.get_status_display}}</td>
+                <td>{{order.joined |date:"Y-n-d H:i:s"}}</td>
+                <td>{{order.updated|date:"Y-n-d H:i:s"}}</td>
+                <td><a href="{% url "directsale:orderdetail" order.ordercode %}">查看详情</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock content %}

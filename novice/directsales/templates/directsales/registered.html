@@ -61,15 +61,15 @@
                         </div>
                         <div class="form-group">
                             <label>节点会员</label>
-                            <input class="form-control" name="parent" placeholder="节点会员">
+                            <input class="form-control" name="parent" placeholder="节点会员" value="{% if parent %}{{parent}}{%else%}{% endif %}">
                         </div>
                         <div class="form-group">
                             <label>市场位置</label>
                             <label class="radio-inline">
-                                <input type="radio" name="isright" id="optionsRadiosInline1" value="false">左边
+                                <input type="radio" name="isright" id="optionsRadiosInline1" value="false" {% if isright == "left" %}checked{% endif %}>左边
                             </label>
                             <label class="radio-inline">
-                                <input type="radio" name="isright" id="optionsRadiosInline2" value="true">右边
+                                <input type="radio" name="isright" id="optionsRadiosInline2" value="true" {% if isright == "right" %}checked{% endif %}>右边
                             </label>
                         </div>
                         <div class="form-group">
@@ -302,6 +302,9 @@
 			return false;
 		}else if($('#is_ength').val()=='no_ength') {
 	        alert('金币不足，请充值后进行操作');
+	        return false;
+	    } else if(registered.password.value==registered.pay_password.value) {
+	        alert('登录密码与支付密码不能相同！');
 	        return false;
 	    }
 		has_error = $('.has-error');

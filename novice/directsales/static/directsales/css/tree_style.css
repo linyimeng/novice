@@ -1,0 +1,260 @@
+@charset "utf-8";
+/* CSS Document */
+/***
+
+ */
+
+body {
+    font-family: "微软雅黑";
+    margin: 0 auto; /*min-width:980px;*/
+    background-color: #f0f0f0;
+    color: #333;
+    line-height: 220%;
+}
+
+
+
+.center2 {
+    margin-top: 0px;
+    margin-right: auto;
+    margin-bottom: 0px;
+    margin-left: auto;
+    height: 20px;
+    background-color: #999;
+    width: 1px;
+    border-top-color: #FFF;
+    border-right-color: #FFF;
+    border-bottom-color: #FFF;
+    border-left-color: #FFF;
+}
+
+/*拓扑图开始*/
+.Topology-table2 {
+    line-height: 35px;
+    color: #FFF;
+    text-align: center;
+    height: 35px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+
+}
+
+.Topology-table2 td {
+    width: 10.5%;
+}
+
+.Topology-table {
+    /*border: 1px solid #009999;*/
+    text-align: center;
+    overflow: hidden;
+    border-collapse: inherit;
+    box-shadow: 0px 0px 5px #888888;
+    behavior: url(js/pie.htc);
+    background-color: #FFF;
+    margin-top: 0px;
+    margin-right: auto;
+    margin-bottom: 0px;
+    margin-left: auto;
+
+}
+
+.Topology-table tr {
+
+}
+
+.Topology-table td {
+    line-height: 24px;
+    height: 24px;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: #FFF;
+
+}
+
+.Register_a {
+    text-align: center;
+    background-color: #FFF;
+}
+
+.Register_a input {
+    border: 1px solid #3380ce;
+    padding-top: 7px;
+    padding-right: 18px;
+    padding-bottom: 7px;
+    padding-left: 18px;
+    color: #3380ce;
+    /*box-shadow: 0px 0px 5px #888888;
+    behavior:url(js/pie.htc);*/
+    cursor: pointer;
+    background-color: #d4e7f0;
+}
+
+.Register_a input:hover {
+    border: 1px solid #ff7d00;
+    padding-top: 7px;
+    padding-right: 18px;
+    padding-bottom: 7px;
+    padding-left: 18px;
+    color: #FFF;
+    background-color: #ff7d00;
+}
+
+.Register_a1 a {
+    border: 1px solid #3380ce;
+    padding-top: 2px;
+    padding-right: 15px;
+    padding-bottom: 2px;
+    padding-left: 15px;
+    color: #3380ce;
+    /*	box-shadow: 0px 0px 5px #888888;
+    behavior:url(js/pie.htc);*/
+    cursor: pointer;
+    background-color: #d4e7f0;
+    display: block;
+}
+
+.Register_a1 a:hover {
+    border: 1px solid #ff7d00;
+    color: #FFF;
+    background-color: #ff7d00;
+}
+
+.Register_a2 a {
+    border-top-color: #8891ed;
+    border-right-color: #8891ed;
+    border-bottom-color: #8891ed;
+    border-left-color: #8891ed;
+    color: #8891ed;
+}
+
+.Register_a2 a:hover {
+    background-color: #8891ed;
+    border-top-color: #8891ed;
+    border-right-color: #8891ed;
+    border-bottom-color: #8891ed;
+    border-left-color: #8891ed;
+}
+
+.Register_a3 a {
+    border-top-color: #aa3939;
+    border-right-color: #aa3939;
+    border-bottom-color: #aa3939;
+    border-left-color: #aa3939;
+    color: #aa3939;
+}
+
+.Register_a3 a:hover {
+    background-color: #aa3939;
+    border-top-color: #aa3939;
+    border-right-color: #aa3939;
+    border-bottom-color: #aa3939;
+    border-left-color: #aa3939;
+}
+
+.Register_a4 a {
+    border-top-color: #ff6700;
+    border-right-color: #ff6700;
+    border-bottom-color: #ff6700;
+    border-left-color: #ff6700;
+    color: #ff6700;
+}
+
+.Register_a4 a:hover {
+    background-color: #ff6700;
+    border-top-color: #ff6700;
+    border-right-color: #ff6700;
+    border-bottom-color: #ff6700;
+    border-left-color: #ff6700;
+}
+
+.Inquire-box {
+    height: 32px;
+    line-height: 32px;
+    padding-bottom: 8px;
+}
+
+.Inquire-box span {
+    float: left;
+}
+
+.Inquire-box b {
+    padding-left: 8px;
+}
+
+.Inquire-table {
+    margin-left: 30px;
+    float: left;
+}
+
+.Inquire-table2 {
+    width: 100%;
+    border-top-width: 1px;
+    border-right-width: 1px;
+    border-bottom-width: 1px;
+    border-left-width: 1px;
+    border-top-style: solid;
+    border-right-style: solid;
+    border-bottom-style: solid;
+    border-left-style: solid;
+    border-top-color: #dedede;
+    border-right-color: #dedede;
+    border-left-color: #dedede;
+}
+
+.Inquire-table2 th {
+    height: 40px;
+    line-height: 22px;
+    text-align: center;
+    background-color: #efefef;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: #dedede;
+    font-weight: normal;
+}
+
+.Inquire-table2 td {
+    line-height: 24px;
+    text-align: center;
+    border-right-width: 1px;
+    border-bottom-width: 1px;
+    border-right-style: dotted;
+    border-bottom-style: solid;
+    border-right-color: #dedede;
+    border-bottom-color: #dedede;
+    padding-top: 7px;
+    padding-bottom: 7px;
+}
+
+.Inquire-table2 a {
+    color: #1b69b2;
+}
+
+.Inquire-table2 td p {
+    line-height: 24px;
+    color: #666;
+}
+
+.Inquire-table2 td i {
+    font-style: normal;
+    color: #ea2020;
+}
+
+.Inquire-gtd {
+    text-indent: 0;
+}
+
+.Inquire-table2 tbody tr.odd {
+    background-color: #f5f8fa;
+    height: 35px;
+}
+
+.Inquire-table2 tbody tr:hover {
+    background: #e5ebee;
+}
+
+.tableimg {
+    width: 60px;
+    height: 50px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+}

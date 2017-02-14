@@ -7,13 +7,13 @@
 	<div class="col-xs-12">
 				<h1 class="grey lighter smaller">
 					<span class="blue bigger-125">
-						<i class="glyphicon glyphicon-music"></i>
+						<i class="fa fa-check "></i>
+						发送邮件成功
 					</span>
-					恭喜你，修改密码成功
 				</h1>
 				<hr />
 				<h3 class="lighter smaller">
-					请牢记您的密码，避免遗忘
+					
 				</h3>
 
 				<div class="space"></div>
@@ -24,12 +24,11 @@
 					<ul class="list-unstyled spaced inline bigger-110 margin-15">
 						<li>
 							<i class="ace-icon fa fa-hand-o-right blue"></i>
-							修改密码后，请注销重新登录
+							邮件在两个工作日内处理。。。
 						</li>
-
 						<li>
 							<i class="ace-icon fa fa-hand-o-right blue"></i>
-							如有疑问，请联系<a href="{% url "directsale:send_mail" %}">管理员</a>
+							请耐心等候管理员回复。
 						</li>
 					</ul>
 				</div>
@@ -38,9 +37,13 @@
 				<div class="space"></div>
 
 				<div class="center">
-					<a href="{% url 'directsale:logout' %}" class="btn btn-primary">
+					<a href="javascript:history.back()" class="btn btn-grey">
+						<i class="ace-icon fa fa-arrow-left"></i>
+						返回上一页
+					</a>
+					<a href="{% url "directsale:view-home" %}" class="btn btn-primary">
 						<i class="ace-icon fa fa-tachometer"></i>
-						重新登录
+						返回首页
 					</a>
 				</div>
 	</div><!-- /.col -->

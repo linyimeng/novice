@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>欢 迎 你</title>
+    <title>易商国际营行联盟商家管理系统|GlobalBrain Capital</title>
     
     <link href="{% static "directsales/sbadmin/vendor/bootstrap/css/bootstrap.min.css" %}" rel="stylesheet">
     <!-- MetisMenu CSS -->
@@ -23,16 +23,22 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <style>
+    body{
+	  background-size:100%;
+	  background-image:url({% static "directsales/img/timg.jpeg" %});
+	}
+    </style>
 </head>
 
 <body>
-
     <div class="container">
         <div class="row">
             <div class="col-md-4 col-md-offset-4">
                 <div class="login-panel panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title">欢迎</h3>
+                        <h3 class="panel-title">易商国际营行联盟商家管理系统</h3>
+                        <h4 class="panel-title">GlobalBrain Capital</h4>
                     </div>
                     <div class="panel-body">
                         <form role="form" method="post" action="{% url "directsale:login" %}" onSubmit="return logincheck()">
@@ -56,7 +62,7 @@
                                     </label>
                                 </div>
                                 <!-- Change this to a button or input when using this as a form -->
-                                <input type="submit" class="btn btn-lg btn-success btn-block" value="登 录" />
+                                <input type="submit" class="btn btn-lg btn-primary btn-block" value="登 录" />
                             </fieldset>
                         </form>
                     </div>

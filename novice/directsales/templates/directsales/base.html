@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>{% block head_title %}天行者销售系统{% endblock head_title %}</title>
+    <title>{% block head_title %}易商国际营行销售管理系统{% endblock head_title %}</title>
     <!-- Bootstrap Core CSS -->
     <link href="{% static "directsales/sbadmin/vendor/bootstrap/css/bootstrap.min.css" %}" rel="stylesheet">
     <!-- MetisMenu CSS -->
@@ -24,7 +24,7 @@
     <![endif]-->
     {% block head_load_static %}{% endblock head_load_static %}
 </head>
-<body onload="init()">
+<body>
 
     <div id="wrapper">
         <!-- Navigation -->
@@ -36,9 +36,10 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="{% url "directsale:view-home" %}">天行者销售系统 v1.0</a>
-                <span class="navbar-brand"> {{request.user.username}}({{bonus.track.identity.name}})</span>
-                <span class="navbar-brand">金币:{{bonus.cash}}</span>
+                <a class="navbar-brand" href="{% url "directsale:view-home" %}">易商国际营行销售管理系统 v0.6.20</a>
+                <span class="navbar-brand"> {{bonus.track.name}}({{bonus.track.identity.name}})</span>
+                <span class="navbar-brand">金币:{{bonus.gold}}</span>
+                {% if bonus.track.is_active %}{%else%}<span class="navbar-brand">不可提现金币:{% if bonus.freeze_gold%}{{bonus.freeze_gold|floatformat:"2"}}{%else%}0{%endif%}</span>{%endif%}
                 <span class="navbar-brand">积分:{{bonus.integral | floatformat:"2"}}</span>
                 <span class="navbar-brand">购物劵:{{bonus.shoppingcoupons}} </span>
             </div>
@@ -99,6 +100,11 @@
                 <!-- /.dropdown -->
                 {% endcomment %}
                 <li class="dropdown">
+                    
+                        <a href="{% url "directsale:bulletinboard" %}"> <i class="glyphicon glyphicon-blackboard"></i></a>
+                    
+                </li>
+                <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <i class="fa fa-bell fa-fw"></i> <i class="fa fa-caret-down"></i>
                     </a>
@@ -146,8 +152,15 @@
                         <li class="divider"></li>
                         <li>
                         	<a href="{% url "directsale:changepassword" %}">
-                        	  <i class="fa fa-user fa-fw"></i> 修改密码
+                        	  <i class="fa fa-key fa-fw"></i> 修改密码
                         	</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                          <a href="{% url "directsale:send_mail" %}">
+                            <i class="fa fa-lightbulb-o  fa-fw"></i> 
+                            联系管理员
+                          </a>
                         </li>
                         <li class="divider"></li>
                         <li>
@@ -189,6 +202,9 @@
                                     <a href="#">我的会员 <span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
                                         <li>
+                                            <a href="{% url "directsale:view_member_tree" %}">会员结构</a>
+                                        </li>
+                                        <li>
                                             <a href="{% url "directsale:member-list" %}">会员列表</a>
                                         </li>
                                     </ul>
@@ -209,16 +225,46 @@
                                     <a href="{% url "directsale:view-bonus_detail" %}">资金明细</a>
                                 </li>
                                 <li>
-                                    <a href="{% url "directsale:transfergold" %}">金币转账</a>
+                                    <a href="{% url "directsale:transfergold" %}">资金转账</a>
                                 </li>
                                 <li>
-                                    <a href="morris.html">金币充值</a>
+                                    <a href="{% url "directsale:glodrecharge" %}">金币充值</a>
                                 </li>
                                 <li>
                                     <a href="{% url "directsale:withdrawal" %}">金币提现</a>
                                 </li>
                                 <li>
                                     <a href="{% url "directsale:view-withdrawal-history" %}">提现记录</a>
+                                </li>
+                            </ul>
+                        </li>
+                        
+                        <li>
+                            <a href="#"><i class="fa fa-shopping-cart "></i> 商品订购<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="{% url "directsale:view_goods" %}">商品订购</a>
+                                </li>
+                                <li>
+                                    <a href="{% url "directsale:orderhistory" %}">我的订单</a>
+                                </li>
+                                <li>
+                                    <a href="{% url "directsale:shipgoods" %}">商家订单</a>
+                                </li>
+                            </ul>
+                        </li>
+                        
+                        <li>
+                            <a href="#"><i class="fa fa-user"></i> 用户设置<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="{% url "directsale:user-info" %}">修改用户信息</a>
+                                </li>
+                                <li>
+                                    <a href="{% url "directsale:changepassword" %}">修改登录密码</a>
+                                </li>
+                                <li>
+                                    <a href="{% url "directsale:changepaypassword" %}">修改支付密码</a>
                                 </li>
                             </ul>
                         </li>

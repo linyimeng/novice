@@ -1,0 +1,82 @@
+{% extends "directsales/base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+<div class="row">
+    <div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h1>发送信件给管理员</h1>
+                <ul class="list-unstyled spaced inline bigger-110 margin-15">
+                    <li>
+						<i class="ace-icon fa fa-hand-o-right blue"></i>
+						<strong style="color:red">充值金币请在内容处填写金币数额</strong>
+					</li>
+                	<li>
+						<i class="ace-icon fa fa-hand-o-right blue"></i>
+						<strong style="color:red">请描述清楚内容，以免增加管理员工作压力</strong>
+					</li>
+					<li>
+						<i class="ace-icon fa fa-hand-o-right blue"></i>
+						<strong style="color:red">一般邮件在两个工作日内处理</strong>
+					</li>
+					<li>
+						<i class="ace-icon fa fa-hand-o-right blue"></i>
+						<strong style="color:red">请耐心等候</strong>
+					</li>
+				</ul>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                  <form role="form" action="{% url "directsale:send_mail" %}" method="post" onSubmit="return docheck()">
+                  {% csrf_token %}
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label>主题</label>
+                            <select class="form-control" name="subject" id="subject">
+                                <option>请选择发送主题</option>
+                                <option value="billing">充值金币</option>
+                                <option value="feedback">问题反馈</option>
+                                <option value="feedback">意见投诉</option>
+                                <option value="manager">用户非法举报</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>内容</label>
+                            <textarea class="form-control" rows="3" id="message" name="message"></textarea>
+                        </div>
+                        <input type="submit" class="btn btn-primary btn-lg btn-block" value="发 送"/>
+                    </div>
+                    </form>
+                </div>
+                <!-- /.row (nested) -->
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->
+{% endblock content %}
+
+{% block js %}
+<script>
+    function docheck(){
+        if($('#subject').val()=='') {
+            alert('主题不能为空');
+            $('#subject').focus();
+            return false;
+        } else if($('#message').val()=="") {
+            alert('内容不能为空');
+            $('#message').focus();
+            return false;
+        } else if($('#subject').val()=="请选择发送主题"){
+        	alert('请选择发送主题');
+            return false;
+        }else{
+            return true;
+        }
+    }
+</script>
+{% endblock js %}
