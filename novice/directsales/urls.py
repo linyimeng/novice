@@ -59,5 +59,6 @@ urlpatterns = [
     url('^sendmail/$',views.send_email,name="send_mail"),
     
     url('^bulletinboard/$',views.bulletin_board,name="bulletinboard"),
-    url('^test/$',ajax.test),
+    url('^confirmorder/$',ajax.confirmship,name="confirmship"),
+    
 ]

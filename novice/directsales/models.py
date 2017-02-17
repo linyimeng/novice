@@ -440,6 +440,14 @@ class OrderManager(Manager):
          
         return ordercode
 
+    def settlement_order(self,order):
+        goodses = Orderdetail.objects.filter(ordercode=order)
+        for goods in goodses:
+            totalprice = goods.quantity * goods.price
+            remark = "销售数量为" + str(goods.quantity) + "的" + goods.goodsname
+            Transactionhistory.objects.create(track=goods.supplier,memberlevel=goods.supplier.identity.name,
+                                              type=order.pay_by,price=totalprice,io="I",
+                                              pay_by=order.pay_by,remark=remark,is_bonus=True,is_active=True)
         
 
 
@@ -476,7 +484,7 @@ class Orderdetail(models.Model):
 #     goods = models.ForeignKey(Goods)
     goodsname = models.CharField('商品名称',max_length=60)
     supplier = models.ForeignKey(Doubletrack,verbose_name="'供应商")
-    price = models.DecimalField('价格',max_digits=18,decimal_places=8)
+    price = models.DecimalField('单价',max_digits=18,decimal_places=8)
     quantity = models.IntegerField('数量')
     status = models.CharField('订单状态',max_length=30,choices=Order.ORDER_STATUS)
     joined = models.DateTimeField(auto_now_add=True)

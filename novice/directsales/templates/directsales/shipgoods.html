@@ -23,9 +23,9 @@
         <li>
           <a href="#integral-pills" data-toggle="tab">已发货</a>
         </li>
-{#        <li>#}
-{#          <a href="#shoppingcoupons-pills" data-toggle="tab">未付款</a>#}
-{#        </li>#}
+        <li>
+          <a href="#end-pills" data-toggle="tab">完结</a>
+        </li>
     </ul>
 
     <!-- Tab panes -->
@@ -55,7 +55,14 @@
 			                <td>{{ch.quantity|floatformat:"2"}}</td>
 			                <td class="center">{{ch.get_status_display}}</td>
 			                <td>{{ch.joined | date:"Y-n-d H:i:s"}}</td>
-			                <td><a class="ship" data="{{ch.pk}}">发货</a></td>
+			                <td>
+			                  <a class="ship" data="{{ch.pk}}">发货</a>
+			                  <a tabindex="0" data-trigger="focus" role="button" data-container="body" data-toggle="popover" data-placement="top" 
+			                  data-content="联系电话:{{ch.ordercode.ship_mobile}} &#10; 地址:{{ch.ordercode.ship_address}}" 
+			                  title="收货人:{{ch.ordercode.ship_recipient}}">
+							    收货地址
+							  </a>
+			                </td>
 			            </tr>
 			            {% endfor %}
 			        </tbody>
@@ -63,8 +70,6 @@
 			</div>
 			<!-- /.panel-body -->
         </div>
-        
-        
         
         <div class="tab-pane fade" id="integral-pills">
         <div style="height:22px"></div>
@@ -100,6 +105,42 @@
 			<!-- /.panel-body -->
         </div>
            
+           
+        <div class="tab-pane fade" id="end-pills">
+        <div style="height:22px"></div>
+			<!-- /.panel-heading -->
+			<div class="panel-body">
+			    <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-end">
+			        <thead>
+			            <tr>
+			                <th>订单编号</th>
+			                <th>商品名称</th>
+			                <th>单价</th>
+			                <th>数量</th>
+			                <th>状态</th>
+			                <th>下单时间</th>
+			                <th>收货时间</th>
+			            </tr>
+			        </thead>
+			        <tbody>
+			            {% for ch in end %}
+			            <tr class="gradeA">
+			                <td>{{ch.ordercode}}</td>
+			                <td>{{ch.goodsname}}</td>
+			                <td style="color:red">{{ch.price|floatformat:"2"}}</td>
+			                <td>{{ch.quantity|floatformat:"2"}}</td>
+			                <td class="center">{{ch.get_status_display}}</td>
+			                <td>{{ch.joined | date:"Y-n-d H:i:s"}}</td>
+			                <td>{{ch.updated|date:"Y-n-d H:i:s"}}</td>
+			            </tr>
+			            {% endfor %}
+			        </tbody>
+			    </table>
+			</div>
+			<!-- /.panel-body -->
+        </div>
+        
+        
     </div>
 </div>
 <!-- /.panel-body -->
@@ -133,8 +174,11 @@ function initTable(idstr) {
 
 
 $(document).ready(function() {
+    $('[data-toggle="popover"]').popover();
+    
     initTable('dataTables-gold');
     initTable('dataTables-integral');
+    initTable('dataTables-end');
     
     $('.ship').bind('click',function(){
         detailpk = $(this).attr('data');

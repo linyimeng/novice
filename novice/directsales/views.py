@@ -381,7 +381,7 @@ def shipgoods(request):
     detail = Orderdetail.objects.filter(supplier__user=request.user)
     ship = detail.filter(status='ship').order_by('-updated')
     pay = detail.filter(status='pay').order_by('-joined')
-    return render(request,"directsales/shipgoods.html",{'ship':ship,'pay':pay})
-    
+    end = detail.filter(status="end").order_by('-updated')
+    return render(request,"directsales/shipgoods.html",{'ship':ship,'pay':pay,'end':end})
     
     

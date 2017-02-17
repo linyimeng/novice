@@ -4,7 +4,17 @@
 {% block content %}
 <div class="row">
 	<div class="col-lg-12">
-	    <h3 class="page-header">订单:{{order.ordercode}} 详情</h3>
+	    <h3 class="page-header">订单:{{order.ordercode}} 状态
+	    {% if order.status == "ship" %}
+	     <a class="btn btn-primary" id="confirm">
+	    确认收货
+	    </a>
+	    {% elif order.status == "pay" %}
+	    <span>已付款</span>
+	    {% else %}
+	    <span>完结</span>
+	    {% endif %}
+	    </h3>
 	</div>
 	<!-- /.col-lg-12 -->
 </div>
@@ -58,3 +68,22 @@
     </table>
 </div>
 {% endblock content %}
+
+{% block js %}
+<script>
+$(function(){
+    $('#confirm').bind('click',function(){
+        if(confirm('确认要进行确认收货操作，确认收货后，货款将进入商家账户！')) {
+	        $.post('{% url "directsale:confirmship"%}',{"ordercode":'{{order.ordercode}}'},function(data){
+	            if(data.result){
+	                window.location.reload();
+	            } else {
+	                alert(data.error);
+	                return;
+	            }
+	        },'json');
+        }
+    })
+});
+</script>
+{% endblock js %}
